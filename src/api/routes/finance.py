@@ -116,6 +116,8 @@ class ForecastRequest(BaseModel):
 @router.get("/summary")
 def get_financial_summary(
     shop_id: int = Query(..., description="Shop ID for multi-tenant query"),
+    start_date: Optional[str] = Query(None, description="Optional start date (YYYY-MM-DD)"),
+    end_date: Optional[str] = Query(None, description="Optional end date (YYYY-MM-DD)"),
     user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -123,34 +125,52 @@ def get_financial_summary(
     Returns an aggregated financial health dashboard for a shop:
     Revenue, COGS, Operating Expenses, Gross & Net Profit, Cash Balance,
     Inventory Valuation, Outstanding Receivables, and Document Review Queue.
+    Supports optional date-range filtering.
     """
     verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
     shop = db.get(Shop, shop_id)
     if not shop:
         raise HTTPException(status_code=404, detail="Shop not found.")
 
+    s_dt = _parse_date_safe(start_date) if start_date else None
+    e_dt = _parse_date_safe(end_date) if end_date else None
+    if s_dt and e_dt and s_dt > e_dt:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid date range: start_date cannot be after end_date.",
+        )
+
     # 1. Sales & Revenue
+    sales_q = db.query(Sale).filter(Sale.shop_id == shop_id)
+    if s_dt:
+        sales_q = sales_q.filter(Sale.sale_date >= s_dt)
+    if e_dt:
+        sales_q = sales_q.filter(Sale.sale_date <= e_dt + timedelta(days=1))
     sales_total = (
-        db.query(func.coalesce(func.sum(Sale.total_amount_minor), 0))
-        .filter(Sale.shop_id == shop_id)
-        .scalar()
+        sales_q.with_entities(func.coalesce(func.sum(Sale.total_amount_minor), 0)).scalar()
     ) or 0
-    sales_count = db.query(Sale).filter(Sale.shop_id == shop_id).count()
+    sales_count = sales_q.count()
 
     # 2. Purchases & COGS
+    purchases_q = db.query(Purchase).filter(Purchase.shop_id == shop_id)
+    if s_dt:
+        purchases_q = purchases_q.filter(Purchase.purchase_date >= s_dt)
+    if e_dt:
+        purchases_q = purchases_q.filter(Purchase.purchase_date <= e_dt + timedelta(days=1))
     cogs_total = (
-        db.query(func.coalesce(func.sum(Purchase.total_amount_minor), 0))
-        .filter(Purchase.shop_id == shop_id)
-        .scalar()
+        purchases_q.with_entities(func.coalesce(func.sum(Purchase.total_amount_minor), 0)).scalar()
     ) or 0
 
     # 3. Operating Expenses
+    expenses_q = db.query(Expense).filter(Expense.shop_id == shop_id)
+    if s_dt:
+        expenses_q = expenses_q.filter(Expense.expense_date >= s_dt)
+    if e_dt:
+        expenses_q = expenses_q.filter(Expense.expense_date <= e_dt + timedelta(days=1))
     expenses_total = (
-        db.query(func.coalesce(func.sum(Expense.amount_minor), 0))
-        .filter(Expense.shop_id == shop_id)
-        .scalar()
+        expenses_q.with_entities(func.coalesce(func.sum(Expense.amount_minor), 0)).scalar()
     ) or 0
-    expenses_count = db.query(Expense).filter(Expense.shop_id == shop_id).count()
+    expenses_count = expenses_q.count()
 
     # 4. Deterministic Profit & Loss
     gross_profit_minor = sales_total - cogs_total
@@ -159,29 +179,43 @@ def get_financial_summary(
     net_margin_pct = round((net_profit_minor / sales_total) * 100, 2) if sales_total > 0 else 0.0
 
     # 5. Cash Flow & Net Balance
-    payment_inflows = (
-        db.query(func.coalesce(func.sum(Payment.amount_minor), 0))
-        .filter(Payment.shop_id == shop_id, Payment.payment_type.in_(["customer_inflow", "loan_disbursement"]))
-        .scalar()
-    ) or 0
-    payment_outflows = (
-        db.query(func.coalesce(func.sum(Payment.amount_minor), 0))
-        .filter(Payment.shop_id == shop_id, Payment.payment_type.in_(["supplier_outflow", "expense_outflow", "loan_repayment"]))
-        .scalar()
-    ) or 0
+    pay_in_q = db.query(Payment).filter(
+        Payment.shop_id == shop_id,
+        Payment.payment_type.in_(["customer_inflow", "loan_disbursement"]),
+    )
+    pay_out_q = db.query(Payment).filter(
+        Payment.shop_id == shop_id,
+        Payment.payment_type.in_(["supplier_outflow", "expense_outflow", "loan_repayment"]),
+    )
+    if s_dt:
+        pay_in_q = pay_in_q.filter(Payment.payment_date >= s_dt)
+        pay_out_q = pay_out_q.filter(Payment.payment_date >= s_dt)
+    if e_dt:
+        pay_in_q = pay_in_q.filter(Payment.payment_date <= e_dt + timedelta(days=1))
+        pay_out_q = pay_out_q.filter(Payment.payment_date <= e_dt + timedelta(days=1))
+
+    payment_inflows = pay_in_q.with_entities(func.coalesce(func.sum(Payment.amount_minor), 0)).scalar() or 0
+    payment_outflows = pay_out_q.with_entities(func.coalesce(func.sum(Payment.amount_minor), 0)).scalar() or 0
 
     if payment_inflows == 0 and payment_outflows == 0:
         # Fallback to CashMovement if Payment table is empty
-        cm_inflows = (
-            db.query(func.coalesce(func.sum(CashMovement.amount_minor), 0))
-            .filter(CashMovement.shop_id == shop_id, CashMovement.movement_type == "inflow")
-            .scalar()
-        ) or 0
-        cm_outflows = (
-            db.query(func.coalesce(func.sum(CashMovement.amount_minor), 0))
-            .filter(CashMovement.shop_id == shop_id, CashMovement.movement_type == "outflow")
-            .scalar()
-        ) or 0
+        cm_in_q = db.query(CashMovement).filter(
+            CashMovement.shop_id == shop_id,
+            CashMovement.movement_type == "inflow",
+        )
+        cm_out_q = db.query(CashMovement).filter(
+            CashMovement.shop_id == shop_id,
+            CashMovement.movement_type == "outflow",
+        )
+        if s_dt:
+            cm_in_q = cm_in_q.filter(CashMovement.movement_date >= s_dt)
+            cm_out_q = cm_out_q.filter(CashMovement.movement_date >= s_dt)
+        if e_dt:
+            cm_in_q = cm_in_q.filter(CashMovement.movement_date <= e_dt + timedelta(days=1))
+            cm_out_q = cm_out_q.filter(CashMovement.movement_date <= e_dt + timedelta(days=1))
+
+        cm_inflows = cm_in_q.with_entities(func.coalesce(func.sum(CashMovement.amount_minor), 0)).scalar() or 0
+        cm_outflows = cm_out_q.with_entities(func.coalesce(func.sum(CashMovement.amount_minor), 0)).scalar() or 0
         net_cash_flow_minor = cm_inflows - cm_outflows
         current_cash_balance_minor = net_cash_flow_minor
     else:
@@ -283,18 +317,22 @@ def list_sales(
     """
     verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
 
+    s_dt = _parse_date_safe(start_date) if start_date else None
+    e_dt = _parse_date_safe(end_date) if end_date else None
+    if s_dt and e_dt and s_dt > e_dt:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid date range: start_date cannot be after end_date.",
+        )
+
     query = db.query(Sale).filter(Sale.shop_id == shop_id)
 
-    if start_date:
-        s_dt = _parse_date_safe(start_date)
-        if s_dt:
-            query = query.filter(Sale.sale_date >= s_dt)
+    if s_dt:
+        query = query.filter(Sale.sale_date >= s_dt)
 
-    if end_date:
-        e_dt = _parse_date_safe(end_date)
-        if e_dt:
-            # Include entire end date day
-            query = query.filter(Sale.sale_date <= e_dt + timedelta(days=1))
+    if e_dt:
+        # Include entire end date day
+        query = query.filter(Sale.sale_date <= e_dt + timedelta(days=1))
 
     if payment_method:
         query = query.filter(Sale.payment_method == payment_method)
@@ -376,17 +414,21 @@ def list_expenses(
     """
     verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
 
+    s_dt = _parse_date_safe(start_date) if start_date else None
+    e_dt = _parse_date_safe(end_date) if end_date else None
+    if s_dt and e_dt and s_dt > e_dt:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid date range: start_date cannot be after end_date.",
+        )
+
     query = db.query(Expense).filter(Expense.shop_id == shop_id)
 
-    if start_date:
-        s_dt = _parse_date_safe(start_date)
-        if s_dt:
-            query = query.filter(Expense.expense_date >= s_dt)
+    if s_dt:
+        query = query.filter(Expense.expense_date >= s_dt)
 
-    if end_date:
-        e_dt = _parse_date_safe(end_date)
-        if e_dt:
-            query = query.filter(Expense.expense_date <= e_dt + timedelta(days=1))
+    if e_dt:
+        query = query.filter(Expense.expense_date <= e_dt + timedelta(days=1))
 
     if category:
         query = query.filter(Expense.expense_category == category)

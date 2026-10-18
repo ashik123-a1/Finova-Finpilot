@@ -5,6 +5,7 @@ Provides immutable, tamper-evident audit trails with shop isolation for complian
 
 from __future__ import annotations
 
+from datetime import timedelta
 from typing import List, Optional, Dict, Any
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel
@@ -14,6 +15,7 @@ from sqlalchemy import select, desc
 from src.database.connection import get_db
 from src.database.models import User, AuditLog
 from src.api.dependencies import get_current_user, verify_shop_access_dependency
+from src.api.routes.finance import _parse_date_safe
 
 router = APIRouter(prefix="/audit", tags=["Audit Logs"])
 
@@ -48,6 +50,8 @@ def list_audit_logs(
     shop_id: int = Query(..., description="Shop ID for tenant isolation"),
     action: Optional[str] = Query(None, description="Filter by action code, e.g. post_document, evaluate_loan_risk"),
     entity_type: Optional[str] = Query(None, description="Filter by entity type, e.g. document, sale"),
+    start_date: Optional[str] = Query(None, description="Filter start date (YYYY-MM-DD)"),
+    end_date: Optional[str] = Query(None, description="Filter end date (YYYY-MM-DD)"),
     page: int = Query(1, ge=1),
     limit: int = Query(20, ge=1, le=100),
     user: User = Depends(get_current_user),
@@ -56,6 +60,7 @@ def list_audit_logs(
     """
     Retrieves paginated audit log events for a shop.
     Guarantees that staff/owners can only view audit logs for shops they belong to.
+    Supports optional date-range filtering.
     """
     verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
 
@@ -64,6 +69,19 @@ def list_audit_logs(
         query = query.filter(AuditLog.action == action)
     if entity_type:
         query = query.filter(AuditLog.entity_type == entity_type)
+
+    s_dt = _parse_date_safe(start_date) if start_date else None
+    e_dt = _parse_date_safe(end_date) if end_date else None
+    if s_dt and e_dt and s_dt > e_dt:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Invalid date range: start_date cannot be after end_date.",
+        )
+
+    if s_dt:
+        query = query.filter(AuditLog.created_at >= s_dt)
+    if e_dt:
+        query = query.filter(AuditLog.created_at <= e_dt + timedelta(days=1))
 
     total_count = query.count()
     offset = (page - 1) * limit

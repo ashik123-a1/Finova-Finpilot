@@ -108,9 +108,8 @@ def confirm_and_post_document(
 
     # Idempotency check: Guard against duplicate posting
     if doc.status == "posted":
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Document has already been posted to financial ledger.",
+        raise DuplicateDocumentError(
+            "Document has already been posted to financial ledger."
         )
 
     try:
@@ -121,9 +120,8 @@ def confirm_and_post_document(
         )
         if result.get("status") == "already_posted":
             db.rollback()
-            raise HTTPException(
-                status_code=status.HTTP_409_CONFLICT,
-                detail="Document has already been posted to financial ledger.",
+            raise DuplicateDocumentError(
+                "Document has already been posted to financial ledger."
             )
         db.commit()
         return result

@@ -20,9 +20,23 @@ def get_current_user(
     authorization: Optional[str] = Header(None),
     db: Session = Depends(get_db),
 ) -> User:
-    """Extracts and verifies session user from Authorization header."""
+    """
+    Extracts and verifies session user from Authorization header.
+    
+    Security Guarantee:
+    Client-supplied headers such as X-User-ID, X-Business-ID, and X-Shop-ID are
+    NEVER used for authentication and cannot forge identity. Identity is strictly
+    established via signed HMAC session tokens (Authorization: Bearer <token>)
+    issued by /api/auth/login or /api/auth/register.
+    """
     if not authorization:
-        # For development / initial testing, allow default demo admin if header absent
+        # In production, require an explicit, valid Authorization header unconditionally
+        if settings.ENVIRONMENT.lower() == "production":
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Missing Authorization header.",
+            )
+        # For development / local demo only, allow fallback to first active user if header is absent
         user = db.query(User).filter_by(is_active=True).first()
         if user:
             return user

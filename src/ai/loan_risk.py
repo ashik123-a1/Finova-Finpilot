@@ -95,7 +95,7 @@ class TransparentLoanRiskEngine:
             "total_payment_minor": comparison.reducing_total_payment_minor,
             "processing_fee_minor": comparison.processing_fee_minor,
             "net_operating_income_minor": net_operating_income_minor,
-            "dscr_ratio": dscr,
+            "dscr_ratio": dscr if dscr != float("inf") else 999.0,
             "emi_to_income_ratio": emi_to_income_ratio if emi_to_income_ratio != float("inf") else 999.0,
             "recommendation_status": status,
             "recommendation_reasons": reasons,
