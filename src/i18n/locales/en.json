@@ -1,0 +1,84 @@
+{
+  "common": {
+    "ok": "OK",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "fallback_notice": "Notice: English translation used as fallback."
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "sales": "Sales Ledger",
+    "purchases": "Purchases",
+    "expenses": "Expenses",
+    "inventory": "Inventory Movements",
+    "documents": "Document Capture",
+    "loans": "Loan Risk & Financing",
+    "forecasting": "Cash-Flow Forecast",
+    "settings": "Settings",
+    "compliance": "Regulatory & Tax Compliance"
+  },
+  "financial": {
+    "revenue": "Total Revenue",
+    "cogs": "Cost of Goods Sold (COGS)",
+    "gross_profit": "Gross Profit",
+    "net_profit": "Net Operating Profit",
+    "gross_margin": "Gross Margin (%)",
+    "net_margin": "Net Margin (%)",
+    "cash_flow": "Net Cash Flow",
+    "receivables": "Outstanding Receivables",
+    "payables": "Accounts Payable",
+    "dscr": "Debt Service Coverage Ratio (DSCR)",
+    "monthly_emi": "Monthly Installment (EMI)",
+    "total_interest": "Total Interest Payable",
+    "principal": "Loan Principal",
+    "tenure": "Tenure (Months)",
+    "tax_amount": "Tax / VAT Amount",
+    "discount": "Discount Applied",
+    "total_amount": "Total Amount",
+    "subtotal": "Subtotal",
+    "opening_balance": "Opening Balance",
+    "closing_balance": "Closing Balance"
+  },
+  "documents": {
+    "upload_title": "Upload Receipt or Invoice",
+    "sales_receipt": "Sales Receipt / Cash Memo",
+    "purchase_invoice": "Supplier Purchase Invoice",
+    "expense_receipt": "Operational Expense Voucher",
+    "payment_receipt": "Payment Receipt / Money Receipt",
+    "unknown": "Unclassified Document",
+    "extracted_total": "Extracted Total: {{amount}} {{currency}}",
+    "extracted_date": "Document Date: {{date}}",
+    "invoice_no": "Invoice #: {{invoice_id}}",
+    "confidence_score": "OCR Confidence: {{score}}%",
+    "review_required": "Review Required: Line items sum does not reconcile with document total.",
+    "auto_post_success": "Document #{{invoice_id}} successfully posted to financial ledger."
+  },
+  "loan_risk": {
+    "healthy_status": "Eligible / Healthy Debt Capacity (DSCR: {{dscr}}x)",
+    "borderline_status": "Conditional Approval (DSCR: {{dscr}}x requires collateral)",
+    "rejected_status": "Ineligible / High Risk (Debt Service exceeds capacity)",
+    "mra_ceiling_breach": "Regulatory Violation: Exceeds Microfinance Borrowing Ceiling of {{ceiling}} {{currency}}",
+    "dti_breach": "Regulatory Violation: Monthly EMI exceeds 40% of Net Operating Income"
+  },
+  "compliance": {
+    "jurisdiction": "Jurisdiction: {{jurisdiction}}",
+    "tax_authority": "Tax Authority: {{authority}}",
+    "standard_vat_rate": "Standard VAT / Tax Rate: {{rate}}%",
+    "regulatory_source": "Regulatory Source: {{source}}",
+    "verification_status": "Verification Status: {{status}}",
+    "effective_date": "Effective Date: {{date}}"
+  },
+  "validation": {
+    "required_field": "This field is required.",
+    "invalid_amount": "Invalid monetary amount: {{value}}",
+    "positive_amount": "Amount must be strictly positive.",
+    "shop_isolation_error": "Access Denied: You do not have permission for Shop #{{shop_id}}."
+  }
+}

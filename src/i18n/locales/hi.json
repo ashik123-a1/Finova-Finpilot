@@ -1,0 +1,84 @@
+{
+  "common": {
+    "ok": "ठीक है",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "edit": "संपादित करें",
+    "delete": "हटाएं",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "loading": "लोड हो रहा है...",
+    "error": "त्रुटि",
+    "success": "सफल",
+    "fallback_notice": "सूचना: डिफ़ॉल्ट अंग्रेजी अनुवाद का उपयोग किया गया है।"
+  },
+  "navigation": {
+    "dashboard": "डैशबोर्ड",
+    "sales": "बिक्री खाता",
+    "purchases": "खरीद बही",
+    "expenses": "व्यापारिक व्यय",
+    "inventory": "स्टॉक इन्वेंट्री ऑडिट",
+    "documents": "दस्तावेज़ और रसीद स्कैन",
+    "loans": "ऋण पात्रता व जोखिम मूल्यांकन",
+    "forecasting": "रोकड़ प्रवाह पूर्वानुमान (Cash Flow)",
+    "settings": "सेटिंग्स",
+    "compliance": "कर व विनियामक अनुपालन"
+  },
+  "financial": {
+    "revenue": "कुल राजस्व / बिक्री",
+    "cogs": "बेचे गए माल की लागत (COGS)",
+    "gross_profit": "सकल लाभ (Gross Profit)",
+    "net_profit": "शुद्ध परिचालन लाभ (Net Profit)",
+    "gross_margin": "सकल लाभ मार्जिन (%)",
+    "net_margin": "शुद्ध लाभ मार्जिन (%)",
+    "cash_flow": "शुद्ध रोकड़ प्रवाह",
+    "receivables": "उधार / प्राप्य राशि",
+    "payables": "देय राशि (सप्लायर बिल)",
+    "dscr": "ऋण सेवा कवरेज अनुपात (DSCR)",
+    "monthly_emi": "मासिक किस्त (EMI)",
+    "total_interest": "कुल देय ब्याज",
+    "principal": "मूलधन राशि",
+    "tenure": "अवधि (महीने)",
+    "tax_amount": "जीएसटी / कर राशि",
+    "discount": "प्रदत्त छूट",
+    "total_amount": "कुल देय राशि",
+    "subtotal": "उप-योग (Subtotal)",
+    "opening_balance": "प्रारंभिक शेष",
+    "closing_balance": "अंतिम शेष"
+  },
+  "documents": {
+    "upload_title": "चालान या रसीद अपलोड करें",
+    "sales_receipt": "बिक्री रसीद / कैश मेमो",
+    "purchase_invoice": "सप्लायर खरीद चालान (Tax Invoice)",
+    "expense_receipt": "खर्च वाउचर",
+    "payment_receipt": "भुगतान रसीद",
+    "unknown": "अवर्गीकृत दस्तावेज़",
+    "extracted_total": "निकाला गया कुल: {{amount}} {{currency}}",
+    "extracted_date": "दस्तावेज़ दिनांक: {{date}}",
+    "invoice_no": "चालान संख्या: {{invoice_id}}",
+    "confidence_score": "ओसीआर सटीकता: {{score}}%",
+    "review_required": "समीक्षा आवश्यक: मदों का योग कुल राशि से मेल नहीं खाता।",
+    "auto_post_success": "चालान #{{invoice_id}} वित्तीय बहीखाते में सफलतापूर्वक दर्ज किया गया।"
+  },
+  "loan_risk": {
+    "healthy_status": "पात्र / स्वस्थ ऋण क्षमता (DSCR: {{dscr}}x)",
+    "borderline_status": "सशर्त स्वीकृति (DSCR: {{dscr}}x अतिरिक्त ज़मानत अपेक्षित)",
+    "rejected_status": "अपात्र / उच्च जोखिम (ऋण भार क्षमता से अधिक)",
+    "mra_ceiling_breach": "नियम उल्लंघन: अधिकतम सूक्ष्म उद्यम ऋण सीमा {{ceiling}} {{currency}} से अधिक",
+    "dti_breach": "नियम उल्लंघन: मासिक किस्त शुद्ध आय के 40% से अधिक है"
+  },
+  "compliance": {
+    "jurisdiction": "क्षेत्राधिकार: {{jurisdiction}}",
+    "tax_authority": "कर प्राधिकरण: {{authority}}",
+    "standard_vat_rate": "मानक कर दर: {{rate}}%",
+    "regulatory_source": "नियामक स्रोत: {{source}}",
+    "verification_status": "सत्यापन स्थिति: {{status}}",
+    "effective_date": "प्रभावी तिथि: {{date}}"
+  },
+  "validation": {
+    "required_field": "यह फ़ील्ड आवश्यक है।",
+    "invalid_amount": "अमान्य धनराशि: {{value}}",
+    "positive_amount": "राशि धनात्मक संख्या होनी चाहिए।",
+    "shop_isolation_error": "पहुंच अस्वीकृत: आपको दुकान #{{shop_id}} के आंकड़े देखने की अनुमति नहीं है।"
+  }
+}

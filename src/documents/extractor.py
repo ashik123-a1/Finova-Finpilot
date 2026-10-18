@@ -166,7 +166,8 @@ class StructuredDocumentExtractor:
     """Extracts structured financial fields and audits calculation consistency with resilient OCR error tolerance."""
 
     DATE_PATTERNS = [
-        r"(?i)\b(?:d[ao]t[eo]?|date|dated|তারিখ|তাং)[ \t#:.-]*([0-9\s]{1,4}[-/.][0-9\s]{1,3}[-/.][0-9\s]{2,5})",
+        r"(?i)\b(?:d[ao]t[eo]?|date|dated|তারিখ|তাং|日期|开票日期|التاريخ|fecha|दिनांक)[ \t#:.-]*([0-9\s]{1,4}[-/.][0-9\s]{1,3}[-/.][0-9\s]{2,5})",
+        r"(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日",
         r"\b([0-9\s]{1,2}[-/.][0-9\s]{1,3}[-/.][0-9\s]{2,5})\b",
         r"\b(\d{4}[-/.]\d{1,2}[-/.]\d{1,2})\b",
         r"\b(\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{4})\b",
@@ -174,44 +175,49 @@ class StructuredDocumentExtractor:
 
     INVOICE_NO_PATTERNS = [
         r"(?i)\b(INV-[A-Za-z0-9\-_]+)\b",
-        r"(?i)\b(?:invoice|inv|bill|bil|memo|চালান|রসিদ)(?:[ \t]*(?:no|num|number|নং))?[ \t#:.-]+([A-Za-z0-9\-_/]+)",
-        r"(?i)\b(?:no|num|নং)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
+        r"(?i)\b(?:invoice|inv|bill|bil|memo|challan|রসিদ|发票号码|发票代码|رقم\s*الفاتورة|factura|बिल\s*नं)(?:[ \t]*(?:no|num|number|নং|号))?[ \t#:.-]+([A-Za-z0-9\-_/]+)",
+        r"(?i)\b(?:no|num|নং|号)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
     ]
 
     TOTAL_PATTERNS = [
-        r"(?i)\b(?:grand[ \t]*total|net[ \t]*total|total[ \t]*amount|total|সর্বমোট|মোট)[ \t:৳TKtk$]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,2})?)",
+        r"(?i)\b(?:grand[ \t]*total|net[ \t]*total|total[ \t]*amount|total|সর্বমোট|মোট|价税合计|合计|金额总计|المبلغ[ \t]*الإجمالي|المجموع[ \t]*الكلي|total[ \t]*a[ \t]*pagar|कुल[ \t]*राशि|कुल[ \t]*योग)[ \t:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
     ]
 
     SUBTOTAL_PATTERNS = [
-        r"(?i)\b(?:sub[ \t]*total|subtotal|subtotat|subtotl|উপমোট|মোট\s*মূল্য)[ \t:৳TKtk$]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,2})?)",
+        r"(?i)\b(?:sub[ \t]*total|subtotal|subtotat|subtotl|উপমোট|মোট\s*মূল্য|金额|不含税金额|المجموع[ \t]*الفرعي|base[ \t]*imponible|उप-योग)[ \t:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
     ]
 
     DISCOUNT_PATTERNS = [
-        r"(?i)\b(?:discount|less|disc|ছাড়|রিবেট)[ \t:৳TKtk$]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,2})?)",
+        r"(?i)\b(?:discount|less|disc|ছাড়|রিবেট|折扣|优惠|الخصم|descuento|छूट)[ \t:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
     ]
 
     TAX_PATTERNS = [
-        r"(?i)\b(?:vat|tax|ভ্যাট|কর)[ \t\(\)\d\%ga-zA-Z:৳TKtk$]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,2})?)",
+        r"(?i)\b(?:vat|tax|ভ্যাট|কর|税额|增值税|الضريبة|ضريبة|iva|कर)[ \t\(\)\d\%ga-zA-Z:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
     ]
 
     @classmethod
     def clean_ocr_text(cls, raw_text: str) -> str:
-        """Normalizes Bengali numerals, OCR typos, currency indicators, and broken tokens."""
+        """Normalizes numerals from all scripts (Bengali, Arabic-Indic, Devanagari), OCR typos, currency indicators, and broken tokens."""
         if not raw_text:
             return ""
-        # 1. Map Bengali digits to ASCII
-        bn_digits = str.maketrans("০১২৩৪৫৬৭৮৯", "0123456789")
-        t = raw_text.translate(bn_digits)
+        # 1. Map all Unicode numeral digits (Bengali, Arabic-Indic, Devanagari, Eastern Arabic) to ASCII 0-9
+        all_digits_trans = str.maketrans(
+            "০১২৩৪৫৬৭৮৯٠١٢٣٤٥٦٧٨٩०१२३४५६७८९۰۱۲۳۴۵۶۷۸۹",
+            "0123456789012345678901234567890123456789"
+        )
+        t = raw_text.translate(all_digits_trans)
 
         # 2. Fix broken invoice prefixes and separators
         t = re.sub(r"\b[Jj][Nn][Vv]-", "INV-", t)
         t = re.sub(r"INV[-\s:]*(\d{4})[-\s:]*(\d{1,4})", r"INV-\1-\2", t)
 
-        # 3. Clean common OCR misrecognitions
+        # 3. Clean common OCR misrecognitions & Currency tokens
         t = re.sub(r"(?i)\b7[kK]\b|\b7k(?=\s*[\d.])", "Tk ", t)
         t = re.sub(r"(?i)\bSubtota[t|l]\b", "Subtotal", t)
         t = re.sub(r"(?i)\bBi[lI|J]{1,3}\b\s+No", "Bill No", t)
         t = re.sub(r"(?i)\bTotal\s+Ammount\b", "Total Amount", t)
+        t = re.sub(r"(?i)\bر\.?س\b", "SAR ", t)
+        t = re.sub(r"(?i)\bد\.?ك\b", "KWD ", t)
         return t
 
     @classmethod
@@ -230,6 +236,15 @@ class StructuredDocumentExtractor:
     @classmethod
     def parse_date(cls, text: str) -> str:
         """Extracts date string or falls back to today's UTC date."""
+        # Check Chinese date YYYY年MM月DD日
+        zh_m = re.search(r"(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日", text)
+        if zh_m:
+            try:
+                y, m, d = int(zh_m.group(1)), int(zh_m.group(2)), int(zh_m.group(3))
+                return f"{y:04d}-{m:02d}-{d:02d}"
+            except Exception:
+                pass
+
         for pattern in cls.DATE_PATTERNS:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
@@ -402,3 +417,22 @@ class StructuredDocumentExtractor:
             extracted["payment_method"] = "cash"
 
         return extracted, field_confidences, validation_errors
+
+    @classmethod
+    def extract_from_text(cls, text: str, doc_type: DocumentType = DocumentType.SALES_RECEIPT) -> Dict[str, Any]:
+        """Convenience method for direct text extraction."""
+        ocr_out = RawOcrOutput(full_text=text, blocks=[])
+        extracted, confs, errors = cls.extract_fields(ocr_out, doc_type)
+        return {
+            "fields": extracted,
+            "confidences": confs,
+            "validation_errors": errors,
+            "date": extracted.get("date"),
+            "invoice_no": extracted.get("invoice_no"),
+            "total_amount": extracted.get("total_amount_minor"),
+            "total_amount_minor": extracted.get("total_amount_minor"),
+        }
+
+
+# Public export aliases
+DocumentExtractor = StructuredDocumentExtractor

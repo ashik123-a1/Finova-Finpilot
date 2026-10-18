@@ -26,6 +26,20 @@ class Money:
         self._amount_minor: int = amount_minor
         self._currency: str = currency.upper()
 
+    @staticmethod
+    def get_minor_unit_multiplier(currency: str) -> int:
+        """Returns the multiplier between major and minor units (e.g. 100 for BDT/USD/CNY, 1000 for KWD, 1 for JPY)."""
+        curr = currency.upper().strip()
+        if curr in ("KWD", "BHD", "OMR", "JOD", "TND"):
+            return 1000
+        if curr in ("JPY", "KRW", "VND", "CLP", "PYG"):
+            return 1
+        return 100
+
+    @property
+    def multiplier(self) -> int:
+        return self.get_minor_unit_multiplier(self._currency)
+
     @property
     def amount_minor(self) -> int:
         """The value in minor currency units (e.g., cents, poisha)."""
@@ -39,7 +53,7 @@ class Money:
     @property
     def amount_major(self) -> Decimal:
         """The value in major units as an exact Decimal."""
-        return Decimal(self._amount_minor) / Decimal(100)
+        return Decimal(self._amount_minor) / Decimal(self.multiplier)
 
     @classmethod
     def zero(cls, currency: str = "BDT") -> Money:
@@ -59,6 +73,7 @@ class Money:
         Create from major units (e.g., "150.75" or Decimal("150.75")).
         Uses ROUND_HALF_UP rounding to exact integer minor units.
         """
+        mult = cls.get_minor_unit_multiplier(currency)
         if isinstance(amount_major, float):
             # Convert float to str first to avoid direct binary float representation errors
             dec = Decimal(str(amount_major))
@@ -69,7 +84,7 @@ class Money:
         else:
             raise TypeError(f"Unsupported major amount type: {type(amount_major)}")
 
-        minor_dec = (dec * Decimal(100)).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
+        minor_dec = (dec * Decimal(mult)).quantize(Decimal("1"), rounding=ROUND_HALF_UP)
         return cls(int(minor_dec), currency)
 
     def __eq__(self, other: Any) -> bool:
@@ -124,9 +139,14 @@ class Money:
         return Money(abs(self._amount_minor), self._currency)
 
     def format(self, include_currency: bool = True) -> str:
-        """Format as comma-separated major units with 2 decimal places."""
+        """Format as comma-separated major units with appropriate decimal places."""
         major = self.amount_major
-        formatted = f"{major:,.2f}"
+        if self.multiplier == 1000:
+            formatted = f"{major:,.3f}"
+        elif self.multiplier == 1:
+            formatted = f"{major:,.0f}"
+        else:
+            formatted = f"{major:,.2f}"
         if include_currency:
             return f"{formatted} {self._currency}"
         return formatted

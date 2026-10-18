@@ -100,3 +100,105 @@ def enforce_shop_isolation(
     raise ShopAccessDeniedError(
         f"Security Alert: User {user_id} is not authorized to access shop {shop_id}."
     )
+
+
+def sanitize_multilingual_input(text: str) -> str:
+    """
+    Sanitizes multilingual user and document input against Unicode spoofing,
+    homoglyph collision, and dangerous bidirectional override (Bidi) attacks.
+    """
+    if not text:
+        return ""
+
+    import unicodedata
+
+    # 1. Canonical NFKC normalization
+    normalized = unicodedata.normalize("NFKC", text)
+
+    # 2. Neutralize dangerous BiDi control characters that disguise malicious payloads
+    # (e.g. \u202E Right-to-Left Override used to mask executable file extensions)
+    bidi_overrides = [
+        "\u202a", "\u202b", "\u202c", "\u202d", "\u202e",
+        "\u2066", "\u2067", "\u2068", "\u2069"
+    ]
+    for char in bidi_overrides:
+        normalized = normalized.replace(char, "")
+
+    # 3. Strip invisible zero-width characters (except valid ZWNJ/ZWJ when embedded in words)
+    invisible_chars = ["\ufeff", "\u200b", "\u2060"]
+    for char in invisible_chars:
+        normalized = normalized.replace(char, "")
+
+    return normalized
+
+
+def detect_multilingual_prompt_injection(text: str) -> tuple[bool, str]:
+    """
+    Detects adversarial prompt injection attempts across English, Bengali,
+    Chinese, Arabic, Russian, Spanish, and Hindi.
+    """
+    if not text:
+        return False, ""
+
+    import re
+    clean = sanitize_multilingual_input(text).lower()
+
+    injection_patterns = [
+        # English
+        (r"(?i)\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:previous|prior)\s+(?:instructions|prompts|rules)", "EN: Instruction override"),
+        (r"(?i)\b(?:system\s+prompt\s+override|prompt\s+override)", "EN: System prompt override"),
+        (r"(?i)\b(?:bypass|disable)[^.\n]{0,30}(?:security|verification|dscr|guardrail|check|limit|rule|loan\s+risk)", "EN: Security bypass attempt"),
+        (r"(?i)\bapprove\s+(?:all|this)\s+loan", "EN: Unauthorized loan approval trigger"),
+        (r"(?i)\b(?:jailbreak|dan\s+mode|developer\s+mode|act\s+as\s+root)\b", "EN: Jailbreak signature"),
+        (r"(?i)\b(?:drop\s+table|delete\s+from|rm\s+-rf|format\s+c:)", "EN: Malicious command execution"),
+        # Bengali
+        (r"(?:পূর্বের|পূর্ববর্তী|আগের)\s+(?:সমস্ত|সব|সকল)\s+(?:নির্দেশ|নির্দেশনা|নিয়ম)\s+(?:ভুলে|উপেক্ষা)", "BN: Instruction override"),
+        (r"(?:নিরাপত্তা|যাচাইকরণ|নিয়ম|সীমা)[^।\n]{0,20}(?:উপেক্ষা|বাইপাস)", "BN: Security bypass attempt"),
+        (r"(?:ডাটাবেস|তথ্য|রেকর্ড)\s*(?:মুছে|ডিলিট)", "BN: Malicious deletion attempt"),
+        (r"(?:সব|সকল|এই)\s+ঋণ\s+(?:অনুমোদন|মঞ্জুর)\s+করুন", "BN: Unauthorized loan approval trigger"),
+        # Chinese
+        (r"(?:忽略|无视|取消|覆盖)[^，。\n]{0,20}(?:指令|指示|规则|提示|要求)", "ZH: Instruction override"),
+        (r"(?:绕过|禁用|取消)[^，。\n]{0,20}(?:风控|安全|验证|dscr|审批|规则|限制|贷款风险)", "ZH: Security bypass attempt"),
+        (r"(?:批准|通过)[^，。\n]{0,10}(?:所有|最高)?贷款", "ZH: Unauthorized loan approval trigger"),
+        # Arabic
+        (r"(?:تجاهل|انسَ|إلغاء)\s+(?:كافة|جميع)?\s*(?:التعليمات|الأوامر)\s+(?:السابقة)", "AR: Instruction override"),
+        (r"(?:تجاوز|تعطيل)\s+(?:قواعد\s+الأمان|التحقق|الأمان|شروط\s+الائتمان)", "AR: Security bypass attempt"),
+        (r"(?:وافق|الموافقة)\s+على\s+(?:جميع|هذا)\s+القروض?", "AR: Unauthorized loan approval trigger"),
+        # Russian
+        (r"(?:игнорируй|забудь)\s+(?:все\s+)?(?:предыдущие|прошлые)\s+инструкции", "RU: Instruction override"),
+        (r"(?:обойти|отключить)\s+(?:защиту|проверку|dscr)", "RU: Security bypass attempt"),
+        # Spanish
+        (r"(?i)\b(?:ignora|olvida)\s+(?:todas\s+las\s+)?(?:instrucciones\s+anteriores)", "ES: Instruction override"),
+        (r"(?i)\b(?:aprueba|aprobar)\s+todos\s+los\s+préstamos", "ES: Unauthorized loan approval trigger"),
+        # Hindi
+        (r"(?:पिछले|पूर्व)\s+सभी\s+(?:निर्देशों|नियमों)\s+को\s+(?:अनदेखा|भूल)", "HI: Instruction override"),
+        (r"सभी\s+ऋण(?:ों)?\s+को\s+स्वीकृत\s+करें", "HI: Unauthorized loan approval trigger"),
+    ]
+
+    for pat, label in injection_patterns:
+        if re.search(pat, clean):
+            return True, f"Adversarial prompt injection detected: {label}"
+
+    return False, ""
+
+
+def redact_pii(text: str) -> str:
+    """
+    Masks sensitive personal identification (credit cards, phone numbers, tax IDs)
+    to protect business privacy before logging or model forwarding.
+    """
+    if not text:
+        return ""
+
+    import re
+
+    # 1. Credit / Debit card numbers (15-16 digits, typically 4 groups of 4)
+    t = re.sub(r"\b(?:\d{4}[ -]?){3}\d{4}\b|\b3[47]\d{2}[ -]?\d{6}[ -]?\d{5}\b", "[REDACTED_PAYMENT_CARD]", text)
+
+    # 2. Email addresses
+    t = re.sub(r"(?i)\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b", "[REDACTED_EMAIL]", t)
+
+    # 3. International & Domestic Phone Numbers
+    t = re.sub(r"(?:\+\d{1,3}[-.\s]*)?\(?\d{2,4}\)?[-.\s]?\d{3,4}[-.\s]?\d{3,4}\b", "[REDACTED_PHONE]", t)
+
+    return t

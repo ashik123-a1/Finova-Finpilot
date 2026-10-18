@@ -1,0 +1,328 @@
+{
+  "version": "2.0.0",
+  "profiles_count": 7,
+  "countries": [
+    {
+      "country_code": "BD",
+      "country_name": "Bangladesh",
+      "native_country_name": "বাংলাদেশ",
+      "primary_currency": "BDT",
+      "currency_symbol": "৳",
+      "minor_unit_multiplier": 100,
+      "default_locale": "bn-BD",
+      "supported_locales": [
+        "bn-BD",
+        "en-US"
+      ],
+      "timezone": "Asia/Dhaka",
+      "calendar_system": "gregorian",
+      "date_format": "DD/MM/YYYY",
+      "accounting_standard": "BFRS for SMEs (aligned with IFRS for SMEs)",
+      "tax_authority_name": "National Board of Revenue (NBR)",
+      "standard_vat_rate_pct": 15.0,
+      "reduced_vat_rates_pct": [
+        5.0,
+        7.5,
+        10.0
+      ],
+      "corporate_income_tax_rate_pct": 27.5,
+      "invoice_standard_name": "NBR Mushak-6.3 Tax Challan (মূসক-৬.৩)",
+      "regulatory_body": "Bangladesh Bank (Central Bank) & Microcredit Regulatory Authority (MRA)",
+      "statutory_dscr_covenant": 1.25,
+      "max_debt_to_income_pct": 40.0,
+      "max_microenterprise_ceiling_minor": 150000000,
+      "reference_benchmark_rate_name": "SMART (Six-Month Moving Average Rate of Treasury)",
+      "sources": [
+        {
+          "topic": "VAT & Invoicing",
+          "regulatory_source": "Value Added Tax and Supplementary Duty Act 2012 (Act No. 47 of 2012) & NBR S.R.O. No. 186-AIN/2019/43-VAT",
+          "effective_date": "2019-07-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Mandatory issuance of Form Mushak-6.3 before goods depart premises."
+        },
+        {
+          "topic": "SME Credit Covenants",
+          "regulatory_source": "Bangladesh Bank BRPD Circular No. 04 (2021) & SME & Special Programmes Department (SMESPD) Circular No. 02/2022",
+          "effective_date": "2022-01-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Enforces minimum DSCR of 1.25x and debt service cap of 40% monthly net income."
+        },
+        {
+          "topic": "Microcredit Ceiling",
+          "regulatory_source": "Microcredit Regulatory Authority (MRA) Rules 2010, Section 24",
+          "effective_date": "2010-12-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Caps microenterprise borrowing at BDT 1,500,000 without institutional collateral."
+        }
+      ]
+    },
+    {
+      "country_code": "CN",
+      "country_name": "China",
+      "native_country_name": "中国",
+      "primary_currency": "CNY",
+      "currency_symbol": "¥",
+      "minor_unit_multiplier": 100,
+      "default_locale": "zh-CN",
+      "supported_locales": [
+        "zh-CN",
+        "en-US"
+      ],
+      "timezone": "Asia/Shanghai",
+      "calendar_system": "gregorian",
+      "date_format": "YYYY-MM-DD",
+      "accounting_standard": "Chinese Accounting Standards for Small Entities (小企业会计准则 CSAS-SE)",
+      "tax_authority_name": "State Taxation Administration of the PRC (国家税务总局 SAT)",
+      "standard_vat_rate_pct": 13.0,
+      "reduced_vat_rates_pct": [
+        9.0,
+        6.0,
+        3.0,
+        1.0
+      ],
+      "corporate_income_tax_rate_pct": 25.0,
+      "invoice_standard_name": "National Electronic Fapiao (全电发票 / 增值税专用发票 / 普通发票)",
+      "regulatory_body": "People's Bank of China (PBOC) & National Financial Regulatory Administration (NFRA)",
+      "statutory_dscr_covenant": 1.3,
+      "max_debt_to_income_pct": 45.0,
+      "max_microenterprise_ceiling_minor": 1000000000,
+      "reference_benchmark_rate_name": "1-Year Loan Prime Rate (LPR 贷款市场报价利率)",
+      "sources": [
+        {
+          "topic": "VAT Invoicing & Fapiao",
+          "regulatory_source": "Measures for the Administration of Invoices of the PRC (中华人民共和国发票管理办法 - State Council Order No. 764)",
+          "effective_date": "2023-07-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Governs digital electronic fapiao (数电发票) formatting, tax classification codes, and anti-fraud verification."
+        },
+        {
+          "topic": "Small Enterprise Income Tax Relief",
+          "regulatory_source": "Ministry of Finance and SAT Announcement No. 12 (2023) on Preferential Income Tax Policies for Small and Low-Profit Enterprises",
+          "effective_date": "2023-01-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Taxable income under 3M CNY taxed at an effective preferential rate of 5% through 2027."
+        },
+        {
+          "topic": "PBOC Inclusive SME Finance",
+          "regulatory_source": "PBOC Circular Yinfa [2021] No. 312 on Deepening Financial Services for Micro and Small Enterprises",
+          "effective_date": "2021-12-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Mandates transparent loan pricing tied to LPR benchmark and strict risk-based debt service evaluation."
+        }
+      ]
+    },
+    {
+      "country_code": "SA",
+      "country_name": "Saudi Arabia",
+      "native_country_name": "المملكة العربية السعودية",
+      "primary_currency": "SAR",
+      "currency_symbol": "﷼",
+      "minor_unit_multiplier": 100,
+      "default_locale": "ar-SA",
+      "supported_locales": [
+        "ar-SA",
+        "en-US"
+      ],
+      "timezone": "Asia/Riyadh",
+      "calendar_system": "islamic_hijri",
+      "date_format": "DD/MM/YYYY",
+      "accounting_standard": "SOCPA / IFRS for SMEs",
+      "tax_authority_name": "Zakat, Tax and Customs Authority (ZATCA / هيئة الزكاة والضريبة والجمارك)",
+      "standard_vat_rate_pct": 15.0,
+      "reduced_vat_rates_pct": [
+        0.0
+      ],
+      "corporate_income_tax_rate_pct": 20.0,
+      "invoice_standard_name": "ZATCA Electronic Invoicing Phase 2 (Fatoora / فاتورة - Base64 TLV QR Code)",
+      "regulatory_body": "Saudi Central Bank (SAMA / البنك المركزي السعودي)",
+      "statutory_dscr_covenant": 1.2,
+      "max_debt_to_income_pct": 40.0,
+      "max_microenterprise_ceiling_minor": 500000000,
+      "reference_benchmark_rate_name": "SAIBOR (Saudi Interbank Offered Rate)",
+      "sources": [
+        {
+          "topic": "ZATCA E-Invoicing Regulations",
+          "regulatory_source": "Electronic Invoicing Regulation (Resolution No. 2-3-21) & ZATCA Integration Phase 2 Mandate",
+          "effective_date": "2023-01-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Mandates cryptographic stamping, UUID, and TLV-encoded Base64 QR code for all B2B and B2C invoices."
+        },
+        {
+          "topic": "SAMA Responsible Lending Principles",
+          "regulatory_source": "SAMA Responsible Lending Principles for Retail and SME Customers Circular No. 391000100",
+          "effective_date": "2018-08-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Enforces Debt Burden Ratio (DBR) / DTI caps and Murabaha / Tawaruq Islamic finance transparency."
+        }
+      ]
+    },
+    {
+      "country_code": "US",
+      "country_name": "United States",
+      "native_country_name": "United States",
+      "primary_currency": "USD",
+      "currency_symbol": "$",
+      "minor_unit_multiplier": 100,
+      "default_locale": "en-US",
+      "supported_locales": [
+        "en-US",
+        "es-ES"
+      ],
+      "timezone": "America/New_York",
+      "calendar_system": "gregorian",
+      "date_format": "MM/DD/YYYY",
+      "accounting_standard": "US GAAP (ASC 606 Revenue / ASC 842 Leases)",
+      "tax_authority_name": "Internal Revenue Service (IRS)",
+      "standard_vat_rate_pct": 0.0,
+      "reduced_vat_rates_pct": [],
+      "corporate_income_tax_rate_pct": 21.0,
+      "invoice_standard_name": "Standard Commercial Invoice & IRS Form 1099-NEC / W-9",
+      "regulatory_body": "Federal Reserve, OCC, and Small Business Administration (SBA)",
+      "statutory_dscr_covenant": 1.25,
+      "max_debt_to_income_pct": 43.0,
+      "max_microenterprise_ceiling_minor": 500000000,
+      "reference_benchmark_rate_name": "SOFR (Secured Overnight Financing Rate)",
+      "sources": [
+        {
+          "topic": "Small Business Administration Lending",
+          "regulatory_source": "SBA Standard Operating Procedure SOP 50 10 7.1 Lender and Development Company Loan Programs",
+          "effective_date": "2023-11-15",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Requires historical and projected DSCR of at least 1.15x to 1.25x for SBA 7(a) loan approval."
+        }
+      ]
+    },
+    {
+      "country_code": "AU",
+      "country_name": "Australia",
+      "native_country_name": "Australia",
+      "primary_currency": "AUD",
+      "currency_symbol": "A$",
+      "minor_unit_multiplier": 100,
+      "default_locale": "en-AU",
+      "supported_locales": [
+        "en-AU"
+      ],
+      "timezone": "Australia/Sydney",
+      "calendar_system": "gregorian",
+      "date_format": "DD/MM/YYYY",
+      "accounting_standard": "AASB (Australian Accounting Standards Board / IFRS)",
+      "tax_authority_name": "Australian Taxation Office (ATO)",
+      "standard_vat_rate_pct": 10.0,
+      "reduced_vat_rates_pct": [
+        0.0
+      ],
+      "corporate_income_tax_rate_pct": 25.0,
+      "invoice_standard_name": "ATO Compliant Tax Invoice & Peppol e-Invoicing",
+      "regulatory_body": "Australian Securities and Investments Commission (ASIC) & APRA",
+      "statutory_dscr_covenant": 1.25,
+      "max_debt_to_income_pct": 40.0,
+      "max_microenterprise_ceiling_minor": 500000000,
+      "reference_benchmark_rate_name": "BBSW (Bank Bill Swap Rate)",
+      "sources": [
+        {
+          "topic": "ATO GST Tax Invoice Standards",
+          "regulatory_source": "A New Tax System (Goods and Services Tax) Act 1999, Section 29-70",
+          "effective_date": "2000-07-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Prescribes mandatory ABN, GST itemization, and tax invoice header requirements."
+        }
+      ]
+    },
+    {
+      "country_code": "KW",
+      "country_name": "Kuwait",
+      "native_country_name": "دولة الكويت",
+      "primary_currency": "KWD",
+      "currency_symbol": "KD",
+      "minor_unit_multiplier": 1000,
+      "default_locale": "ar-KW",
+      "supported_locales": [
+        "ar-KW",
+        "en-US"
+      ],
+      "timezone": "Asia/Kuwait",
+      "calendar_system": "islamic_hijri",
+      "date_format": "DD/MM/YYYY",
+      "accounting_standard": "IFRS for SMEs as adopted by Ministry of Commerce and Industry (MOCI)",
+      "tax_authority_name": "Ministry of Finance - Department of Income Tax",
+      "standard_vat_rate_pct": 0.0,
+      "reduced_vat_rates_pct": [],
+      "corporate_income_tax_rate_pct": 15.0,
+      "invoice_standard_name": "Kuwait Commercial Code Invoicing Standards",
+      "regulatory_body": "Central Bank of Kuwait (CBK) & National Fund for SME Development",
+      "statutory_dscr_covenant": 1.25,
+      "max_debt_to_income_pct": 40.0,
+      "max_microenterprise_ceiling_minor": 500000000,
+      "reference_benchmark_rate_name": "KIBOR (Kuwait Interbank Offered Rate)",
+      "sources": [
+        {
+          "topic": "Kuwait Corporate Income Tax",
+          "regulatory_source": "Amiri Decree No. 3 of 1955 as amended by Law No. 2 of 2008 & Law No. 46 of 2006 (Zakat)",
+          "effective_date": "2008-01-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Three-decimal currency precision (Fils). Zakat applied at 1% of annual net profit under Law 46/2006."
+        },
+        {
+          "topic": "CBK Consumer and SME Lending Instructions",
+          "regulatory_source": "Central Bank of Kuwait Instructions Concerning Consumer and Installment Loans (November 2018)",
+          "effective_date": "2018-12-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Strict debt burden ratios capped at 40% of net monthly income."
+        }
+      ]
+    },
+    {
+      "country_code": "UZ",
+      "country_name": "Uzbekistan",
+      "native_country_name": "Oʻzbekiston",
+      "primary_currency": "UZS",
+      "currency_symbol": "so'm",
+      "minor_unit_multiplier": 100,
+      "default_locale": "uz-UZ",
+      "supported_locales": [
+        "uz-UZ",
+        "ru-RU",
+        "en-US"
+      ],
+      "timezone": "Asia/Tashkent",
+      "calendar_system": "gregorian",
+      "date_format": "DD/MM/YYYY",
+      "accounting_standard": "National Accounting Standards of Uzbekistan (BHMS / NAS)",
+      "tax_authority_name": "State Tax Committee of the Republic of Uzbekistan (Soliq)",
+      "standard_vat_rate_pct": 12.0,
+      "reduced_vat_rates_pct": [
+        0.0
+      ],
+      "corporate_income_tax_rate_pct": 15.0,
+      "invoice_standard_name": "STC Electronic Tax Invoicing (Elektron hisobvaraq-faktura EHF)",
+      "regulatory_body": "Central Bank of the Republic of Uzbekistan (CBU)",
+      "statutory_dscr_covenant": 1.2,
+      "max_debt_to_income_pct": 50.0,
+      "max_microenterprise_ceiling_minor": 50000000000,
+      "reference_benchmark_rate_name": "CBU Refinancing Policy Rate (13.5%)",
+      "sources": [
+        {
+          "topic": "Uzbekistan Tax Code & EHF",
+          "regulatory_source": "Tax Code of the Republic of Uzbekistan (New Edition 2020) & Cabinet of Ministers Resolution No. 489 (2020)",
+          "effective_date": "2023-01-01",
+          "retrieval_date": "2026-10-18",
+          "verification_status": "VERIFIED_OFFICIAL",
+          "notes": "Mandates electronic invoices (EHF) via accredited electronic document management operators."
+        }
+      ]
+    }
+  ]
+}

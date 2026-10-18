@@ -14,7 +14,7 @@ from src.config import settings
 from src.database.connection import engine, SessionLocal
 from src.database.migrations.runner import apply_migrations
 from src.ai.registry import ModelRegistry
-from src.api.routes import auth, documents, finance, datasets, models
+from src.api.routes import auth, documents, finance, datasets, models, i18n
 
 
 @asynccontextmanager
@@ -54,6 +54,7 @@ app.include_router(documents.router, prefix="/api")
 app.include_router(finance.router, prefix="/api")
 app.include_router(datasets.router, prefix="/api")
 app.include_router(models.router, prefix="/api")
+app.include_router(i18n.router, prefix="/api")
 
 
 @app.get("/")

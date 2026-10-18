@@ -1,0 +1,84 @@
+{
+  "common": {
+    "ok": "Aceptar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito",
+    "fallback_notice": "Aviso: Se utilizó la traducción en inglés por defecto."
+  },
+  "navigation": {
+    "dashboard": "Panel de Control",
+    "sales": "Libro de Ventas",
+    "purchases": "Compras a Proveedores",
+    "expenses": "Gastos Operativos",
+    "inventory": "Control de Inventario",
+    "documents": "Captura de Documentos",
+    "loans": "Riesgo Crediticio y Préstamos",
+    "forecasting": "Previsión de Flujo de Caja",
+    "settings": "Configuración",
+    "compliance": "Cumplimiento Fiscal y Normativo"
+  },
+  "financial": {
+    "revenue": "Ingresos Totales",
+    "cogs": "Coste de Mercancías Vendidas (COGS)",
+    "gross_profit": "Beneficio Bruto",
+    "net_profit": "Beneficio Neto de Explotación",
+    "gross_margin": "Margen Bruto (%)",
+    "net_margin": "Margen Neto (%)",
+    "cash_flow": "Flujo de Caja Neto",
+    "receivables": "Cuentas por Cobrar",
+    "payables": "Cuentas por Pagar",
+    "dscr": "Ratio de Cobertura del Servicio de la Deuda (DSCR)",
+    "monthly_emi": "Cuota Mensual (Amortización Francesa)",
+    "total_interest": "Interés Total a Pagar",
+    "principal": "Capital del Préstamo",
+    "tenure": "Plazo (Meses)",
+    "tax_amount": "Importe de Impuestos / IVA",
+    "discount": "Descuento Aplicado",
+    "total_amount": "Importe Total",
+    "subtotal": "Base Imponible (Subtotal)",
+    "opening_balance": "Saldo Inicial",
+    "closing_balance": "Saldo Final"
+  },
+  "documents": {
+    "upload_title": "Subir Factura o Ticket",
+    "sales_receipt": "Ticket de Venta / Factura Simplificada",
+    "purchase_invoice": "Factura de Compra de Proveedor",
+    "expense_receipt": "Comprobante de Gasto",
+    "payment_receipt": "Recibo de Pago",
+    "unknown": "Documento No Clasificado",
+    "extracted_total": "Total Extraído: {{amount}} {{currency}}",
+    "extracted_date": "Fecha del Documento: {{date}}",
+    "invoice_no": "Número de Factura: {{invoice_id}}",
+    "confidence_score": "Confianza OCR: {{score}}%",
+    "review_required": "Revisión Necesaria: La suma de líneas no coincide con el total.",
+    "auto_post_success": "Documento #{{invoice_id}} asentado con éxito en el libro contable."
+  },
+  "loan_risk": {
+    "healthy_status": "Elegible / Capacidad Financiera Saludable (DSCR: {{dscr}}x)",
+    "borderline_status": "Aprobación Condicional (DSCR: {{dscr}}x requiere garantías)",
+    "rejected_status": "No Elegible / Alto Riesgo (Servicio de deuda excede capacidad)",
+    "mra_ceiling_breach": "Infracción Normativa: Supera el límite de microcrédito de {{ceiling}} {{currency}}",
+    "dti_breach": "Infracción Normativa: La cuota mensual supera el 40% del beneficio neto"
+  },
+  "compliance": {
+    "jurisdiction": "Jurisdicción: {{jurisdiction}}",
+    "tax_authority": "Autoridad Tributaria: {{authority}}",
+    "standard_vat_rate": "Tipo Impositivo General de IVA: {{rate}}%",
+    "regulatory_source": "Normativa Aplicable: {{source}}",
+    "verification_status": "Estado de Verificación: {{status}}",
+    "effective_date": "Fecha de Entrada en Vigor: {{date}}"
+  },
+  "validation": {
+    "required_field": "Este campo es obligatorio.",
+    "invalid_amount": "Importe monetario no válido: {{value}}",
+    "positive_amount": "El importe debe ser un número positivo.",
+    "shop_isolation_error": "Acceso Denegado: No tiene autorización para la Tienda #{{shop_id}}."
+  }
+}

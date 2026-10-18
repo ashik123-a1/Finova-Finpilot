@@ -1,0 +1,84 @@
+{
+  "common": {
+    "ok": "确定",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "search": "搜索",
+    "filter": "筛选",
+    "loading": "加载中...",
+    "error": "错误",
+    "success": "成功",
+    "fallback_notice": "提示：当前条目已回退至英文默认文本。"
+  },
+  "navigation": {
+    "dashboard": "控制台仪表盘",
+    "sales": "销售总账",
+    "purchases": "采购管理",
+    "expenses": "营业支出",
+    "inventory": "库存动态审计",
+    "documents": "发票与票据识别",
+    "loans": "中小微企业贷款评估",
+    "forecasting": "现金流滚动预测",
+    "settings": "系统设置",
+    "compliance": "财税合规与政策"
+  },
+  "financial": {
+    "revenue": "营业总收入",
+    "cogs": "主营业务成本 (COGS)",
+    "gross_profit": "毛利润",
+    "net_profit": "净营业利润",
+    "gross_margin": "毛利率 (%)",
+    "net_margin": "净利率 (%)",
+    "cash_flow": "净现金流",
+    "receivables": "应收账款",
+    "payables": "应付账款",
+    "dscr": "偿债备付率 (DSCR)",
+    "monthly_emi": "每月还款额 (等额本息)",
+    "total_interest": "应付利息总额",
+    "principal": "贷款本金",
+    "tenure": "还款期限 (月)",
+    "tax_amount": "税额 / 增值税",
+    "discount": "折扣优惠",
+    "total_amount": "价税合计金额",
+    "subtotal": "不含税金额 (小计)",
+    "opening_balance": "期初余额",
+    "closing_balance": "期末余额"
+  },
+  "documents": {
+    "upload_title": "上传发票或收据扫描件",
+    "sales_receipt": "销售发票 / 收据",
+    "purchase_invoice": "供应商增值税专用发票 / 进项发票",
+    "expense_receipt": "费用报销单 / 付款凭单",
+    "payment_receipt": "收款凭单 / 电子收据",
+    "unknown": "未分类凭据",
+    "extracted_total": "识别总金额: {{amount}} {{currency}}",
+    "extracted_date": "开票日期: {{date}}",
+    "invoice_no": "发票代码/号码: {{invoice_id}}",
+    "confidence_score": "OCR置信度: {{score}}%",
+    "review_required": "待人工复核：明细金额累计与总金额不一致。",
+    "auto_post_success": "单据 #{{invoice_id}} 已成功记入财务总账。"
+  },
+  "loan_risk": {
+    "healthy_status": "资质优良 / 偿债能力充裕 (DSCR: {{dscr}}x)",
+    "borderline_status": "附条件审核 (DSCR: {{dscr}}x 需提供额外增信担保)",
+    "rejected_status": "不予准入 / 偿债风险过高 (债务本息超出承受范围)",
+    "mra_ceiling_breach": "违规提示：超出普惠小微企业单户授信上限 {{ceiling}} {{currency}}",
+    "dti_breach": "合规警告：月还款额超出月净经营现金流的 40%"
+  },
+  "compliance": {
+    "jurisdiction": "司法管辖区: {{jurisdiction}}",
+    "tax_authority": "主管税务机关: {{authority}}",
+    "standard_vat_rate": "标准增值税率: {{rate}}%",
+    "regulatory_source": "监管法规文件: {{source}}",
+    "verification_status": "官方核验状态: {{status}}",
+    "effective_date": "实施生效日期: {{date}}"
+  },
+  "validation": {
+    "required_field": "此项为必填项。",
+    "invalid_amount": "无效金额数据: {{value}}",
+    "positive_amount": "金额必须为正数。",
+    "shop_isolation_error": "权限拒绝：您无权访问门店 #{{shop_id}} 的财务数据。"
+  }
+}

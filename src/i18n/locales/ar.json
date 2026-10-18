@@ -1,0 +1,84 @@
+{
+  "common": {
+    "ok": "موافق",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "search": "بحث",
+    "filter": "تصفية",
+    "loading": "جار التحميل...",
+    "error": "خطأ",
+    "success": "نجاح",
+    "fallback_notice": "تنبيه: تم استخدام الترجمة الإنجليزية كبديل احتياطي."
+  },
+  "navigation": {
+    "dashboard": "لوحة المؤشرات",
+    "sales": "سجل المبيعات",
+    "purchases": "المشتريات",
+    "expenses": "المصروفات التشغيلية",
+    "inventory": "حركة المخزون",
+    "documents": "مسح وتدقيق الفواتير",
+    "loans": "تقييم الجدارة الائتمانية والتمويل",
+    "forecasting": "التنبؤ بالتدفقات النقدية",
+    "settings": "الإعدادات",
+    "compliance": "الامتثال الضريبي والنظامي"
+  },
+  "financial": {
+    "revenue": "إجمالي الإيرادات",
+    "cogs": "تكلفة البضاعة المباعة (COGS)",
+    "gross_profit": "إجمالي الربح",
+    "net_profit": "صافي الربح التشغيلي",
+    "gross_margin": "هامش الربح الإجمالي (%)",
+    "net_margin": "هامش الربح الصافي (%)",
+    "cash_flow": "صافي التدفق النقدي",
+    "receivables": "الذمم المدينة (المستحقات)",
+    "payables": "الذمم الدائنة (الموردين)",
+    "dscr": "نسبة تغطية خدمة الدين (DSCR)",
+    "monthly_emi": "القسط الشهري المتناقص",
+    "total_interest": "إجمالي الأرباح / الفوائد",
+    "principal": "مبلغ التمويل الأصلي",
+    "tenure": "مدة التمويل (أشهر)",
+    "tax_amount": "مبلغ ضريبة القيمة المضافة",
+    "discount": "الخصم الممنوح",
+    "total_amount": "المبلغ الإجمالي شامل الضريبة",
+    "subtotal": "المجموع الفرعي (قبل الضريبة)",
+    "opening_balance": "الرصيد الافتتاحي",
+    "closing_balance": "الرصيد الختامي"
+  },
+  "documents": {
+    "upload_title": "رفع فاتورة أو إيصال",
+    "sales_receipt": "فاتورة مبيعات / إيصال قبض",
+    "purchase_invoice": "فاتورة شراء ضريبية للمورد",
+    "expense_receipt": "سند صرف مصروفات",
+    "payment_receipt": "إيصال سداد / دفع",
+    "unknown": "مستند غير مصنف",
+    "extracted_total": "الإجمالي المستخرج: {{amount}} {{currency}}",
+    "extracted_date": "تاريخ الفاتورة: {{date}}",
+    "invoice_no": "رقم الفاتورة: {{invoice_id}}",
+    "confidence_score": "دقة التعرف الضوئي: {{score}}%",
+    "review_required": "يتطلب مراجعة بشرية: مجموع بنود الفاتورة لا يطابق الإجمالي.",
+    "auto_post_success": "تم ترحيل الفاتورة #{{invoice_id}} بنجاح إلى دفتر الأستاذ المالي."
+  },
+  "loan_risk": {
+    "healthy_status": "مؤهل / جدارة ائتمانية ممتازة (DSCR: {{dscr}}x)",
+    "borderline_status": "موافقة مشروطة (DSCR: {{dscr}}x تتطلب ضمانات إضافية)",
+    "rejected_status": "غير مؤهل / مخاطر تعثر مرتفعة (خدمة الدين تتجاوز الطاقة التشغيلية)",
+    "mra_ceiling_breach": "مخالفة نظامية: تجاوز الحد الأقصى لتمويل المنشآت الصغيرة البالغ {{ceiling}} {{currency}}",
+    "dti_breach": "مخالفة نظامية: القسط الشهري يتجاوز 40% من صافي الدخل التشغيلي"
+  },
+  "compliance": {
+    "jurisdiction": "الولاية القضائية: {{jurisdiction}}",
+    "tax_authority": "الهيئة الضريبية: {{authority}}",
+    "standard_vat_rate": "نسبة ضريبة القيمة المضافة الأساسية: {{rate}}%",
+    "regulatory_source": "المرجع النظامي: {{source}}",
+    "verification_status": "حالة التحقق الرسمية: {{status}}",
+    "effective_date": "تاريخ السريان: {{date}}"
+  },
+  "validation": {
+    "required_field": "هذا الحقل مطلوب.",
+    "invalid_amount": "قيمة مالية غير صالحة: {{value}}",
+    "positive_amount": "يجب أن يكون المبلغ رقماً موجباً.",
+    "shop_isolation_error": "تم رفض الوصول: ليس لديك صلاحية الاطلاع على بيانات الفرع #{{shop_id}}."
+  }
+}

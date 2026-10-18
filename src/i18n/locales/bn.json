@@ -1,0 +1,84 @@
+{
+  "common": {
+    "ok": "ঠিক আছে",
+    "cancel": "বাতিল",
+    "save": "সংরক্ষণ করুন",
+    "edit": "সম্পাদনা",
+    "delete": "মুছে ফেলুন",
+    "search": "অনুসন্ধান",
+    "filter": "ফিল্টার",
+    "loading": "লোড হচ্ছে...",
+    "error": "ত্রুটি",
+    "success": "সফল",
+    "fallback_notice": "বিজ্ঞপ্তি: ডিফল্ট ইংরেজি অনুবাদ ব্যবহৃত হয়েছে।"
+  },
+  "navigation": {
+    "dashboard": "ড্যাশবোর্ড",
+    "sales": "বিক্রয় খতিয়ান",
+    "purchases": "ক্রয় খতিয়ান",
+    "expenses": "খরচ সমূহ",
+    "inventory": "মজুদ পণ্য পর্যবেক্ষণ",
+    "documents": "কাগজপত্র ও রসিদ আপলোড",
+    "loans": "ঋণ ঝুঁকি ও অর্থায়ন মূল্যায়ন",
+    "forecasting": "নগদ প্রবাহ পূর্বাভাস",
+    "settings": "সেটিংস",
+    "compliance": "আইনগত ও কর পরিপালন"
+  },
+  "financial": {
+    "revenue": "মোট আয় / বিক্রয়",
+    "cogs": "বিক্রিত পণ্যের ব্যয় (COGS)",
+    "gross_profit": "মোট লাভ",
+    "net_profit": "নিট পরিচালন লাভ",
+    "gross_margin": "মোট মুনাফার হার (%)",
+    "net_margin": "নিট মুনাফার হার (%)",
+    "cash_flow": "নিট নগদ প্রবাহ",
+    "receivables": "বকেয়া পাওনা (বাকির খাতা)",
+    "payables": "দেনা / প্রদেয় হিসাব",
+    "dscr": "ঋণ পরিশোধ সক্ষমতা অনুপাত (DSCR)",
+    "monthly_emi": "মাসিক কিস্তি (EMI)",
+    "total_interest": "মোট প্রদেয় সুদ",
+    "principal": "মূল ঋণ পরিমাণ",
+    "tenure": "মেয়াদ (মাস)",
+    "tax_amount": "ভ্যাট / কর পরিমাণ",
+    "discount": "প্রদত্ত ছাড়",
+    "total_amount": "সর্বমোট পরিমাণ",
+    "subtotal": "উপমোট",
+    "opening_balance": "প্রারম্ভিক স্থিতি",
+    "closing_balance": "সমাপনী স্থিতি"
+  },
+  "documents": {
+    "upload_title": "রসিদ অথবা ইনভয়েস আপলোড",
+    "sales_receipt": "ক্যাশ মেমো / বিক্রয় রসিদ",
+    "purchase_invoice": "সরবরাহকারী ক্রয় চালান",
+    "expense_receipt": "ব্যয় ভাউচার",
+    "payment_receipt": "জমা রসিদ / পেমেন্ট ভাউচার",
+    "unknown": "অশ্রেণিকৃত নথিপত্র",
+    "extracted_total": "নিষ্কাশিত মোট: {{amount}} {{currency}}",
+    "extracted_date": "নথির তারিখ: {{date}}",
+    "invoice_no": "চালান নং: {{invoice_id}}",
+    "confidence_score": "ওসিআর নির্ভুলতা মান: {{score}}%",
+    "review_required": "পর্যালোচনা প্রয়োজন: আইটেমের যোগফল মোট পরিমাণের সাথে মিলছে না।",
+    "auto_post_success": "চালান #{{invoice_id}} সফলভাবে হিসাব খতিয়ানে যুক্ত হয়েছে।"
+  },
+  "loan_risk": {
+    "healthy_status": "অনুমোদনযোগ্য / সন্তোষজনক ঋণ সক্ষমতা (DSCR: {{dscr}}x)",
+    "borderline_status": "শর্তসাপেক্ষ অনুমোদন (DSCR: {{dscr}}x জামানত প্রয়োজন)",
+    "rejected_status": "অনুপযুক্ত / উচ্চ ঋণ ঝুঁকি (পরিশোধ সক্ষমতা অপর্যাপ্ত)",
+    "mra_ceiling_breach": "নিয়ম লঙ্ঘন: এমআরএ ক্ষুদ্রঋণ ঋণসীমা {{ceiling}} {{currency}} অতিক্রম করেছে",
+    "dti_breach": "নিয়ম লঙ্ঘন: মাসিক কিস্তি নিট আয়ের ৪০% এর বেশি"
+  },
+  "compliance": {
+    "jurisdiction": "অধিক্ষেত্র: {{jurisdiction}}",
+    "tax_authority": "কর কর্তৃপক্ষ: {{authority}}",
+    "standard_vat_rate": "আদর্শ ভ্যাট হার: {{rate}}%",
+    "regulatory_source": "নিয়ন্ত্রক বিধিমালা: {{source}}",
+    "verification_status": "যাচাইকরণের অবস্থা: {{status}}",
+    "effective_date": "কার্যকর তারিখ: {{date}}"
+  },
+  "validation": {
+    "required_field": "এই তথ্যটি আবশ্যক।",
+    "invalid_amount": "অবৈধ অর্থের পরিমাণ: {{value}}",
+    "positive_amount": "পরিমাণটি অবশ্যই ধনাত্মক সংখ্যা হতে হবে।",
+    "shop_isolation_error": "অনুমতি অস্বীকৃত: দোকান #{{shop_id}} এর তথ্য দেখার অনুমতি নেই।"
+  }
+}

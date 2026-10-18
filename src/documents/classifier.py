@@ -17,9 +17,10 @@ class DocumentClassifier:
     Provides confidence scores and full class probability distributions.
     """
 
-    # Keyword indicators with relative importance weights
+    # Keyword indicators with relative importance weights (Multilingual: EN, BN, ZH, AR, ES, HI)
     KEYWORD_WEIGHTS = {
         DocumentType.SALES_RECEIPT: {
+            # English
             "cash memo": 3.0,
             "cashmemo": 3.0,
             "sales receipt": 3.0,
@@ -30,6 +31,7 @@ class DocumentClassifier:
             "customer copy": 2.0,
             "pos receipt": 3.0,
             "sold to": 2.0,
+            # Bengali
             "ক্যাশ মেমো": 3.5,
             "ক্যাশমেমো": 3.5,
             "বিক্রয় রসিদ": 3.5,
@@ -38,8 +40,29 @@ class DocumentClassifier:
             "বিক্রয়": 2.0,
             "গ্রাহক কপি": 2.5,
             "নগদ রসিদ": 2.5,
+            # Chinese
+            "销售发票": 3.5,
+            "普通发票": 3.0,
+            "收银小票": 3.5,
+            "销售清单": 3.0,
+            "销售收据": 3.5,
+            "结账单": 2.5,
+            # Arabic
+            "فاتورة مبيعات": 3.5,
+            "إيصال بيع": 3.5,
+            "إيصال نقدي": 3.0,
+            "سند قبض مبيعات": 3.0,
+            # Spanish
+            "recibo de venta": 3.5,
+            "ticket de venta": 3.5,
+            "factura simplificada": 3.0,
+            # Hindi
+            "बिक्री रसीद": 3.5,
+            "कैश मेमो": 3.5,
+            "बिक्री बिल": 3.0,
         },
         DocumentType.PURCHASE_INVOICE: {
+            # English
             "purchase invoice": 3.5,
             "purchaseinvoice": 3.5,
             "tax invoice": 3.0,
@@ -49,6 +72,7 @@ class DocumentClassifier:
             "bill of supply": 2.5,
             "challan": 2.0,
             "purchase order ref": 2.5,
+            # Bengali
             "চালান": 3.5,
             "ক্রয় চালান": 3.5,
             "ক্রয় চালান": 3.5,
@@ -56,8 +80,28 @@ class DocumentClassifier:
             "ক্রয়": 2.0,
             "সরবরাহকারী": 2.5,
             "ভেন্ডর বিল": 3.0,
+            # Chinese
+            "增值税专用发票": 3.5,
+            "采购发票": 3.5,
+            "进项发票": 3.5,
+            "采购订单": 3.0,
+            "供货发票": 3.0,
+            # Arabic
+            "فاتورة ضريبية": 3.5,
+            "فاتورة مشتريات": 3.5,
+            "فاتورة شراء": 3.5,
+            "فاتورة مورد": 3.0,
+            # Spanish
+            "factura de compra": 3.5,
+            "factura proveedor": 3.5,
+            "albarán": 2.5,
+            # Hindi
+            "खरीद चालान": 3.5,
+            "कर चालान": 3.5,
+            "टैक्स इनवॉइस": 3.0,
         },
         DocumentType.EXPENSE_RECEIPT: {
+            # English
             "expense voucher": 3.5,
             "expensevoucher": 3.5,
             "petty expense": 3.5,
@@ -72,6 +116,7 @@ class DocumentClassifier:
             "electricity bill": 3.0,
             "salary slip": 3.0,
             "office supplies": 2.0,
+            # Bengali
             "ভাউচার": 3.0,
             "দোকান খরচ": 3.5,
             "খরচ": 2.5,
@@ -79,8 +124,32 @@ class DocumentClassifier:
             "বাড়ি ভাড়া": 3.5,
             "বিদ্যুৎ বিল": 3.5,
             "বেতন": 3.0,
+            # Chinese
+            "费用报销单": 3.5,
+            "支出凭单": 3.5,
+            "日常报销": 3.0,
+            "差旅费": 3.0,
+            "水电费收据": 3.5,
+            "房租收据": 3.5,
+            # Arabic
+            "سند صرف": 3.5,
+            "سند صرف نفقات": 3.5,
+            "مصروفات تشغيلية": 3.0,
+            "فاتورة خدمات": 3.0,
+            "إيصال إيجار": 3.5,
+            # Spanish
+            "comprobante de gasto": 3.5,
+            "recibo de gastos": 3.5,
+            "vale de caja": 3.0,
+            "recibo de alquiler": 3.5,
+            # Hindi
+            "खर्च वाउचर": 3.5,
+            "व्यय रसीद": 3.5,
+            "किराया रसीद": 3.5,
+            "बिजली बिल": 3.0,
         },
         DocumentType.PAYMENT_RECEIPT: {
+            # English
             "payment receipt": 3.5,
             "paymentreceipt": 3.5,
             "money receipt": 3.5,
@@ -89,10 +158,31 @@ class DocumentClassifier:
             "received with thanks": 3.0,
             "bank deposit slip": 3.5,
             "acknowledgment receipt": 2.5,
+            # Bengali
             "টাকা প্রাপ্তি রসিদ": 3.5,
             "টাকা জমার রসিদ": 3.5,
             "পেমেন্ট রসিদ": 3.5,
             "জমা স্লিপ": 3.5,
+            # Chinese
+            "收款收据": 3.5,
+            "收款凭单": 3.5,
+            "交款单": 3.0,
+            "付款确认书": 3.0,
+            "银行汇款凭条": 3.5,
+            # Arabic
+            "سند قبض": 3.5,
+            "إيصال دفع": 3.5,
+            "إيصال استلام نقدية": 3.5,
+            "إشعار تحويل بنكي": 3.0,
+            # Spanish
+            "recibo de pago": 3.5,
+            "comprobante de pago": 3.5,
+            "justificante de pago": 3.0,
+            # Hindi
+            "भुगतान रसीद": 3.5,
+            "जमा रसीद": 3.5,
+            "पेमेंट रसीद": 3.5,
+            "बैंक जमा पर्ची": 3.0,
         },
     }
 
@@ -195,3 +285,14 @@ class DocumentClassifier:
             return DocumentType.UNKNOWN, 0.30, rule_probabilities
 
         return rule_type, round(rule_conf, 2), rule_probabilities
+
+    @classmethod
+    def predict(cls, text: str) -> Tuple[DocumentType, float, Dict[str, float]]:
+        """Convenience alias for classify_text."""
+        return cls.classify_text(text)
+
+    @classmethod
+    def classify(cls, text: str) -> Tuple[DocumentType, float, Dict[str, float]]:
+        """Convenience alias for classify_text."""
+        return cls.classify_text(text)
+
