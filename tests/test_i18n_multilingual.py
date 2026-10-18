@@ -147,3 +147,19 @@ class TestLocaleFormatter:
         assert LocaleFormatter.get_text_direction("ur") == "rtl"
         assert LocaleFormatter.get_text_direction("en") == "ltr"
         assert LocaleFormatter.get_text_direction("zh") == "ltr"
+
+    def test_chinese_financial_unit_formatting(self):
+        # Wan (万 - 10,000)
+        assert LocaleFormatter.format_chinese_financial_units(50000000) == "¥ 50.00万元"
+        assert LocaleFormatter.format_chinese_financial_units(32000000) == "¥ 32.00万元"
+        # Yi (亿 - 100,000,000)
+        assert LocaleFormatter.format_chinese_financial_units(12000000000) == "¥ 1.20亿元"
+        # Sub-Wan standard format
+        assert LocaleFormatter.format_chinese_financial_units(350000) == "¥ 3,500.00元"
+
+    def test_locale_normalization(self):
+        # Verify BCP-47 and POSIX locale codes resolve to master catalog
+        assert t("common.save", "zh-CN") == "保存"
+        assert t("common.save", "zh_CN") == "保存"
+        assert t("common.save", "en-US") == "Save"
+        assert t("common.save", "bn-BD") == "সংরক্ষণ করুন"

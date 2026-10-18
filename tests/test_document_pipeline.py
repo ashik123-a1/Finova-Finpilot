@@ -144,3 +144,43 @@ def test_pipeline_router_and_idempotent_posting(db_session, seeded_shop_context)
     # Count sales with this document ID (must still be exactly 1)
     sales_count = db_session.query(Sale).filter_by(document_id=routing.document_id).count()
     assert sales_count == 1
+
+
+def test_multilingual_document_extraction_chinese_fapiao_and_bengali_mushak():
+    """Verifies regex and field extraction for Chinese Fapiao and Bengali Mushak-6.3 invoices."""
+    # 1. Chinese Fapiao
+    fapiao_text = (
+        "电子发票 (普通发票)\n"
+        "发票代码: 031001900111\n"
+        "发票号码: 23442000000012345678\n"
+        "开票日期: 2026-04-15\n"
+        "购买方名称: 杭州科技有限公司\n"
+        "合计金额: ¥ 128,500.00\n"
+        "价税合计: ¥ 128,500.00\n"
+    )
+    ocr_zh = RawOcrOutput(full_text=fapiao_text, blocks=[], detected_language="zh")
+    extracted_zh, _, val_errors_zh = StructuredDocumentExtractor.extract_fields(
+        ocr_zh, DocumentType.PURCHASE_INVOICE
+    )
+    assert extracted_zh["invoice_number"] == "23442000000012345678"
+    assert extracted_zh["date"] == "2026-04-15"
+    assert extracted_zh["total_amount_minor"] == 12850000
+
+    # 2. Bengali Mushak-6.3 VAT Challan
+    mushak_text = (
+        "গণপ্রজাতন্ত্রী বাংলাদেশ সরকার\n"
+        "জাতীয় রাজস্ব বোর্ড\n"
+        "কর চালানপত্র (মূসক-৬.৩)\n"
+        "চালানপত্র নম্বর: CHALAN-2026-9901\n"
+        "তারিখ: 2026-04-15\n"
+        "বিক্রেতার নাম: রহিম এন্টারপ্রাইজ\n"
+        "মোট মূল্য টাকা: 12,450.50\n"
+    )
+    ocr_bn = RawOcrOutput(full_text=mushak_text, blocks=[], detected_language="bn")
+    extracted_bn, _, val_errors_bn = StructuredDocumentExtractor.extract_fields(
+        ocr_bn, DocumentType.PURCHASE_INVOICE
+    )
+    assert extracted_bn["invoice_number"] == "CHALAN-2026-9901"
+    assert extracted_bn["date"] == "2026-04-15"
+    assert extracted_bn["total_amount_minor"] == 1245050
+

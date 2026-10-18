@@ -74,7 +74,7 @@ class I18nService:
         Falls back to English if missing, preserving financial facts safely.
         """
         cls._load_catalogs()
-        clean_locale = locale.lower().split("-")[0].strip() if locale else cls.DEFAULT_LOCALE
+        clean_locale = locale.lower().replace("_", "-").split("-")[0].strip() if locale else cls.DEFAULT_LOCALE
 
         # 1. Look up in requested locale
         raw_text, resolved_locale, is_fallback = cls._lookup(key, clean_locale)

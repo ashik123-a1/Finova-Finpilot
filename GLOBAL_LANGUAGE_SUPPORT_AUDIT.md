@@ -14,9 +14,17 @@ SME Finance Copilot implements a centralized, versioned **100-Language Master Re
 
 ### The Core Architectural Principles:
 1. **Zero Fabrication Policy:** A language is never claimed to be "production-ready" merely because its name appears in a dropdown. Every language is assigned a strictly verified **Capability Tier**.
-2. **Language vs. Jurisdiction Orthogonality:** A merchant operating in China can view the system in English, Arabic, or Bengali without altering Chinese statutory tax calculations (13% VAT, CSAS-SE accounting, LPR loan covenants).
+2. **Language vs. Jurisdiction Orthogonality:** A merchant operating in China can view the system in English, Arabic, or Bengali without altering Chinese statutory tax calculations (13% VAT, CSAS-SE accounting, LPR loan covenants). Selecting English does NOT assume the business operates in the US.
 3. **Financial Fact Invariance:** Numerical amounts, decimal fractions, currency codes, and transaction identifiers (`INV-xxxx`) are protected tokens (`{{amount}}`, `{{currency}}`) that remain completely immune to machine translation drift or lexical substitution.
 4. **Resilient Fallback Hierarchy:** Any missing translation key gracefully falls back to the fully verified English (`en`) master catalog, accompanied by an audit warning, preventing crashes or blank user interfaces.
+
+### 1.1 Confirmed Product Language Priority
+
+The product establishes a concrete four-tier operational priority:
+1. **English (`en`) — Primary Default:** Complete master UI catalog (68 keys), system default locale (`DEFAULT_LOCALE = "en"`), default reports, evaluation output, and competition demonstration language.
+2. **Simplified Chinese (`zh-CN` / `zh`) — Second Priority:** Specialized China SME financial workflows, Digital Electronic Fapiao (全电发票 / 增值税发票) extraction, CSAS-SE accounting standards, commercial Wan (万) and Yi (亿) financial unit formatting, and Chinese date parsing.
+3. **Bengali (`bn`) — Preserved Core:** 100% complete existing support, NBR Mushak-6.3 VAT invoice extraction, Bangladesh Bank SMART lending covenants, BDT poisha precision, and native Bengali numeral parsing.
+4. **Other 97 Registered Languages — Extensible Architecture:** Maintained across evaluated, implemented, and configured capability tiers with truthful, empirical per-language status tracking.
 
 ---
 
@@ -26,9 +34,9 @@ Each of the 100 registered languages is classified into one of four capability t
 
 | Capability Tier | Definition | Current Count | Verification Criteria |
 | :--- | :--- | :---: | :--- |
-| **`production_ready`** | Zero critical bugs, 100% catalog coverage, validated against real/synthetic documents, benchmarked for security | **6** | English (`en`), Bengali (`bn`), Chinese (`zh`), Arabic (`ar`), Spanish (`es`), Hindi (`hi`) |
-| **`evaluated`** | Empirical benchmark data available, automated prompt injection tests run, partial OCR support | **10** | Russian (`ru`), French (`fr`), German (`de`), Portuguese (`pt`), Japanese (`ja`), Korean (`ko`), Urdu (`ur`), Indonesian (`id`), Turkish (`tr`), Vietnamese (`vi`) |
-| **`implemented`** | Working translation catalog loaded, locale formatting and native numeral conversion operational | **15** | Italian, Dutch, Polish, Persian, Swahili, Thai, Malay, Tagalog, Tamil, Telugu, Marathi, Gujarati, Ukrainian, Romanian, Greek |
+| **`production_ready`** | Zero critical bugs, 100% catalog coverage, validated against real/synthetic documents, benchmarked for security | **2** | English (`en`), Bengali (`bn`) |
+| **`evaluated`** | Empirical benchmark data available, automated prompt injection tests run, partial OCR support | **10** | Simplified Chinese (`zh`), Arabic (`ar`), Spanish (`es`), Hindi (`hi`), Urdu (`ur`), French (`fr`), German (`de`), Japanese (`ja`), Russian (`ru`), Portuguese (`pt`) |
+| **`implemented`** | Working translation catalog loaded, locale formatting and native numeral conversion operational | **19** | Italian, Dutch, Polish, Persian, Swahili, Thai, Malay, Tagalog, Tamil, Telugu, Marathi, Gujarati, Ukrainian, Romanian, Greek, Korean, Indonesian, Turkish, Vietnamese |
 | **`configured`** | Registered in ISO metadata registry, BCP-47 locale mapped, text direction defined, fallback to English active | **69** | Remaining 69 world languages (e.g. Uzbek, Kazakh, Amharic, Burmese, Hebrew, etc.) |
 
 ---

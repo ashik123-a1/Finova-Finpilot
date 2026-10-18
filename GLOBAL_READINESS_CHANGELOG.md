@@ -68,20 +68,30 @@ This release upgrades SME Finance Copilot from a single-locale prototype into a 
 5. `src/ai/guardrails.py`:
    - Integrated language detection, prompt injection defense, and multi-country tax/covenant context.
    - Preserved exact `Money.format()` contract while adding localized labels.
-6. `src/api/app.py`:
-   - Mounted `i18n_router` under `/api/i18n`.
+7. `src/config.py`:
+   - Added explicit `DEFAULT_LOCALE: str = "en"` establishing English as system master default.
+   - Added `DEFAULT_COUNTRY: str = "CN"` establishing China as current SME operating jurisdiction while preserving `DEFAULT_CURRENCY = "BDT"` for seamless test backwards compatibility.
+8. `src/i18n/formatters.py` (Enhancement):
+   - Added `format_chinese_financial_units()` for authentic Chinese SME commercial notation: Wan (万 - $10^4$) and Yi (亿 - $10^8$) (e.g., `¥ 50.00万元`).
+9. `src/i18n/translator.py` (Enhancement):
+   - Added robust POSIX and BCP-47 locale normalization resolving `zh-CN`, `zh_CN`, `en-US`, and `bn-BD` to master translation catalogs.
+10. `src/documents/extractor.py` (Enhancement):
+   - Decoupled ASCII `\b` word boundary matching from non-ASCII Unicode terms across all regex categories.
+   - Prioritized `发票号码` over `发票代码` for Chinese Fapiao and added `চালানপত্র নম্বর` for Bengali Mushak-6.3.
 
 ### New Test Suites & Evaluation Scripts
 1. `tests/test_i18n_multilingual.py`:
-   - 14 tests verifying 100 languages, schema, RTL detection, catalog integrity, fallback, fact preservation, and digit conversions.
+   - 16 tests verifying 100 languages, schema, RTL detection, catalog integrity, fallback, fact preservation, digit conversions, Chinese Wan/Yi formatting, and BCP-47 locale normalization.
 2. `tests/test_country_profiles.py`:
    - 7 tests verifying country profiles, statutory tax rates, 3-decimal KWD precision, and legal citations.
 3. `tests/test_multilingual_security.py`:
    - 14 tests verifying Unicode sanitization, BiDi override removal, prompt injection defense in 7 languages, PII redaction, and FastAPI endpoints.
-4. `src/evaluation/eval_multilingual.py`:
+4. `tests/test_document_pipeline.py`:
+   - Added end-to-end multi-script invoice ingestion tests verifying Chinese Fapiao (`23442000000012345678`) and Bengali Mushak-6.3 (`CHALAN-2026-9901`).
+5. `src/evaluation/eval_multilingual.py`:
    - Reproducible benchmark harness evaluating fact preservation, calculation parity, classification, and prompt injection defense.
-5. `scripts/demo_multilingual_competition.py`:
-   - 7-step competition demonstration script.
+6. `scripts/demo_multilingual_competition.py`:
+   - 7-step competition demonstration script structured around English-first, China-second operational priority.
 
 ---
 
@@ -91,8 +101,8 @@ A core mandate of this upgrade was **zero regression of existing features and AP
 
 1. **Existing Unit Tests:**
    - Prior test count: **27 passed**
-   - New test count: **62 passed (27 original + 35 new)**
-   - Pass rate: **100% (62/62)**.
+   - New test count: **65 passed (27 original + 38 new)**
+   - Pass rate: **100% (65/65)**.
 2. **Deterministic Ledger Compatibility:**
    - All monetary amounts remain stored as integers in minor units in SQLite (`BigInteger`).
    - No floating-point contamination was introduced into the ledger.

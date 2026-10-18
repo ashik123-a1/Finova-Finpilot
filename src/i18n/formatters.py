@@ -181,6 +181,23 @@ class LocaleFormatter:
         return f"{sym} {formatted_num}"
 
     @classmethod
+    def format_chinese_financial_units(cls, amount_minor: int, minor_multiplier: int = 100) -> str:
+        """
+        Formats large monetary values using standard Chinese SME commercial units:
+        Wan (万 - 10,000) and Yi (亿 - 100,000,000).
+        Example: 500,000 CNY -> '¥ 50.00万元', 12,850,000 CNY -> '¥ 1,285.00万元'.
+        """
+        major = Decimal(amount_minor) / Decimal(minor_multiplier)
+        if abs(major) >= Decimal("100000000"):
+            yi = major / Decimal("100000000")
+            return f"¥ {yi:,.2f}亿元"
+        elif abs(major) >= Decimal("10000"):
+            wan = major / Decimal("10000")
+            return f"¥ {wan:,.2f}万元"
+        else:
+            return f"¥ {major:,.2f}元"
+
+    @classmethod
     def parse_localized_number(cls, text: str, locale: str = "en") -> Optional[Decimal]:
         """
         Safely parses a localized number string into an exact Decimal.

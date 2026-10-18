@@ -59,6 +59,7 @@ tests/test_database.py::test_cascade_delete PASSED
 tests/test_document_pipeline.py::test_document_classifier_languages PASSED
 tests/test_document_pipeline.py::test_extraction_mathematical_validation PASSED
 tests/test_document_pipeline.py::test_pipeline_router_and_idempotent_posting PASSED
+tests/test_document_pipeline.py::test_multilingual_document_extraction_chinese_fapiao_and_bengali_mushak PASSED
 tests/test_evaluation_framework.py::test_classification_metrics_correctness PASSED
 tests/test_evaluation_framework.py::test_ocr_cer_and_wer_metrics PASSED
 tests/test_evaluation_framework.py::test_forecast_metrics_and_mase PASSED
@@ -87,6 +88,8 @@ tests/test_i18n_multilingual.py::TestTranslationEngine::test_helper_function_t P
 tests/test_i18n_multilingual.py::TestLocaleFormatter::test_currency_formatting_decimals PASSED
 tests/test_i18n_multilingual.py::TestLocaleFormatter::test_digit_conversion PASSED
 tests/test_i18n_multilingual.py::TestLocaleFormatter::test_rtl_detection PASSED
+tests/test_i18n_multilingual.py::TestLocaleFormatter::test_chinese_financial_unit_formatting PASSED
+tests/test_i18n_multilingual.py::TestLocaleFormatter::test_locale_normalization PASSED
 tests/test_isolation.py::test_shop_isolation_membership_denial PASSED
 tests/test_isolation.py::test_cross_shop_inventory_posting_rejected PASSED
 tests/test_model_registry.py::test_model_registry_initialization PASSED
@@ -102,14 +105,14 @@ tests/test_multilingual_security.py::TestAdversarialPromptInjection::test_benign
 tests/test_multilingual_security.py::TestPIIRedaction::test_email_redaction PASSED
 tests/test_multilingual_security.py::TestPIIRedaction::test_phone_redaction PASSED
 tests/test_multilingual_security.py::TestPIIRedaction::test_card_redaction PASSED
-tests/test_multilingual_security.py::TestI18nApiEndpoints::test_languages_endpoint PASSED
-tests/test_multilingual_security.py::TestI18nApiEndpoints::test_countries_endpoint PASSED
-tests/test_multilingual_security.py::TestI18nApiEndpoints::test_translations_endpoint PASSED
-tests/test_multilingual_security.py::TestI18nApiEndpoints::test_format_currency_endpoint PASSED
-tests/test_multilingual_security.py::TestI18nApiEndpoints::test_audit_prompt_endpoint PASSED
+tests/test_i18n_api_endpoints.py::TestI18nApiEndpoints::test_languages_endpoint PASSED
+tests/test_i18n_api_endpoints.py::TestI18nApiEndpoints::test_countries_endpoint PASSED
+tests/test_i18n_api_endpoints.py::TestI18nApiEndpoints::test_translations_endpoint PASSED
+tests/test_i18n_api_endpoints.py::TestI18nApiEndpoints::test_format_currency_endpoint PASSED
+tests/test_i18n_api_endpoints.py::TestI18nApiEndpoints::test_audit_prompt_endpoint PASSED
 tests/test_synthetic_generator.py::test_synthetic_data_generator_and_reset PASSED
 
-======================== 62 passed, 1 warning in 1.38s ========================
+======================== 65 passed, 1 warning in 1.26s ========================
 ```
 
 ---

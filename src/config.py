@@ -57,6 +57,10 @@ class Settings:
             BASE_DIR / os.getenv("MODEL_REGISTRY_PATH", "storage/model_registry")
         )
 
+        # Language & Localization Priority (English First, China Second)
+        self.DEFAULT_LOCALE: str = os.getenv("DEFAULT_LOCALE", "en")
+        self.DEFAULT_COUNTRY: str = os.getenv("DEFAULT_COUNTRY", "CN")
+
         # Currency & Precision
         self.DEFAULT_CURRENCY: str = os.getenv("DEFAULT_CURRENCY", "BDT")
         self.DEFAULT_MINOR_UNIT_MULTIPLIER: int = int(

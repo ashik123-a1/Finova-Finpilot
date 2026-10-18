@@ -26,6 +26,14 @@ In financial and tax technology, inaccurate tax rates or misquoted regulatory so
 > 2. **Primary Context 2 — Bangladesh (`BD`):** Implicated by the existing database, NBR VAT Act 2012, Mushak-6.3 schemas, and Bangladesh Bank microcredit guidelines.
 > 3. **Candidate Jurisdictions (`SA`, `US`, `AU`, `KW`, `UZ`):** Sourced from workspace candidate records (`F:\country.txt`). All 5 candidate countries are fully implemented with verified central bank and tax authority profiles.
 
+> [!NOTE]
+> **LANGUAGE-JURISDICTION DECOUPLING IN CHINA SME DEPLOYMENTS:**  
+> In international finance, language of display is orthogonal to country of incorporation. A Chinese SME operating in Hangzhou or Shenzhen can interact with SME Finance Copilot using the English (`en`) interface without altering the accounting rules:
+> - **Display Language (`locale="en"`):** All dashboard navigation, risk status labels, and financial metrics are presented in clear English.
+> - **Operational Jurisdiction (`country_code="CN"`):** The calculation engine automatically enforces Chinese statutory parameters (13% VAT, 5% preferential CIT under 3M CNY, CSAS-SE accounting standards, and 1.30x PBOC DSCR floor).
+> - **Commercial Formatting:** Large numbers seamlessly format in Chinese commercial Wan (万) units (e.g. `¥ 50.00万元`) alongside international comma notations (`¥ 500,000.00`).
+> Selecting English never causes the system to assume US tax law or Federal Reserve regulations.
+
 ---
 
 ## 3. Jurisdiction Compliance Profiles

@@ -175,12 +175,13 @@ class StructuredDocumentExtractor:
 
     INVOICE_NO_PATTERNS = [
         r"(?i)\b(INV-[A-Za-z0-9\-_]+)\b",
-        r"(?i)\b(?:invoice|inv|bill|bil|memo|challan|রসিদ|发票号码|发票代码|رقم\s*الفاتورة|factura|बिल\s*नं)(?:[ \t]*(?:no|num|number|নং|号))?[ \t#:.-]+([A-Za-z0-9\-_/]+)",
-        r"(?i)\b(?:no|num|নং|号)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
+        r"(?i)(?:发票号码|发票号|চালানপত্র\s*নম্বর)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
+        r"(?i)\b(?:invoice|inv|bill|bil|memo|challan|রসিদ|চালান|发票代码|رقم\s*الفاتورة|factura|बिल\s*नं)(?:[ \t]*(?:no|num|number|নং|号|নম্বর))?[ \t#:.-]+([A-Za-z0-9\-_/]+)",
+        r"(?i)\b(?:no|num|নং|号|নম্বর)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
     ]
 
     TOTAL_PATTERNS = [
-        r"(?i)\b(?:grand[ \t]*total|net[ \t]*total|total[ \t]*amount|total|সর্বমোট|মোট|价税合计|合计|金额总计|المبلغ[ \t]*الإجمالي|المجموع[ \t]*الكلي|total[ \t]*a[ \t]*pagar|कुल[ \t]*राशि|कुल[ \t]*योग)[ \t:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
+        r"(?i)(?:\b(?:grand[ \t]*total|net[ \t]*total|total[ \t]*amount|total|total[ \t]*a[ \t]*pagar)\b|(?:সর্বমোট|মোট(?:\s*(?:প্রদেয়|মূল্য))?|মোট\s*টাকা|价税合计|合计|金额总计|المبلغ[ \t]*الإجمالي|المجموع[ \t]*الكلي|कुल[ \t]*राशि|कुल[ \t]*योग))[ \t:৳TKtk$¥€£﷼KD]*(?:টাকা\s*[:\-]*)?[ \t:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
     ]
 
     SUBTOTAL_PATTERNS = [
@@ -428,7 +429,8 @@ class StructuredDocumentExtractor:
             "confidences": confs,
             "validation_errors": errors,
             "date": extracted.get("date"),
-            "invoice_no": extracted.get("invoice_no"),
+            "invoice_no": extracted.get("invoice_number"),
+            "invoice_number": extracted.get("invoice_number"),
             "total_amount": extracted.get("total_amount_minor"),
             "total_amount_minor": extracted.get("total_amount_minor"),
         }
