@@ -1,0 +1,43 @@
+{
+  "image_id": 729,
+  "filename": "receipt_00729_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00729_en_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0729",
+  "date_str": "07/02/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 167000,
+  "tax_minor": 8350,
+  "discount_minor": 10000,
+  "total_amount_minor": 165350,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0729\nDate: 07/02/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nMasur Dal 1kg x1  Tk 140.00\nRefined White Sugar 1kg x2  Tk 270.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 1670.00\nVAT (5%): Tk 83.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1653.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

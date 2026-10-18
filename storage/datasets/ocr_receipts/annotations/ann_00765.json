@@ -1,0 +1,37 @@
+{
+  "image_id": 765,
+  "filename": "receipt_00765_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00765_en_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0765",
+  "date_str": "20/04/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 159000,
+  "tax_minor": 7950,
+  "discount_minor": 0,
+  "total_amount_minor": 166950,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0765\nDate: 20/04/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nMiniket Rice 5kg x3  Tk 1140.00\nRefined White Sugar 1kg x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 1590.00\nVAT (5%): Tk 79.50\nTotal Amount: Tk 1669.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

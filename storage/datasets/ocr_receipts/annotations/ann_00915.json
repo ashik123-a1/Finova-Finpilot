@@ -1,0 +1,31 @@
+{
+  "image_id": 915,
+  "filename": "receipt_00915_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00915_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0915",
+  "date_str": "18/06/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 109000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 104000,
+  "full_text_ground_truth": "Desh General Store\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0915\nDate: 18/06/2026\n------------------------------------------\nMiniket Rice 5kg x2  Tk 760.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1090.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1040.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

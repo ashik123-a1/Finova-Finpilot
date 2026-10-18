@@ -1,0 +1,43 @@
+{
+  "image_id": 917,
+  "filename": "receipt_00917_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00917_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0917",
+  "date_str": "25/08/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 72000,
+  "tax_minor": 3600,
+  "discount_minor": 10000,
+  "total_amount_minor": 65600,
+  "full_text_ground_truth": "Metro Departmental (বেঙ্গল ফুড মার্ট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0917\nDate: 25/08/2026\n------------------------------------------\nগোসলের সাবান x2  Tk 120.00\nRefined White Sugar 1kg x1  Tk 135.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nআটা ২ কেজি x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 720.00\nVAT (5%): Tk 36.00\nDiscount: Tk 100.00\nTotal Amount: Tk 656.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

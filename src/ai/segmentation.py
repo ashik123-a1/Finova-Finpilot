@@ -34,11 +34,11 @@ class CustomerSegmentationEngine:
             segment = "At-Risk"
             strategy = "Targeted win-back offer or reminder before customer goes dormant."
             priority = "high"
-        elif total_spent_minor >= 500_000 and total_orders_count >= 10:  # e.g., > 5,000 BDT
+        elif total_spent_minor >= 12_000_000 and total_orders_count >= 16:  # e.g., >= 120,000 BDT & top order frequency (top ~10-15%)
             segment = "VIP"
             strategy = "Priority customer service, exclusive previews, loyalty appreciation."
             priority = "high"
-        elif total_orders_count >= 5:
+        elif total_spent_minor >= 3_000_000 and total_orders_count >= 8:   # e.g., >= 30,000 BDT & routine replenishment (core ~55%)
             segment = "Regular"
             strategy = "Cross-sell relevant inventory, loyalty points incentives."
             priority = "medium"

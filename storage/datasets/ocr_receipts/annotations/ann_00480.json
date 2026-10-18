@@ -1,0 +1,43 @@
+{
+  "image_id": 480,
+  "filename": "receipt_00480_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00480_en_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0480",
+  "date_str": "07/09/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 201000,
+  "tax_minor": 10050,
+  "discount_minor": 0,
+  "total_amount_minor": 211050,
+  "full_text_ground_truth": "Desh General Store\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0480\nDate: 07/09/2026\n------------------------------------------\nBath Soap 100g x1  Tk 60.00\nLaundry Soap Bar x2  Tk 90.00\nMiniket Rice 5kg x3  Tk 1140.00\nSoybean Oil 2L x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 2010.00\nVAT (5%): Tk 100.50\nTotal Amount: Tk 2110.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

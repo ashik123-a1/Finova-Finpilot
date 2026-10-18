@@ -1,0 +1,37 @@
+{
+  "image_id": 550,
+  "filename": "receipt_00550_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00550_bn_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0550",
+  "date_str": "11/11/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 85000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 80000,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nদোকান খরচ রসিদ\nBill No: INV-2026-0550\nDate: 11/11/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 850.00\nDiscount: Tk 50.00\nTotal Amount: Tk 800.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

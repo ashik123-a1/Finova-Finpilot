@@ -1,0 +1,31 @@
+{
+  "image_id": 452,
+  "filename": "receipt_00452_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00452_bilingual_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0452",
+  "date_str": "17/09/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 16500,
+  "tax_minor": 825,
+  "discount_minor": 0,
+  "total_amount_minor": 17325,
+  "full_text_ground_truth": "Metro Departmental (বিসমিল্লাহ ইলেকট্রনিক্স)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0452\nDate: 17/09/2026\n------------------------------------------\nগোসলের সাবান x2  Tk 120.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 165.00\nVAT (5%): Tk 8.25\nTotal Amount: Tk 173.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

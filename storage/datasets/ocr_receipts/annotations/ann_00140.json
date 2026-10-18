@@ -1,0 +1,31 @@
+{
+  "image_id": 140,
+  "filename": "receipt_00140_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00140_bilingual_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0140",
+  "date_str": "19/09/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 41500,
+  "tax_minor": 2075,
+  "discount_minor": 0,
+  "total_amount_minor": 43575,
+  "full_text_ground_truth": "Bismillah Electronics (দেশ জেনারেল স্টোর)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0140\nDate: 19/09/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 415.00\nVAT (5%): Tk 20.75\nTotal Amount: Tk 435.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

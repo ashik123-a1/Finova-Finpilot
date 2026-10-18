@@ -1,0 +1,31 @@
+{
+  "image_id": 604,
+  "filename": "receipt_00604_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00604_bn_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0604",
+  "date_str": "25/05/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 51000,
+  "tax_minor": 2550,
+  "discount_minor": 0,
+  "total_amount_minor": 53550,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0604\nDate: 25/05/2026\n------------------------------------------\nডিটারজেন্ট সাবান x2  Tk 90.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 510.00\nVAT (5%): Tk 25.50\nTotal Amount: Tk 535.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

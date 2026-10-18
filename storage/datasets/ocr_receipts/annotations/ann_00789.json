@@ -1,0 +1,43 @@
+{
+  "image_id": 789,
+  "filename": "receipt_00789_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00789_en_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0789",
+  "date_str": "20/04/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 92000,
+  "tax_minor": 4600,
+  "discount_minor": 5000,
+  "total_amount_minor": 91600,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0789\nDate: 20/04/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nSoybean Oil 2L x1  Tk 360.00\nLaundry Soap Bar x1  Tk 45.00\nRefined White Sugar 1kg x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 920.00\nVAT (5%): Tk 46.00\nDiscount: Tk 50.00\nTotal Amount: Tk 916.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

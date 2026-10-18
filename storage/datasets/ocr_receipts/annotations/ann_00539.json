@@ -1,0 +1,43 @@
+{
+  "image_id": 539,
+  "filename": "receipt_00539_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00539_bilingual_clean.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0539",
+  "date_str": "04/12/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 106500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 96500,
+  "full_text_ground_truth": "Chowdhury Supermarket (বেঙ্গল ফুড মার্ট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0539\nDate: 04/12/2026\n------------------------------------------\nগোসলের সাবান x1  Tk 60.00\nLaundry Soap Bar x3  Tk 135.00\nআটা ২ কেজি x1  Tk 110.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1065.00\nDiscount: Tk 100.00\nTotal Amount: Tk 965.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

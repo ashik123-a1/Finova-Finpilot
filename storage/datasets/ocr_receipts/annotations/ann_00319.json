@@ -1,0 +1,31 @@
+{
+  "image_id": 319,
+  "filename": "receipt_00319_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00319_bn_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0319",
+  "date_str": "05/07/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 48000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 48000,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nটাকা জমার রসিদ\nBill No: INV-2026-0319\nDate: 05/07/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x3  Tk 420.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 480.00\nTotal Amount: Tk 480.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

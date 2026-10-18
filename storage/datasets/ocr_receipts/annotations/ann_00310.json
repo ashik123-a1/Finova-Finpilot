@@ -1,0 +1,31 @@
+{
+  "image_id": 310,
+  "filename": "receipt_00310_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00310_bn_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0310",
+  "date_str": "06/09/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 37500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 37500,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nদোকান খরচ রসিদ\nBill No: INV-2026-0310\nDate: 06/09/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 375.00\nTotal Amount: Tk 375.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

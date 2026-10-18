@@ -1,0 +1,37 @@
+{
+  "image_id": 936,
+  "filename": "receipt_00936_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00936_en_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0936",
+  "date_str": "22/03/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 111000,
+  "tax_minor": 5550,
+  "discount_minor": 10000,
+  "total_amount_minor": 106550,
+  "full_text_ground_truth": "Desh General Store\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0936\nDate: 22/03/2026\n------------------------------------------\nBlack Tea Pack 400g x3  Tk 720.00\nBath Soap 100g x1  Tk 60.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1110.00\nVAT (5%): Tk 55.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1065.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

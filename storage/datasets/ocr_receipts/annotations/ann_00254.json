@@ -1,0 +1,31 @@
+{
+  "image_id": 254,
+  "filename": "receipt_00254_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00254_bilingual_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0254",
+  "date_str": "07/01/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 141000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 136000,
+  "full_text_ground_truth": "Chowdhury Supermarket (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0254\nDate: 07/01/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1410.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1360.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

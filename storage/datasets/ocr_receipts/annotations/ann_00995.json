@@ -1,0 +1,37 @@
+{
+  "image_id": 995,
+  "filename": "receipt_00995_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00995_bilingual_blur.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0995",
+  "date_str": "20/10/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 116000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 116000,
+  "full_text_ground_truth": "Bengal Food Mart (চৌধুরী সুপার মার্কেট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0995\nDate: 20/10/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 1160.00\nTotal Amount: Tk 1160.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

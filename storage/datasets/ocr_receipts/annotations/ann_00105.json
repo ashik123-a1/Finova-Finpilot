@@ -1,0 +1,43 @@
+{
+  "image_id": 105,
+  "filename": "receipt_00105_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00105_en_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0105",
+  "date_str": "05/09/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 109500,
+  "tax_minor": 5475,
+  "discount_minor": 10000,
+  "total_amount_minor": 104975,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0105\nDate: 05/09/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nBath Soap 100g x3  Tk 180.00\nMiniket Rice 5kg x2  Tk 760.00\nAata Flour 2kg x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 1095.00\nVAT (5%): Tk 54.75\nDiscount: Tk 100.00\nTotal Amount: Tk 1049.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

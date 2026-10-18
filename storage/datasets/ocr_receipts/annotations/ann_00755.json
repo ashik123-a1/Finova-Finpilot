@@ -1,0 +1,31 @@
+{
+  "image_id": 755,
+  "filename": "receipt_00755_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00755_bilingual_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0755",
+  "date_str": "10/04/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 51500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 41500,
+  "full_text_ground_truth": "Metro Departmental (দেশ জেনারেল স্টোর)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0755\nDate: 10/04/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nডিটারজেন্ট সাবান x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 515.00\nDiscount: Tk 100.00\nTotal Amount: Tk 415.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

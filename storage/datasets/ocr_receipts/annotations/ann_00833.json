@@ -1,0 +1,31 @@
+{
+  "image_id": 833,
+  "filename": "receipt_00833_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00833_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0833",
+  "date_str": "10/02/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 58000,
+  "tax_minor": 2900,
+  "discount_minor": 10000,
+  "total_amount_minor": 50900,
+  "full_text_ground_truth": "Bengal Food Mart (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0833\nDate: 10/02/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nAata Flour 2kg x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 580.00\nVAT (5%): Tk 29.00\nDiscount: Tk 100.00\nTotal Amount: Tk 509.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

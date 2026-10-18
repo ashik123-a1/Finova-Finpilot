@@ -1,0 +1,43 @@
+{
+  "image_id": 323,
+  "filename": "receipt_00323_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00323_bilingual_blur.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0323",
+  "date_str": "21/11/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 106000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 106000,
+  "full_text_ground_truth": "Metro Departmental (বেঙ্গল ফুড মার্ট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0323\nDate: 21/11/2026\n------------------------------------------\nআটা ২ কেজি x3  Tk 330.00\nডিটারজেন্ট সাবান x2  Tk 90.00\nSoybean Oil 2L x1  Tk 360.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 1060.00\nTotal Amount: Tk 1060.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 901,
+  "filename": "receipt_00901_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00901_bn_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0901",
+  "date_str": "26/10/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 57500,
+  "tax_minor": 2875,
+  "discount_minor": 10000,
+  "total_amount_minor": 50375,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0901\nDate: 26/10/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nডিটারজেন্ট সাবান x2  Tk 90.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\nআটা ২ কেজি x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 575.00\nVAT (5%): Tk 28.75\nDiscount: Tk 100.00\nTotal Amount: Tk 503.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 481,
+  "filename": "receipt_00481_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00481_bn_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0481",
+  "date_str": "03/01/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 86000,
+  "tax_minor": 4300,
+  "discount_minor": 0,
+  "total_amount_minor": 90300,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0481\nDate: 03/01/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 860.00\nVAT (5%): Tk 43.00\nTotal Amount: Tk 903.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

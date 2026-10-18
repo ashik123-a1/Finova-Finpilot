@@ -1,0 +1,43 @@
+{
+  "image_id": 244,
+  "filename": "receipt_00244_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00244_bn_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0244",
+  "date_str": "04/01/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 129000,
+  "tax_minor": 6450,
+  "discount_minor": 0,
+  "total_amount_minor": 135450,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0244\nDate: 04/01/2026\n------------------------------------------\nআটা ২ কেজি x1  Tk 110.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nগোসলের সাবান x3  Tk 180.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1290.00\nVAT (5%): Tk 64.50\nTotal Amount: Tk 1354.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

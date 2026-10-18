@@ -1,0 +1,37 @@
+{
+  "image_id": 225,
+  "filename": "receipt_00225_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00225_en_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0225",
+  "date_str": "25/10/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 226500,
+  "tax_minor": 11325,
+  "discount_minor": 5000,
+  "total_amount_minor": 232825,
+  "full_text_ground_truth": "Rahman Enterprise\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0225\nDate: 25/10/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nLaundry Soap Bar x1  Tk 45.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 2265.00\nVAT (5%): Tk 113.25\nDiscount: Tk 50.00\nTotal Amount: Tk 2328.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

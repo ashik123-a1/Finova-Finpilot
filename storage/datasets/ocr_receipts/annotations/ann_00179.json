@@ -1,0 +1,31 @@
+{
+  "image_id": 179,
+  "filename": "receipt_00179_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00179_bilingual_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0179",
+  "date_str": "08/12/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 54000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 49000,
+  "full_text_ground_truth": "Rahman Enterprise (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0179\nDate: 08/12/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 540.00\nDiscount: Tk 50.00\nTotal Amount: Tk 490.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

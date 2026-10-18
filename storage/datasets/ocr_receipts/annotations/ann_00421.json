@@ -1,0 +1,43 @@
+{
+  "image_id": 421,
+  "filename": "receipt_00421_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00421_bn_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0421",
+  "date_str": "19/10/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 159000,
+  "tax_minor": 7950,
+  "discount_minor": 5000,
+  "total_amount_minor": 161950,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0421\nDate: 19/10/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nআটা ২ কেজি x3  Tk 330.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1590.00\nVAT (5%): Tk 79.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1619.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

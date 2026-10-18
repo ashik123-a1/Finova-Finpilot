@@ -1,0 +1,43 @@
+{
+  "image_id": 3,
+  "filename": "receipt_00003_en_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00003_en_low_light.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0003",
+  "date_str": "07/12/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 101000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 96000,
+  "full_text_ground_truth": "Rahman Enterprise\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0003\nDate: 07/12/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nSoybean Oil 2L x1  Tk 360.00\nAata Flour 2kg x1  Tk 110.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1010.00\nDiscount: Tk 50.00\nTotal Amount: Tk 960.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

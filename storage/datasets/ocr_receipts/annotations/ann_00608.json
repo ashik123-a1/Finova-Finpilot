@@ -1,0 +1,31 @@
+{
+  "image_id": 608,
+  "filename": "receipt_00608_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00608_bilingual_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0608",
+  "date_str": "23/11/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 150000,
+  "tax_minor": 7500,
+  "discount_minor": 0,
+  "total_amount_minor": 157500,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0608\nDate: 23/11/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x3  Tk 420.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1500.00\nVAT (5%): Tk 75.00\nTotal Amount: Tk 1575.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

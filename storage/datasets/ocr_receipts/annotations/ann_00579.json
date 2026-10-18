@@ -1,0 +1,43 @@
+{
+  "image_id": 579,
+  "filename": "receipt_00579_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00579_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0579",
+  "date_str": "01/11/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 173000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 168000,
+  "full_text_ground_truth": "Bengal Food Mart\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0579\nDate: 01/11/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nLaundry Soap Bar x2  Tk 90.00\nSoybean Oil 2L x3  Tk 1080.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 1730.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1680.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

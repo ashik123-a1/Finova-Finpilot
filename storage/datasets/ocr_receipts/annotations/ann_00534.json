@@ -1,0 +1,31 @@
+{
+  "image_id": 534,
+  "filename": "receipt_00534_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00534_en_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0534",
+  "date_str": "19/05/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 57000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 57000,
+  "full_text_ground_truth": "Chowdhury Supermarket\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0534\nDate: 19/05/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 570.00\nTotal Amount: Tk 570.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 365,
+  "filename": "receipt_00365_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00365_bilingual_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0365",
+  "date_str": "06/10/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 176000,
+  "tax_minor": 8800,
+  "discount_minor": 0,
+  "total_amount_minor": 184800,
+  "full_text_ground_truth": "Bengal Food Mart (দেশ জেনারেল স্টোর)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0365\nDate: 06/10/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nBlack Tea Pack 400g x3  Tk 720.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1760.00\nVAT (5%): Tk 88.00\nTotal Amount: Tk 1848.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

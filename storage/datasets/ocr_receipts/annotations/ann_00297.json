@@ -1,0 +1,31 @@
+{
+  "image_id": 297,
+  "filename": "receipt_00297_en_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00297_en_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0297",
+  "date_str": "26/07/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 100000,
+  "tax_minor": 5000,
+  "discount_minor": 10000,
+  "total_amount_minor": 95000,
+  "full_text_ground_truth": "Bismillah Electronics\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0297\nDate: 26/07/2026\n------------------------------------------\nMiniket Rice 5kg x2  Tk 760.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1000.00\nVAT (5%): Tk 50.00\nDiscount: Tk 100.00\nTotal Amount: Tk 950.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

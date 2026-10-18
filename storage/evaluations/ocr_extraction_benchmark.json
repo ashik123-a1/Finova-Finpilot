@@ -1,180 +1,70 @@
 {
-  "evaluation_task": "ocr_and_field_extraction",
-  "total_samples": 12,
+  "benchmark_name": "Large-Scale OCR & Field Extraction Benchmark",
+  "dataset_name": "SME Receipt Image Benchmark Dataset (v2.0.0-synthetic-evaluation)",
+  "total_dataset_images": 1000,
+  "evaluated_test_images": 70,
   "overall_metrics": {
-    "mean_character_error_rate_cer": 0.3741,
-    "mean_word_error_rate_wer": 0.4653,
-    "date_exact_match_rate": 1.0,
-    "total_amount_exact_match_rate": 0.0,
-    "invoice_number_exact_match_rate": 1.0,
-    "math_reconciliation_success_rate": 0.0,
-    "truth_and_math_accurate_rate": 0.0,
-    "fallacy_gap_math_consistent_but_wrong": 0.0
+    "mean_character_error_rate_pct": 49.76,
+    "mean_word_error_rate_pct": 48.43,
+    "field_match_date_pct": 87.14,
+    "field_match_total_pct": 90.0,
+    "field_match_invoice_no_pct": 54.29,
+    "document_classification_accuracy_pct": 41.43,
+    "arithmetic_reconciliation_success_pct": 45.71
   },
-  "by_language": {
-    "en": {
-      "sample_count": 4,
-      "cer": 0.3216,
-      "wer": 0.421,
-      "amount_exact_match_rate": 0.0
-    },
+  "breakdown_by_language": {
     "bn": {
-      "sample_count": 4,
-      "cer": 0.4427,
-      "wer": 0.4993,
-      "amount_exact_match_rate": 0.0
+      "cer_pct": 61.18,
+      "wer_pct": 67.71,
+      "samples": 24
     },
-    "bn_en": {
-      "sample_count": 4,
-      "cer": 0.3579,
-      "wer": 0.4755,
-      "amount_exact_match_rate": 0.0
+    "bilingual": {
+      "cer_pct": 50.25,
+      "wer_pct": 48.54,
+      "samples": 23
+    },
+    "en": {
+      "cer_pct": 37.37,
+      "wer_pct": 28.21,
+      "samples": 23
     }
   },
-  "by_quality": {
+  "breakdown_by_quality": {
+    "blur": {
+      "cer_pct": 54.23,
+      "wer_pct": 68.23,
+      "samples": 10
+    },
+    "rotated": {
+      "cer_pct": 49.44,
+      "wer_pct": 50.56,
+      "samples": 10
+    },
+    "low_light": {
+      "cer_pct": 46.18,
+      "wer_pct": 35.28,
+      "samples": 10
+    },
+    "faded_thermal": {
+      "cer_pct": 52.14,
+      "wer_pct": 50.99,
+      "samples": 10
+    },
+    "shadow": {
+      "cer_pct": 47.99,
+      "wer_pct": 41.32,
+      "samples": 10
+    },
+    "cropped": {
+      "cer_pct": 46.86,
+      "wer_pct": 43.12,
+      "samples": 10
+    },
     "clean": {
-      "sample_count": 6,
-      "cer": 0.3707,
-      "wer": 0.4682,
-      "amount_exact_match_rate": 0.0
-    },
-    "degraded": {
-      "sample_count": 6,
-      "cer": 0.3775,
-      "wer": 0.4624,
-      "amount_exact_match_rate": 0.0
+      "cer_pct": 51.5,
+      "wer_pct": 49.54,
+      "samples": 10
     }
   },
-  "detailed_samples": [
-    {
-      "sample_id": 1,
-      "class": "purchase_invoice",
-      "language": "bn",
-      "is_degraded": false,
-      "cer": 0.4304,
-      "wer": 0.5,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 75000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 2,
-      "class": "expense_receipt",
-      "language": "bn_en",
-      "is_degraded": true,
-      "cer": 0.3439,
-      "wer": 0.4688,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 3,
-      "class": "payment_receipt",
-      "language": "en",
-      "is_degraded": false,
-      "cer": 0.3571,
-      "wer": 0.44,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 75000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 4,
-      "class": "sales_receipt",
-      "language": "bn",
-      "is_degraded": true,
-      "cer": 0.5028,
-      "wer": 0.5484,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 5,
-      "class": "purchase_invoice",
-      "language": "bn_en",
-      "is_degraded": false,
-      "cer": 0.3298,
-      "wer": 0.4242,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 6,
-      "class": "expense_receipt",
-      "language": "en",
-      "is_degraded": true,
-      "cer": 0.3032,
-      "wer": 0.3871,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 7,
-      "class": "payment_receipt",
-      "language": "bn",
-      "is_degraded": false,
-      "cer": 0.4064,
-      "wer": 0.4688,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 8,
-      "class": "sales_receipt",
-      "language": "bn_en",
-      "is_degraded": true,
-      "cer": 0.3594,
-      "wer": 0.4706,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 9,
-      "class": "purchase_invoice",
-      "language": "en",
-      "is_degraded": false,
-      "cer": 0.3021,
-      "wer": 0.4375,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 101000,
-      "math_consistent": false
-    },
-    {
-      "sample_id": 10,
-      "class": "expense_receipt",
-      "language": "bn",
-      "is_degraded": true,
-      "cer": 0.4314,
-      "wer": 0.48,
-      "date_match": true,
-      "total_exact_match": false,
-      "extracted_total_minor": 0,
-      "ground_truth_total_minor": 75000,
-      "math_consistent": false
-    }
-  ]
+  "disclosure": "Synthesized benchmark using 1,000 generated thermal receipt images with independent ground-truth annotations."
 }

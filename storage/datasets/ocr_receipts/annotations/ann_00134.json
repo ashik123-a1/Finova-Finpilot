@@ -1,0 +1,43 @@
+{
+  "image_id": 134,
+  "filename": "receipt_00134_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00134_bilingual_blur.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0134",
+  "date_str": "21/10/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 261000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 256000,
+  "full_text_ground_truth": "Bismillah Electronics (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0134\nDate: 21/10/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x2  Tk 270.00\nBath Soap 100g x2  Tk 120.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2610.00\nDiscount: Tk 50.00\nTotal Amount: Tk 2560.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 75,
+  "filename": "receipt_00075_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00075_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0075",
+  "date_str": "18/04/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 80500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 80500,
+  "full_text_ground_truth": "Bengal Food Mart\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0075\nDate: 18/04/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nLaundry Soap Bar x1  Tk 45.00\nBath Soap 100g x1  Tk 60.00\nAata Flour 2kg x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 805.00\nTotal Amount: Tk 805.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

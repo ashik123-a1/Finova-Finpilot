@@ -1,0 +1,31 @@
+{
+  "image_id": 510,
+  "filename": "receipt_00510_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00510_en_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0510",
+  "date_str": "16/08/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 40000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 40000,
+  "full_text_ground_truth": "Rahman Enterprise\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0510\nDate: 16/08/2026\n------------------------------------------\nAata Flour 2kg x2  Tk 220.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 400.00\nTotal Amount: Tk 400.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

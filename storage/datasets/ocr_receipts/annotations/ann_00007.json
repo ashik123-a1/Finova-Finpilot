@@ -1,0 +1,37 @@
+{
+  "image_id": 7,
+  "filename": "receipt_00007_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00007_bn_clean.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0007",
+  "date_str": "28/02/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 48000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 48000,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nটাকা জমার রসিদ\nBill No: INV-2026-0007\nDate: 28/02/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nআটা ২ কেজি x1  Tk 110.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 480.00\nTotal Amount: Tk 480.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

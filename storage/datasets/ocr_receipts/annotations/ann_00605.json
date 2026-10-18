@@ -1,0 +1,37 @@
+{
+  "image_id": 605,
+  "filename": "receipt_00605_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00605_bilingual_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0605",
+  "date_str": "07/11/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 61000,
+  "tax_minor": 3050,
+  "discount_minor": 0,
+  "total_amount_minor": 64050,
+  "full_text_ground_truth": "Desh General Store (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0605\nDate: 07/11/2026\n------------------------------------------\nMasur Dal 1kg x1  Tk 140.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\nআটা ২ কেজি x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 610.00\nVAT (5%): Tk 30.50\nTotal Amount: Tk 640.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

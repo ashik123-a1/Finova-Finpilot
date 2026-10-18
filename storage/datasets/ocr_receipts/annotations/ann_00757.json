@@ -1,0 +1,43 @@
+{
+  "image_id": 757,
+  "filename": "receipt_00757_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00757_bn_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0757",
+  "date_str": "15/05/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 153000,
+  "tax_minor": 7650,
+  "discount_minor": 5000,
+  "total_amount_minor": 155650,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0757\nDate: 15/05/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x2  Tk 270.00\nগোসলের সাবান x1  Tk 60.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1530.00\nVAT (5%): Tk 76.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1556.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

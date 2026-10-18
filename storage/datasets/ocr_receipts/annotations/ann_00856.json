@@ -1,0 +1,43 @@
+{
+  "image_id": 856,
+  "filename": "receipt_00856_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00856_bn_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0856",
+  "date_str": "06/03/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 108500,
+  "tax_minor": 5425,
+  "discount_minor": 10000,
+  "total_amount_minor": 103925,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0856\nDate: 06/03/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 1085.00\nVAT (5%): Tk 54.25\nDiscount: Tk 100.00\nTotal Amount: Tk 1039.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

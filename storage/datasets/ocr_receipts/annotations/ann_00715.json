@@ -1,0 +1,31 @@
+{
+  "image_id": 715,
+  "filename": "receipt_00715_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00715_bn_blur.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0715",
+  "date_str": "24/04/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 146000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 136000,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nটাকা জমার রসিদ\nBill No: INV-2026-0715\nDate: 24/04/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x1  Tk 380.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1460.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1360.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

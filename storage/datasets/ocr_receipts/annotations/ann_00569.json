@@ -1,0 +1,43 @@
+{
+  "image_id": 569,
+  "filename": "receipt_00569_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00569_bilingual_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0569",
+  "date_str": "16/07/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 171000,
+  "tax_minor": 8550,
+  "discount_minor": 10000,
+  "total_amount_minor": 169550,
+  "full_text_ground_truth": "Metro Departmental (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0569\nDate: 16/07/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nগোসলের সাবান x3  Tk 180.00\nLaundry Soap Bar x1  Tk 45.00\nRefined White Sugar 1kg x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 1710.00\nVAT (5%): Tk 85.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1695.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

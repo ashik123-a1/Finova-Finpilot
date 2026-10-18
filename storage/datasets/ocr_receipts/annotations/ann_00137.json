@@ -1,0 +1,37 @@
+{
+  "image_id": 137,
+  "filename": "receipt_00137_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00137_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0137",
+  "date_str": "05/11/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 58500,
+  "tax_minor": 2925,
+  "discount_minor": 0,
+  "total_amount_minor": 61425,
+  "full_text_ground_truth": "Bismillah Electronics (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0137\nDate: 05/11/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nSoybean Oil 2L x1  Tk 360.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 585.00\nVAT (5%): Tk 29.25\nTotal Amount: Tk 614.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

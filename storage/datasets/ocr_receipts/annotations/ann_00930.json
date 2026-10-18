@@ -1,0 +1,31 @@
+{
+  "image_id": 930,
+  "filename": "receipt_00930_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00930_en_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0930",
+  "date_str": "18/03/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 26000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 26000,
+  "full_text_ground_truth": "Bismillah Electronics\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0930\nDate: 18/03/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 260.00\nTotal Amount: Tk 260.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

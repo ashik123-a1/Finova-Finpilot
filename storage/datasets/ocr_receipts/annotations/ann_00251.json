@@ -1,0 +1,37 @@
+{
+  "image_id": 251,
+  "filename": "receipt_00251_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00251_bilingual_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0251",
+  "date_str": "14/09/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 107000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 107000,
+  "full_text_ground_truth": "Metro Departmental (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0251\nDate: 14/09/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nAata Flour 2kg x1  Tk 110.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1070.00\nTotal Amount: Tk 1070.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

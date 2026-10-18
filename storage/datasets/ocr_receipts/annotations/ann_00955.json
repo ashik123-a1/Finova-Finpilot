@@ -1,0 +1,31 @@
+{
+  "image_id": 955,
+  "filename": "receipt_00955_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00955_bn_low_light.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0955",
+  "date_str": "21/11/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 90000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 90000,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nটাকা জমার রসিদ\nBill No: INV-2026-0955\nDate: 21/11/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 900.00\nTotal Amount: Tk 900.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

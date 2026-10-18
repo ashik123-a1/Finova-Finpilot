@@ -1,0 +1,43 @@
+{
+  "image_id": 880,
+  "filename": "receipt_00880_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00880_bn_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0880",
+  "date_str": "14/08/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 188500,
+  "tax_minor": 9425,
+  "discount_minor": 10000,
+  "total_amount_minor": 187925,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0880\nDate: 14/08/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nআটা ২ কেজি x3  Tk 330.00\nডিটারজেন্ট সাবান x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1885.00\nVAT (5%): Tk 94.25\nDiscount: Tk 100.00\nTotal Amount: Tk 1879.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

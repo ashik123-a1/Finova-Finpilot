@@ -1,0 +1,43 @@
+{
+  "image_id": 30,
+  "filename": "receipt_00030_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00030_en_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0030",
+  "date_str": "16/09/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 99500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 89500,
+  "full_text_ground_truth": "Rahman Enterprise\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0030\nDate: 16/09/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nMiniket Rice 5kg x1  Tk 380.00\nMasur Dal 1kg x3  Tk 420.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 995.00\nDiscount: Tk 100.00\nTotal Amount: Tk 895.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 628,
+  "filename": "receipt_00628_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00628_bn_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0628",
+  "date_str": "17/02/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 156000,
+  "tax_minor": 7800,
+  "discount_minor": 5000,
+  "total_amount_minor": 158800,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0628\nDate: 17/02/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nগোসলের সাবান x3  Tk 180.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1560.00\nVAT (5%): Tk 78.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1588.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

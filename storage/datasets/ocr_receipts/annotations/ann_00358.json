@@ -1,0 +1,37 @@
+{
+  "image_id": 358,
+  "filename": "receipt_00358_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00358_bn_blur.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0358",
+  "date_str": "04/03/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 86500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 86500,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nদোকান খরচ রসিদ\nBill No: INV-2026-0358\nDate: 04/03/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 865.00\nTotal Amount: Tk 865.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

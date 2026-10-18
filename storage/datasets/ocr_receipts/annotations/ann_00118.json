@@ -1,0 +1,43 @@
+{
+  "image_id": 118,
+  "filename": "receipt_00118_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00118_bn_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0118",
+  "date_str": "07/03/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 71500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 61500,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nদোকান খরচ রসিদ\nBill No: INV-2026-0118\nDate: 07/03/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nগোসলের সাবান x2  Tk 120.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 715.00\nDiscount: Tk 100.00\nTotal Amount: Tk 615.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

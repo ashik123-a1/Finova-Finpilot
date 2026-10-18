@@ -1,0 +1,43 @@
+{
+  "image_id": 764,
+  "filename": "receipt_00764_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00764_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0764",
+  "date_str": "23/02/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 155000,
+  "tax_minor": 7750,
+  "discount_minor": 0,
+  "total_amount_minor": 162750,
+  "full_text_ground_truth": "Bengal Food Mart (বিসমিল্লাহ ইলেকট্রনিক্স)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0764\nDate: 23/02/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nগোসলের সাবান x3  Tk 180.00\nMiniket Rice 5kg x1  Tk 380.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 1550.00\nVAT (5%): Tk 77.50\nTotal Amount: Tk 1627.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

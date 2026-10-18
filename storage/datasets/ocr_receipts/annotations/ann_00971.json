@@ -1,0 +1,37 @@
+{
+  "image_id": 971,
+  "filename": "receipt_00971_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00971_bilingual_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0971",
+  "date_str": "26/03/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 126500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 116500,
+  "full_text_ground_truth": "Rahman Enterprise (বিসমিল্লাহ ইলেকট্রনিক্স)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0971\nDate: 26/03/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nMiniket Rice 5kg x1  Tk 380.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 1265.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1165.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

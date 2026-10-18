@@ -1,0 +1,37 @@
+{
+  "image_id": 737,
+  "filename": "receipt_00737_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00737_bilingual_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0737",
+  "date_str": "09/04/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 102000,
+  "tax_minor": 5100,
+  "discount_minor": 0,
+  "total_amount_minor": 107100,
+  "full_text_ground_truth": "Metro Departmental (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0737\nDate: 09/04/2026\n------------------------------------------\nMasur Dal 1kg x3  Tk 420.00\nMiniket Rice 5kg x1  Tk 380.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 1020.00\nVAT (5%): Tk 51.00\nTotal Amount: Tk 1071.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

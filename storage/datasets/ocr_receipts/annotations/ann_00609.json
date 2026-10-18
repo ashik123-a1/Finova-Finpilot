@@ -1,0 +1,37 @@
+{
+  "image_id": 609,
+  "filename": "receipt_00609_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00609_en_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0609",
+  "date_str": "06/01/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 49500,
+  "tax_minor": 2475,
+  "discount_minor": 0,
+  "total_amount_minor": 51975,
+  "full_text_ground_truth": "Bismillah Electronics\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0609\nDate: 06/01/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nBath Soap 100g x2  Tk 120.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 495.00\nVAT (5%): Tk 24.75\nTotal Amount: Tk 519.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

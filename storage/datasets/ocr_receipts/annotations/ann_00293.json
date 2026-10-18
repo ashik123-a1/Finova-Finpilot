@@ -1,0 +1,43 @@
+{
+  "image_id": 293,
+  "filename": "receipt_00293_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00293_bilingual_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0293",
+  "date_str": "03/07/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 105500,
+  "tax_minor": 5275,
+  "discount_minor": 10000,
+  "total_amount_minor": 100775,
+  "full_text_ground_truth": "Bismillah Electronics (মেট্রো ডিপার্টমেন্টাল)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0293\nDate: 03/07/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nRefined White Sugar 1kg x2  Tk 270.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 1055.00\nVAT (5%): Tk 52.75\nDiscount: Tk 100.00\nTotal Amount: Tk 1007.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

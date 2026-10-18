@@ -1,0 +1,37 @@
+{
+  "image_id": 518,
+  "filename": "receipt_00518_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00518_bilingual_clean.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0518",
+  "date_str": "17/01/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 62000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 62000,
+  "full_text_ground_truth": "Rahman Enterprise (দেশ জেনারেল স্টোর)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0518\nDate: 17/01/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nআটা ২ কেজি x2  Tk 220.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 620.00\nTotal Amount: Tk 620.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

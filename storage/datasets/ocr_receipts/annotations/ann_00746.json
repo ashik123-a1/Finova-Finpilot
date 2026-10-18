@@ -1,0 +1,31 @@
+{
+  "image_id": 746,
+  "filename": "receipt_00746_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00746_bilingual_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0746",
+  "date_str": "18/10/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 135000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 135000,
+  "full_text_ground_truth": "Metro Departmental (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0746\nDate: 18/10/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1350.00\nTotal Amount: Tk 1350.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

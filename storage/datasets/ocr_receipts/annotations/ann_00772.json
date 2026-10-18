@@ -1,0 +1,43 @@
+{
+  "image_id": 772,
+  "filename": "receipt_00772_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00772_bn_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0772",
+  "date_str": "18/08/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 158000,
+  "tax_minor": 7900,
+  "discount_minor": 5000,
+  "total_amount_minor": 160900,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0772\nDate: 18/08/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x2  Tk 270.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nগোসলের সাবান x2  Tk 120.00\nআটা ২ কেজি x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 1580.00\nVAT (5%): Tk 79.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1609.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

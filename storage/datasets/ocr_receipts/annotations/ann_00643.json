@@ -1,0 +1,43 @@
+{
+  "image_id": 643,
+  "filename": "receipt_00643_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00643_bn_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0643",
+  "date_str": "17/07/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 165500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 155500,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nটাকা জমার রসিদ\nBill No: INV-2026-0643\nDate: 17/07/2026\n------------------------------------------\nআটা ২ কেজি x1  Tk 110.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1655.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1555.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

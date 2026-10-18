@@ -1,0 +1,43 @@
+{
+  "image_id": 826,
+  "filename": "receipt_00826_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00826_bn_clean.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0826",
+  "date_str": "12/11/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 132500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 122500,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nদোকান খরচ রসিদ\nBill No: INV-2026-0826\nDate: 12/11/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nআটা ২ কেজি x1  Tk 110.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1325.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1225.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

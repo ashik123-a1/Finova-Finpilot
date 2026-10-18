@@ -1,0 +1,43 @@
+{
+  "image_id": 620,
+  "filename": "receipt_00620_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00620_bilingual_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0620",
+  "date_str": "11/03/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 131000,
+  "tax_minor": 6550,
+  "discount_minor": 10000,
+  "total_amount_minor": 127550,
+  "full_text_ground_truth": "Desh General Store (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0620\nDate: 11/03/2026\n------------------------------------------\nMiniket Rice 5kg x2  Tk 760.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nLaundry Soap Bar x2  Tk 90.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 1310.00\nVAT (5%): Tk 65.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1275.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

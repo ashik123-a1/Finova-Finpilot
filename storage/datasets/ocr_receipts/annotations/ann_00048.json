@@ -1,0 +1,43 @@
+{
+  "image_id": 48,
+  "filename": "receipt_00048_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00048_en_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0048",
+  "date_str": "24/05/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 104000,
+  "tax_minor": 5200,
+  "discount_minor": 0,
+  "total_amount_minor": 109200,
+  "full_text_ground_truth": "Desh General Store\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0048\nDate: 24/05/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nLaundry Soap Bar x3  Tk 135.00\nAata Flour 2kg x2  Tk 220.00\nRefined White Sugar 1kg x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 1040.00\nVAT (5%): Tk 52.00\nTotal Amount: Tk 1092.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 47,
+  "filename": "receipt_00047_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00047_bilingual_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0047",
+  "date_str": "24/12/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 171000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 161000,
+  "full_text_ground_truth": "Rahman Enterprise (মেট্রো ডিপার্টমেন্টাল)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0047\nDate: 24/12/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nLaundry Soap Bar x2  Tk 90.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nSoybean Oil 2L x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1710.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1610.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

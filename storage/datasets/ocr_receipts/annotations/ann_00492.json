@@ -1,0 +1,37 @@
+{
+  "image_id": 492,
+  "filename": "receipt_00492_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00492_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0492",
+  "date_str": "19/10/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 62500,
+  "tax_minor": 3125,
+  "discount_minor": 0,
+  "total_amount_minor": 65625,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0492\nDate: 19/10/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nAata Flour 2kg x2  Tk 220.00\nSoybean Oil 2L x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 625.00\nVAT (5%): Tk 31.25\nTotal Amount: Tk 656.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

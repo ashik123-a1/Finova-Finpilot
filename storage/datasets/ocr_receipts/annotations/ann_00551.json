@@ -1,0 +1,37 @@
+{
+  "image_id": 551,
+  "filename": "receipt_00551_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00551_bilingual_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0551",
+  "date_str": "17/08/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 31500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 31500,
+  "full_text_ground_truth": "Metro Departmental (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0551\nDate: 17/08/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nRefined White Sugar 1kg x1  Tk 135.00\nডিটারজেন্ট সাবান x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 315.00\nTotal Amount: Tk 315.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

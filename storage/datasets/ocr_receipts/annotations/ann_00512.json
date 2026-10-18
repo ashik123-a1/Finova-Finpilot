@@ -1,0 +1,31 @@
+{
+  "image_id": 512,
+  "filename": "receipt_00512_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00512_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0512",
+  "date_str": "19/02/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 20000,
+  "tax_minor": 1000,
+  "discount_minor": 0,
+  "total_amount_minor": 21000,
+  "full_text_ground_truth": "Bengal Food Mart (রহমান এন্টারপ্রাইজ)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0512\nDate: 19/02/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 200.00\nVAT (5%): Tk 10.00\nTotal Amount: Tk 210.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

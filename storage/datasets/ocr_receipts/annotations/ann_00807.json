@@ -1,0 +1,43 @@
+{
+  "image_id": 807,
+  "filename": "receipt_00807_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00807_en_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0807",
+  "date_str": "05/05/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 196000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 186000,
+  "full_text_ground_truth": "Bengal Food Mart\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0807\nDate: 05/05/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nAata Flour 2kg x2  Tk 220.00\nMiniket Rice 5kg x3  Tk 1140.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1960.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1860.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

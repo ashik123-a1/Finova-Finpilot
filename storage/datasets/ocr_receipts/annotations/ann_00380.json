@@ -1,0 +1,31 @@
+{
+  "image_id": 380,
+  "filename": "receipt_00380_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00380_bilingual_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0380",
+  "date_str": "21/10/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 88500,
+  "tax_minor": 4425,
+  "discount_minor": 0,
+  "total_amount_minor": 92925,
+  "full_text_ground_truth": "Rahman Enterprise (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0380\nDate: 21/10/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nRefined White Sugar 1kg x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 885.00\nVAT (5%): Tk 44.25\nTotal Amount: Tk 929.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

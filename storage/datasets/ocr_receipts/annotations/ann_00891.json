@@ -1,0 +1,43 @@
+{
+  "image_id": 891,
+  "filename": "receipt_00891_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00891_en_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0891",
+  "date_str": "22/02/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 113000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 103000,
+  "full_text_ground_truth": "Rahman Enterprise\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0891\nDate: 22/02/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nAata Flour 2kg x3  Tk 330.00\nBath Soap 100g x3  Tk 180.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1130.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1030.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

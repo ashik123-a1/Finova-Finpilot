@@ -1,0 +1,31 @@
+{
+  "image_id": 582,
+  "filename": "receipt_00582_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00582_en_blur.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0582",
+  "date_str": "04/08/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 222000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 217000,
+  "full_text_ground_truth": "Chowdhury Supermarket\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0582\nDate: 04/08/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2220.00\nDiscount: Tk 50.00\nTotal Amount: Tk 2170.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

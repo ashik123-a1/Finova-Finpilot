@@ -1,0 +1,37 @@
+{
+  "image_id": 713,
+  "filename": "receipt_00713_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00713_bilingual_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0713",
+  "date_str": "03/08/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 147000,
+  "tax_minor": 7350,
+  "discount_minor": 0,
+  "total_amount_minor": 154350,
+  "full_text_ground_truth": "Rahman Enterprise (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0713\nDate: 03/08/2026\n------------------------------------------\nBath Soap 100g x1  Tk 60.00\nRefined White Sugar 1kg x2  Tk 270.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1470.00\nVAT (5%): Tk 73.50\nTotal Amount: Tk 1543.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

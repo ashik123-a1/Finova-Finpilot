@@ -1,0 +1,31 @@
+{
+  "image_id": 522,
+  "filename": "receipt_00522_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00522_en_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0522",
+  "date_str": "26/12/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 156000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 151000,
+  "full_text_ground_truth": "Bengal Food Mart\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0522\nDate: 26/12/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nBlack Tea Pack 400g x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1560.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1510.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

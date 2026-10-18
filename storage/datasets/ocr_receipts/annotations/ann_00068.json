@@ -1,0 +1,31 @@
+{
+  "image_id": 68,
+  "filename": "receipt_00068_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00068_bilingual_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0068",
+  "date_str": "04/10/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 156000,
+  "tax_minor": 7800,
+  "discount_minor": 5000,
+  "total_amount_minor": 158800,
+  "full_text_ground_truth": "Chowdhury Supermarket (বিসমিল্লাহ ইলেকট্রনিক্স)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0068\nDate: 04/10/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1560.00\nVAT (5%): Tk 78.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1588.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

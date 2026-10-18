@@ -1,0 +1,31 @@
+{
+  "image_id": 368,
+  "filename": "receipt_00368_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00368_bilingual_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0368",
+  "date_str": "26/09/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 126000,
+  "tax_minor": 6300,
+  "discount_minor": 5000,
+  "total_amount_minor": 127300,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0368\nDate: 26/09/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nBath Soap 100g x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 1260.00\nVAT (5%): Tk 63.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1273.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

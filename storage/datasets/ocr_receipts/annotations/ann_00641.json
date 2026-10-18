@@ -1,0 +1,43 @@
+{
+  "image_id": 641,
+  "filename": "receipt_00641_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00641_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0641",
+  "date_str": "20/11/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 116000,
+  "tax_minor": 5800,
+  "discount_minor": 5000,
+  "total_amount_minor": 116800,
+  "full_text_ground_truth": "Metro Departmental (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0641\nDate: 20/11/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nBlack Tea Pack 400g x1  Tk 240.00\nআটা ২ কেজি x1  Tk 110.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1160.00\nVAT (5%): Tk 58.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1168.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 272,
+  "filename": "receipt_00272_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00272_bilingual_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0272",
+  "date_str": "08/12/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 76500,
+  "tax_minor": 3825,
+  "discount_minor": 10000,
+  "total_amount_minor": 70325,
+  "full_text_ground_truth": "Bengal Food Mart (রহমান এন্টারপ্রাইজ)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0272\nDate: 08/12/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 765.00\nVAT (5%): Tk 38.25\nDiscount: Tk 100.00\nTotal Amount: Tk 703.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

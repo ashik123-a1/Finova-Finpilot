@@ -1,0 +1,43 @@
+{
+  "image_id": 503,
+  "filename": "receipt_00503_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00503_bilingual_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0503",
+  "date_str": "09/10/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 73500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 63500,
+  "full_text_ground_truth": "Bismillah Electronics (মেট্রো ডিপার্টমেন্টাল)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0503\nDate: 09/10/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nBath Soap 100g x3  Tk 180.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 735.00\nDiscount: Tk 100.00\nTotal Amount: Tk 635.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

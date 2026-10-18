@@ -1,0 +1,31 @@
+{
+  "image_id": 656,
+  "filename": "receipt_00656_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00656_bilingual_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0656",
+  "date_str": "15/09/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 78000,
+  "tax_minor": 3900,
+  "discount_minor": 0,
+  "total_amount_minor": 81900,
+  "full_text_ground_truth": "Chowdhury Supermarket (দেশ জেনারেল স্টোর)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0656\nDate: 15/09/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 780.00\nVAT (5%): Tk 39.00\nTotal Amount: Tk 819.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

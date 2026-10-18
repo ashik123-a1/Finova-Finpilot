@@ -1,0 +1,37 @@
+{
+  "image_id": 821,
+  "filename": "receipt_00821_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00821_bilingual_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0821",
+  "date_str": "24/11/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 27000,
+  "tax_minor": 1350,
+  "discount_minor": 0,
+  "total_amount_minor": 28350,
+  "full_text_ground_truth": "Chowdhury Supermarket (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0821\nDate: 24/11/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nBath Soap 100g x3  Tk 180.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 270.00\nVAT (5%): Tk 13.50\nTotal Amount: Tk 283.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

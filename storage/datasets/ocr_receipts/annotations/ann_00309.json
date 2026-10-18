@@ -1,0 +1,43 @@
+{
+  "image_id": 309,
+  "filename": "receipt_00309_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00309_en_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0309",
+  "date_str": "13/07/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 88000,
+  "tax_minor": 4400,
+  "discount_minor": 10000,
+  "total_amount_minor": 82400,
+  "full_text_ground_truth": "Rahman Enterprise\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0309\nDate: 13/07/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nMasur Dal 1kg x2  Tk 280.00\nAata Flour 2kg x3  Tk 330.00\nLaundry Soap Bar x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 880.00\nVAT (5%): Tk 44.00\nDiscount: Tk 100.00\nTotal Amount: Tk 824.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 563,
+  "filename": "receipt_00563_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00563_bilingual_low_light.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0563",
+  "date_str": "18/01/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 36000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 36000,
+  "full_text_ground_truth": "Chowdhury Supermarket (দেশ জেনারেল স্টোর)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0563\nDate: 18/01/2026\n------------------------------------------\nAata Flour 2kg x2  Tk 220.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 360.00\nTotal Amount: Tk 360.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 233,
+  "filename": "receipt_00233_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00233_bilingual_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0233",
+  "date_str": "16/11/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 85500,
+  "tax_minor": 4275,
+  "discount_minor": 0,
+  "total_amount_minor": 89775,
+  "full_text_ground_truth": "Metro Departmental (বেঙ্গল ফুড মার্ট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0233\nDate: 16/11/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nLaundry Soap Bar x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 855.00\nVAT (5%): Tk 42.75\nTotal Amount: Tk 897.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

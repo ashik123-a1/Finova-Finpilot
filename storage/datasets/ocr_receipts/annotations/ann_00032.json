@@ -1,0 +1,37 @@
+{
+  "image_id": 32,
+  "filename": "receipt_00032_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00032_bilingual_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0032",
+  "date_str": "17/06/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 47500,
+  "tax_minor": 2375,
+  "discount_minor": 0,
+  "total_amount_minor": 49875,
+  "full_text_ground_truth": "Rahman Enterprise (রহমান এন্টারপ্রাইজ)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0032\nDate: 17/06/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 475.00\nVAT (5%): Tk 23.75\nTotal Amount: Tk 498.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

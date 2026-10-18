@@ -1,0 +1,31 @@
+{
+  "image_id": 770,
+  "filename": "receipt_00770_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00770_bilingual_clean.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0770",
+  "date_str": "20/02/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 54000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 49000,
+  "full_text_ground_truth": "Chowdhury Supermarket (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0770\nDate: 20/02/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 540.00\nDiscount: Tk 50.00\nTotal Amount: Tk 490.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

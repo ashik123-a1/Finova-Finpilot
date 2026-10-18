@@ -1,0 +1,37 @@
+{
+  "image_id": 15,
+  "filename": "receipt_00015_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00015_en_blur.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0015",
+  "date_str": "24/12/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 182500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 172500,
+  "full_text_ground_truth": "Desh General Store\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0015\nDate: 24/12/2026\n------------------------------------------\nRefined White Sugar 1kg x3  Tk 405.00\nMasur Dal 1kg x2  Tk 280.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1825.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1725.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

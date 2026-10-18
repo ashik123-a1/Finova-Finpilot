@@ -1,0 +1,31 @@
+{
+  "image_id": 489,
+  "filename": "receipt_00489_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00489_en_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0489",
+  "date_str": "21/09/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 23000,
+  "tax_minor": 1150,
+  "discount_minor": 0,
+  "total_amount_minor": 24150,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0489\nDate: 21/09/2026\n------------------------------------------\nMasur Dal 1kg x1  Tk 140.00\nLaundry Soap Bar x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 230.00\nVAT (5%): Tk 11.50\nTotal Amount: Tk 241.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 660,
+  "filename": "receipt_00660_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00660_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0660",
+  "date_str": "10/05/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 102000,
+  "tax_minor": 5100,
+  "discount_minor": 0,
+  "total_amount_minor": 107100,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0660\nDate: 10/05/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nBath Soap 100g x1  Tk 60.00\nAata Flour 2kg x1  Tk 110.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1020.00\nVAT (5%): Tk 51.00\nTotal Amount: Tk 1071.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

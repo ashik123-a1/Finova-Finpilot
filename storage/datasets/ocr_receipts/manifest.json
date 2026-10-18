@@ -1,0 +1,48 @@
+{
+  "dataset_name": "SME Receipt Image Benchmark Dataset",
+  "version": "v2.0.0-synthetic-evaluation",
+  "total_images": 1000,
+  "target_scale_capacity": 5000,
+  "classes": [
+    "sales_receipt",
+    "purchase_invoice",
+    "expense_receipt",
+    "payment_receipt"
+  ],
+  "languages": [
+    "en",
+    "bn",
+    "bilingual"
+  ],
+  "quality_categories": [
+    "clean",
+    "blur",
+    "rotated",
+    "low_light",
+    "faded_thermal",
+    "shadow",
+    "cropped"
+  ],
+  "class_distribution": {
+    "sales_receipt": 250,
+    "purchase_invoice": 250,
+    "expense_receipt": 250,
+    "payment_receipt": 250
+  },
+  "language_distribution": {
+    "en": 333,
+    "bn": 334,
+    "bilingual": 333
+  },
+  "quality_distribution": {
+    "clean": 142,
+    "blur": 143,
+    "rotated": 143,
+    "low_light": 143,
+    "faded_thermal": 143,
+    "shadow": 143,
+    "cropped": 143
+  },
+  "is_synthetic": true,
+  "provenance": "Synthesized with Pillow using Bengali/English text templates and optical degradation models."
+}

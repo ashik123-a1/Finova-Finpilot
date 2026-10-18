@@ -1,0 +1,37 @@
+{
+  "image_id": 448,
+  "filename": "receipt_00448_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00448_bn_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0448",
+  "date_str": "06/09/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 108000,
+  "tax_minor": 5400,
+  "discount_minor": 0,
+  "total_amount_minor": 113400,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0448\nDate: 06/09/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nগোসলের সাবান x2  Tk 120.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1080.00\nVAT (5%): Tk 54.00\nTotal Amount: Tk 1134.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

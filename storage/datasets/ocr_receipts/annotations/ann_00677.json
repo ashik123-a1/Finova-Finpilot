@@ -1,0 +1,31 @@
+{
+  "image_id": 677,
+  "filename": "receipt_00677_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00677_bilingual_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0677",
+  "date_str": "28/05/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 39000,
+  "tax_minor": 1950,
+  "discount_minor": 0,
+  "total_amount_minor": 40950,
+  "full_text_ground_truth": "Bengal Food Mart (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0677\nDate: 28/05/2026\n------------------------------------------\nআটা ২ কেজি x3  Tk 330.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 390.00\nVAT (5%): Tk 19.50\nTotal Amount: Tk 409.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

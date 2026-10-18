@@ -1,0 +1,37 @@
+{
+  "image_id": 555,
+  "filename": "receipt_00555_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00555_en_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0555",
+  "date_str": "28/06/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 94000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 94000,
+  "full_text_ground_truth": "Bismillah Electronics\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0555\nDate: 28/06/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nBath Soap 100g x3  Tk 180.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 940.00\nTotal Amount: Tk 940.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

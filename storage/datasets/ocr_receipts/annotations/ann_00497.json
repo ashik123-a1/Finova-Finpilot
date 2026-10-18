@@ -1,0 +1,37 @@
+{
+  "image_id": 497,
+  "filename": "receipt_00497_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00497_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0497",
+  "date_str": "25/03/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 123000,
+  "tax_minor": 6150,
+  "discount_minor": 0,
+  "total_amount_minor": 129150,
+  "full_text_ground_truth": "Bengal Food Mart (মেট্রো ডিপার্টমেন্টাল)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0497\nDate: 25/03/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x3  Tk 420.00\nAata Flour 2kg x3  Tk 330.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1230.00\nVAT (5%): Tk 61.50\nTotal Amount: Tk 1291.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

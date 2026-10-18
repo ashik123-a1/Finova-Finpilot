@@ -1,0 +1,37 @@
+{
+  "image_id": 217,
+  "filename": "receipt_00217_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00217_bn_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0217",
+  "date_str": "13/06/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 130500,
+  "tax_minor": 6525,
+  "discount_minor": 5000,
+  "total_amount_minor": 132025,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0217\nDate: 13/06/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nগোসলের সাবান x3  Tk 180.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1305.00\nVAT (5%): Tk 65.25\nDiscount: Tk 50.00\nTotal Amount: Tk 1320.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

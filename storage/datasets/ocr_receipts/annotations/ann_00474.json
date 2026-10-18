@@ -1,0 +1,31 @@
+{
+  "image_id": 474,
+  "filename": "receipt_00474_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00474_en_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0474",
+  "date_str": "26/09/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 46000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 46000,
+  "full_text_ground_truth": "Desh General Store\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0474\nDate: 26/09/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 460.00\nTotal Amount: Tk 460.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

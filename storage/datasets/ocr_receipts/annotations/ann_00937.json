@@ -1,0 +1,43 @@
+{
+  "image_id": 937,
+  "filename": "receipt_00937_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00937_bn_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0937",
+  "date_str": "18/01/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 164500,
+  "tax_minor": 8225,
+  "discount_minor": 0,
+  "total_amount_minor": 172725,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0937\nDate: 18/01/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 1645.00\nVAT (5%): Tk 82.25\nTotal Amount: Tk 1727.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

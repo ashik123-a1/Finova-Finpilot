@@ -1,0 +1,37 @@
+{
+  "image_id": 614,
+  "filename": "receipt_00614_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00614_bilingual_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0614",
+  "date_str": "12/11/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 79500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 79500,
+  "full_text_ground_truth": "Chowdhury Supermarket (দেশ জেনারেল স্টোর)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0614\nDate: 12/11/2026\n------------------------------------------\nআটা ২ কেজি x1  Tk 110.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 795.00\nTotal Amount: Tk 795.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

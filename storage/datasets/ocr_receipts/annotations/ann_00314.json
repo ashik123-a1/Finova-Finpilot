@@ -1,0 +1,43 @@
+{
+  "image_id": 314,
+  "filename": "receipt_00314_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00314_bilingual_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0314",
+  "date_str": "25/08/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 227000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 217000,
+  "full_text_ground_truth": "Rahman Enterprise (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0314\nDate: 25/08/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nSoybean Oil 2L x3  Tk 1080.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 2270.00\nDiscount: Tk 100.00\nTotal Amount: Tk 2170.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

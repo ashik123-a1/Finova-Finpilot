@@ -1,0 +1,43 @@
+{
+  "image_id": 151,
+  "filename": "receipt_00151_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00151_bn_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0151",
+  "date_str": "19/07/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 75500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 70500,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nটাকা জমার রসিদ\nBill No: INV-2026-0151\nDate: 19/07/2026\n------------------------------------------\nগোসলের সাবান x2  Tk 120.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nআটা ২ কেজি x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 755.00\nDiscount: Tk 50.00\nTotal Amount: Tk 705.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

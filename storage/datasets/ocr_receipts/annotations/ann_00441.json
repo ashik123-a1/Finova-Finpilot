@@ -1,0 +1,37 @@
+{
+  "image_id": 441,
+  "filename": "receipt_00441_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00441_en_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0441",
+  "date_str": "11/06/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 75000,
+  "tax_minor": 3750,
+  "discount_minor": 0,
+  "total_amount_minor": 78750,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0441\nDate: 11/06/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nLaundry Soap Bar x2  Tk 90.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 750.00\nVAT (5%): Tk 37.50\nTotal Amount: Tk 787.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

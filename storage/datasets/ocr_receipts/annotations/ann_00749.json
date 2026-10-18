@@ -1,0 +1,43 @@
+{
+  "image_id": 749,
+  "filename": "receipt_00749_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00749_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0749",
+  "date_str": "18/02/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 161000,
+  "tax_minor": 8050,
+  "discount_minor": 5000,
+  "total_amount_minor": 164050,
+  "full_text_ground_truth": "Bismillah Electronics (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0749\nDate: 18/02/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nআটা ২ কেজি x1  Tk 110.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 1610.00\nVAT (5%): Tk 80.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1640.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

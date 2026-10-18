@@ -1,0 +1,31 @@
+{
+  "image_id": 469,
+  "filename": "receipt_00469_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00469_bn_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0469",
+  "date_str": "24/05/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 42000,
+  "tax_minor": 2100,
+  "discount_minor": 0,
+  "total_amount_minor": 44100,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0469\nDate: 24/05/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 420.00\nVAT (5%): Tk 21.00\nTotal Amount: Tk 441.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

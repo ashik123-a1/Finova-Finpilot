@@ -1,0 +1,31 @@
+{
+  "image_id": 543,
+  "filename": "receipt_00543_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00543_en_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0543",
+  "date_str": "05/12/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 30000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 30000,
+  "full_text_ground_truth": "Chowdhury Supermarket\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0543\nDate: 05/12/2026\n------------------------------------------\nBlack Tea Pack 400g x1  Tk 240.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 300.00\nTotal Amount: Tk 300.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

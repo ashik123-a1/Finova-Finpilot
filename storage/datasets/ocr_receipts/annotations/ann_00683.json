@@ -1,0 +1,43 @@
+{
+  "image_id": 683,
+  "filename": "receipt_00683_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00683_bilingual_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0683",
+  "date_str": "06/07/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 240000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 235000,
+  "full_text_ground_truth": "Bismillah Electronics (চৌধুরী সুপার মার্কেট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0683\nDate: 06/07/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nBlack Tea Pack 400g x3  Tk 720.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 2400.00\nDiscount: Tk 50.00\nTotal Amount: Tk 2350.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

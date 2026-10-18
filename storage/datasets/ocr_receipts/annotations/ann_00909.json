@@ -1,0 +1,37 @@
+{
+  "image_id": 909,
+  "filename": "receipt_00909_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00909_en_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0909",
+  "date_str": "15/02/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 94000,
+  "tax_minor": 4700,
+  "discount_minor": 10000,
+  "total_amount_minor": 88700,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0909\nDate: 15/02/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nMasur Dal 1kg x2  Tk 280.00\nBlack Tea Pack 400g x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 940.00\nVAT (5%): Tk 47.00\nDiscount: Tk 100.00\nTotal Amount: Tk 887.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

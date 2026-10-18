@@ -1,0 +1,31 @@
+{
+  "image_id": 725,
+  "filename": "receipt_00725_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00725_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0725",
+  "date_str": "01/08/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 62000,
+  "tax_minor": 3100,
+  "discount_minor": 10000,
+  "total_amount_minor": 55100,
+  "full_text_ground_truth": "Bengal Food Mart (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0725\nDate: 01/08/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 620.00\nVAT (5%): Tk 31.00\nDiscount: Tk 100.00\nTotal Amount: Tk 551.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 92,
+  "filename": "receipt_00092_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00092_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0092",
+  "date_str": "16/09/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 135000,
+  "tax_minor": 6750,
+  "discount_minor": 0,
+  "total_amount_minor": 141750,
+  "full_text_ground_truth": "Desh General Store (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0092\nDate: 16/09/2026\n------------------------------------------\nগোসলের সাবান x3  Tk 180.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nMasur Dal 1kg x3  Tk 420.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 1350.00\nVAT (5%): Tk 67.50\nTotal Amount: Tk 1417.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

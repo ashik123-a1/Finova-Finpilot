@@ -1,0 +1,37 @@
+{
+  "image_id": 326,
+  "filename": "receipt_00326_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00326_bilingual_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0326",
+  "date_str": "05/11/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 46000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 46000,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0326\nDate: 05/11/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 460.00\nTotal Amount: Tk 460.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

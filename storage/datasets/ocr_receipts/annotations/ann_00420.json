@@ -1,0 +1,37 @@
+{
+  "image_id": 420,
+  "filename": "receipt_00420_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00420_en_clean.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0420",
+  "date_str": "14/06/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 79000,
+  "tax_minor": 3950,
+  "discount_minor": 0,
+  "total_amount_minor": 82950,
+  "full_text_ground_truth": "Bismillah Electronics\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0420\nDate: 14/06/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nBlack Tea Pack 400g x1  Tk 240.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 790.00\nVAT (5%): Tk 39.50\nTotal Amount: Tk 829.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 114,
+  "filename": "receipt_00114_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00114_en_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0114",
+  "date_str": "19/06/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 116000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 106000,
+  "full_text_ground_truth": "Bengal Food Mart\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0114\nDate: 19/06/2026\n------------------------------------------\nMasur Dal 1kg x3  Tk 420.00\nLaundry Soap Bar x2  Tk 90.00\nRefined White Sugar 1kg x2  Tk 270.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 1160.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1060.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

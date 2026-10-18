@@ -1,0 +1,37 @@
+{
+  "image_id": 912,
+  "filename": "receipt_00912_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00912_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0912",
+  "date_str": "04/10/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 197500,
+  "tax_minor": 9875,
+  "discount_minor": 10000,
+  "total_amount_minor": 197375,
+  "full_text_ground_truth": "Bismillah Electronics\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0912\nDate: 04/10/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nMiniket Rice 5kg x2  Tk 760.00\nRefined White Sugar 1kg x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1975.00\nVAT (5%): Tk 98.75\nDiscount: Tk 100.00\nTotal Amount: Tk 1973.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

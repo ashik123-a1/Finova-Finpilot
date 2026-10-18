@@ -1,0 +1,31 @@
+{
+  "image_id": 868,
+  "filename": "receipt_00868_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00868_bn_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0868",
+  "date_str": "10/03/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 32000,
+  "tax_minor": 1600,
+  "discount_minor": 0,
+  "total_amount_minor": 33600,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0868\nDate: 10/03/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 320.00\nVAT (5%): Tk 16.00\nTotal Amount: Tk 336.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

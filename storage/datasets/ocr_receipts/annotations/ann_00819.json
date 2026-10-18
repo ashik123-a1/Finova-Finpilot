@@ -1,0 +1,43 @@
+{
+  "image_id": 819,
+  "filename": "receipt_00819_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00819_en_clean.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0819",
+  "date_str": "17/08/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 150500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 140500,
+  "full_text_ground_truth": "Rahman Enterprise\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0819\nDate: 17/08/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nMiniket Rice 5kg x3  Tk 1140.00\nLaundry Soap Bar x2  Tk 90.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 1505.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1405.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

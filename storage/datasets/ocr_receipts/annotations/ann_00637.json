@@ -1,0 +1,31 @@
+{
+  "image_id": 637,
+  "filename": "receipt_00637_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00637_bn_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0637",
+  "date_str": "25/05/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 81000,
+  "tax_minor": 4050,
+  "discount_minor": 0,
+  "total_amount_minor": 85050,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0637\nDate: 25/05/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nআটা ২ কেজি x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 810.00\nVAT (5%): Tk 40.50\nTotal Amount: Tk 850.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

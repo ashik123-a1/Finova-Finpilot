@@ -1,0 +1,31 @@
+{
+  "image_id": 138,
+  "filename": "receipt_00138_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00138_en_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0138",
+  "date_str": "24/06/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 156000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 151000,
+  "full_text_ground_truth": "Metro Departmental\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0138\nDate: 24/06/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1560.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1510.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 188,
+  "filename": "receipt_00188_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00188_bilingual_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0188",
+  "date_str": "26/02/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 196500,
+  "tax_minor": 9825,
+  "discount_minor": 0,
+  "total_amount_minor": 206325,
+  "full_text_ground_truth": "Rahman Enterprise (বিসমিল্লাহ ইলেকট্রনিক্স)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0188\nDate: 26/02/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nSoybean Oil 2L x3  Tk 1080.00\nBath Soap 100g x2  Tk 120.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1965.00\nVAT (5%): Tk 98.25\nTotal Amount: Tk 2063.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

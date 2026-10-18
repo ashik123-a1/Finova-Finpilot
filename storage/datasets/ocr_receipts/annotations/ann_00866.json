@@ -1,0 +1,31 @@
+{
+  "image_id": 866,
+  "filename": "receipt_00866_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00866_bilingual_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0866",
+  "date_str": "15/11/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 46000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 46000,
+  "full_text_ground_truth": "Rahman Enterprise (বিসমিল্লাহ ইলেকট্রনিক্স)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0866\nDate: 15/11/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 460.00\nTotal Amount: Tk 460.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

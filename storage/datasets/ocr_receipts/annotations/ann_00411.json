@@ -1,0 +1,31 @@
+{
+  "image_id": 411,
+  "filename": "receipt_00411_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00411_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0411",
+  "date_str": "01/08/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 27500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 27500,
+  "full_text_ground_truth": "Metro Departmental\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0411\nDate: 01/08/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 275.00\nTotal Amount: Tk 275.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

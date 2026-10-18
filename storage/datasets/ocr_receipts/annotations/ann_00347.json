@@ -1,0 +1,31 @@
+{
+  "image_id": 347,
+  "filename": "receipt_00347_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00347_bilingual_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0347",
+  "date_str": "13/03/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 222000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 212000,
+  "full_text_ground_truth": "Bengal Food Mart (বিসমিল্লাহ ইলেকট্রনিক্স)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0347\nDate: 13/03/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2220.00\nDiscount: Tk 100.00\nTotal Amount: Tk 2120.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

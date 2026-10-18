@@ -1,0 +1,37 @@
+{
+  "image_id": 216,
+  "filename": "receipt_00216_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00216_en_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0216",
+  "date_str": "13/09/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 84000,
+  "tax_minor": 4200,
+  "discount_minor": 0,
+  "total_amount_minor": 88200,
+  "full_text_ground_truth": "Desh General Store\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0216\nDate: 13/09/2026\n------------------------------------------\nMasur Dal 1kg x3  Tk 420.00\nBath Soap 100g x3  Tk 180.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 840.00\nVAT (5%): Tk 42.00\nTotal Amount: Tk 882.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

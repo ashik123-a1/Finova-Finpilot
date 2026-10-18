@@ -1,0 +1,37 @@
+{
+  "image_id": 720,
+  "filename": "receipt_00720_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00720_en_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0720",
+  "date_str": "27/02/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 33500,
+  "tax_minor": 1675,
+  "discount_minor": 0,
+  "total_amount_minor": 35175,
+  "full_text_ground_truth": "Bismillah Electronics\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0720\nDate: 27/02/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nBath Soap 100g x1  Tk 60.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 335.00\nVAT (5%): Tk 16.75\nTotal Amount: Tk 351.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

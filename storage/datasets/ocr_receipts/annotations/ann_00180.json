@@ -1,0 +1,31 @@
+{
+  "image_id": 180,
+  "filename": "receipt_00180_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00180_en_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0180",
+  "date_str": "19/07/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 86000,
+  "tax_minor": 4300,
+  "discount_minor": 10000,
+  "total_amount_minor": 80300,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0180\nDate: 19/07/2026\n------------------------------------------\nSoybean Oil 2L x2  Tk 720.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 860.00\nVAT (5%): Tk 43.00\nDiscount: Tk 100.00\nTotal Amount: Tk 803.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

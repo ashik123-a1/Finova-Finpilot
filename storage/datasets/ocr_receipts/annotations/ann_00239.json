@@ -1,0 +1,31 @@
+{
+  "image_id": 239,
+  "filename": "receipt_00239_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00239_bilingual_blur.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0239",
+  "date_str": "16/06/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 90000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 85000,
+  "full_text_ground_truth": "Chowdhury Supermarket (চৌধুরী সুপার মার্কেট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0239\nDate: 16/06/2026\n------------------------------------------\nMiniket Rice 5kg x2  Tk 760.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 900.00\nDiscount: Tk 50.00\nTotal Amount: Tk 850.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

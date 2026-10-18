@@ -1,0 +1,31 @@
+{
+  "image_id": 410,
+  "filename": "receipt_00410_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00410_bilingual_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0410",
+  "date_str": "08/11/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 116500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 116500,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0410\nDate: 08/11/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 1165.00\nTotal Amount: Tk 1165.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

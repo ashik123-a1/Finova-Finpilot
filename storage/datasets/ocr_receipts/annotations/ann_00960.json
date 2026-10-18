@@ -1,0 +1,31 @@
+{
+  "image_id": 960,
+  "filename": "receipt_00960_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00960_en_blur.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0960",
+  "date_str": "17/09/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 19500,
+  "tax_minor": 975,
+  "discount_minor": 0,
+  "total_amount_minor": 20475,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0960\nDate: 17/09/2026\n------------------------------------------\nBath Soap 100g x1  Tk 60.00\nRefined White Sugar 1kg x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 195.00\nVAT (5%): Tk 9.75\nTotal Amount: Tk 204.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

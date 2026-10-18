@@ -1,0 +1,31 @@
+{
+  "image_id": 91,
+  "filename": "receipt_00091_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00091_bn_clean.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0091",
+  "date_str": "01/02/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 126000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 116000,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nটাকা জমার রসিদ\nBill No: INV-2026-0091\nDate: 01/02/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 1260.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1160.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

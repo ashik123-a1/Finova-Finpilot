@@ -1,0 +1,43 @@
+{
+  "image_id": 740,
+  "filename": "receipt_00740_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00740_bilingual_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0740",
+  "date_str": "24/07/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 102500,
+  "tax_minor": 5125,
+  "discount_minor": 10000,
+  "total_amount_minor": 97625,
+  "full_text_ground_truth": "Bismillah Electronics (দেশ জেনারেল স্টোর)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0740\nDate: 24/07/2026\n------------------------------------------\nBlack Tea Pack 400g x3  Tk 720.00\nAata Flour 2kg x1  Tk 110.00\nLaundry Soap Bar x3  Tk 135.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 1025.00\nVAT (5%): Tk 51.25\nDiscount: Tk 100.00\nTotal Amount: Tk 976.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

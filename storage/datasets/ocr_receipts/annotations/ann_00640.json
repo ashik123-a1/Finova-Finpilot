@@ -1,0 +1,37 @@
+{
+  "image_id": 640,
+  "filename": "receipt_00640_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00640_bn_low_light.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0640",
+  "date_str": "19/10/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 86500,
+  "tax_minor": 4325,
+  "discount_minor": 0,
+  "total_amount_minor": 90825,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0640\nDate: 19/10/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 865.00\nVAT (5%): Tk 43.25\nTotal Amount: Tk 908.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 372,
+  "filename": "receipt_00372_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00372_en_blur.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0372",
+  "date_str": "28/07/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 130500,
+  "tax_minor": 6525,
+  "discount_minor": 10000,
+  "total_amount_minor": 127025,
+  "full_text_ground_truth": "Rahman Enterprise\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0372\nDate: 28/07/2026\n------------------------------------------\nRefined White Sugar 1kg x3  Tk 405.00\nSoybean Oil 2L x2  Tk 720.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 1305.00\nVAT (5%): Tk 65.25\nDiscount: Tk 100.00\nTotal Amount: Tk 1270.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

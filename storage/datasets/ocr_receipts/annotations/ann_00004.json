@@ -1,0 +1,31 @@
+{
+  "image_id": 4,
+  "filename": "receipt_00004_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00004_bn_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0004",
+  "date_str": "09/03/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 80500,
+  "tax_minor": 4025,
+  "discount_minor": 0,
+  "total_amount_minor": 84525,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0004\nDate: 09/03/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 805.00\nVAT (5%): Tk 40.25\nTotal Amount: Tk 845.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -141,3 +141,58 @@ def test_ablation_engines_integrity():
     guard_ab = run_assistant_guardrails_ablation()
     assert guard_ab["guardrail_arithmetic_drift_rate_pct"] == 0.0
     assert guard_ab["regulatory_dscr_compliance_pct"] == 100.0
+
+
+def test_loan_risk_12_vectors_all_pass():
+    from src.evaluation.eval_loan_risk import LoanRiskEvaluator
+    summary = LoanRiskEvaluator.run_benchmark()
+    assert summary["total_test_cases"] == 12
+    assert summary["passed_test_cases"] == 12
+    assert summary["pass_rate_pct"] == 100.0
+
+
+def test_ocr_and_classification_dataset_manifests():
+    import json
+    from pathlib import Path
+
+    # Classification manifest check
+    cls_manifest_path = Path("storage/datasets/document_classification/dataset_manifest.json")
+    assert cls_manifest_path.exists()
+    with open(cls_manifest_path, "r", encoding="utf-8") as f:
+        cls_manifest = json.load(f)
+    assert cls_manifest["counts"]["test"] == 1000
+    assert cls_manifest["is_synthetic"] is True
+
+    # OCR manifest check
+    ocr_manifest_path = Path("storage/datasets/ocr_receipts/manifest.json")
+    assert ocr_manifest_path.exists()
+    with open(ocr_manifest_path, "r", encoding="utf-8") as f:
+        ocr_manifest = json.load(f)
+    assert ocr_manifest["total_images"] == 1000
+    assert ocr_manifest["is_synthetic"] is True
+
+
+def test_evaluation_api_dashboard_endpoints():
+    from fastapi.testclient import TestClient
+    from src.api.app import app
+
+    client = TestClient(app)
+    r_sum = client.get("/api/models/evaluations/summary")
+    assert r_sum.status_code == 200
+    data = r_sum.json()["competition_evaluation_summary"]
+    assert data["total_tasks_evaluated"] == 6
+
+    # Verify evidence types
+    evidence_types = {t["task"]: t["evidence_type"] for t in data["tasks"]}
+    assert evidence_types["Document Classification"] == "MEASURED_SYNTHETIC"
+    assert evidence_types["OCR & Field Extraction"] == "MEASURED_SYNTHETIC"
+    assert evidence_types["Cash-Flow Forecasting"] == "MEASURED_SYNTHETIC"
+    assert evidence_types["Loan Risk & Product Matching"] == "RULE_VERIFICATION_DETERMINISTIC"
+    assert evidence_types["Customer Segmentation"] == "MEASURED_SYNTHETIC"
+    assert evidence_types["Demand Estimation & Pricing"] == "SIMULATED"
+
+    # Verify ablations endpoint
+    r_ab = client.get("/api/models/evaluations/ablations")
+    assert r_ab.status_code == 200
+    assert "doc_pipeline_ablation" in r_ab.json()
+

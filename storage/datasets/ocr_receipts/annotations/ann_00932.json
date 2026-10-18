@@ -1,0 +1,31 @@
+{
+  "image_id": 932,
+  "filename": "receipt_00932_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00932_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0932",
+  "date_str": "12/11/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 150000,
+  "tax_minor": 7500,
+  "discount_minor": 10000,
+  "total_amount_minor": 147500,
+  "full_text_ground_truth": "Metro Departmental (বেঙ্গল ফুড মার্ট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0932\nDate: 12/11/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1500.00\nVAT (5%): Tk 75.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1475.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

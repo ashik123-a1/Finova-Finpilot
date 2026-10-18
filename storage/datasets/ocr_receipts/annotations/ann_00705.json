@@ -1,0 +1,37 @@
+{
+  "image_id": 705,
+  "filename": "receipt_00705_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00705_en_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0705",
+  "date_str": "22/06/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 109000,
+  "tax_minor": 5450,
+  "discount_minor": 5000,
+  "total_amount_minor": 109450,
+  "full_text_ground_truth": "Metro Departmental\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0705\nDate: 22/06/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nBath Soap 100g x1  Tk 60.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1090.00\nVAT (5%): Tk 54.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1094.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

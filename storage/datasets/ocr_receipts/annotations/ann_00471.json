@@ -1,0 +1,43 @@
+{
+  "image_id": 471,
+  "filename": "receipt_00471_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00471_en_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0471",
+  "date_str": "06/12/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 187000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 187000,
+  "full_text_ground_truth": "Chowdhury Supermarket\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0471\nDate: 06/12/2026\n------------------------------------------\nSoybean Oil 2L x2  Tk 720.00\nAata Flour 2kg x3  Tk 330.00\nMiniket Rice 5kg x2  Tk 760.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 1870.00\nTotal Amount: Tk 1870.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

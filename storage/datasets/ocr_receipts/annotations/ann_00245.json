@@ -1,0 +1,37 @@
+{
+  "image_id": 245,
+  "filename": "receipt_00245_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00245_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0245",
+  "date_str": "23/10/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 109000,
+  "tax_minor": 5450,
+  "discount_minor": 0,
+  "total_amount_minor": 114450,
+  "full_text_ground_truth": "Metro Departmental (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0245\nDate: 23/10/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nগোসলের সাবান x1  Tk 60.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1090.00\nVAT (5%): Tk 54.50\nTotal Amount: Tk 1144.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

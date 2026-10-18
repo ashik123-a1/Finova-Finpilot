@@ -1,0 +1,37 @@
+{
+  "image_id": 430,
+  "filename": "receipt_00430_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00430_bn_low_light.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0430",
+  "date_str": "05/06/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 52500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 52500,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nদোকান খরচ রসিদ\nBill No: INV-2026-0430\nDate: 05/06/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nগোসলের সাবান x2  Tk 120.00\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 525.00\nTotal Amount: Tk 525.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

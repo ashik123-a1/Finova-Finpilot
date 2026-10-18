@@ -1,0 +1,31 @@
+{
+  "image_id": 727,
+  "filename": "receipt_00727_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00727_bn_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0727",
+  "date_str": "15/07/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 54500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 44500,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nটাকা জমার রসিদ\nBill No: INV-2026-0727\nDate: 15/07/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x3  Tk 405.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 545.00\nDiscount: Tk 100.00\nTotal Amount: Tk 445.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

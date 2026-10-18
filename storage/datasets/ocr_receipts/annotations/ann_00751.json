@@ -1,0 +1,37 @@
+{
+  "image_id": 751,
+  "filename": "receipt_00751_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00751_bn_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0751",
+  "date_str": "27/02/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 133000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 133000,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nটাকা জমার রসিদ\nBill No: INV-2026-0751\nDate: 27/02/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nআটা ২ কেজি x3  Tk 330.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1330.00\nTotal Amount: Tk 1330.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 603,
+  "filename": "receipt_00603_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00603_en_blur.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0603",
+  "date_str": "22/07/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 144000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 134000,
+  "full_text_ground_truth": "Desh General Store\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0603\nDate: 22/07/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nRefined White Sugar 1kg x2  Tk 270.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1440.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1340.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

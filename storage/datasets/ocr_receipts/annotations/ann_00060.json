@@ -1,0 +1,31 @@
+{
+  "image_id": 60,
+  "filename": "receipt_00060_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00060_en_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0060",
+  "date_str": "13/08/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 36000,
+  "tax_minor": 1800,
+  "discount_minor": 0,
+  "total_amount_minor": 37800,
+  "full_text_ground_truth": "Rahman Enterprise\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0060\nDate: 13/08/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 360.00\nVAT (5%): Tk 18.00\nTotal Amount: Tk 378.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

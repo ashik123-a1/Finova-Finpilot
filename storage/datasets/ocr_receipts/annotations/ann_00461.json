@@ -1,0 +1,37 @@
+{
+  "image_id": 461,
+  "filename": "receipt_00461_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00461_bilingual_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0461",
+  "date_str": "24/09/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 79500,
+  "tax_minor": 3975,
+  "discount_minor": 0,
+  "total_amount_minor": 83475,
+  "full_text_ground_truth": "Rahman Enterprise (মেট্রো ডিপার্টমেন্টাল)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0461\nDate: 24/09/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x3  Tk 405.00\nআটা ২ কেজি x3  Tk 330.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 795.00\nVAT (5%): Tk 39.75\nTotal Amount: Tk 834.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

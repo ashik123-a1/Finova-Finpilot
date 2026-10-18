@@ -1,0 +1,43 @@
+{
+  "image_id": 676,
+  "filename": "receipt_00676_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00676_bn_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0676",
+  "date_str": "11/05/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 92000,
+  "tax_minor": 4600,
+  "discount_minor": 10000,
+  "total_amount_minor": 86600,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0676\nDate: 11/05/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nআটা ২ কেজি x3  Tk 330.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 920.00\nVAT (5%): Tk 46.00\nDiscount: Tk 100.00\nTotal Amount: Tk 866.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

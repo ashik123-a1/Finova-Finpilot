@@ -1,0 +1,37 @@
+{
+  "image_id": 998,
+  "filename": "receipt_00998_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00998_bilingual_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0998",
+  "date_str": "26/05/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 55500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 50500,
+  "full_text_ground_truth": "Metro Departmental (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0998\nDate: 26/05/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nBath Soap 100g x3  Tk 180.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 555.00\nDiscount: Tk 50.00\nTotal Amount: Tk 505.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

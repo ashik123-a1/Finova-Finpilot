@@ -1,0 +1,37 @@
+{
+  "image_id": 56,
+  "filename": "receipt_00056_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00056_bilingual_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0056",
+  "date_str": "28/08/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 175000,
+  "tax_minor": 8750,
+  "discount_minor": 5000,
+  "total_amount_minor": 178750,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0056\nDate: 28/08/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1750.00\nVAT (5%): Tk 87.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1787.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

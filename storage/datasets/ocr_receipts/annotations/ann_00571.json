@@ -1,0 +1,31 @@
+{
+  "image_id": 571,
+  "filename": "receipt_00571_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00571_bn_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0571",
+  "date_str": "14/06/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 45000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 45000,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nটাকা জমার রসিদ\nBill No: INV-2026-0571\nDate: 14/06/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x2  Tk 270.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 450.00\nTotal Amount: Tk 450.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

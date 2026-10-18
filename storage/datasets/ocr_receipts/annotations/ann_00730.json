@@ -1,0 +1,31 @@
+{
+  "image_id": 730,
+  "filename": "receipt_00730_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00730_bn_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0730",
+  "date_str": "09/01/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 54000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 49000,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nদোকান খরচ রসিদ\nBill No: INV-2026-0730\nDate: 09/01/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 540.00\nDiscount: Tk 50.00\nTotal Amount: Tk 490.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

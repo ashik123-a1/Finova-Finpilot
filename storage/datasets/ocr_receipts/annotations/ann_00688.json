@@ -1,0 +1,37 @@
+{
+  "image_id": 688,
+  "filename": "receipt_00688_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00688_bn_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0688",
+  "date_str": "26/05/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 163500,
+  "tax_minor": 8175,
+  "discount_minor": 10000,
+  "total_amount_minor": 161675,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0688\nDate: 26/05/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x3  Tk 405.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 1635.00\nVAT (5%): Tk 81.75\nDiscount: Tk 100.00\nTotal Amount: Tk 1616.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

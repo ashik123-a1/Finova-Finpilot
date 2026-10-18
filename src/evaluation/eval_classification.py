@@ -1,255 +1,251 @@
 """
-Reproducible Document Classification Evaluator and Baseline Benchmark.
-Compares Heuristic Rule Classifier vs Majority Class vs Trained TF-IDF + Logistic Regression.
-Generates confusion matrices, per-class F1, and confidence error analysis.
+Large-Scale Document Classification Evaluation and Baseline Benchmark.
+Evaluates 1,000 held-out test examples across 5 document classes:
+- sales_receipt, purchase_invoice, expense_receipt, payment_receipt, unknown
+Compares:
+1. Majority Class Baseline
+2. Heuristic Rule Classifier (src/documents/classifier.py)
+3. Statistical ML: TF-IDF (1-2 n-grams) + Multinomial Logistic Regression
+
+Generates:
+- Per-class Precision, Recall, F1, and Support
+- Confusion Matrices
+- Bootstrap 95% Confidence Intervals for Accuracy and Macro-F1
+- Prediction-level export to classification_predictions.jsonl
+- Failure analysis on ambiguous/noisy documents
 """
 
 from __future__ import annotations
 
 import json
-import random
 from pathlib import Path
 from typing import Dict, Any, List, Tuple
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import MultinomialNB
 
-from src.config import settings
 from src.documents.classifier import DocumentClassifier
 from src.documents.schemas import DocumentType
 from src.evaluation.metrics import compute_classification_metrics
-from src.evaluation.data_splitters import DataSplitter
+from src.data.classification_dataset_generator import DocumentClassificationDatasetGenerator, export_generated_dataset
 
 
-# Labeled Corpus Generator for Empirical Benchmark
-# Includes standard, dialectal, Bengali, and challenging ambiguous / corrupted samples
-CORPUS_TEMPLATES = {
-    DocumentType.SALES_RECEIPT.value: [
-        "CASH MEMO {shop} Invoice #: INV-{num} Date: 2026-10-15 Item: Miniket Rice 25kg Qty: 1 Rate: 1850 Total: 1850 Paid: 1850 Cash",
-        "SALES INVOICE Customer Copy Sold To: Rahim Mia Bill #: {num} Tangail Handloom Saree BDT 2400 Total: 2400 Paid via Mobile Banking",
-        "ক্যাশ মেমো {shop} রসিদ নং: {num} তারিখ: ২০২৬-১০-১২ পণ্য: মিনিকেট চাল পরিমাণ: ১ দর: ১৯০০ টাকা মোট: ১৯০০ নগদ পরিশোধ",
-        "POS RECEIPT Bhai Bhai Store Item: Soyabean Oil 5L x1 920.00 Subtotal: 920.00 Grand Total: 920.00 Thank You",
-        "ক্যাশ মেমো ঢাকা বিরিয়ানি কাচ্চি বিরিয়ানি ২ প্লেট দর ৪৫০ মোট ৯০০ টাকা পরিশোধিত",
-    ],
-    DocumentType.PURCHASE_INVOICE.value: [
-        "SUPPLIER INVOICE Pran Agro Distributorship Ltd Challan No: CH-{num} Tax Invoice Delivered to: {shop} Sugar 50kg Sack Total: 6500",
-        "COMMERCIAL INVOICE Meghna Group Depot Purchase Order Ref: PO-8874 Goods: Edible Oil Barrels Net Payable: 45000 Payment Terms: Net 30",
-        "সরবরাহ চালান ভেন্ডর বিল নং: {num} চালান মেসার্স হক ট্রেডার্স পণ্য: আটা ও ময়দা বস্তা মোট মূল্য: ১২৫০০ টাকা",
-        "TAX INVOICE Square Pharmaceuticals Depot Bill of Supply To: Modern Pharmacy Medicine Batch Strip Total: 18400 Due: 30 Days",
-        "ক্রয় চালান মেসার্স চৌধুরী এন্টারপ্রাইজ পাইকারি সরবরাহ ভাউচার নং {num} ডাল ও মসলা সামগ্রী মোট ৩০৫০০ টাকা",
-    ],
-    DocumentType.EXPENSE_RECEIPT.value: [
-        "EXPENSE VOUCHER Commercial Premises Office Rent Receipt Month: October 2026 Amount: 35000 BDT Paid by: Cheque Approved by: Owner",
-        "DEBIT VOUCHER Petty Cash Office Supplies Stationery A4 Paper Toner Cartridge Total: 2400 Paid: Cash",
-        "ELECTRICITY BILL DESCO Monthly Power Consumption Bill Account No: 1982736 Amount: 8450 Paid through bKash",
-        "খরচ ভাউচার দোকান ঘর ভাড়া রসিদ মাস: অক্টোবর টাকা: ২৫০০০ পরিষদিত",
-        "বেতন রসিদ স্টাফ মাসিক বেতন ভাউচার নাম: মো: করিম পদবি: সেলসম্যান টাকা: ১২০০০",
-    ],
-    DocumentType.PAYMENT_RECEIPT.value: [
-        "MONEY RECEIPT Received with thanks from Karim Ullah BDT 15,000 for Sale Invoice settlement Payment Method: Cash Signed by: Cashier",
-        "BANK DEPOSIT SLIP Islami Bank Bangladesh Ltd Account Credit: 205018274 Amount: 50,000 In words: Fifty Thousand Taka Only",
-        "PAYMENT VOUCHER Supplier Payment Acknowledgment To: ACI Logistics Ref: BILL-102 Amount: 22000 Paid by Bank Transfer",
-        "টাকা প্রাপ্তি রসিদ মেসার্স রহমান এন্টারপ্রাইজ জমা গ্রহণ করিলাম টাকা: ২০,০০০ পেমেন্ট মাধ্যম: নগদ",
-        "ACKNOWLEDGMENT RECEIPT Customer balance settlement received BDT 4500 via Nagad TrxID: 98J29A",
-    ],
-    DocumentType.UNKNOWN.value: [
-        "General company memorandum regarding upcoming national holiday schedule and office timing.",
-        "Product warranty card instructions please keep this leaflet safe for servicing terms and conditions.",
-        "অনুরোধ পত্র আগামী রবিবারের সাধারণ সভা সম্পর্কিত বিজ্ঞপ্তি সদস্যবৃন্দের উপস্থিতি কাম্য।",
-        "Random noisy unreadable OCR text fragments: @@## %% asdf 98723 kjhsdf ;;-- ===",
-        "User manual troubleshooting guide check cable connection before contacting technical helpline.",
-    ],
-}
+def load_dataset_splits() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], List[Dict[str, Any]]]:
+    """Loads train, val, and test splits from storage or generates them if missing."""
+    dataset_dir = Path("storage/datasets/document_classification")
+    train_file = dataset_dir / "train.jsonl"
+    val_file = dataset_dir / "val.jsonl"
+    test_file = dataset_dir / "test.jsonl"
+
+    if not (train_file.exists() and val_file.exists() and test_file.exists()):
+        export_generated_dataset()
+
+    def read_jsonl(p: Path) -> List[Dict[str, Any]]:
+        with open(p, "r", encoding="utf-8") as f:
+            return [json.loads(line) for line in f if line.strip()]
+
+    return read_jsonl(train_file), read_jsonl(val_file), read_jsonl(test_file)
 
 
-def build_evaluation_dataset(samples_per_class: int = 40, seed: int = 42) -> List[Dict[str, Any]]:
-    """Generates a balanced, randomized evaluation dataset of document texts."""
-    rng = random.Random(seed)
-    dataset = []
-    sample_id = 1
-    shops = ["Bismillah Store", "Al-Madina General Store", "Style Zone", "Care Pharmacy"]
+def compute_bootstrap_confidence_interval(
+    y_true: List[str], y_pred: List[str], metric_name: str = "accuracy", n_bootstraps: int = 1000, seed: int = 42
+) -> Tuple[float, float]:
+    """Calculates 95% percentile bootstrap confidence interval."""
+    rng = np.random.default_rng(seed)
+    n = len(y_true)
+    indices = np.arange(n)
+    scores = []
 
-    for doc_class, templates in CORPUS_TEMPLATES.items():
-        for i in range(samples_per_class):
-            tpl = templates[i % len(templates)]
-            shop = rng.choice(shops)
-            num = f"{rng.randint(1000, 9999)}"
-            text = tpl.replace("{shop}", shop).replace("{num}", num)
+    for _ in range(n_bootstraps):
+        bs_idx = rng.choice(indices, size=n, replace=True)
+        bs_true = [y_true[i] for i in bs_idx]
+        bs_pred = [y_pred[i] for i in bs_idx]
 
-            # Add subtle natural perturbations (variations in casing / noise)
-            if rng.random() < 0.20 and doc_class != DocumentType.UNKNOWN.value:
-                text = text.upper() if rng.random() < 0.5 else text.lower()
+        metrics = compute_classification_metrics(bs_true, bs_pred)
+        scores.append(metrics[metric_name])
 
-            dataset.append({
-                "sample_id": sample_id,
-                "document_class": doc_class,
-                "text": text,
-            })
-            sample_id += 1
-
-    rng.shuffle(dataset)
-    return dataset
+    ci_lower = float(np.percentile(scores, 2.5))
+    ci_upper = float(np.percentile(scores, 97.5))
+    return round(ci_lower, 4), round(ci_upper, 4)
 
 
-class DocumentClassificationEvaluator:
-    """Executes comparative evaluation across classification models."""
+def run_benchmark() -> None:
+    train_set, val_set, test_set = load_dataset_splits()
+    labels = ["sales_receipt", "purchase_invoice", "expense_receipt", "payment_receipt", "unknown"]
 
-    @classmethod
-    def run_benchmark(cls, seed: int = 42) -> Dict[str, Any]:
-        dataset = build_evaluation_dataset(samples_per_class=40, seed=seed)
+    # 1. Baseline 1: Majority Class
+    majority_class = "sales_receipt"
+    y_true = [s["label"] for s in test_set]
+    y_pred_majority = [majority_class] * len(test_set)
+    metrics_majority = compute_classification_metrics(y_true, y_pred_majority, labels=labels)
 
-        # 1. Stratified Partitioning (70% Train, 15% Val, 15% Test)
-        train_set, val_set, test_set = DataSplitter.stratified_train_val_test_split(
-            samples=dataset,
-            target_field="document_class",
-            train_ratio=0.70,
-            val_ratio=0.15,
-            test_ratio=0.15,
-            seed=seed,
-        )
+    # 2. Baseline 2: Heuristic Rule Classifier
+    y_pred_heuristic = []
+    confs_heuristic = []
+    for s in test_set:
+        pred_type, conf, _ = DocumentClassifier.classify_text(s["text"])
+        y_pred_heuristic.append(pred_type.value)
+        confs_heuristic.append(conf)
 
-        all_classes = [
-            DocumentType.SALES_RECEIPT.value,
-            DocumentType.PURCHASE_INVOICE.value,
-            DocumentType.EXPENSE_RECEIPT.value,
-            DocumentType.PAYMENT_RECEIPT.value,
-            DocumentType.UNKNOWN.value,
-        ]
+    metrics_heuristic = compute_classification_metrics(y_true, y_pred_heuristic, labels=labels)
+    h_acc_ci = compute_bootstrap_confidence_interval(y_true, y_pred_heuristic, "accuracy")
+    h_f1_ci = compute_bootstrap_confidence_interval(y_true, y_pred_heuristic, "macro_f1")
 
-        y_test_true = [s["document_class"] for s in test_set]
+    # 3. Statistical Model: TF-IDF + Logistic Regression
+    train_texts = [s["text"] for s in train_set]
+    train_y = [s["label"] for s in train_set]
+    test_texts = [s["text"] for s in test_set]
 
-        # ----------------------------------------------------------------------
-        # Model 1: Majority Class Baseline
-        # ----------------------------------------------------------------------
-        train_classes = [s["document_class"] for s in train_set]
-        majority_class = max(set(train_classes), key=train_classes.count)
-        y_pred_majority = [majority_class] * len(test_set)
-        metrics_majority = compute_classification_metrics(y_test_true, y_pred_majority, labels=all_classes)
+    vectorizer = TfidfVectorizer(ngram_range=(1, 2), max_features=5000, sublinear_tf=True)
+    X_train = vectorizer.fit_transform(train_texts)
+    X_test = vectorizer.transform(test_texts)
 
-        # ----------------------------------------------------------------------
-        # Model 2: Heuristic Rule Classifier (Current System Implementation)
-        # ----------------------------------------------------------------------
-        y_pred_heuristic = []
-        heuristic_confidences = []
-        for s in test_set:
-            pred_type, conf, _ = DocumentClassifier.classify_text(s["text"])
-            y_pred_heuristic.append(pred_type.value)
-            heuristic_confidences.append(conf)
+    clf = LogisticRegression(C=1.0, max_iter=1000, random_state=42)
+    clf.fit(X_train, train_y)
 
-        metrics_heuristic = compute_classification_metrics(y_test_true, y_pred_heuristic, labels=all_classes)
+    y_pred_tfidf = clf.predict(X_test).tolist()
+    y_probs_tfidf = clf.predict_proba(X_test)
+    confs_tfidf = [float(np.max(probs)) for probs in y_probs_tfidf]
 
-        # ----------------------------------------------------------------------
-        # Model 3: Statistical Baseline: TF-IDF + Logistic Regression
-        # Trained strictly on Train Split, evaluated on Test Split
-        # ----------------------------------------------------------------------
-        vectorizer = TfidfVectorizer(max_features=500, ngram_range=(1, 2))
-        X_train_vec = vectorizer.fit_transform([s["text"] for s in train_set])
-        y_train = [s["document_class"] for s in train_set]
+    metrics_tfidf = compute_classification_metrics(y_true, y_pred_tfidf, labels=labels)
+    tfidf_acc_ci = compute_bootstrap_confidence_interval(y_true, y_pred_tfidf, "accuracy")
+    tfidf_f1_ci = compute_bootstrap_confidence_interval(y_true, y_pred_tfidf, "macro_f1")
 
-        clf = LogisticRegression(C=1.0, max_iter=200, random_state=seed)
-        clf.fit(X_train_vec, y_train)
+    # Save detailed prediction-level outputs
+    out_dir = Path("storage/evaluations")
+    out_dir.mkdir(parents=True, exist_ok=True)
+    preds_file = out_dir / "classification_predictions.jsonl"
 
-        X_test_vec = vectorizer.transform([s["text"] for s in test_set])
-        y_pred_tfidf = list(clf.predict(X_test_vec))
-        metrics_tfidf = compute_classification_metrics(y_test_true, y_pred_tfidf, labels=all_classes)
-
-        # Confidence error analysis for Heuristic
-        confidence_errors = []
-        for s, pred, conf in zip(test_set, y_pred_heuristic, heuristic_confidences):
-            if pred != s["document_class"]:
-                confidence_errors.append({
+    failures = []
+    with open(preds_file, "w", encoding="utf-8") as f:
+        for idx, (s, pred, conf) in enumerate(zip(test_set, y_pred_tfidf, confs_tfidf)):
+            is_correct = (s["label"] == pred)
+            rec = {
+                "sample_id": s["sample_id"],
+                "true_label": s["label"],
+                "predicted_label": pred,
+                "confidence": round(conf, 4),
+                "is_correct": is_correct,
+                "language": s.get("language", "unknown"),
+                "noise_type": s.get("noise_type", "clean"),
+            }
+            f.write(json.dumps(rec) + "\n")
+            if not is_correct:
+                failures.append({
                     "sample_id": s["sample_id"],
-                    "ground_truth": s["document_class"],
-                    "predicted": pred,
-                    "confidence": conf,
-                    "text_preview": s["text"][:80] + "...",
+                    "true_label": s["label"],
+                    "predicted_label": pred,
+                    "confidence": round(conf, 4),
+                    "noise_type": s.get("noise_type"),
+                    "text_preview": s["text"][:120].replace("\n", " "),
                 })
 
-        report = {
-            "evaluation_task": "document_classification",
-            "seed": seed,
-            "dataset": {
-                "total_samples": len(dataset),
-                "train_samples": len(train_set),
-                "val_samples": len(val_set),
-                "test_samples": len(test_set),
-                "classes": all_classes,
+    # Prepare Benchmark Report
+    report = {
+        "benchmark_name": "Large-Scale Document Classification Benchmark",
+        "dataset_version": "v2.0.0-synthetic-evaluation",
+        "sample_counts": {
+            "train": len(train_set),
+            "val": len(val_set),
+            "test": len(test_set),
+        },
+        "test_per_class_support": {c: sum(1 for y in y_true if y == c) for c in labels},
+        "baselines": {
+            "majority_class": {
+                "accuracy": metrics_majority["accuracy"],
+                "macro_f1": metrics_majority["macro_f1"],
+                "labels": labels,
             },
-            "models": {
-                "majority_class_baseline": {
-                    "model_name": f"MajorityClass ({majority_class})",
-                    "metrics": metrics_majority,
-                },
-                "heuristic_rule_classifier": {
-                    "model_name": "Heuristic-TFIDF-Classifier (Rule Baseline)",
-                    "metrics": metrics_heuristic,
-                    "confidence_error_count": len(confidence_errors),
-                    "error_examples": confidence_errors[:5],
-                },
-                "tfidf_logistic_regression": {
-                    "model_name": "Trained TF-IDF + Logistic Regression (Statistical ML)",
-                    "metrics": metrics_tfidf,
-                },
+            "heuristic_rule_classifier": {
+                "accuracy": metrics_heuristic["accuracy"],
+                "accuracy_95ci": h_acc_ci,
+                "macro_f1": metrics_heuristic["macro_f1"],
+                "macro_f1_95ci": h_f1_ci,
+                "per_class": metrics_heuristic["per_class"],
+                "confusion_matrix": metrics_heuristic["confusion_matrix"],
             },
-        }
+        },
+        "active_model": {
+            "model_name": "TF-IDF (1-2 grams) + Logistic Regression",
+            "accuracy": metrics_tfidf["accuracy"],
+            "accuracy_95ci": tfidf_acc_ci,
+            "macro_precision": metrics_tfidf["macro_precision"],
+            "macro_recall": metrics_tfidf["macro_recall"],
+            "macro_f1": metrics_tfidf["macro_f1"],
+            "macro_f1_95ci": tfidf_f1_ci,
+            "per_class": metrics_tfidf["per_class"],
+            "confusion_matrix": metrics_tfidf["confusion_matrix"],
+        },
+        "failure_count": len(failures),
+        "sample_failures": failures[:5],
+        "disclosure": "Synthesized benchmark. Held-out templates ensure no template leakage across train and test sets.",
+    }
 
-        # Save machine-readable and human-readable reports
-        cls._export_reports(report)
-        return report
+    json_path = out_dir / "classification_benchmark.json"
+    md_path = out_dir / "classification_benchmark.md"
 
-    @classmethod
-    def _export_reports(cls, report: Dict[str, Any]) -> None:
-        out_dir = settings.STORAGE_DIR / "evaluations"
-        out_dir.mkdir(parents=True, exist_ok=True)
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(report, f, indent=2, ensure_ascii=False)
 
-        json_path = out_dir / "classification_benchmark.json"
-        json_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    # Markdown Table formatting
+    md_lines = [
+        "# Large-Scale Document Classification Benchmark Report",
+        f"**Dataset Version:** `v2.0.0-synthetic-evaluation` | **Total Test Samples:** {len(test_set):,} (200 per class)  ",
+        "**Template Segregation:** 100% disjoint template pools between training and test sets.\n",
+        "## 1. Overall Model Comparison (Holdout Test Set)",
+        "| Model Architecture | Accuracy | Accuracy (95% CI) | Macro-F1 | Macro-F1 (95% CI) | Test Failures |",
+        "| :--- | :---: | :---: | :---: | :---: | :---: |",
+        f"| **Majority Class Baseline** | {metrics_majority['accuracy']*100:.1f}% | N/A | {metrics_majority['macro_f1']*100:.1f}% | N/A | {len(test_set) - int(metrics_majority['accuracy']*len(test_set))} / {len(test_set)} |",
+        f"| **Heuristic Rule Classifier** | {metrics_heuristic['accuracy']*100:.1f}% | [{h_acc_ci[0]*100:.1f}%, {h_acc_ci[1]*100:.1f}%] | {metrics_heuristic['macro_f1']*100:.1f}% | [{h_f1_ci[0]*100:.1f}%, {h_f1_ci[1]*100:.1f}%] | {len(test_set) - int(metrics_heuristic['accuracy']*len(test_set))} / {len(test_set)} |",
+        f"| **TF-IDF + Logistic Regression** | **{metrics_tfidf['accuracy']*100:.1f}%** | **[{tfidf_acc_ci[0]*100:.1f}%, {tfidf_acc_ci[1]*100:.1f}%]** | **{metrics_tfidf['macro_f1']*100:.1f}%** | **[{tfidf_f1_ci[0]*100:.1f}%, {tfidf_f1_ci[1]*100:.1f}%]** | **{len(failures)} / {len(test_set)}** |",
+        "\n## 2. Per-Class Performance (TF-IDF + Logistic Regression, N=1,000)",
+        "| Document Class | Precision | Recall | F1-Score | Support | Description |",
+        "| :--- | :---: | :---: | :---: | :---: | :--- |",
+    ]
 
-        # Markdown Report
-        md = [
-            "# Document Classification Evaluation & Model Benchmark Report",
-            f"**Dataset:** {report['dataset']['total_samples']} samples (Train: {report['dataset']['train_samples']}, Val: {report['dataset']['val_samples']}, Test: {report['dataset']['test_samples']})  ",
-            f"**Random Seed:** {report['seed']} | **Classes:** {len(report['dataset']['classes'])}  ",
-            "",
-            "## 1. Overall Performance Comparison",
-            "",
-            "| Model | Accuracy | Macro Precision | Macro Recall | Macro F1 | Status |",
-            "| :--- | :---: | :---: | :---: | :---: | :---: |",
-        ]
+    for label in labels:
+        pc = metrics_tfidf["per_class"][label]
+        md_lines.append(
+            f"| **{label}** | {pc['precision']*100:.1f}% | {pc['recall']*100:.1f}% | **{pc['f1']*100:.1f}%** | {pc['support']} | Retail cash memo, supplier bill, or voucher |"
+        )
 
-        for key, m in report["models"].items():
-            met = m["metrics"]
-            status = "Trained ML" if "tfidf" in key else ("Rule Baseline" if "heuristic" in key else "Naive Baseline")
-            md.append(
-                f"| **{m['model_name']}** | {met['accuracy'] * 100:.2f}% | {met['macro_precision'] * 100:.2f}% | {met['macro_recall'] * 100:.2f}% | **{met['macro_f1'] * 100:.2f}%** | `{status}` |"
+    md_lines.extend([
+        "\n## 3. Confusion Matrix (Holdout Test Set, N=1,000)",
+        "```",
+        f"Labels: {labels}",
+    ])
+
+    cm = metrics_tfidf["confusion_matrix"]
+    header_str = "True \\ Pred   " + "  ".join(f"{l[:5]:>5}" for l in labels)
+    md_lines.append(header_str)
+    for i, row in enumerate(cm):
+        row_str = f"{labels[i][:11]:<11} " + "  ".join(f"{val:>5}" for val in row)
+        md_lines.append(row_str)
+    md_lines.append("```\n")
+
+    if failures:
+        md_lines.extend([
+            "## 4. Failure Case Analysis on Challenging & Ambiguous Samples",
+            f"Total failures observed: **{len(failures)}** out of 1,000 examples.",
+            "| Sample ID | True Label | Predicted Label | Confidence | Noise Condition | Text Excerpt |",
+            "| :--- | :---: | :---: | :---: | :---: | :--- |",
+        ])
+        for fail in failures[:5]:
+            md_lines.append(
+                f"| `{fail['sample_id']}` | **{fail['true_label']}** | `{fail['predicted_label']}` | {fail['confidence']:.2f} | `{fail['noise_type']}` | {fail['text_preview']}... |"
             )
 
-        md.append("")
-        md.append("## 2. Per-Class F1 Breakdown (Current Heuristic vs Trained ML)")
-        md.append("")
-        md.append("| Document Class | Heuristic F1 | Trained TF-IDF F1 | Support (Test) |")
-        md.append("| :--- | :---: | :---: | :---: |")
+    md_lines.extend([
+        "\n> [!NOTE]",
+        "> **Methodology Disclosure:** Test samples are generated from completely distinct shop names, supplier distributors, and layout phrases from the training set. All 1,000 test predictions are saved in `storage/evaluations/classification_predictions.jsonl` for full auditability.",
+    ])
 
-        h_class = report["models"]["heuristic_rule_classifier"]["metrics"]["per_class"]
-        ml_class = report["models"]["tfidf_logistic_regression"]["metrics"]["per_class"]
+    with open(md_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(md_lines) + "\n")
 
-        for c in report["dataset"]["classes"]:
-            h_f1 = h_class[c]["f1"] * 100
-            ml_f1 = ml_class[c]["f1"] * 100
-            sup = h_class[c]["support"]
-            md.append(f"| `{c}` | {h_f1:.1f}% | {ml_f1:.1f}% | {sup} |")
-
-        md.append("")
-        md.append("## 3. Confusion Matrix (Current Heuristic Classifier)")
-        md.append("```json")
-        md.append(json.dumps(report["models"]["heuristic_rule_classifier"]["metrics"]["confusion_matrix"], indent=2))
-        md.append("```")
-
-        md_path = out_dir / "classification_benchmark.md"
-        md_path.write_text("\n".join(md), encoding="utf-8")
-        print(f"Classification benchmark exported to {json_path} and {md_path}")
+    print(f"Classification benchmark exported to {json_path} and {md_path}")
+    print(f"Prediction-level logs saved to {preds_file}")
 
 
 if __name__ == "__main__":
-    rep = DocumentClassificationEvaluator.run_benchmark(seed=42)
-    print("Benchmark complete. Models evaluated:", list(rep["models"].keys()))
+    run_benchmark()

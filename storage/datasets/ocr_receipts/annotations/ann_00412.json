@@ -1,0 +1,43 @@
+{
+  "image_id": 412,
+  "filename": "receipt_00412_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00412_bn_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0412",
+  "date_str": "20/05/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 83000,
+  "tax_minor": 4150,
+  "discount_minor": 5000,
+  "total_amount_minor": 82150,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0412\nDate: 20/05/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nআটা ২ কেজি x2  Tk 220.00\nগোসলের সাবান x1  Tk 60.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 830.00\nVAT (5%): Tk 41.50\nDiscount: Tk 50.00\nTotal Amount: Tk 821.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

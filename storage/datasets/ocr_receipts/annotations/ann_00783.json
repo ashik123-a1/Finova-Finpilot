@@ -1,0 +1,43 @@
+{
+  "image_id": 783,
+  "filename": "receipt_00783_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00783_en_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0783",
+  "date_str": "23/09/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 129000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 124000,
+  "full_text_ground_truth": "Rahman Enterprise\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0783\nDate: 23/09/2026\n------------------------------------------\nSoybean Oil 2L x1  Tk 360.00\nAata Flour 2kg x1  Tk 110.00\nBath Soap 100g x1  Tk 60.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1290.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1240.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

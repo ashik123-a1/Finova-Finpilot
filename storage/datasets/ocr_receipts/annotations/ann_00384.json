@@ -1,0 +1,37 @@
+{
+  "image_id": 384,
+  "filename": "receipt_00384_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00384_en_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0384",
+  "date_str": "08/03/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 154000,
+  "tax_minor": 7700,
+  "discount_minor": 5000,
+  "total_amount_minor": 156700,
+  "full_text_ground_truth": "Metro Departmental\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0384\nDate: 08/03/2026\n------------------------------------------\nSoybean Oil 2L x2  Tk 720.00\nBath Soap 100g x1  Tk 60.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1540.00\nVAT (5%): Tk 77.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1567.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 654,
+  "filename": "receipt_00654_en_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00654_en_low_light.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0654",
+  "date_str": "04/05/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 122500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 117500,
+  "full_text_ground_truth": "Rahman Enterprise\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0654\nDate: 04/05/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nBlack Tea Pack 400g x1  Tk 240.00\nMiniket Rice 5kg x2  Tk 760.00\nRefined White Sugar 1kg x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1225.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1175.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

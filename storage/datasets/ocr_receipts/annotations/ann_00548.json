@@ -1,0 +1,37 @@
+{
+  "image_id": 548,
+  "filename": "receipt_00548_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00548_bilingual_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0548",
+  "date_str": "25/12/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 147000,
+  "tax_minor": 7350,
+  "discount_minor": 0,
+  "total_amount_minor": 154350,
+  "full_text_ground_truth": "Rahman Enterprise (বেঙ্গল ফুড মার্ট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0548\nDate: 25/12/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nBath Soap 100g x2  Tk 120.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1470.00\nVAT (5%): Tk 73.50\nTotal Amount: Tk 1543.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

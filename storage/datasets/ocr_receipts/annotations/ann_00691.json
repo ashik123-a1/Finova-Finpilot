@@ -1,0 +1,37 @@
+{
+  "image_id": 691,
+  "filename": "receipt_00691_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00691_bn_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0691",
+  "date_str": "05/10/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 45500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 45500,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nটাকা জমার রসিদ\nBill No: INV-2026-0691\nDate: 05/10/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nগোসলের সাবান x3  Tk 180.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 455.00\nTotal Amount: Tk 455.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

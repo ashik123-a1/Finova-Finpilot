@@ -1,0 +1,31 @@
+{
+  "image_id": 85,
+  "filename": "receipt_00085_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00085_bn_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0085",
+  "date_str": "06/04/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 84000,
+  "tax_minor": 4200,
+  "discount_minor": 5000,
+  "total_amount_minor": 83200,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0085\nDate: 06/04/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 840.00\nVAT (5%): Tk 42.00\nDiscount: Tk 50.00\nTotal Amount: Tk 832.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

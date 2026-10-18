@@ -1,0 +1,31 @@
+{
+  "image_id": 424,
+  "filename": "receipt_00424_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00424_bn_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0424",
+  "date_str": "21/01/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 37500,
+  "tax_minor": 1875,
+  "discount_minor": 0,
+  "total_amount_minor": 39375,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0424\nDate: 21/01/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 375.00\nVAT (5%): Tk 18.75\nTotal Amount: Tk 393.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

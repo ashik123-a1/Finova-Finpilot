@@ -1,0 +1,37 @@
+{
+  "image_id": 878,
+  "filename": "receipt_00878_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00878_bilingual_low_light.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0878",
+  "date_str": "23/08/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 166500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 166500,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0878\nDate: 23/08/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nMiniket Rice 5kg x3  Tk 1140.00\nডিটারজেন্ট সাবান x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 1665.00\nTotal Amount: Tk 1665.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

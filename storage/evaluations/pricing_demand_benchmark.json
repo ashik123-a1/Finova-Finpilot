@@ -1,69 +1,134 @@
 {
   "framework": "Demand Estimation, Safety Stock & Price Elasticity Benchmark",
-  "random_seed": 42,
+  "simulation_seeds": [
+    42,
+    101,
+    202,
+    303,
+    404
+  ],
+  "total_cycles_per_sector": 50000,
   "inventory_replenishment": {
-    "simulation_cycles_per_sector": 10000,
+    "seeds_evaluated": [
+      42,
+      101,
+      202,
+      303,
+      404
+    ],
+    "cycles_per_seed": 10000,
+    "total_simulated_cycles_per_sector": 50000,
     "sectors_evaluated": 5,
     "benchmarks": [
       {
         "sector": "Grocery & Daily Essentials",
         "lead_time_days": 4,
         "target_service_level_pct": 95.0,
-        "lead_time_demand_mean_units": 340,
+        "achieved_service_level_pct": 95.08,
         "safety_stock_units": 73,
         "dynamic_reorder_point_units": 413,
         "economic_order_quantity_units": 394,
-        "naive_stockout_rate_pct": 50.09,
-        "dynamic_stockout_rate_pct": 5.07,
-        "relative_stockout_reduction_pct": 89.9
+        "annual_safety_holding_cost_bdt": 1460.0,
+        "average_excess_units_at_replenishment": 74.1,
+        "naive_stockout_rate_pct": 49.78,
+        "naive_stockout_95ci": [
+          49.14,
+          50.09
+        ],
+        "dynamic_stockout_rate_pct": 4.92,
+        "dynamic_stockout_95ci": [
+          4.67,
+          5.13
+        ],
+        "relative_stockout_reduction_pct": 90.1
       },
       {
         "sector": "Retail Pharmacy",
         "lead_time_days": 5,
         "target_service_level_pct": 98.0,
-        "lead_time_demand_mean_units": 200,
+        "achieved_service_level_pct": 98.19,
         "safety_stock_units": 56,
         "dynamic_reorder_point_units": 256,
         "economic_order_quantity_units": 205,
-        "naive_stockout_rate_pct": 49.3,
-        "dynamic_stockout_rate_pct": 1.72,
-        "relative_stockout_reduction_pct": 96.5
+        "annual_safety_holding_cost_bdt": 1960.0,
+        "average_excess_units_at_replenishment": 56.3,
+        "naive_stockout_rate_pct": 49.8,
+        "naive_stockout_95ci": [
+          49.58,
+          50.18
+        ],
+        "dynamic_stockout_rate_pct": 1.81,
+        "dynamic_stockout_95ci": [
+          1.6,
+          2.06
+        ],
+        "relative_stockout_reduction_pct": 96.4
       },
       {
         "sector": "Electronics & Accessories",
         "lead_time_days": 10,
         "target_service_level_pct": 95.0,
-        "lead_time_demand_mean_units": 150,
+        "achieved_service_level_pct": 95.11,
         "safety_stock_units": 34,
         "dynamic_reorder_point_units": 184,
         "economic_order_quantity_units": 56,
-        "naive_stockout_rate_pct": 50.08,
-        "dynamic_stockout_rate_pct": 4.93,
+        "annual_safety_holding_cost_bdt": 6120.0,
+        "average_excess_units_at_replenishment": 34.2,
+        "naive_stockout_rate_pct": 49.99,
+        "naive_stockout_95ci": [
+          49.4,
+          50.66
+        ],
+        "dynamic_stockout_rate_pct": 4.89,
+        "dynamic_stockout_95ci": [
+          4.39,
+          5.04
+        ],
         "relative_stockout_reduction_pct": 90.2
       },
       {
         "sector": "Clothing & Apparel",
         "lead_time_days": 7,
         "target_service_level_pct": 90.0,
-        "lead_time_demand_mean_units": 196,
+        "achieved_service_level_pct": 90.18,
         "safety_stock_units": 34,
         "dynamic_reorder_point_units": 230,
         "economic_order_quantity_units": 107,
-        "naive_stockout_rate_pct": 50.67,
-        "dynamic_stockout_rate_pct": 9.67,
-        "relative_stockout_reduction_pct": 80.9
+        "annual_safety_holding_cost_bdt": 3060.0,
+        "average_excess_units_at_replenishment": 35.3,
+        "naive_stockout_rate_pct": 49.91,
+        "naive_stockout_95ci": [
+          49.26,
+          50.63
+        ],
+        "dynamic_stockout_rate_pct": 9.82,
+        "dynamic_stockout_95ci": [
+          9.31,
+          10.15
+        ],
+        "relative_stockout_reduction_pct": 80.3
       },
       {
         "sector": "Restaurant & Fast Food",
         "lead_time_days": 2,
         "target_service_level_pct": 95.0,
-        "lead_time_demand_mean_units": 220,
+        "achieved_service_level_pct": 94.98,
         "safety_stock_units": 82,
         "dynamic_reorder_point_units": 302,
         "economic_order_quantity_units": 518,
-        "naive_stockout_rate_pct": 50.34,
-        "dynamic_stockout_rate_pct": 5.2,
-        "relative_stockout_reduction_pct": 89.7
+        "annual_safety_holding_cost_bdt": 1230.0,
+        "average_excess_units_at_replenishment": 83.3,
+        "naive_stockout_rate_pct": 49.66,
+        "naive_stockout_95ci": [
+          49.0,
+          50.39
+        ],
+        "dynamic_stockout_rate_pct": 5.02,
+        "dynamic_stockout_95ci": [
+          4.85,
+          5.24
+        ],
+        "relative_stockout_reduction_pct": 89.9
       }
     ]
   },
@@ -207,5 +272,6 @@
         ]
       }
     ]
-  }
+  },
+  "synthetic_disclosure": "Operations research simulation benchmark. Evaluates mathematical convergence and theoretical service levels. Real-world business profit and stockout performance depend on physical supplier reliability and lead time variance."
 }

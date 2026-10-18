@@ -1,0 +1,43 @@
+{
+  "image_id": 945,
+  "filename": "receipt_00945_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00945_en_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0945",
+  "date_str": "09/02/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 84500,
+  "tax_minor": 4225,
+  "discount_minor": 5000,
+  "total_amount_minor": 83725,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0945\nDate: 09/02/2026\n------------------------------------------\nBlack Tea Pack 400g x1  Tk 240.00\nAata Flour 2kg x3  Tk 330.00\nRefined White Sugar 1kg x1  Tk 135.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 845.00\nVAT (5%): Tk 42.25\nDiscount: Tk 50.00\nTotal Amount: Tk 837.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

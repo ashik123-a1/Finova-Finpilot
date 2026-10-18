@@ -1,0 +1,37 @@
+{
+  "image_id": 144,
+  "filename": "receipt_00144_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00144_en_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0144",
+  "date_str": "13/07/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 144000,
+  "tax_minor": 7200,
+  "discount_minor": 10000,
+  "total_amount_minor": 141200,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0144\nDate: 13/07/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nSoybean Oil 2L x3  Tk 1080.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 1440.00\nVAT (5%): Tk 72.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1412.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

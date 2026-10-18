@@ -1,0 +1,31 @@
+{
+  "image_id": 994,
+  "filename": "receipt_00994_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00994_bn_clean.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0994",
+  "date_str": "28/04/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 62500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 52500,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nদোকান খরচ রসিদ\nBill No: INV-2026-0994\nDate: 28/04/2026\n------------------------------------------\nআটা ২ কেজি x2  Tk 220.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 625.00\nDiscount: Tk 100.00\nTotal Amount: Tk 525.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

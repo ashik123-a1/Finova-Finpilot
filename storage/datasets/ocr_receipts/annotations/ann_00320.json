@@ -1,0 +1,43 @@
+{
+  "image_id": 320,
+  "filename": "receipt_00320_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00320_bilingual_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0320",
+  "date_str": "08/03/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 85500,
+  "tax_minor": 4275,
+  "discount_minor": 10000,
+  "total_amount_minor": 79775,
+  "full_text_ground_truth": "Metro Departmental (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0320\nDate: 08/03/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x3  Tk 405.00\nডিটারজেন্ট সাবান x2  Tk 90.00\nAata Flour 2kg x2  Tk 220.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 855.00\nVAT (5%): Tk 42.75\nDiscount: Tk 100.00\nTotal Amount: Tk 797.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 533,
+  "filename": "receipt_00533_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00533_bilingual_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0533",
+  "date_str": "10/02/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 161500,
+  "tax_minor": 8075,
+  "discount_minor": 5000,
+  "total_amount_minor": 164575,
+  "full_text_ground_truth": "Bismillah Electronics (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0533\nDate: 10/02/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x1  Tk 135.00\nSoybean Oil 2L x2  Tk 720.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1615.00\nVAT (5%): Tk 80.75\nDiscount: Tk 50.00\nTotal Amount: Tk 1645.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 62,
+  "filename": "receipt_00062_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00062_bilingual_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0062",
+  "date_str": "26/07/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 78000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 68000,
+  "full_text_ground_truth": "Metro Departmental (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0062\nDate: 26/07/2026\n------------------------------------------\nLaundry Soap Bar x3  Tk 135.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nBlack Tea Pack 400g x1  Tk 240.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 780.00\nDiscount: Tk 100.00\nTotal Amount: Tk 680.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

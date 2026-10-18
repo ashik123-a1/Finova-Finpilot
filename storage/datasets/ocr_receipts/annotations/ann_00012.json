@@ -1,0 +1,31 @@
+{
+  "image_id": 12,
+  "filename": "receipt_00012_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00012_en_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0012",
+  "date_str": "16/02/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 132000,
+  "tax_minor": 6600,
+  "discount_minor": 10000,
+  "total_amount_minor": 128600,
+  "full_text_ground_truth": "Rahman Enterprise\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0012\nDate: 16/02/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1320.00\nVAT (5%): Tk 66.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1286.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

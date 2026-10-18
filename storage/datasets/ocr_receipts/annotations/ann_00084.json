@@ -1,0 +1,43 @@
+{
+  "image_id": 84,
+  "filename": "receipt_00084_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00084_en_clean.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0084",
+  "date_str": "14/05/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 132500,
+  "tax_minor": 6625,
+  "discount_minor": 10000,
+  "total_amount_minor": 129125,
+  "full_text_ground_truth": "Rahman Enterprise\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0084\nDate: 14/05/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nMasur Dal 1kg x3  Tk 420.00\nLaundry Soap Bar x1  Tk 45.00\nBlack Tea Pack 400g x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1325.00\nVAT (5%): Tk 66.25\nDiscount: Tk 100.00\nTotal Amount: Tk 1291.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 299,
+  "filename": "receipt_00299_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00299_bilingual_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0299",
+  "date_str": "01/08/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 42000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 42000,
+  "full_text_ground_truth": "Chowdhury Supermarket (বিসমিল্লাহ ইলেকট্রনিক্স)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0299\nDate: 01/08/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 420.00\nTotal Amount: Tk 420.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

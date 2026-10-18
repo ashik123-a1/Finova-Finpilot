@@ -1,0 +1,31 @@
+{
+  "image_id": 861,
+  "filename": "receipt_00861_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00861_en_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0861",
+  "date_str": "13/05/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 28000,
+  "tax_minor": 1400,
+  "discount_minor": 0,
+  "total_amount_minor": 29400,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0861\nDate: 13/05/2026\n------------------------------------------\nAata Flour 2kg x2  Tk 220.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 280.00\nVAT (5%): Tk 14.00\nTotal Amount: Tk 294.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

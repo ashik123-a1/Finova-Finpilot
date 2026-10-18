@@ -1,0 +1,31 @@
+{
+  "image_id": 690,
+  "filename": "receipt_00690_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00690_en_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0690",
+  "date_str": "10/08/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 41500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 41500,
+  "full_text_ground_truth": "Desh General Store\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0690\nDate: 10/08/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 415.00\nTotal Amount: Tk 415.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

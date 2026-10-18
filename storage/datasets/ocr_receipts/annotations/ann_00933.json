@@ -1,0 +1,31 @@
+{
+  "image_id": 933,
+  "filename": "receipt_00933_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00933_en_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0933",
+  "date_str": "03/05/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 10500,
+  "tax_minor": 525,
+  "discount_minor": 0,
+  "total_amount_minor": 11025,
+  "full_text_ground_truth": "Rahman Enterprise\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0933\nDate: 03/05/2026\n------------------------------------------\nBath Soap 100g x1  Tk 60.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 105.00\nVAT (5%): Tk 5.25\nTotal Amount: Tk 110.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

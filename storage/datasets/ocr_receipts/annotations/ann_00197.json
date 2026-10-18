@@ -1,0 +1,37 @@
+{
+  "image_id": 197,
+  "filename": "receipt_00197_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00197_bilingual_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0197",
+  "date_str": "03/11/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 177000,
+  "tax_minor": 8850,
+  "discount_minor": 5000,
+  "total_amount_minor": 180850,
+  "full_text_ground_truth": "Metro Departmental (বেঙ্গল ফুড মার্ট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0197\nDate: 03/11/2026\n------------------------------------------\nআটা ২ কেজি x3  Tk 330.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nSoybean Oil 2L x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1770.00\nVAT (5%): Tk 88.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1808.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

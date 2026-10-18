@@ -1,0 +1,37 @@
+{
+  "image_id": 761,
+  "filename": "receipt_00761_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00761_bilingual_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0761",
+  "date_str": "12/03/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 107500,
+  "tax_minor": 5375,
+  "discount_minor": 0,
+  "total_amount_minor": 112875,
+  "full_text_ground_truth": "Metro Departmental (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0761\nDate: 12/03/2026\n------------------------------------------\nগোসলের সাবান x3  Tk 180.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nRefined White Sugar 1kg x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1075.00\nVAT (5%): Tk 53.75\nTotal Amount: Tk 1128.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

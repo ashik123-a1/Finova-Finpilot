@@ -1,0 +1,43 @@
+{
+  "image_id": 719,
+  "filename": "receipt_00719_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00719_bilingual_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0719",
+  "date_str": "01/08/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 98500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 98500,
+  "full_text_ground_truth": "Bengal Food Mart (মেট্রো ডিপার্টমেন্টাল)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0719\nDate: 01/08/2026\n------------------------------------------\nSoybean Oil 2L x1  Tk 360.00\nAata Flour 2kg x1  Tk 110.00\nআটা ২ কেজি x1  Tk 110.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 985.00\nTotal Amount: Tk 985.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

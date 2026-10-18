@@ -1,0 +1,31 @@
+{
+  "image_id": 29,
+  "filename": "receipt_00029_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00029_bilingual_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0029",
+  "date_str": "10/04/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 83000,
+  "tax_minor": 4150,
+  "discount_minor": 0,
+  "total_amount_minor": 87150,
+  "full_text_ground_truth": "Chowdhury Supermarket (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0029\nDate: 10/04/2026\n------------------------------------------\nSoybean Oil 2L x2  Tk 720.00\nআটা ২ কেজি x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 830.00\nVAT (5%): Tk 41.50\nTotal Amount: Tk 871.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

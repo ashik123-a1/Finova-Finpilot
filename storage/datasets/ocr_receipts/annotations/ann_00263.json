@@ -1,0 +1,37 @@
+{
+  "image_id": 263,
+  "filename": "receipt_00263_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00263_bilingual_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0263",
+  "date_str": "07/06/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 154500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 154500,
+  "full_text_ground_truth": "Bengal Food Mart (বিসমিল্লাহ ইলেকট্রনিক্স)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0263\nDate: 07/06/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nMiniket Rice 5kg x3  Tk 1140.00\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 1545.00\nTotal Amount: Tk 1545.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 224,
+  "filename": "receipt_00224_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00224_bilingual_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0224",
+  "date_str": "11/07/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 26500,
+  "tax_minor": 1325,
+  "discount_minor": 0,
+  "total_amount_minor": 27825,
+  "full_text_ground_truth": "Desh General Store (বেঙ্গল ফুড মার্ট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0224\nDate: 11/07/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 265.00\nVAT (5%): Tk 13.25\nTotal Amount: Tk 278.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

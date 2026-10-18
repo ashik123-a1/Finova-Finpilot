@@ -1,0 +1,43 @@
+{
+  "image_id": 558,
+  "filename": "receipt_00558_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00558_en_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0558",
+  "date_str": "10/08/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 114500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 104500,
+  "full_text_ground_truth": "Bismillah Electronics\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0558\nDate: 10/08/2026\n------------------------------------------\nMiniket Rice 5kg x2  Tk 760.00\nLaundry Soap Bar x1  Tk 45.00\nAata Flour 2kg x2  Tk 220.00\nBath Soap 100g x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 1145.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1045.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

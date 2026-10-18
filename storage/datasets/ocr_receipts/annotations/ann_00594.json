@@ -1,0 +1,43 @@
+{
+  "image_id": 594,
+  "filename": "receipt_00594_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00594_en_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0594",
+  "date_str": "09/06/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 159500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 159500,
+  "full_text_ground_truth": "Chowdhury Supermarket\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0594\nDate: 09/06/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nSoybean Oil 2L x3  Tk 1080.00\nRefined White Sugar 1kg x2  Tk 270.00\nLaundry Soap Bar x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1595.00\nTotal Amount: Tk 1595.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

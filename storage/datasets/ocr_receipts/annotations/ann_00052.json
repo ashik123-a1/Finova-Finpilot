@@ -1,0 +1,37 @@
+{
+  "image_id": 52,
+  "filename": "receipt_00052_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00052_bn_low_light.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0052",
+  "date_str": "02/04/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 147000,
+  "tax_minor": 7350,
+  "discount_minor": 10000,
+  "total_amount_minor": 144350,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0052\nDate: 02/04/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nআটা ২ কেজি x3  Tk 330.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 1470.00\nVAT (5%): Tk 73.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1443.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

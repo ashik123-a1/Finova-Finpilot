@@ -1,0 +1,43 @@
+{
+  "image_id": 240,
+  "filename": "receipt_00240_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00240_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0240",
+  "date_str": "11/05/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 150000,
+  "tax_minor": 7500,
+  "discount_minor": 0,
+  "total_amount_minor": 157500,
+  "full_text_ground_truth": "Bismillah Electronics\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0240\nDate: 11/05/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nRefined White Sugar 1kg x1  Tk 135.00\nLaundry Soap Bar x1  Tk 45.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 1500.00\nVAT (5%): Tk 75.00\nTotal Amount: Tk 1575.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

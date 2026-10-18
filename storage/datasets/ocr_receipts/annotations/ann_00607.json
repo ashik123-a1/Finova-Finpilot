@@ -1,0 +1,43 @@
+{
+  "image_id": 607,
+  "filename": "receipt_00607_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00607_bn_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0607",
+  "date_str": "11/04/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 171500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 161500,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nটাকা জমার রসিদ\nBill No: INV-2026-0607\nDate: 11/04/2026\n------------------------------------------\nআটা ২ কেজি x2  Tk 220.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nডিটারজেন্ট সাবান x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1715.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1615.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

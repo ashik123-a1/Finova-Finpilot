@@ -1,0 +1,43 @@
+{
+  "image_id": 268,
+  "filename": "receipt_00268_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00268_bn_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0268",
+  "date_str": "01/04/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 254500,
+  "tax_minor": 12725,
+  "discount_minor": 10000,
+  "total_amount_minor": 257225,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0268\nDate: 01/04/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 2545.00\nVAT (5%): Tk 127.25\nDiscount: Tk 100.00\nTotal Amount: Tk 2572.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

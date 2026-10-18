@@ -1,0 +1,31 @@
+{
+  "image_id": 837,
+  "filename": "receipt_00837_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00837_en_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0837",
+  "date_str": "26/11/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 71000,
+  "tax_minor": 3550,
+  "discount_minor": 5000,
+  "total_amount_minor": 69550,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0837\nDate: 26/11/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 710.00\nVAT (5%): Tk 35.50\nDiscount: Tk 50.00\nTotal Amount: Tk 695.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 525,
+  "filename": "receipt_00525_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00525_en_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0525",
+  "date_str": "17/05/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 151000,
+  "tax_minor": 7550,
+  "discount_minor": 10000,
+  "total_amount_minor": 148550,
+  "full_text_ground_truth": "Metro Departmental\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0525\nDate: 17/05/2026\n------------------------------------------\nMiniket Rice 5kg x2  Tk 760.00\nBath Soap 100g x1  Tk 60.00\nSoybean Oil 2L x1  Tk 360.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1510.00\nVAT (5%): Tk 75.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1485.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

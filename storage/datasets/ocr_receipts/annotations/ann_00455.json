@@ -1,0 +1,31 @@
+{
+  "image_id": 455,
+  "filename": "receipt_00455_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00455_bilingual_clean.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0455",
+  "date_str": "12/12/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 48000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 48000,
+  "full_text_ground_truth": "Rahman Enterprise (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0455\nDate: 12/12/2026\n------------------------------------------\nSoybean Oil 2L x1  Tk 360.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 480.00\nTotal Amount: Tk 480.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

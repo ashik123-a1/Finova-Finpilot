@@ -1,0 +1,43 @@
+{
+  "image_id": 351,
+  "filename": "receipt_00351_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00351_en_blur.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0351",
+  "date_str": "19/05/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 128500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 128500,
+  "full_text_ground_truth": "Bismillah Electronics\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0351\nDate: 19/05/2026\n------------------------------------------\nAata Flour 2kg x2  Tk 220.00\nBlack Tea Pack 400g x1  Tk 240.00\nRefined White Sugar 1kg x3  Tk 405.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1285.00\nTotal Amount: Tk 1285.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

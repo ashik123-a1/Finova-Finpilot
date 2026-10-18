@@ -1,0 +1,43 @@
+{
+  "image_id": 836,
+  "filename": "receipt_00836_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00836_bilingual_low_light.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0836",
+  "date_str": "20/12/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 156500,
+  "tax_minor": 7825,
+  "discount_minor": 10000,
+  "total_amount_minor": 154325,
+  "full_text_ground_truth": "Bismillah Electronics (বেঙ্গল ফুড মার্ট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0836\nDate: 20/12/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x1  Tk 135.00\nBlack Tea Pack 400g x3  Tk 720.00\nআটা ২ কেজি x3  Tk 330.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 1565.00\nVAT (5%): Tk 78.25\nDiscount: Tk 100.00\nTotal Amount: Tk 1543.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

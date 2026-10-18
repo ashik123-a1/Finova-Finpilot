@@ -1,0 +1,31 @@
+{
+  "image_id": 173,
+  "filename": "receipt_00173_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00173_bilingual_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0173",
+  "date_str": "27/07/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 57000,
+  "tax_minor": 2850,
+  "discount_minor": 0,
+  "total_amount_minor": 59850,
+  "full_text_ground_truth": "Rahman Enterprise (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0173\nDate: 27/07/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 570.00\nVAT (5%): Tk 28.50\nTotal Amount: Tk 598.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -5,21 +5,21 @@
 
 | Segment | Count | Share (%) | Strategic SME Action |
 | :--- | :---: | :---: | :--- |
-| **VIP** | 1,231 | 76.0% | Priority VIP services & exclusive product previews |
-| **Regular** | 372 | 23.0% | Loyalty point programs & routine replenishment reminders |
-| **Occasional** | 2 | 0.1% | Welcome promotions & cross-sell bundles |
+| **Occasional** | 536 | 33.1% | Welcome promotions & cross-sell bundles |
+| **Regular** | 904 | 55.8% | Loyalty point programs & routine replenishment reminders |
 | **At-Risk** | 14 | 0.9% | Targeted win-back discounts before attrition |
+| **VIP** | 165 | 10.2% | Priority VIP services & exclusive product previews |
 | **Dormant** | 1 | 0.1% | Re-engagement surveys & win-back campaigns |
 
 ## 2. Unsupervised KMeans Cluster Stability (k=2 to k=6)
 
 | Clusters (k) | Silhouette Score (Higher is Better) | Davies-Bouldin (Lower is Better) | Calinski-Harabasz (Higher is Better) |
 | :---: | :---: | :---: | :---: |
-| **k = 2** | **0.2856** | 1.3547 | 662.7 |
-| **k = 3** | **0.3060** | 1.1383 | 711.8 |
-| **k = 4** | **0.2995** | 1.0640 | 749.7 |
-| **k = 5** | **0.2788** | 1.1312 | 683.5 |
-| **k = 6** | **0.2653** | 1.1547 | 661.9 |
+| **k = 2** | **0.2854** | 1.3556 | 662.7 |
+| **k = 3** | **0.3060** | 1.1381 | 711.9 |
+| **k = 4** | **0.2989** | 1.0616 | 749.6 |
+| **k = 5** | **0.2786** | 1.1388 | 683.1 |
+| **k = 6** | **0.2654** | 1.1538 | 661.5 |
 
 > [!TIP]
 > **Optimal Cluster Count:** `k = 3` (Peak Silhouette: `0.3060`). k=3 achieves optimal trade-off between cluster separation and cohesion. Higher k values fragment natural spend tiers without increasing actionable insight.

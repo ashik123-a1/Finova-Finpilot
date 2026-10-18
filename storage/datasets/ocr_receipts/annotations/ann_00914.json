@@ -1,0 +1,37 @@
+{
+  "image_id": 914,
+  "filename": "receipt_00914_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00914_bilingual_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0914",
+  "date_str": "02/05/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 49500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 49500,
+  "full_text_ground_truth": "Rahman Enterprise (বেঙ্গল ফুড মার্ট)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0914\nDate: 02/05/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nRefined White Sugar 1kg x2  Tk 270.00\nডিটারজেন্ট সাবান x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 495.00\nTotal Amount: Tk 495.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 125,
+  "filename": "receipt_00125_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00125_bilingual_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0125",
+  "date_str": "02/12/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 60000,
+  "tax_minor": 3000,
+  "discount_minor": 10000,
+  "total_amount_minor": 53000,
+  "full_text_ground_truth": "Bengal Food Mart (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0125\nDate: 02/12/2026\n------------------------------------------\nBath Soap 100g x1  Tk 60.00\nBlack Tea Pack 400g x2  Tk 480.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 600.00\nVAT (5%): Tk 30.00\nDiscount: Tk 100.00\nTotal Amount: Tk 530.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

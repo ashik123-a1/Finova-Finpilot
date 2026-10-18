@@ -1,0 +1,43 @@
+{
+  "image_id": 464,
+  "filename": "receipt_00464_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00464_bilingual_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0464",
+  "date_str": "14/11/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 64500,
+  "tax_minor": 3225,
+  "discount_minor": 5000,
+  "total_amount_minor": 62725,
+  "full_text_ground_truth": "Metro Departmental (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0464\nDate: 14/11/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nগোসলের সাবান x3  Tk 180.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 645.00\nVAT (5%): Tk 32.25\nDiscount: Tk 50.00\nTotal Amount: Tk 627.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

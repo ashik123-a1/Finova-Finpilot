@@ -1,0 +1,31 @@
+{
+  "image_id": 531,
+  "filename": "receipt_00531_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00531_en_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0531",
+  "date_str": "15/10/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 86000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 81000,
+  "full_text_ground_truth": "Metro Departmental\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0531\nDate: 15/10/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 860.00\nDiscount: Tk 50.00\nTotal Amount: Tk 810.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

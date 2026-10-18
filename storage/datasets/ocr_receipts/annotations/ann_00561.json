@@ -1,0 +1,43 @@
+{
+  "image_id": 561,
+  "filename": "receipt_00561_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00561_en_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0561",
+  "date_str": "25/10/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 83500,
+  "tax_minor": 4175,
+  "discount_minor": 0,
+  "total_amount_minor": 87675,
+  "full_text_ground_truth": "Rahman Enterprise\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0561\nDate: 25/10/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nRefined White Sugar 1kg x2  Tk 270.00\nLaundry Soap Bar x1  Tk 45.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 835.00\nVAT (5%): Tk 41.75\nTotal Amount: Tk 876.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 286,
+  "filename": "receipt_00286_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00286_bn_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0286",
+  "date_str": "09/08/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 120000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 115000,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nদোকান খরচ রসিদ\nBill No: INV-2026-0286\nDate: 09/08/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1200.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1150.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

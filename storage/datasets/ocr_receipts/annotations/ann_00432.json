@@ -1,0 +1,43 @@
+{
+  "image_id": 432,
+  "filename": "receipt_00432_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00432_en_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0432",
+  "date_str": "21/05/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 165500,
+  "tax_minor": 8275,
+  "discount_minor": 0,
+  "total_amount_minor": 173775,
+  "full_text_ground_truth": "Bengal Food Mart\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0432\nDate: 21/05/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nMasur Dal 1kg x1  Tk 140.00\nBlack Tea Pack 400g x1  Tk 240.00\nLaundry Soap Bar x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1655.00\nVAT (5%): Tk 82.75\nTotal Amount: Tk 1737.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

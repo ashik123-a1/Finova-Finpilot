@@ -1,0 +1,43 @@
+{
+  "image_id": 446,
+  "filename": "receipt_00446_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00446_bilingual_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0446",
+  "date_str": "17/12/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 139500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 129500,
+  "full_text_ground_truth": "Metro Departmental (মেট্রো ডিপার্টমেন্টাল)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0446\nDate: 17/12/2026\n------------------------------------------\nBlack Tea Pack 400g x3  Tk 720.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nLaundry Soap Bar x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 1395.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1295.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

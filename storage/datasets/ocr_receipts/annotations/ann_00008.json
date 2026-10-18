@@ -1,0 +1,43 @@
+{
+  "image_id": 8,
+  "filename": "receipt_00008_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00008_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0008",
+  "date_str": "22/05/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 186000,
+  "tax_minor": 9300,
+  "discount_minor": 5000,
+  "total_amount_minor": 190300,
+  "full_text_ground_truth": "Bismillah Electronics (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0008\nDate: 22/05/2026\n------------------------------------------\nRefined White Sugar 1kg x3  Tk 405.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1860.00\nVAT (5%): Tk 93.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1903.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

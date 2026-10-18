@@ -1,0 +1,32 @@
+{
+  "dataset_name": "SME Document Classification Benchmark Dataset",
+  "version": "v2.0.0-synthetic-evaluation",
+  "description": "Large-scale bilingual document text dataset with strict template segregation between train and test pools.",
+  "classes": [
+    "sales_receipt",
+    "purchase_invoice",
+    "expense_receipt",
+    "payment_receipt",
+    "unknown"
+  ],
+  "counts": {
+    "train": 1000,
+    "val": 250,
+    "test": 1000,
+    "total": 2250
+  },
+  "per_class_test_counts": {
+    "sales_receipt": 200,
+    "purchase_invoice": 200,
+    "expense_receipt": 200,
+    "payment_receipt": 200,
+    "unknown": 200
+  },
+  "sha256_checksums": {
+    "train.jsonl": "6c9198895aba62efa7f426419bc02e82d10af910a8691deee1a37dd8aa4dbf79",
+    "val.jsonl": "d8f13508dcf06414e7b5a6558692704f31e298d5ded5a6d0831ff0da164595ce",
+    "test.jsonl": "915419d7c0b950af599ccefa80f332b40ba810c36d61883aee62a85d96f787a3"
+  },
+  "is_synthetic": true,
+  "disclosure": "Synthesized for competition benchmarking. Real-world physical receipt diversity may vary based on print fading and store formatting."
+}

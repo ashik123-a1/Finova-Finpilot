@@ -1,0 +1,31 @@
+{
+  "image_id": 493,
+  "filename": "receipt_00493_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00493_bn_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0493",
+  "date_str": "27/06/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 31000,
+  "tax_minor": 1550,
+  "discount_minor": 0,
+  "total_amount_minor": 32550,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0493\nDate: 27/06/2026\n------------------------------------------\nডিটারজেন্ট সাবান x2  Tk 90.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 310.00\nVAT (5%): Tk 15.50\nTotal Amount: Tk 325.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

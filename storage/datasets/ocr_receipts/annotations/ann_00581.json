@@ -1,0 +1,31 @@
+{
+  "image_id": 581,
+  "filename": "receipt_00581_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00581_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0581",
+  "date_str": "11/02/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 51500,
+  "tax_minor": 2575,
+  "discount_minor": 0,
+  "total_amount_minor": 54075,
+  "full_text_ground_truth": "Bengal Food Mart (মেট্রো ডিপার্টমেন্টাল)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0581\nDate: 11/02/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 515.00\nVAT (5%): Tk 25.75\nTotal Amount: Tk 540.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

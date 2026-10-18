@@ -1,0 +1,31 @@
+{
+  "image_id": 166,
+  "filename": "receipt_00166_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00166_bn_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0166",
+  "date_str": "22/09/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 26000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 26000,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nদোকান খরচ রসিদ\nBill No: INV-2026-0166\nDate: 22/09/2026\n------------------------------------------\nগোসলের সাবান x2  Tk 120.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 260.00\nTotal Amount: Tk 260.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

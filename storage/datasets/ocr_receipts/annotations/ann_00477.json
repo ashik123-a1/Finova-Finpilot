@@ -1,0 +1,37 @@
+{
+  "image_id": 477,
+  "filename": "receipt_00477_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00477_en_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0477",
+  "date_str": "02/11/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 174000,
+  "tax_minor": 8700,
+  "discount_minor": 10000,
+  "total_amount_minor": 172700,
+  "full_text_ground_truth": "Chowdhury Supermarket\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0477\nDate: 02/11/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nBlack Tea Pack 400g x2  Tk 480.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1740.00\nVAT (5%): Tk 87.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1727.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

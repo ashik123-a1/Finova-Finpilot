@@ -1,0 +1,31 @@
+{
+  "image_id": 445,
+  "filename": "receipt_00445_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00445_bn_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0445",
+  "date_str": "14/08/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 135000,
+  "tax_minor": 6750,
+  "discount_minor": 0,
+  "total_amount_minor": 141750,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0445\nDate: 14/08/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 1350.00\nVAT (5%): Tk 67.50\nTotal Amount: Tk 1417.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

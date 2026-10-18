@@ -1,0 +1,37 @@
+{
+  "image_id": 158,
+  "filename": "receipt_00158_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00158_bilingual_faded_thermal.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0158",
+  "date_str": "17/02/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 130000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 130000,
+  "full_text_ground_truth": "Desh General Store (বিসমিল্লাহ ইলেকট্রনিক্স)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0158\nDate: 17/02/2026\n------------------------------------------\nগোসলের সাবান x1  Tk 60.00\nBlack Tea Pack 400g x2  Tk 480.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1300.00\nTotal Amount: Tk 1300.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

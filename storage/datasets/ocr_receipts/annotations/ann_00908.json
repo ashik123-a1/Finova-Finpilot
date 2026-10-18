@@ -1,0 +1,31 @@
+{
+  "image_id": 908,
+  "filename": "receipt_00908_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00908_bilingual_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0908",
+  "date_str": "14/07/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 65000,
+  "tax_minor": 3250,
+  "discount_minor": 5000,
+  "total_amount_minor": 63250,
+  "full_text_ground_truth": "Chowdhury Supermarket (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0908\nDate: 14/07/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 650.00\nVAT (5%): Tk 32.50\nDiscount: Tk 50.00\nTotal Amount: Tk 632.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

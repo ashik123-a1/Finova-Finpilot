@@ -1,0 +1,37 @@
+{
+  "image_id": 313,
+  "filename": "receipt_00313_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00313_bn_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0313",
+  "date_str": "01/04/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 177000,
+  "tax_minor": 8850,
+  "discount_minor": 5000,
+  "total_amount_minor": 180850,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0313\nDate: 01/04/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 1770.00\nVAT (5%): Tk 88.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1808.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

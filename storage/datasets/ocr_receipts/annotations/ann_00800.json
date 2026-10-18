@@ -1,0 +1,43 @@
+{
+  "image_id": 800,
+  "filename": "receipt_00800_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00800_bilingual_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0800",
+  "date_str": "25/12/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 163000,
+  "tax_minor": 8150,
+  "discount_minor": 10000,
+  "total_amount_minor": 161150,
+  "full_text_ground_truth": "Bengal Food Mart (বিসমিল্লাহ ইলেকট্রনিক্স)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0800\nDate: 25/12/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nগোসলের সাবান x2  Tk 120.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 1630.00\nVAT (5%): Tk 81.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1611.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 101,
+  "filename": "receipt_00101_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00101_bilingual_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0101",
+  "date_str": "25/07/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 165500,
+  "tax_minor": 8275,
+  "discount_minor": 10000,
+  "total_amount_minor": 163775,
+  "full_text_ground_truth": "Desh General Store (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0101\nDate: 25/07/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1655.00\nVAT (5%): Tk 82.75\nDiscount: Tk 100.00\nTotal Amount: Tk 1637.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

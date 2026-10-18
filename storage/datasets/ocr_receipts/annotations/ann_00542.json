@@ -1,0 +1,43 @@
+{
+  "image_id": 542,
+  "filename": "receipt_00542_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00542_bilingual_low_light.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0542",
+  "date_str": "05/10/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 182500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 177500,
+  "full_text_ground_truth": "Chowdhury Supermarket (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0542\nDate: 05/10/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nSoybean Oil 2L x3  Tk 1080.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 1825.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1775.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

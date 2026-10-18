@@ -1,0 +1,43 @@
+{
+  "image_id": 223,
+  "filename": "receipt_00223_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00223_bn_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0223",
+  "date_str": "16/03/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 151500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 151500,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nটাকা জমার রসিদ\nBill No: INV-2026-0223\nDate: 16/03/2026\n------------------------------------------\nগোসলের সাবান x1  Tk 60.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1515.00\nTotal Amount: Tk 1515.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

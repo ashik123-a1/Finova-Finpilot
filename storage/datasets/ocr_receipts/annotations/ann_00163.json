@@ -1,0 +1,37 @@
+{
+  "image_id": 163,
+  "filename": "receipt_00163_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00163_bn_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0163",
+  "date_str": "11/02/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 109000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 99000,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nটাকা জমার রসিদ\nBill No: INV-2026-0163\nDate: 11/02/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 1090.00\nDiscount: Tk 100.00\nTotal Amount: Tk 990.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

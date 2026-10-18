@@ -1,0 +1,43 @@
+{
+  "image_id": 828,
+  "filename": "receipt_00828_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00828_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0828",
+  "date_str": "13/12/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 80000,
+  "tax_minor": 4000,
+  "discount_minor": 5000,
+  "total_amount_minor": 79000,
+  "full_text_ground_truth": "Metro Departmental\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0828\nDate: 13/12/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nBlack Tea Pack 400g x1  Tk 240.00\nSoybean Oil 2L x1  Tk 360.00\nLaundry Soap Bar x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 800.00\nVAT (5%): Tk 40.00\nDiscount: Tk 50.00\nTotal Amount: Tk 790.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

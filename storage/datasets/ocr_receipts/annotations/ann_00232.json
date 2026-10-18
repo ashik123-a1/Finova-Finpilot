@@ -1,0 +1,37 @@
+{
+  "image_id": 232,
+  "filename": "receipt_00232_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00232_bn_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0232",
+  "date_str": "11/12/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 73500,
+  "tax_minor": 3675,
+  "discount_minor": 5000,
+  "total_amount_minor": 72175,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0232\nDate: 11/12/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 735.00\nVAT (5%): Tk 36.75\nDiscount: Tk 50.00\nTotal Amount: Tk 721.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

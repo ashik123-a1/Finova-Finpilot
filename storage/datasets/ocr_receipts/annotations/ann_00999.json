@@ -1,0 +1,31 @@
+{
+  "image_id": 999,
+  "filename": "receipt_00999_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00999_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0999",
+  "date_str": "13/11/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 119000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 119000,
+  "full_text_ground_truth": "Bengal Food Mart\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0999\nDate: 13/11/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nAata Flour 2kg x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 1190.00\nTotal Amount: Tk 1190.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

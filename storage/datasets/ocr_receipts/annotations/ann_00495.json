@@ -1,0 +1,43 @@
+{
+  "image_id": 495,
+  "filename": "receipt_00495_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00495_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0495",
+  "date_str": "28/03/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 165000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 155000,
+  "full_text_ground_truth": "Bismillah Electronics\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0495\nDate: 28/03/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nRefined White Sugar 1kg x1  Tk 135.00\nLaundry Soap Bar x1  Tk 45.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1650.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1550.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

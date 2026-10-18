@@ -1,0 +1,31 @@
+{
+  "image_id": 697,
+  "filename": "receipt_00697_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00697_bn_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0697",
+  "date_str": "17/07/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 40000,
+  "tax_minor": 2000,
+  "discount_minor": 0,
+  "total_amount_minor": 42000,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0697\nDate: 17/07/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 400.00\nVAT (5%): Tk 20.00\nTotal Amount: Tk 420.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

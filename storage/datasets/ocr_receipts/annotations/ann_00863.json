@@ -1,0 +1,37 @@
+{
+  "image_id": 863,
+  "filename": "receipt_00863_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00863_bilingual_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0863",
+  "date_str": "04/05/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 84000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 84000,
+  "full_text_ground_truth": "Metro Departmental (চৌধুরী সুপার মার্কেট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0863\nDate: 04/05/2026\n------------------------------------------\nডিটারজেন্ট সাবান x2  Tk 90.00\nআটা ২ কেজি x3  Tk 330.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 840.00\nTotal Amount: Tk 840.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

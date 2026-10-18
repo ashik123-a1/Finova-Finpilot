@@ -1,0 +1,43 @@
+{
+  "image_id": 650,
+  "filename": "receipt_00650_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00650_bilingual_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0650",
+  "date_str": "27/06/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 94000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 94000,
+  "full_text_ground_truth": "Chowdhury Supermarket (বিসমিল্লাহ ইলেকট্রনিক্স)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0650\nDate: 27/06/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nগোসলের সাবান x3  Tk 180.00\nBlack Tea Pack 400g x1  Tk 240.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 940.00\nTotal Amount: Tk 940.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

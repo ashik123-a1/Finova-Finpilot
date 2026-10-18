@@ -1,0 +1,43 @@
+{
+  "image_id": 596,
+  "filename": "receipt_00596_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00596_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0596",
+  "date_str": "10/01/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 224000,
+  "tax_minor": 11200,
+  "discount_minor": 0,
+  "total_amount_minor": 235200,
+  "full_text_ground_truth": "Rahman Enterprise (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0596\nDate: 10/01/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nSoybean Oil 2L x2  Tk 720.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 2240.00\nVAT (5%): Tk 112.00\nTotal Amount: Tk 2352.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 573,
+  "filename": "receipt_00573_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00573_en_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0573",
+  "date_str": "05/06/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 58000,
+  "tax_minor": 2900,
+  "discount_minor": 10000,
+  "total_amount_minor": 50900,
+  "full_text_ground_truth": "Rahman Enterprise\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0573\nDate: 05/06/2026\n------------------------------------------\nAata Flour 2kg x2  Tk 220.00\nSoybean Oil 2L x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 580.00\nVAT (5%): Tk 29.00\nDiscount: Tk 100.00\nTotal Amount: Tk 509.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 486,
+  "filename": "receipt_00486_en_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00486_en_low_light.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0486",
+  "date_str": "22/12/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 80500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 70500,
+  "full_text_ground_truth": "Bismillah Electronics\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0486\nDate: 22/12/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nMiniket Rice 5kg x1  Tk 380.00\nMasur Dal 1kg x1  Tk 140.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 805.00\nDiscount: Tk 100.00\nTotal Amount: Tk 705.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

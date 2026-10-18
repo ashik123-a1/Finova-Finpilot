@@ -1,0 +1,43 @@
+{
+  "image_id": 638,
+  "filename": "receipt_00638_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00638_bilingual_blur.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0638",
+  "date_str": "08/04/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 120000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 120000,
+  "full_text_ground_truth": "Rahman Enterprise (বেঙ্গল ফুড মার্ট)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0638\nDate: 08/04/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nBlack Tea Pack 400g x3  Tk 720.00\nBath Soap 100g x3  Tk 180.00\nগোসলের সাবান x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 1200.00\nTotal Amount: Tk 1200.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 823,
+  "filename": "receipt_00823_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00823_bn_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0823",
+  "date_str": "01/04/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 112000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 112000,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nটাকা জমার রসিদ\nBill No: INV-2026-0823\nDate: 01/04/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nআটা ২ কেজি x2  Tk 220.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1120.00\nTotal Amount: Tk 1120.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

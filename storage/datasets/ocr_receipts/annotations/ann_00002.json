@@ -1,0 +1,31 @@
+{
+  "image_id": 2,
+  "filename": "receipt_00002_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00002_bilingual_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0002",
+  "date_str": "14/01/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 46500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 46500,
+  "full_text_ground_truth": "Desh General Store (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0002\nDate: 14/01/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 465.00\nTotal Amount: Tk 465.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

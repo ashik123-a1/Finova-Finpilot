@@ -1,0 +1,31 @@
+{
+  "image_id": 219,
+  "filename": "receipt_00219_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00219_en_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0219",
+  "date_str": "20/09/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 23000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 23000,
+  "full_text_ground_truth": "Chowdhury Supermarket\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0219\nDate: 20/09/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nMasur Dal 1kg x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 230.00\nTotal Amount: Tk 230.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

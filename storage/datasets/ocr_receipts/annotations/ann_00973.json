@@ -1,0 +1,43 @@
+{
+  "image_id": 973,
+  "filename": "receipt_00973_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00973_bn_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0973",
+  "date_str": "17/07/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 80500,
+  "tax_minor": 4025,
+  "discount_minor": 10000,
+  "total_amount_minor": 74525,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0973\nDate: 17/07/2026\n------------------------------------------\nডিটারজেন্ট সাবান x1  Tk 45.00\nআটা ২ কেজি x2  Tk 220.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 805.00\nVAT (5%): Tk 40.25\nDiscount: Tk 100.00\nTotal Amount: Tk 745.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

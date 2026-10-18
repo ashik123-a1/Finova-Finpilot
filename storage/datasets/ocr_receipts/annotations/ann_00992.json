@@ -1,0 +1,37 @@
+{
+  "image_id": 992,
+  "filename": "receipt_00992_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00992_bilingual_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0992",
+  "date_str": "17/02/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 116500,
+  "tax_minor": 5825,
+  "discount_minor": 5000,
+  "total_amount_minor": 117325,
+  "full_text_ground_truth": "Bismillah Electronics (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0992\nDate: 17/02/2026\n------------------------------------------\nSoybean Oil 2L x1  Tk 360.00\nLaundry Soap Bar x1  Tk 45.00\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1165.00\nVAT (5%): Tk 58.25\nDiscount: Tk 50.00\nTotal Amount: Tk 1173.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

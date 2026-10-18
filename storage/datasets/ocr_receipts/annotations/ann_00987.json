@@ -1,0 +1,37 @@
+{
+  "image_id": 987,
+  "filename": "receipt_00987_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00987_en_clean.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0987",
+  "date_str": "27/06/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 99000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 89000,
+  "full_text_ground_truth": "Metro Departmental\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0987\nDate: 27/06/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nBlack Tea Pack 400g x2  Tk 480.00\nBath Soap 100g x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 990.00\nDiscount: Tk 100.00\nTotal Amount: Tk 890.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 221,
+  "filename": "receipt_00221_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00221_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0221",
+  "date_str": "11/11/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 117000,
+  "tax_minor": 5850,
+  "discount_minor": 10000,
+  "total_amount_minor": 112850,
+  "full_text_ground_truth": "Desh General Store (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0221\nDate: 11/11/2026\n------------------------------------------\nডিটারজেন্ট সাবান x2  Tk 90.00\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1170.00\nVAT (5%): Tk 58.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1128.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

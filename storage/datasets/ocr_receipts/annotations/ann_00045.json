@@ -1,0 +1,43 @@
+{
+  "image_id": 45,
+  "filename": "receipt_00045_en_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00045_en_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0045",
+  "date_str": "09/03/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 170000,
+  "tax_minor": 8500,
+  "discount_minor": 5000,
+  "total_amount_minor": 173500,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0045\nDate: 09/03/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nMiniket Rice 5kg x2  Tk 760.00\nBath Soap 100g x3  Tk 180.00\nBlack Tea Pack 400g x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 1700.00\nVAT (5%): Tk 85.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1735.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 711,
+  "filename": "receipt_00711_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00711_en_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0711",
+  "date_str": "18/04/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 16500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 16500,
+  "full_text_ground_truth": "Desh General Store\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0711\nDate: 18/04/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 165.00\nTotal Amount: Tk 165.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

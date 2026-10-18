@@ -1,0 +1,31 @@
+{
+  "image_id": 903,
+  "filename": "receipt_00903_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00903_en_clean.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0903",
+  "date_str": "11/11/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 186000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 181000,
+  "full_text_ground_truth": "Rahman Enterprise\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0903\nDate: 11/11/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nBlack Tea Pack 400g x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1860.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1810.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 9,
+  "filename": "receipt_00009_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00009_en_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0009",
+  "date_str": "09/11/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 118500,
+  "tax_minor": 5925,
+  "discount_minor": 5000,
+  "total_amount_minor": 119425,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0009\nDate: 09/11/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nLaundry Soap Bar x1  Tk 45.00\nRefined White Sugar 1kg x2  Tk 270.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1185.00\nVAT (5%): Tk 59.25\nDiscount: Tk 50.00\nTotal Amount: Tk 1194.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

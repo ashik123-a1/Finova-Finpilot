@@ -1,0 +1,37 @@
+{
+  "image_id": 524,
+  "filename": "receipt_00524_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00524_bilingual_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0524",
+  "date_str": "09/04/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 188500,
+  "tax_minor": 9425,
+  "discount_minor": 10000,
+  "total_amount_minor": 187925,
+  "full_text_ground_truth": "Desh General Store (দেশ জেনারেল স্টোর)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0524\nDate: 09/04/2026\n------------------------------------------\nRefined White Sugar 1kg x3  Tk 405.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1885.00\nVAT (5%): Tk 94.25\nDiscount: Tk 100.00\nTotal Amount: Tk 1879.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

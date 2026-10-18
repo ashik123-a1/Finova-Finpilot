@@ -1,0 +1,31 @@
+{
+  "image_id": 394,
+  "filename": "receipt_00394_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00394_bn_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0394",
+  "date_str": "08/09/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 66000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 56000,
+  "full_text_ground_truth": "রহমান এন্টারপ্রাইজ\nদোকান খরচ রসিদ\nBill No: INV-2026-0394\nDate: 08/09/2026\n------------------------------------------\nগোসলের সাবান x3  Tk 180.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 660.00\nDiscount: Tk 100.00\nTotal Amount: Tk 560.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

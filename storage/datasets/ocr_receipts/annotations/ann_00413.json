@@ -1,0 +1,37 @@
+{
+  "image_id": 413,
+  "filename": "receipt_00413_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00413_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0413",
+  "date_str": "27/10/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 223000,
+  "tax_minor": 11150,
+  "discount_minor": 10000,
+  "total_amount_minor": 224150,
+  "full_text_ground_truth": "Metro Departmental (রহমান এন্টারপ্রাইজ)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0413\nDate: 27/10/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nMiniket Rice 5kg x2  Tk 760.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2230.00\nVAT (5%): Tk 111.50\nDiscount: Tk 100.00\nTotal Amount: Tk 2241.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

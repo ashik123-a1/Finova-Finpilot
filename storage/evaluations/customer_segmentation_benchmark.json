@@ -2,21 +2,21 @@
   "evaluation_task": "customer_segmentation",
   "total_customers_analyzed": 1620,
   "rfm_rule_distribution": {
-    "VIP": {
-      "count": 1231,
-      "percentage": 75.99
+    "Occasional": {
+      "count": 536,
+      "percentage": 33.09
     },
     "Regular": {
-      "count": 372,
-      "percentage": 22.96
-    },
-    "Occasional": {
-      "count": 2,
-      "percentage": 0.12
+      "count": 904,
+      "percentage": 55.8
     },
     "At-Risk": {
       "count": 14,
       "percentage": 0.86
+    },
+    "VIP": {
+      "count": 165,
+      "percentage": 10.19
     },
     "Dormant": {
       "count": 1,
@@ -25,29 +25,29 @@
   },
   "cluster_stability_sweep": {
     "k_2": {
-      "silhouette_score": 0.2856,
-      "davies_bouldin_index": 1.3547,
-      "calinski_harabasz_score": 662.73
+      "silhouette_score": 0.2854,
+      "davies_bouldin_index": 1.3556,
+      "calinski_harabasz_score": 662.68
     },
     "k_3": {
       "silhouette_score": 0.306,
-      "davies_bouldin_index": 1.1383,
-      "calinski_harabasz_score": 711.76
+      "davies_bouldin_index": 1.1381,
+      "calinski_harabasz_score": 711.94
     },
     "k_4": {
-      "silhouette_score": 0.2995,
-      "davies_bouldin_index": 1.064,
-      "calinski_harabasz_score": 749.71
+      "silhouette_score": 0.2989,
+      "davies_bouldin_index": 1.0616,
+      "calinski_harabasz_score": 749.65
     },
     "k_5": {
-      "silhouette_score": 0.2788,
-      "davies_bouldin_index": 1.1312,
-      "calinski_harabasz_score": 683.54
+      "silhouette_score": 0.2786,
+      "davies_bouldin_index": 1.1388,
+      "calinski_harabasz_score": 683.14
     },
     "k_6": {
-      "silhouette_score": 0.2653,
-      "davies_bouldin_index": 1.1547,
-      "calinski_harabasz_score": 661.85
+      "silhouette_score": 0.2654,
+      "davies_bouldin_index": 1.1538,
+      "calinski_harabasz_score": 661.54
     }
   },
   "optimal_k_recommendation": {

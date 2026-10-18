@@ -1,0 +1,31 @@
+{
+  "image_id": 247,
+  "filename": "receipt_00247_bn_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00247_bn_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0247",
+  "date_str": "07/10/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 109000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 109000,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nটাকা জমার রসিদ\nBill No: INV-2026-0247\nDate: 07/10/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nআটা ২ কেজি x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1090.00\nTotal Amount: Tk 1090.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

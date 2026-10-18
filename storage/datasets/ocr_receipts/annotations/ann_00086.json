@@ -1,0 +1,31 @@
+{
+  "image_id": 86,
+  "filename": "receipt_00086_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00086_bilingual_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0086",
+  "date_str": "16/05/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 100000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 90000,
+  "full_text_ground_truth": "Metro Departmental (রহমান এন্টারপ্রাইজ)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0086\nDate: 16/05/2026\n------------------------------------------\nBlack Tea Pack 400g x3  Tk 720.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 1000.00\nDiscount: Tk 100.00\nTotal Amount: Tk 900.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

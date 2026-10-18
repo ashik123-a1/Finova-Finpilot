@@ -1,0 +1,31 @@
+{
+  "image_id": 748,
+  "filename": "receipt_00748_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00748_bn_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0748",
+  "date_str": "12/06/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 122000,
+  "tax_minor": 6100,
+  "discount_minor": 0,
+  "total_amount_minor": 128100,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0748\nDate: 12/06/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 1220.00\nVAT (5%): Tk 61.00\nTotal Amount: Tk 1281.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

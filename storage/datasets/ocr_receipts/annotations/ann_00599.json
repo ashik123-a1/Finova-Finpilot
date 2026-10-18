@@ -1,0 +1,31 @@
+{
+  "image_id": 599,
+  "filename": "receipt_00599_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00599_bilingual_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0599",
+  "date_str": "19/09/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 60000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 60000,
+  "full_text_ground_truth": "Bengal Food Mart (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0599\nDate: 19/09/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nBath Soap 100g x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 600.00\nTotal Amount: Tk 600.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

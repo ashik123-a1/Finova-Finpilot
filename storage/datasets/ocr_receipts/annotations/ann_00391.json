@@ -1,0 +1,37 @@
+{
+  "image_id": 391,
+  "filename": "receipt_00391_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00391_bn_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0391",
+  "date_str": "16/02/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 64000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 54000,
+  "full_text_ground_truth": "দেশ জেনারেল স্টোর\nটাকা জমার রসিদ\nBill No: INV-2026-0391\nDate: 16/02/2026\n------------------------------------------\nগোসলের সাবান x3  Tk 180.00\nআটা ২ কেজি x2  Tk 220.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 640.00\nDiscount: Tk 100.00\nTotal Amount: Tk 540.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

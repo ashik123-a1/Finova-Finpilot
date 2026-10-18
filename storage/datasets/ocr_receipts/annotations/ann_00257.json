@@ -1,0 +1,43 @@
+{
+  "image_id": 257,
+  "filename": "receipt_00257_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00257_bilingual_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0257",
+  "date_str": "13/03/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 97500,
+  "tax_minor": 4875,
+  "discount_minor": 0,
+  "total_amount_minor": 102375,
+  "full_text_ground_truth": "Chowdhury Supermarket (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0257\nDate: 13/03/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nAata Flour 2kg x3  Tk 330.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 975.00\nVAT (5%): Tk 48.75\nTotal Amount: Tk 1023.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

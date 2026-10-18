@@ -1,0 +1,31 @@
+{
+  "image_id": 980,
+  "filename": "receipt_00980_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00980_bilingual_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0980",
+  "date_str": "26/05/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 83000,
+  "tax_minor": 4150,
+  "discount_minor": 0,
+  "total_amount_minor": 87150,
+  "full_text_ground_truth": "Metro Departmental (দেশ জেনারেল স্টোর)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0980\nDate: 26/05/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nSoybean Oil 2L x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 830.00\nVAT (5%): Tk 41.50\nTotal Amount: Tk 871.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

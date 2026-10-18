@@ -1,0 +1,31 @@
+{
+  "image_id": 883,
+  "filename": "receipt_00883_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00883_bn_blur.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0883",
+  "date_str": "14/01/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 23000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 23000,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nটাকা জমার রসিদ\nBill No: INV-2026-0883\nDate: 14/01/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 230.00\nTotal Amount: Tk 230.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

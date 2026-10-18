@@ -1,0 +1,37 @@
+{
+  "image_id": 845,
+  "filename": "receipt_00845_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00845_bilingual_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0845",
+  "date_str": "14/03/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 138000,
+  "tax_minor": 6900,
+  "discount_minor": 5000,
+  "total_amount_minor": 139900,
+  "full_text_ground_truth": "Metro Departmental (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0845\nDate: 14/03/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nMiniket Rice 5kg x1  Tk 380.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1380.00\nVAT (5%): Tk 69.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1399.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

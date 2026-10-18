@@ -1,0 +1,31 @@
+{
+  "image_id": 375,
+  "filename": "receipt_00375_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00375_en_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0375",
+  "date_str": "20/04/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 52500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 52500,
+  "full_text_ground_truth": "Bismillah Electronics\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0375\nDate: 20/04/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nBlack Tea Pack 400g x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 525.00\nTotal Amount: Tk 525.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

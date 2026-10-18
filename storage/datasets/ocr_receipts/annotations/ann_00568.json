@@ -1,0 +1,31 @@
+{
+  "image_id": 568,
+  "filename": "receipt_00568_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00568_bn_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0568",
+  "date_str": "08/12/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 57000,
+  "tax_minor": 2850,
+  "discount_minor": 10000,
+  "total_amount_minor": 49850,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0568\nDate: 08/12/2026\n------------------------------------------\nআটা ২ কেজি x3  Tk 330.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 570.00\nVAT (5%): Tk 28.50\nDiscount: Tk 100.00\nTotal Amount: Tk 498.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

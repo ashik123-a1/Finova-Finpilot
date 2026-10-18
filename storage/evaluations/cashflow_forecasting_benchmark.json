@@ -1,190 +1,156 @@
 {
   "evaluation_task": "cashflow_forecasting",
   "backtest_method": "chronological_rolling_origin",
-  "horizon_days": 14,
+  "horizon_days": 7,
   "min_train_days": 60,
-  "total_folds_evaluated": 216,
+  "total_folds_evaluated": 459,
   "overall_model_comparison": {
     "naive_persistence": {
-      "mean_mae_minor": 1454150.62,
-      "mean_rmse_minor": 1712860.97,
-      "mean_mase": 1.0031,
+      "mean_mae_minor": 1446929.88,
+      "mae_bdt": 14469.3,
+      "mae_95ci_bdt": [
+        13976.83,
+        14984.23
+      ],
+      "mean_rmse_minor": 1691044.05,
+      "rmse_bdt": 16910.44,
+      "mean_mase": 0.998,
+      "mase_95ci": [
+        0.96,
+        1.04
+      ],
       "empirical_80_ci_coverage": "N/A"
     },
     "seasonal_naive_7d": {
-      "mean_mae_minor": 1447382.32,
-      "mean_rmse_minor": 1757202.2,
-      "mean_mase": 0.9926,
+      "mean_mae_minor": 1442853.08,
+      "mae_bdt": 14428.53,
+      "mae_95ci_bdt": [
+        14084.69,
+        14782.17
+      ],
+      "mean_rmse_minor": 1733773.32,
+      "rmse_bdt": 17337.73,
+      "mean_mase": 0.989,
+      "mase_95ci": [
+        0.96,
+        1.01
+      ],
       "empirical_80_ci_coverage": "N/A"
     },
     "rolling_moving_average_7d": {
-      "mean_mae_minor": 1114867.77,
-      "mean_rmse_minor": 1344935.67,
-      "mean_mase": 0.7689,
-      "empirical_80_ci_coverage": 0.6693
+      "mean_mae_minor": 1118368.56,
+      "mae_bdt": 11183.69,
+      "mae_95ci_bdt": [
+        10920.45,
+        11453.14
+      ],
+      "mean_rmse_minor": 1328889.87,
+      "rmse_bdt": 13288.9,
+      "mean_mase": 0.77,
+      "mase_95ci": [
+        0.75,
+        0.79
+      ],
+      "empirical_80_ci_coverage": 0.6782
     },
     "autoregressive_ridge_ml": {
-      "mean_mae_minor": 1073028.97,
-      "mean_rmse_minor": 1293865.1,
-      "mean_mase": 0.7396,
-      "empirical_80_ci_coverage": 0.7364
+      "mean_mae_minor": 1079381.77,
+      "mae_bdt": 10793.82,
+      "mae_95ci_bdt": [
+        10545.34,
+        11061.45
+      ],
+      "mean_rmse_minor": 1283538.09,
+      "rmse_bdt": 12835.38,
+      "mean_mase": 0.743,
+      "mase_95ci": [
+        0.73,
+        0.76
+      ],
+      "empirical_80_ci_coverage": 0.7354
     }
   },
+  "sensitivity_stress_tests": [
+    {
+      "scenario": "Standard Operational Baseline",
+      "mase": 0.626,
+      "mae_bdt": 9285.51,
+      "resilience_status": "STABLE"
+    },
+    {
+      "scenario": "Cash Shortage Shock (-70% Revenue)",
+      "mase": 0.332,
+      "mae_bdt": 4992.12,
+      "resilience_status": "STABLE"
+    },
+    {
+      "scenario": "Sparse Data (20% Missing Days)",
+      "mase": 0.7,
+      "mae_bdt": 8871.85,
+      "resilience_status": "STABLE"
+    },
+    {
+      "scenario": "Windfall Outlier Spike (+500% Sales)",
+      "mase": 0.723,
+      "mae_bdt": 12013.89,
+      "resilience_status": "STABLE"
+    }
+  ],
   "performance_by_sector": {
     "grocery": {
-      "naive_persistence": 1454004.48,
-      "seasonal_naive_7d": 1516546.43,
-      "rolling_moving_average_7d": 1094216.45,
-      "autoregressive_ridge_ml": 1059947.29
+      "naive_persistence": 14882.22,
+      "seasonal_naive_7d": 14355.69,
+      "rolling_moving_average_7d": 10924.82,
+      "autoregressive_ridge_ml": 11021.31
     },
     "clothing": {
-      "naive_persistence": 1475746.48,
-      "seasonal_naive_7d": 1455166.87,
-      "rolling_moving_average_7d": 1079587.04,
-      "autoregressive_ridge_ml": 1051397.33
+      "naive_persistence": 15561.12,
+      "seasonal_naive_7d": 15212.55,
+      "rolling_moving_average_7d": 11490.95,
+      "autoregressive_ridge_ml": 10734.9
     },
     "restaurant": {
-      "naive_persistence": 1474582.44,
-      "seasonal_naive_7d": 1402266.16,
-      "rolling_moving_average_7d": 1075601.79,
-      "autoregressive_ridge_ml": 1053644.62
+      "naive_persistence": 14640.93,
+      "seasonal_naive_7d": 14041.62,
+      "rolling_moving_average_7d": 11141.04,
+      "autoregressive_ridge_ml": 10727.84
     },
     "pharmacy": {
-      "naive_persistence": 1362762.49,
-      "seasonal_naive_7d": 1336991.36,
-      "rolling_moving_average_7d": 1075432.47,
-      "autoregressive_ridge_ml": 1057394.99
+      "naive_persistence": 13935.62,
+      "seasonal_naive_7d": 14582.25,
+      "rolling_moving_average_7d": 11252.98,
+      "autoregressive_ridge_ml": 10633.72
     },
     "electronics": {
-      "naive_persistence": 1502385.06,
-      "seasonal_naive_7d": 1356374.95,
-      "rolling_moving_average_7d": 1153218.26,
-      "autoregressive_ridge_ml": 1077310.51
+      "naive_persistence": 14693.06,
+      "seasonal_naive_7d": 14115.18,
+      "rolling_moving_average_7d": 11199.32,
+      "autoregressive_ridge_ml": 10885.06
     },
     "wholesale": {
-      "naive_persistence": 1513921.37,
-      "seasonal_naive_7d": 1621481.08,
-      "rolling_moving_average_7d": 1246834.12,
-      "autoregressive_ridge_ml": 1182495.79
+      "naive_persistence": 14740.12,
+      "seasonal_naive_7d": 15341.0,
+      "rolling_moving_average_7d": 11961.82,
+      "autoregressive_ridge_ml": 11660.41
     },
     "manufacturing": {
-      "naive_persistence": 1504944.48,
-      "seasonal_naive_7d": 1507824.21,
-      "rolling_moving_average_7d": 1152039.01,
-      "autoregressive_ridge_ml": 1084903.89
+      "naive_persistence": 14666.7,
+      "seasonal_naive_7d": 14562.89,
+      "rolling_moving_average_7d": 11799.34,
+      "autoregressive_ridge_ml": 10803.61
     },
     "service": {
-      "naive_persistence": 1499663.04,
-      "seasonal_naive_7d": 1422203.82,
-      "rolling_moving_average_7d": 1124884.72,
-      "autoregressive_ridge_ml": 1073230.21
+      "naive_persistence": 13328.85,
+      "seasonal_naive_7d": 13593.77,
+      "rolling_moving_average_7d": 10686.69,
+      "autoregressive_ridge_ml": 10632.15
     },
     "online_seller": {
-      "naive_persistence": 1299345.74,
-      "seasonal_naive_7d": 1407585.98,
-      "rolling_moving_average_7d": 1031996.03,
-      "autoregressive_ridge_ml": 1016936.13
+      "naive_persistence": 13775.07,
+      "seasonal_naive_7d": 14051.82,
+      "rolling_moving_average_7d": 10196.21,
+      "autoregressive_ridge_ml": 10045.37
     }
   },
-  "visualization_sample": {
-    "shop_id": "28",
-    "sector": "grocery",
-    "horizon_days": 14,
-    "actual_test_series": [
-      -2071.51,
-      25046.34,
-      10560.36,
-      -7136.72,
-      -14836.66,
-      3901.66,
-      -12592.72,
-      12041.79,
-      -7591.27,
-      22722.65,
-      3429.34,
-      -19131.26,
-      18586.66,
-      6475.05
-    ],
-    "naive_pred": [
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89,
-      -733.89
-    ],
-    "moving_avg_pred": [
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43,
-      2517.43
-    ],
-    "ridge_pred": [
-      7797.99,
-      10221.52,
-      7092.01,
-      6351.47,
-      11051.0,
-      6415.84,
-      5283.09,
-      6182.58,
-      7141.17,
-      7357.01,
-      5967.79,
-      7155.31,
-      7260.42,
-      6810.17
-    ],
-    "ridge_ci_lower_80": [
-      -5255.17,
-      -2831.64,
-      -5961.15,
-      -6701.69,
-      -2002.16,
-      -6637.32,
-      -7770.07,
-      -6870.58,
-      -5911.99,
-      -5696.15,
-      -7085.37,
-      -5897.85,
-      -5792.74,
-      -6242.99
-    ],
-    "ridge_ci_upper_80": [
-      20851.15,
-      23274.68,
-      20145.17,
-      19404.63,
-      24104.16,
-      19469.0,
-      18336.25,
-      19235.74,
-      20194.33,
-      20410.17,
-      19020.95,
-      20208.47,
-      20313.58,
-      19863.33
-    ]
-  }
+  "synthetic_disclosure": "Trained and evaluated on synthetic SME transaction flows. Real-world business cash flow volatility and macroeconomic shocks remain unverified without empirical SME bank ledger access."
 }

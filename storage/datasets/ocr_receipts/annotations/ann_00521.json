@@ -1,0 +1,37 @@
+{
+  "image_id": 521,
+  "filename": "receipt_00521_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00521_bilingual_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0521",
+  "date_str": "25/12/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 64500,
+  "tax_minor": 3225,
+  "discount_minor": 0,
+  "total_amount_minor": 67725,
+  "full_text_ground_truth": "Rahman Enterprise (বিসমিল্লাহ ইলেকট্রনিক্স)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0521\nDate: 25/12/2026\n------------------------------------------\nMasur Dal 1kg x3  Tk 420.00\nডিটারজেন্ট সাবান x1  Tk 45.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 645.00\nVAT (5%): Tk 32.25\nTotal Amount: Tk 677.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

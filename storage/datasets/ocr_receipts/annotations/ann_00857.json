@@ -1,0 +1,43 @@
+{
+  "image_id": 857,
+  "filename": "receipt_00857_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00857_bilingual_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0857",
+  "date_str": "08/08/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 91500,
+  "tax_minor": 4575,
+  "discount_minor": 5000,
+  "total_amount_minor": 91075,
+  "full_text_ground_truth": "Bengal Food Mart (দেশ জেনারেল স্টোর)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0857\nDate: 08/08/2026\n------------------------------------------\nAata Flour 2kg x2  Tk 220.00\nগোসলের সাবান x3  Tk 180.00\nLaundry Soap Bar x3  Tk 135.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 915.00\nVAT (5%): Tk 45.75\nDiscount: Tk 50.00\nTotal Amount: Tk 910.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

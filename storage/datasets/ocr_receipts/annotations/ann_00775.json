@@ -1,0 +1,31 @@
+{
+  "image_id": 775,
+  "filename": "receipt_00775_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00775_bn_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0775",
+  "date_str": "21/04/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 84000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 84000,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nটাকা জমার রসিদ\nBill No: INV-2026-0775\nDate: 21/04/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 840.00\nTotal Amount: Tk 840.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

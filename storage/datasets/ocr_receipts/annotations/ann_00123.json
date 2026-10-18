@@ -1,0 +1,31 @@
+{
+  "image_id": 123,
+  "filename": "receipt_00123_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00123_en_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0123",
+  "date_str": "10/08/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 132000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 127000,
+  "full_text_ground_truth": "Desh General Store\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0123\nDate: 10/08/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nBlack Tea Pack 400g x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1320.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1270.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

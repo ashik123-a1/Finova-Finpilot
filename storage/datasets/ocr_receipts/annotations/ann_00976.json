@@ -1,0 +1,31 @@
+{
+  "image_id": 976,
+  "filename": "receipt_00976_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00976_bn_low_light.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0976",
+  "date_str": "09/09/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    }
+  ],
+  "subtotal_minor": 25500,
+  "tax_minor": 1275,
+  "discount_minor": 0,
+  "total_amount_minor": 26775,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0976\nDate: 09/09/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x1  Tk 135.00\nগোসলের সাবান x2  Tk 120.00\n------------------------------------------\nSubtotal: Tk 255.00\nVAT (5%): Tk 12.75\nTotal Amount: Tk 267.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

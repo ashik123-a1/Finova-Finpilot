@@ -1,0 +1,37 @@
+{
+  "image_id": 871,
+  "filename": "receipt_00871_bn_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00871_bn_low_light.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0871",
+  "date_str": "26/03/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 184000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 174000,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nটাকা জমার রসিদ\nBill No: INV-2026-0871\nDate: 26/03/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\nচা পাতা ৪০০ গ্রাম x2  Tk 480.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 1840.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1740.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

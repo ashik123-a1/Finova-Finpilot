@@ -1,0 +1,31 @@
+{
+  "image_id": 443,
+  "filename": "receipt_00443_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00443_bilingual_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0443",
+  "date_str": "23/12/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 117000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 112000,
+  "full_text_ground_truth": "Desh General Store (চৌধুরী সুপার মার্কেট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0443\nDate: 23/12/2026\n------------------------------------------\nLaundry Soap Bar x2  Tk 90.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1170.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1120.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

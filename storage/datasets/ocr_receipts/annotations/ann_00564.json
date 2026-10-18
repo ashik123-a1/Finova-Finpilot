@@ -1,0 +1,31 @@
+{
+  "image_id": 564,
+  "filename": "receipt_00564_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00564_en_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0564",
+  "date_str": "15/12/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    }
+  ],
+  "subtotal_minor": 49000,
+  "tax_minor": 2450,
+  "discount_minor": 0,
+  "total_amount_minor": 51450,
+  "full_text_ground_truth": "Metro Departmental\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0564\nDate: 15/12/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nMiniket Rice 5kg x1  Tk 380.00\n------------------------------------------\nSubtotal: Tk 490.00\nVAT (5%): Tk 24.50\nTotal Amount: Tk 514.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

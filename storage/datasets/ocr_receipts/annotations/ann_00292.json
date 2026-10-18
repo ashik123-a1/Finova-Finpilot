@@ -1,0 +1,31 @@
+{
+  "image_id": 292,
+  "filename": "receipt_00292_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00292_bn_shadow.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0292",
+  "date_str": "25/09/2026",
+  "line_items": [
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 33000,
+  "tax_minor": 1650,
+  "discount_minor": 0,
+  "total_amount_minor": 34650,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0292\nDate: 25/09/2026\n------------------------------------------\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 330.00\nVAT (5%): Tk 16.50\nTotal Amount: Tk 346.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

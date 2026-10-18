@@ -1,0 +1,31 @@
+{
+  "image_id": 993,
+  "filename": "receipt_00993_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00993_en_cropped.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0993",
+  "date_str": "06/02/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 29000,
+  "tax_minor": 1450,
+  "discount_minor": 0,
+  "total_amount_minor": 30450,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0993\nDate: 06/02/2026\n------------------------------------------\nBath Soap 100g x3  Tk 180.00\nAata Flour 2kg x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 290.00\nVAT (5%): Tk 14.50\nTotal Amount: Tk 304.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

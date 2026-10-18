@@ -1,0 +1,31 @@
+{
+  "image_id": 560,
+  "filename": "receipt_00560_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00560_bilingual_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0560",
+  "date_str": "13/07/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 184000,
+  "tax_minor": 9200,
+  "discount_minor": 0,
+  "total_amount_minor": 193200,
+  "full_text_ground_truth": "Metro Departmental (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0560\nDate: 13/07/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1840.00\nVAT (5%): Tk 92.00\nTotal Amount: Tk 1932.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

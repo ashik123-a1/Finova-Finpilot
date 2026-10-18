@@ -1,0 +1,31 @@
+{
+  "image_id": 884,
+  "filename": "receipt_00884_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00884_bilingual_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0884",
+  "date_str": "08/09/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    }
+  ],
+  "subtotal_minor": 58500,
+  "tax_minor": 2925,
+  "discount_minor": 10000,
+  "total_amount_minor": 51425,
+  "full_text_ground_truth": "Bismillah Electronics (বেঙ্গল ফুড মার্ট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0884\nDate: 08/09/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x3  Tk 405.00\nগোসলের সাবান x3  Tk 180.00\n------------------------------------------\nSubtotal: Tk 585.00\nVAT (5%): Tk 29.25\nDiscount: Tk 100.00\nTotal Amount: Tk 514.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

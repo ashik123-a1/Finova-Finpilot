@@ -1,0 +1,31 @@
+{
+  "image_id": 426,
+  "filename": "receipt_00426_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00426_en_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0426",
+  "date_str": "16/07/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 80000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 75000,
+  "full_text_ground_truth": "Bengal Food Mart\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0426\nDate: 16/07/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 800.00\nDiscount: Tk 50.00\nTotal Amount: Tk 750.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

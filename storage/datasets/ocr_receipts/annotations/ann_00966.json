@@ -1,0 +1,31 @@
+{
+  "image_id": 966,
+  "filename": "receipt_00966_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00966_en_clean.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0966",
+  "date_str": "02/01/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 24500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 24500,
+  "full_text_ground_truth": "Bismillah Electronics\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0966\nDate: 02/01/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nRefined White Sugar 1kg x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 245.00\nTotal Amount: Tk 245.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

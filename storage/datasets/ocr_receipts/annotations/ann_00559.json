@@ -1,0 +1,43 @@
+{
+  "image_id": 559,
+  "filename": "receipt_00559_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00559_bn_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0559",
+  "date_str": "26/01/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 106000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 96000,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nটাকা জমার রসিদ\nBill No: INV-2026-0559\nDate: 26/01/2026\n------------------------------------------\nডিটারজেন্ট সাবান x2  Tk 90.00\nসয়াবিন তেল ২ লিটার x2  Tk 720.00\nআটা ২ কেজি x1  Tk 110.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 1060.00\nDiscount: Tk 100.00\nTotal Amount: Tk 960.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 743,
+  "filename": "receipt_00743_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00743_bilingual_blur.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0743",
+  "date_str": "05/06/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 159000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 154000,
+  "full_text_ground_truth": "Bengal Food Mart (চৌধুরী সুপার মার্কেট)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0743\nDate: 05/06/2026\n------------------------------------------\nBlack Tea Pack 400g x1  Tk 240.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1590.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1540.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

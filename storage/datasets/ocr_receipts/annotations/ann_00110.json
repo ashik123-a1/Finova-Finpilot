@@ -1,0 +1,43 @@
+{
+  "image_id": 110,
+  "filename": "receipt_00110_bilingual_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00110_bilingual_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0110",
+  "date_str": "17/07/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 166500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 166500,
+  "full_text_ground_truth": "Chowdhury Supermarket (চৌধুরী সুপার মার্কেট)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0110\nDate: 17/07/2026\n------------------------------------------\nLaundry Soap Bar x3  Tk 135.00\nRefined White Sugar 1kg x2  Tk 270.00\nগোসলের সাবান x3  Tk 180.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1665.00\nTotal Amount: Tk 1665.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

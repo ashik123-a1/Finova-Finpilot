@@ -1,0 +1,37 @@
+{
+  "image_id": 312,
+  "filename": "receipt_00312_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00312_en_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0312",
+  "date_str": "21/08/2026",
+  "line_items": [
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 74500,
+  "tax_minor": 3725,
+  "discount_minor": 0,
+  "total_amount_minor": 78225,
+  "full_text_ground_truth": "Rahman Enterprise\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0312\nDate: 21/08/2026\n------------------------------------------\nBlack Tea Pack 400g x2  Tk 480.00\nAata Flour 2kg x2  Tk 220.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 745.00\nVAT (5%): Tk 37.25\nTotal Amount: Tk 782.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

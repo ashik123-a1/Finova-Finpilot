@@ -1,0 +1,43 @@
+{
+  "image_id": 473,
+  "filename": "receipt_00473_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00473_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0473",
+  "date_str": "26/10/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 168000,
+  "tax_minor": 8400,
+  "discount_minor": 10000,
+  "total_amount_minor": 166400,
+  "full_text_ground_truth": "Bismillah Electronics (বেঙ্গল ফুড মার্ট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0473\nDate: 26/10/2026\n------------------------------------------\nআটা ২ কেজি x2  Tk 220.00\nSoybean Oil 2L x3  Tk 1080.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1680.00\nVAT (5%): Tk 84.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1664.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

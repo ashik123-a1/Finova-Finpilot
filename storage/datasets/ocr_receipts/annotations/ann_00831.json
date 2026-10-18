@@ -1,0 +1,31 @@
+{
+  "image_id": 831,
+  "filename": "receipt_00831_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00831_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0831",
+  "date_str": "21/10/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    }
+  ],
+  "subtotal_minor": 118500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 113500,
+  "full_text_ground_truth": "Desh General Store\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0831\nDate: 21/10/2026\n------------------------------------------\nMiniket Rice 5kg x3  Tk 1140.00\nLaundry Soap Bar x1  Tk 45.00\n------------------------------------------\nSubtotal: Tk 1185.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1135.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

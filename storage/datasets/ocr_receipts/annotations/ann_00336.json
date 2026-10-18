@@ -1,0 +1,37 @@
+{
+  "image_id": 336,
+  "filename": "receipt_00336_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00336_en_clean.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0336",
+  "date_str": "07/12/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 99000,
+  "tax_minor": 4950,
+  "discount_minor": 0,
+  "total_amount_minor": 103950,
+  "full_text_ground_truth": "Rahman Enterprise\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0336\nDate: 07/12/2026\n------------------------------------------\nMasur Dal 1kg x1  Tk 140.00\nLaundry Soap Bar x2  Tk 90.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 990.00\nVAT (5%): Tk 49.50\nTotal Amount: Tk 1039.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

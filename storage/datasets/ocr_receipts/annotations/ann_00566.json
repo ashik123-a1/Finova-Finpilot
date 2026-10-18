@@ -1,0 +1,31 @@
+{
+  "image_id": 566,
+  "filename": "receipt_00566_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00566_bilingual_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0566",
+  "date_str": "27/03/2026",
+  "line_items": [
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    }
+  ],
+  "subtotal_minor": 90000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 80000,
+  "full_text_ground_truth": "Bismillah Electronics (দেশ জেনারেল স্টোর)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0566\nDate: 27/03/2026\n------------------------------------------\nমিনিকেট চাল ৫ কেজি x2  Tk 760.00\nমসুর ডাল ১ কেজি x1  Tk 140.00\n------------------------------------------\nSubtotal: Tk 900.00\nDiscount: Tk 100.00\nTotal Amount: Tk 800.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

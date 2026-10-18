@@ -1,0 +1,43 @@
+{
+  "image_id": 459,
+  "filename": "receipt_00459_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00459_en_faded_thermal.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0459",
+  "date_str": "17/03/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 262500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 257500,
+  "full_text_ground_truth": "Bengal Food Mart\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0459\nDate: 17/03/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nLaundry Soap Bar x3  Tk 135.00\nSoybean Oil 2L x3  Tk 1080.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2625.00\nDiscount: Tk 50.00\nTotal Amount: Tk 2575.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,37 @@
+{
+  "image_id": 126,
+  "filename": "receipt_00126_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00126_en_clean.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0126",
+  "date_str": "18/11/2026",
+  "line_items": [
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 1,
+      "unit_price_minor": 38000,
+      "line_total_minor": 38000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    }
+  ],
+  "subtotal_minor": 76000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 76000,
+  "full_text_ground_truth": "Bismillah Electronics\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0126\nDate: 18/11/2026\n------------------------------------------\nMiniket Rice 5kg x1  Tk 380.00\nAata Flour 2kg x1  Tk 110.00\nRefined White Sugar 1kg x2  Tk 270.00\n------------------------------------------\nSubtotal: Tk 760.00\nTotal Amount: Tk 760.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

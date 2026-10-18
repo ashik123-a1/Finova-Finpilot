@@ -1,0 +1,43 @@
+{
+  "image_id": 335,
+  "filename": "receipt_00335_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00335_bilingual_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0335",
+  "date_str": "20/10/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 261000,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 251000,
+  "full_text_ground_truth": "Chowdhury Supermarket (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0335\nDate: 20/10/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nমসুর ডাল ১ কেজি x2  Tk 280.00\nআটা ২ কেজি x1  Tk 110.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2610.00\nDiscount: Tk 100.00\nTotal Amount: Tk 2510.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

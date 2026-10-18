@@ -1,0 +1,43 @@
+{
+  "image_id": 482,
+  "filename": "receipt_00482_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00482_bilingual_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0482",
+  "date_str": "13/08/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 164500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 164500,
+  "full_text_ground_truth": "Bismillah Electronics (বেঙ্গল ফুড মার্ট)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0482\nDate: 13/08/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x2  Tk 280.00\nBath Soap 100g x3  Tk 180.00\nLaundry Soap Bar x1  Tk 45.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1645.00\nTotal Amount: Tk 1645.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

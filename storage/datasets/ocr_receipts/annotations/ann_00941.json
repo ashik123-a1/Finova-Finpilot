@@ -1,0 +1,37 @@
+{
+  "image_id": 941,
+  "filename": "receipt_00941_bilingual_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00941_bilingual_low_light.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0941",
+  "date_str": "27/11/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 74500,
+  "tax_minor": 3725,
+  "discount_minor": 0,
+  "total_amount_minor": 78225,
+  "full_text_ground_truth": "Desh General Store (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0941\nDate: 27/11/2026\n------------------------------------------\nAata Flour 2kg x3  Tk 330.00\nডিটারজেন্ট সাবান x3  Tk 135.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 745.00\nVAT (5%): Tk 37.25\nTotal Amount: Tk 782.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

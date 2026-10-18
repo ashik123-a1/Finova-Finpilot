@@ -1,0 +1,37 @@
+{
+  "image_id": 873,
+  "filename": "receipt_00873_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00873_en_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0873",
+  "date_str": "24/10/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 75000,
+  "tax_minor": 3750,
+  "discount_minor": 0,
+  "total_amount_minor": 78750,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0873\nDate: 24/10/2026\n------------------------------------------\nSoybean Oil 2L x1  Tk 360.00\nAata Flour 2kg x1  Tk 110.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 750.00\nVAT (5%): Tk 37.50\nTotal Amount: Tk 787.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

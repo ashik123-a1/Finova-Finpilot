@@ -1,0 +1,43 @@
+{
+  "image_id": 532,
+  "filename": "receipt_00532_bn_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00532_bn_clean.png",
+  "document_type": "sales_receipt",
+  "language": "bn",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0532",
+  "date_str": "26/04/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    }
+  ],
+  "subtotal_minor": 104500,
+  "tax_minor": 5225,
+  "discount_minor": 10000,
+  "total_amount_minor": 99725,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nক্যাশ মেমো / বিক্রয় রসিদ\nBill No: INV-2026-0532\nDate: 26/04/2026\n------------------------------------------\nআটা ২ কেজি x2  Tk 220.00\nগোসলের সাবান x3  Tk 180.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\nচা পাতা ৪০০ গ্রাম x1  Tk 240.00\n------------------------------------------\nSubtotal: Tk 1045.00\nVAT (5%): Tk 52.25\nDiscount: Tk 100.00\nTotal Amount: Tk 997.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

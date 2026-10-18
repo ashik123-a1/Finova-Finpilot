@@ -1,0 +1,43 @@
+{
+  "image_id": 355,
+  "filename": "receipt_00355_bn_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00355_bn_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "bn",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0355",
+  "date_str": "24/02/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "চা পাতা ৪০০ গ্রাম",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 161000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 156000,
+  "full_text_ground_truth": "বেঙ্গল ফুড মার্ট\nটাকা জমার রসিদ\nBill No: INV-2026-0355\nDate: 24/02/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\nচা পাতা ৪০০ গ্রাম x3  Tk 720.00\nআটা ২ কেজি x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 1610.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1560.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

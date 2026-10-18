@@ -1,0 +1,31 @@
+{
+  "image_id": 389,
+  "filename": "receipt_00389_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00389_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0389",
+  "date_str": "02/06/2026",
+  "line_items": [
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 117000,
+  "tax_minor": 5850,
+  "discount_minor": 10000,
+  "total_amount_minor": 112850,
+  "full_text_ground_truth": "Bengal Food Mart (চৌধুরী সুপার মার্কেট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0389\nDate: 02/06/2026\n------------------------------------------\nডিটারজেন্ট সাবান x2  Tk 90.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1170.00\nVAT (5%): Tk 58.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1128.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

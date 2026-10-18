@@ -1,0 +1,31 @@
+{
+  "image_id": 953,
+  "filename": "receipt_00953_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00953_bilingual_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0953",
+  "date_str": "04/11/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    }
+  ],
+  "subtotal_minor": 100000,
+  "tax_minor": 5000,
+  "discount_minor": 0,
+  "total_amount_minor": 105000,
+  "full_text_ground_truth": "Bengal Food Mart (দেশ জেনারেল স্টোর)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0953\nDate: 04/11/2026\n------------------------------------------\nSoybean Oil 2L x2  Tk 720.00\nMasur Dal 1kg x2  Tk 280.00\n------------------------------------------\nSubtotal: Tk 1000.00\nVAT (5%): Tk 50.00\nTotal Amount: Tk 1050.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

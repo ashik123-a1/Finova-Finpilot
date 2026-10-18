@@ -1,0 +1,31 @@
+{
+  "image_id": 53,
+  "filename": "receipt_00053_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00053_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0053",
+  "date_str": "16/07/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 55500,
+  "tax_minor": 2775,
+  "discount_minor": 0,
+  "total_amount_minor": 58275,
+  "full_text_ground_truth": "Metro Departmental (বেঙ্গল ফুড মার্ট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0053\nDate: 16/07/2026\n------------------------------------------\nMasur Dal 1kg x3  Tk 420.00\nসাদা চিনি ১ কেজি x1  Tk 135.00\n------------------------------------------\nSubtotal: Tk 555.00\nVAT (5%): Tk 27.75\nTotal Amount: Tk 582.75\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 905,
+  "filename": "receipt_00905_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00905_bilingual_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0905",
+  "date_str": "25/11/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 60000,
+  "tax_minor": 3000,
+  "discount_minor": 0,
+  "total_amount_minor": 63000,
+  "full_text_ground_truth": "Desh General Store (দেশ জেনারেল স্টোর)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0905\nDate: 25/11/2026\n------------------------------------------\nগোসলের সাবান x3  Tk 180.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 600.00\nVAT (5%): Tk 30.00\nTotal Amount: Tk 630.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 261,
+  "filename": "receipt_00261_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00261_en_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0261",
+  "date_str": "24/08/2026",
+  "line_items": [
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 83000,
+  "tax_minor": 4150,
+  "discount_minor": 5000,
+  "total_amount_minor": 82150,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0261\nDate: 24/08/2026\n------------------------------------------\nAata Flour 2kg x1  Tk 110.00\nBlack Tea Pack 400g x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 830.00\nVAT (5%): Tk 41.50\nDiscount: Tk 50.00\nTotal Amount: Tk 821.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

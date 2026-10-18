@@ -1,0 +1,43 @@
+{
+  "image_id": 201,
+  "filename": "receipt_00201_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00201_en_shadow.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0201",
+  "date_str": "15/08/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 3,
+      "unit_price_minor": 24000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 140500,
+  "tax_minor": 7025,
+  "discount_minor": 0,
+  "total_amount_minor": 147525,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0201\nDate: 15/08/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nSoybean Oil 2L x1  Tk 360.00\nMasur Dal 1kg x2  Tk 280.00\nBlack Tea Pack 400g x3  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1405.00\nVAT (5%): Tk 70.25\nTotal Amount: Tk 1475.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

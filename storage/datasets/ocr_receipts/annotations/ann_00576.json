@@ -1,0 +1,43 @@
+{
+  "image_id": 576,
+  "filename": "receipt_00576_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00576_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0576",
+  "date_str": "07/01/2026",
+  "line_items": [
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    }
+  ],
+  "subtotal_minor": 142500,
+  "tax_minor": 7125,
+  "discount_minor": 5000,
+  "total_amount_minor": 144625,
+  "full_text_ground_truth": "Metro Departmental\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0576\nDate: 07/01/2026\n------------------------------------------\nBath Soap 100g x2  Tk 120.00\nRefined White Sugar 1kg x1  Tk 135.00\nLaundry Soap Bar x2  Tk 90.00\nSoybean Oil 2L x3  Tk 1080.00\n------------------------------------------\nSubtotal: Tk 1425.00\nVAT (5%): Tk 71.25\nDiscount: Tk 50.00\nTotal Amount: Tk 1446.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

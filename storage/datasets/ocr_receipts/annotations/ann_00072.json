@@ -1,0 +1,43 @@
+{
+  "image_id": 72,
+  "filename": "receipt_00072_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00072_en_rotated.png",
+  "document_type": "sales_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0072",
+  "date_str": "15/07/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 167000,
+  "tax_minor": 8350,
+  "discount_minor": 10000,
+  "total_amount_minor": 165350,
+  "full_text_ground_truth": "Bengal Food Mart\nCASH MEMO / SALES RECEIPT\nBill No: INV-2026-0072\nDate: 15/07/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nRefined White Sugar 1kg x2  Tk 270.00\nSoybean Oil 2L x1  Tk 360.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1670.00\nVAT (5%): Tk 83.50\nDiscount: Tk 100.00\nTotal Amount: Tk 1653.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

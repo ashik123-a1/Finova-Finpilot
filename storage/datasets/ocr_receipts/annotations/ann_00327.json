@@ -1,0 +1,43 @@
+{
+  "image_id": 327,
+  "filename": "receipt_00327_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00327_en_shadow.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0327",
+  "date_str": "03/06/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    }
+  ],
+  "subtotal_minor": 213500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 203500,
+  "full_text_ground_truth": "Bismillah Electronics\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0327\nDate: 03/06/2026\n------------------------------------------\nRefined White Sugar 1kg x3  Tk 405.00\nMiniket Rice 5kg x3  Tk 1140.00\nAata Flour 2kg x1  Tk 110.00\nBlack Tea Pack 400g x2  Tk 480.00\n------------------------------------------\nSubtotal: Tk 2135.00\nDiscount: Tk 100.00\nTotal Amount: Tk 2035.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 275,
+  "filename": "receipt_00275_bilingual_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00275_bilingual_rotated.png",
+  "document_type": "payment_receipt",
+  "language": "bilingual",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0275",
+  "date_str": "16/05/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    }
+  ],
+  "subtotal_minor": 67500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 57500,
+  "full_text_ground_truth": "Metro Departmental (রহমান এন্টারপ্রাইজ)\nMONEY RECEIPT (রসিদ)\nBill No: INV-2026-0275\nDate: 16/05/2026\n------------------------------------------\nRefined White Sugar 1kg x2  Tk 270.00\nসাদা চিনি ১ কেজি x3  Tk 405.00\n------------------------------------------\nSubtotal: Tk 675.00\nDiscount: Tk 100.00\nTotal Amount: Tk 575.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

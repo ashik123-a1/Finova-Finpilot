@@ -1,0 +1,31 @@
+{
+  "image_id": 665,
+  "filename": "receipt_00665_bilingual_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00665_bilingual_clean.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0665",
+  "date_str": "19/03/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 2,
+      "unit_price_minor": 6000,
+      "line_total_minor": 12000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 84000,
+  "tax_minor": 4200,
+  "discount_minor": 10000,
+  "total_amount_minor": 78200,
+  "full_text_ground_truth": "Desh General Store (বেঙ্গল ফুড মার্ট)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0665\nDate: 19/03/2026\n------------------------------------------\nগোসলের সাবান x2  Tk 120.00\nSoybean Oil 2L x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 840.00\nVAT (5%): Tk 42.00\nDiscount: Tk 100.00\nTotal Amount: Tk 782.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

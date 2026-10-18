@@ -1,0 +1,37 @@
+{
+  "image_id": 918,
+  "filename": "receipt_00918_en_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00918_en_blur.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0918",
+  "date_str": "13/04/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 155500,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 150500,
+  "full_text_ground_truth": "Bengal Food Mart\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0918\nDate: 13/04/2026\n------------------------------------------\nLaundry Soap Bar x3  Tk 135.00\nMasur Dal 1kg x2  Tk 280.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1555.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1505.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,43 @@
+{
+  "image_id": 680,
+  "filename": "receipt_00680_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00680_bilingual_blur.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0680",
+  "date_str": "05/04/2026",
+  "line_items": [
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Bath Soap 100g",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    }
+  ],
+  "subtotal_minor": 42500,
+  "tax_minor": 2125,
+  "discount_minor": 0,
+  "total_amount_minor": 44625,
+  "full_text_ground_truth": "Chowdhury Supermarket (বেঙ্গল ফুড মার্ট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0680\nDate: 05/04/2026\n------------------------------------------\nমসুর ডাল ১ কেজি x1  Tk 140.00\nডিটারজেন্ট সাবান x2  Tk 90.00\nLaundry Soap Bar x3  Tk 135.00\nBath Soap 100g x1  Tk 60.00\n------------------------------------------\nSubtotal: Tk 425.00\nVAT (5%): Tk 21.25\nTotal Amount: Tk 446.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 759,
+  "filename": "receipt_00759_en_low_light.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00759_en_low_light.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "low_light",
+  "invoice_number": "INV-2026-0759",
+  "date_str": "23/11/2026",
+  "line_items": [
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 1,
+      "unit_price_minor": 13500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    }
+  ],
+  "subtotal_minor": 49500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 49500,
+  "full_text_ground_truth": "Metro Departmental\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0759\nDate: 23/11/2026\n------------------------------------------\nRefined White Sugar 1kg x1  Tk 135.00\nSoybean Oil 2L x1  Tk 360.00\n------------------------------------------\nSubtotal: Tk 495.00\nTotal Amount: Tk 495.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

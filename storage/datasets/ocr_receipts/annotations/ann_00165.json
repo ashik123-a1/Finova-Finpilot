@@ -1,0 +1,43 @@
+{
+  "image_id": 165,
+  "filename": "receipt_00165_en_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00165_en_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0165",
+  "date_str": "05/10/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Refined White Sugar 1kg",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 1,
+      "unit_price_minor": 14000,
+      "line_total_minor": 14000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 182000,
+  "tax_minor": 9100,
+  "discount_minor": 10000,
+  "total_amount_minor": 181100,
+  "full_text_ground_truth": "Bengal Food Mart\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0165\nDate: 05/10/2026\n------------------------------------------\nSoybean Oil 2L x3  Tk 1080.00\nRefined White Sugar 1kg x2  Tk 270.00\nMasur Dal 1kg x1  Tk 140.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 1820.00\nVAT (5%): Tk 91.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1811.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

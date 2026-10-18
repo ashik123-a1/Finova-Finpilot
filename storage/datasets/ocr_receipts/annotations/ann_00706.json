@@ -1,0 +1,37 @@
+{
+  "image_id": 706,
+  "filename": "receipt_00706_bn_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00706_bn_cropped.png",
+  "document_type": "expense_receipt",
+  "language": "bn",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0706",
+  "date_str": "02/05/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "মিনিকেট চাল ৫ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 152000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 147000,
+  "full_text_ground_truth": "বিসমিল্লাহ ইলেকট্রনিক্স\nদোকান খরচ রসিদ\nBill No: INV-2026-0706\nDate: 02/05/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x2  Tk 270.00\nআটা ২ কেজি x1  Tk 110.00\nমিনিকেট চাল ৫ কেজি x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 1520.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1470.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

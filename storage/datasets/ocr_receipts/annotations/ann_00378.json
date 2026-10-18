@@ -1,0 +1,43 @@
+{
+  "image_id": 378,
+  "filename": "receipt_00378_en_clean.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00378_en_clean.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "clean",
+  "invoice_number": "INV-2026-0378",
+  "date_str": "11/03/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 2,
+      "unit_price_minor": 24000,
+      "line_total_minor": 48000
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    }
+  ],
+  "subtotal_minor": 166500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 156500,
+  "full_text_ground_truth": "Metro Departmental\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0378\nDate: 11/03/2026\n------------------------------------------\nLaundry Soap Bar x1  Tk 45.00\nSoybean Oil 2L x2  Tk 720.00\nBlack Tea Pack 400g x2  Tk 480.00\nMasur Dal 1kg x3  Tk 420.00\n------------------------------------------\nSubtotal: Tk 1665.00\nDiscount: Tk 100.00\nTotal Amount: Tk 1565.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

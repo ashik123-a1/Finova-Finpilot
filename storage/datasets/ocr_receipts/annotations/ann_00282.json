@@ -1,0 +1,31 @@
+{
+  "image_id": 282,
+  "filename": "receipt_00282_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00282_en_rotated.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0282",
+  "date_str": "11/06/2026",
+  "line_items": [
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 2,
+      "unit_price_minor": 38000,
+      "line_total_minor": 76000
+    }
+  ],
+  "subtotal_minor": 148000,
+  "tax_minor": 0,
+  "discount_minor": 5000,
+  "total_amount_minor": 143000,
+  "full_text_ground_truth": "Bengal Food Mart\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0282\nDate: 11/06/2026\n------------------------------------------\nSoybean Oil 2L x2  Tk 720.00\nMiniket Rice 5kg x2  Tk 760.00\n------------------------------------------\nSubtotal: Tk 1480.00\nDiscount: Tk 50.00\nTotal Amount: Tk 1430.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

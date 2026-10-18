@@ -1,0 +1,31 @@
+{
+  "image_id": 949,
+  "filename": "receipt_00949_bn_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00949_bn_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0949",
+  "date_str": "11/05/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 1,
+      "unit_price_minor": 36000,
+      "line_total_minor": 36000
+    },
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 11000,
+      "line_total_minor": 22000
+    }
+  ],
+  "subtotal_minor": 58000,
+  "tax_minor": 2900,
+  "discount_minor": 0,
+  "total_amount_minor": 60900,
+  "full_text_ground_truth": "মেট্রো ডিপার্টমেন্টাল\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0949\nDate: 11/05/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x1  Tk 360.00\nআটা ২ কেজি x2  Tk 220.00\n------------------------------------------\nSubtotal: Tk 580.00\nVAT (5%): Tk 29.00\nTotal Amount: Tk 609.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

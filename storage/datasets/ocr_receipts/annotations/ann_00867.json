@@ -1,0 +1,31 @@
+{
+  "image_id": 867,
+  "filename": "receipt_00867_en_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00867_en_cropped.png",
+  "document_type": "payment_receipt",
+  "language": "en",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0867",
+  "date_str": "21/09/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    }
+  ],
+  "subtotal_minor": 39000,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 39000,
+  "full_text_ground_truth": "Metro Departmental\nMONEY RECEIPT VOUCHER\nBill No: INV-2026-0867\nDate: 21/09/2026\n------------------------------------------\nMasur Dal 1kg x2  Tk 280.00\nAata Flour 2kg x1  Tk 110.00\n------------------------------------------\nSubtotal: Tk 390.00\nTotal Amount: Tk 390.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

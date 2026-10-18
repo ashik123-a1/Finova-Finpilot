@@ -1,0 +1,43 @@
+{
+  "image_id": 860,
+  "filename": "receipt_00860_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00860_bilingual_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0860",
+  "date_str": "28/01/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 1,
+      "unit_price_minor": 4500,
+      "line_total_minor": 4500
+    },
+    {
+      "description": "মসুর ডাল ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Miniket Rice 5kg",
+      "quantity": 3,
+      "unit_price_minor": 38000,
+      "line_total_minor": 114000
+    }
+  ],
+  "subtotal_minor": 268500,
+  "tax_minor": 13425,
+  "discount_minor": 5000,
+  "total_amount_minor": 276925,
+  "full_text_ground_truth": "Chowdhury Supermarket (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0860\nDate: 28/01/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nLaundry Soap Bar x1  Tk 45.00\nমসুর ডাল ১ কেজি x3  Tk 420.00\nMiniket Rice 5kg x3  Tk 1140.00\n------------------------------------------\nSubtotal: Tk 2685.00\nVAT (5%): Tk 134.25\nDiscount: Tk 50.00\nTotal Amount: Tk 2769.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

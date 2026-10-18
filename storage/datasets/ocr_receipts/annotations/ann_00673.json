@@ -1,0 +1,31 @@
+{
+  "image_id": 673,
+  "filename": "receipt_00673_bn_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00673_bn_blur.png",
+  "document_type": "purchase_invoice",
+  "language": "bn",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0673",
+  "date_str": "10/07/2026",
+  "line_items": [
+    {
+      "description": "সয়াবিন তেল ২ লিটার",
+      "quantity": 3,
+      "unit_price_minor": 36000,
+      "line_total_minor": 108000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 117000,
+  "tax_minor": 5850,
+  "discount_minor": 5000,
+  "total_amount_minor": 117850,
+  "full_text_ground_truth": "চৌধুরী সুপার মার্কেট\nবাণিজ্যিক ক্রয় চালান\nBill No: INV-2026-0673\nDate: 10/07/2026\n------------------------------------------\nসয়াবিন তেল ২ লিটার x3  Tk 1080.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 1170.00\nVAT (5%): Tk 58.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1178.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

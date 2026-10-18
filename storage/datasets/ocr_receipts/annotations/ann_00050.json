@@ -1,0 +1,43 @@
+{
+  "image_id": 50,
+  "filename": "receipt_00050_bilingual_blur.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00050_bilingual_blur.png",
+  "document_type": "expense_receipt",
+  "language": "bilingual",
+  "quality_category": "blur",
+  "invoice_number": "INV-2026-0050",
+  "date_str": "07/07/2026",
+  "line_items": [
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 3,
+      "unit_price_minor": 13500,
+      "line_total_minor": 40500
+    },
+    {
+      "description": "Black Tea Pack 400g",
+      "quantity": 1,
+      "unit_price_minor": 24000,
+      "line_total_minor": 24000
+    },
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "ডিটারজেন্ট সাবান",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 91500,
+  "tax_minor": 0,
+  "discount_minor": 10000,
+  "total_amount_minor": 81500,
+  "full_text_ground_truth": "Bismillah Electronics (বিসমিল্লাহ ইলেকট্রনিক্স)\nEXPENSE VOUCHER (খরচ)\nBill No: INV-2026-0050\nDate: 07/07/2026\n------------------------------------------\nসাদা চিনি ১ কেজি x3  Tk 405.00\nBlack Tea Pack 400g x1  Tk 240.00\nগোসলের সাবান x3  Tk 180.00\nডিটারজেন্ট সাবান x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 915.00\nDiscount: Tk 100.00\nTotal Amount: Tk 815.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

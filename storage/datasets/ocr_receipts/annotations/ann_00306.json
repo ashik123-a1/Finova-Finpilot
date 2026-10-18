@@ -1,0 +1,37 @@
+{
+  "image_id": 306,
+  "filename": "receipt_00306_en_shadow.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00306_en_shadow.png",
+  "document_type": "expense_receipt",
+  "language": "en",
+  "quality_category": "shadow",
+  "invoice_number": "INV-2026-0306",
+  "date_str": "09/11/2026",
+  "line_items": [
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    },
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 2,
+      "unit_price_minor": 14000,
+      "line_total_minor": 28000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    }
+  ],
+  "subtotal_minor": 74500,
+  "tax_minor": 0,
+  "discount_minor": 0,
+  "total_amount_minor": 74500,
+  "full_text_ground_truth": "Desh General Store\nPETTY EXPENSE RECEIPT\nBill No: INV-2026-0306\nDate: 09/11/2026\n------------------------------------------\nLaundry Soap Bar x3  Tk 135.00\nMasur Dal 1kg x2  Tk 280.00\nAata Flour 2kg x3  Tk 330.00\n------------------------------------------\nSubtotal: Tk 745.00\nTotal Amount: Tk 745.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

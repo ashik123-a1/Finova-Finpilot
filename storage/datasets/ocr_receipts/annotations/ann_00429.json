@@ -1,0 +1,37 @@
+{
+  "image_id": 429,
+  "filename": "receipt_00429_en_rotated.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00429_en_rotated.png",
+  "document_type": "purchase_invoice",
+  "language": "en",
+  "quality_category": "rotated",
+  "invoice_number": "INV-2026-0429",
+  "date_str": "27/01/2026",
+  "line_items": [
+    {
+      "description": "Masur Dal 1kg",
+      "quantity": 3,
+      "unit_price_minor": 14000,
+      "line_total_minor": 42000
+    },
+    {
+      "description": "Aata Flour 2kg",
+      "quantity": 3,
+      "unit_price_minor": 11000,
+      "line_total_minor": 33000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 3,
+      "unit_price_minor": 4500,
+      "line_total_minor": 13500
+    }
+  ],
+  "subtotal_minor": 88500,
+  "tax_minor": 4425,
+  "discount_minor": 5000,
+  "total_amount_minor": 87925,
+  "full_text_ground_truth": "Desh General Store\nCOMMERCIAL PURCHASE INVOICE\nBill No: INV-2026-0429\nDate: 27/01/2026\n------------------------------------------\nMasur Dal 1kg x3  Tk 420.00\nAata Flour 2kg x3  Tk 330.00\nLaundry Soap Bar x3  Tk 135.00\n------------------------------------------\nSubtotal: Tk 885.00\nVAT (5%): Tk 44.25\nDiscount: Tk 50.00\nTotal Amount: Tk 879.25\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

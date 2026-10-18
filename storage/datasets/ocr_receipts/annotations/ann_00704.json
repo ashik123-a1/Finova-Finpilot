@@ -1,0 +1,37 @@
+{
+  "image_id": 704,
+  "filename": "receipt_00704_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00704_bilingual_faded_thermal.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0704",
+  "date_str": "06/05/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 3,
+      "unit_price_minor": 6000,
+      "line_total_minor": 18000
+    },
+    {
+      "description": "সাদা চিনি ১ কেজি",
+      "quantity": 2,
+      "unit_price_minor": 13500,
+      "line_total_minor": 27000
+    },
+    {
+      "description": "Soybean Oil 2L",
+      "quantity": 2,
+      "unit_price_minor": 36000,
+      "line_total_minor": 72000
+    }
+  ],
+  "subtotal_minor": 117000,
+  "tax_minor": 5850,
+  "discount_minor": 5000,
+  "total_amount_minor": 117850,
+  "full_text_ground_truth": "Desh General Store (মেট্রো ডিপার্টমেন্টাল)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0704\nDate: 06/05/2026\n------------------------------------------\nগোসলের সাবান x3  Tk 180.00\nসাদা চিনি ১ কেজি x2  Tk 270.00\nSoybean Oil 2L x2  Tk 720.00\n------------------------------------------\nSubtotal: Tk 1170.00\nVAT (5%): Tk 58.50\nDiscount: Tk 50.00\nTotal Amount: Tk 1178.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

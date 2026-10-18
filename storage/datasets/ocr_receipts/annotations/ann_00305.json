@@ -1,0 +1,31 @@
+{
+  "image_id": 305,
+  "filename": "receipt_00305_bilingual_faded_thermal.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00305_bilingual_faded_thermal.png",
+  "document_type": "purchase_invoice",
+  "language": "bilingual",
+  "quality_category": "faded_thermal",
+  "invoice_number": "INV-2026-0305",
+  "date_str": "26/09/2026",
+  "line_items": [
+    {
+      "description": "আটা ২ কেজি",
+      "quantity": 1,
+      "unit_price_minor": 11000,
+      "line_total_minor": 11000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 20000,
+  "tax_minor": 1000,
+  "discount_minor": 0,
+  "total_amount_minor": 21000,
+  "full_text_ground_truth": "Rahman Enterprise (দেশ জেনারেল স্টোর)\nPURCHASE INVOICE (চালান)\nBill No: INV-2026-0305\nDate: 26/09/2026\n------------------------------------------\nআটা ২ কেজি x1  Tk 110.00\nLaundry Soap Bar x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 200.00\nVAT (5%): Tk 10.00\nTotal Amount: Tk 210.00\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}

@@ -1,0 +1,31 @@
+{
+  "image_id": 692,
+  "filename": "receipt_00692_bilingual_cropped.png",
+  "image_path": "storage\\datasets\\ocr_receipts\\images\\receipt_00692_bilingual_cropped.png",
+  "document_type": "sales_receipt",
+  "language": "bilingual",
+  "quality_category": "cropped",
+  "invoice_number": "INV-2026-0692",
+  "date_str": "19/12/2026",
+  "line_items": [
+    {
+      "description": "গোসলের সাবান",
+      "quantity": 1,
+      "unit_price_minor": 6000,
+      "line_total_minor": 6000
+    },
+    {
+      "description": "Laundry Soap Bar",
+      "quantity": 2,
+      "unit_price_minor": 4500,
+      "line_total_minor": 9000
+    }
+  ],
+  "subtotal_minor": 15000,
+  "tax_minor": 750,
+  "discount_minor": 0,
+  "total_amount_minor": 15750,
+  "full_text_ground_truth": "Rahman Enterprise (চৌধুরী সুপার মার্কেট)\nCASH MEMO (ক্যাশ মেমো)\nBill No: INV-2026-0692\nDate: 19/12/2026\n------------------------------------------\nগোসলের সাবান x1  Tk 60.00\nLaundry Soap Bar x2  Tk 90.00\n------------------------------------------\nSubtotal: Tk 150.00\nVAT (5%): Tk 7.50\nTotal Amount: Tk 157.50\n==========================================\nThank you / ধন্যবাদ",
+  "is_synthetic": true,
+  "provenance": "SME Synthetic Thermal Receipt Generator v2.0"
+}
