@@ -12,12 +12,15 @@
                 <i data-lucide="sparkles" class="w-5 h-5"></i>
             </div>
             <div>
-                <div class="text-xs font-bold text-white flex items-center gap-2">
+                <div class="text-xs font-bold text-white flex items-center gap-2 flex-wrap">
                     <span>AI Financial Participant Active</span>
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                    <span id="data-environment-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono {% if is_synthetic %}bg-amber-500/20 text-amber-300 border border-amber-500/30{% else %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% endif %}">
+                        {% if is_synthetic %}SYNTHETIC BENCHMARK DATA{% else %}VERIFIED AUDITED DATA{% endif %}
+                    </span>
                 </div>
                 <div class="text-[11px] text-slate-300">
-                    Active Shop: <strong class="text-cyan-300">Shop #{{ active_shop_id }}</strong> • 21,978 transactions synchronized with 0% precision loss.
+                    Active Shop: <strong id="active-shop-label" class="text-cyan-300">{{ active_shop_name }} (Shop #{{ active_shop_id }})</strong> • <span id="sync-telemetry-text">Ledger entries synchronized with 0% precision loss.</span>
                 </div>
             </div>
         </div>
@@ -36,57 +39,69 @@
     <!-- 4 High-Impact KPI Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <!-- Revenue Card -->
-        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wider">30-Day Revenue</span>
-                <i data-lucide="arrow-up-right" class="w-4 h-4 text-emerald-400"></i>
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider">30-Day Revenue</span>
+                    <i data-lucide="arrow-up-right" class="w-4 h-4 text-emerald-400"></i>
+                </div>
+                <div id="kpi-revenue" class="font-orbitron text-2xl font-bold text-white min-h-[32px] flex items-center">
+                    <span class="inline-block w-36 h-7 bg-white/10 rounded animate-pulse"></span>
+                </div>
             </div>
-            <div id="kpi-revenue" class="font-orbitron text-2xl font-bold text-white">৳ 1,842,500<span class="text-xs font-mono text-cyan-400">.00</span></div>
-            <div class="text-[11px] text-emerald-400 flex items-center gap-1 mt-2">
-                <i data-lucide="trending-up" class="w-3 h-3"></i>
-                <span>+12.4% vs previous 30 days</span>
+            <div id="kpi-revenue-trend" class="text-[11px] text-slate-400 flex items-center gap-1 mt-2 min-h-[16px]">
+                <span class="inline-block w-28 h-3 bg-white/5 rounded animate-pulse"></span>
             </div>
         </div>
 
         <!-- Net Operating Profit Card -->
-        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wider">Net Operating Profit</span>
-                <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i>
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider">Net Operating Profit</span>
+                    <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i>
+                </div>
+                <div id="kpi-profit" class="font-orbitron text-2xl font-bold text-emerald-400 min-h-[32px] flex items-center">
+                    <span class="inline-block w-32 h-7 bg-white/10 rounded animate-pulse"></span>
+                </div>
             </div>
-            <div id="kpi-profit" class="font-orbitron text-2xl font-bold text-emerald-400">৳ 412,800<span class="text-xs font-mono text-emerald-300">.00</span></div>
-            <div class="text-[11px] text-cyan-400 flex items-center gap-1 mt-2">
-                <i data-lucide="check" class="w-3 h-3"></i>
-                <span>22.4% Net Margin (Healthy)</span>
+            <div id="kpi-profit-margin" class="text-[11px] text-cyan-400 flex items-center gap-1 mt-2 min-h-[16px]">
+                <span class="inline-block w-28 h-3 bg-white/5 rounded animate-pulse"></span>
             </div>
         </div>
 
         <!-- Current Cash Balance Card -->
-        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wider">Cash & Liquidity</span>
-                <i data-lucide="wallet" class="w-4 h-4 text-indigo-400"></i>
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider">Cash & Liquidity</span>
+                    <i data-lucide="wallet" class="w-4 h-4 text-indigo-400"></i>
+                </div>
+                <div id="kpi-cash" class="font-orbitron text-2xl font-bold text-white min-h-[32px] flex items-center">
+                    <span class="inline-block w-32 h-7 bg-white/10 rounded animate-pulse"></span>
+                </div>
             </div>
-            <div id="kpi-cash" class="font-orbitron text-2xl font-bold text-white">৳ 948,200<span class="text-xs font-mono text-cyan-400">.00</span></div>
-            <div class="text-[11px] text-slate-400 flex items-center gap-1 mt-2">
-                <i data-lucide="clock" class="w-3 h-3"></i>
-                <span>Reconciled 14m ago</span>
+            <div id="kpi-cash-subtext" class="text-[11px] text-slate-400 flex items-center gap-1 mt-2 min-h-[16px]">
+                <span class="inline-block w-24 h-3 bg-white/5 rounded animate-pulse"></span>
             </div>
         </div>
 
         <!-- 30-Day Runway & DSCR Card -->
-        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden">
-            <div class="flex items-center justify-between text-slate-400 mb-2">
-                <span class="text-xs font-semibold uppercase tracking-wider">Cash Runway & DSCR</span>
-                <i data-lucide="shield-check" class="w-4 h-4 text-amber-400"></i>
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between text-slate-400 mb-2">
+                    <span class="text-xs font-semibold uppercase tracking-wider">Cash Runway & DSCR</span>
+                    <i data-lucide="shield-check" class="w-4 h-4 text-amber-400"></i>
+                </div>
+                <div class="flex items-baseline gap-2 min-h-[32px]">
+                    <span id="kpi-runway" class="font-orbitron text-2xl font-bold text-amber-300">
+                        <span class="inline-block w-20 h-7 bg-white/10 rounded animate-pulse"></span>
+                    </span>
+                    <span id="kpi-dscr" class="text-xs font-mono text-slate-400"></span>
+                </div>
             </div>
-            <div class="flex items-baseline gap-2">
-                <span id="kpi-runway" class="font-orbitron text-2xl font-bold text-amber-300">88 Days</span>
-                <span class="text-xs font-mono text-slate-400">(DSCR 1.76x)</span>
-            </div>
-            <div class="text-[11px] text-emerald-400 flex items-center gap-1 mt-2">
-                <i data-lucide="check-circle" class="w-3 h-3"></i>
-                <span>Bank Loan Pre-Qualified</span>
+            <div id="kpi-loan-status" class="text-[11px] flex items-center gap-1 mt-2 min-h-[16px]">
+                <span class="inline-block w-28 h-3 bg-white/5 rounded animate-pulse"></span>
             </div>
         </div>
     </div>
@@ -94,11 +109,14 @@
     <!-- Charts Row -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Revenue vs Expense Stream Chart (2 Cols) -->
-        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-4">
-            <div class="flex items-center justify-between">
+        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-4 relative">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
-                    <h3 class="text-sm font-bold text-white">Revenue vs Operating Expenses (30 Days)</h3>
-                    <p class="text-xs text-slate-400">Daily actuals synchronized from POS and invoice entries</p>
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <span>Revenue vs Operating Expenses (30 Days)</span>
+                        <span id="chart-currency-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-cyan-300 border border-white/10">BDT</span>
+                    </h3>
+                    <p id="chart-subtext" class="text-xs text-slate-400">Daily actuals synchronized from POS sales and verified ledger entries</p>
                 </div>
                 <div class="flex items-center gap-3 text-xs font-mono">
                     <span class="flex items-center gap-1.5 text-cyan-400">
@@ -110,8 +128,31 @@
                 </div>
             </div>
 
-            <!-- Canvas for Chart.js -->
+            <!-- Canvas for Chart.js with Loading, Error, and Empty States -->
             <div class="h-64 relative w-full">
+                <!-- Loading State -->
+                <div id="chart-loading" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 rounded-2xl">
+                    <div class="w-7 h-7 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                    <span class="text-xs text-slate-300 font-mono">Querying shop ledger records...</span>
+                </div>
+
+                <!-- Empty State -->
+                <div id="chart-empty" class="hidden absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 p-6 text-center rounded-2xl">
+                    <i data-lucide="bar-chart-2" class="w-8 h-8 text-slate-500"></i>
+                    <p class="text-xs font-semibold text-slate-300">No transactions recorded for this 30-day window.</p>
+                    <p class="text-[11px] text-slate-500 max-w-sm">Post new sales or upload invoices to visualize your daily revenue and expense streams.</p>
+                </div>
+
+                <!-- Error State -->
+                <div id="chart-error" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 p-6 text-center rounded-2xl border border-rose-500/20">
+                    <i data-lucide="alert-circle" class="w-8 h-8 text-rose-400"></i>
+                    <p id="chart-error-msg" class="text-xs font-semibold text-rose-300">Failed to load financial stream.</p>
+                    <button type="button" onclick="loadDashboardData()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-cyan-300 border border-cyan-500/30 transition-all flex items-center gap-1.5">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                        <span>Retry</span>
+                    </button>
+                </div>
+
                 <canvas id="revenueExpenseChart"></canvas>
             </div>
         </div>
@@ -124,21 +165,21 @@
                         <i data-lucide="bot" class="w-4 h-4 text-cyan-400"></i>
                         <span class="text-xs font-mono uppercase text-cyan-400 font-bold">Autonomous Advisor</span>
                     </div>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">Real-time</span>
+                    <span id="advisor-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">Live Audit</span>
                 </div>
-                <h4 class="text-sm font-bold text-white mb-2">Liquidity Spike Detected</h4>
-                <p class="text-xs text-slate-300 leading-relaxed">
-                    Sales in <strong>Shop #{{ active_shop_id }}</strong> grew by 14.8% this week. Current gross profit comfortably absorbs the proposed ৳ 500,000 inventory loan with a safe DSCR of <strong>1.82x</strong> (Threshold: >1.25x).
+                <h4 id="advisor-title" class="text-sm font-bold text-white mb-2">Analyzing financial trajectory...</h4>
+                <p id="advisor-text" class="text-xs text-slate-300 leading-relaxed">
+                    Evaluating trailing 30-day cash burn, gross margins, and debt service capacity for <strong>Shop #{{ active_shop_id }}</strong>...
                 </p>
                 
                 <div class="mt-4 p-3 rounded-xl bg-slate-900/80 border border-white/10 space-y-1.5 text-xs">
                     <div class="flex justify-between text-slate-400">
                         <span>Recommended Action:</span>
-                        <span class="text-cyan-300 font-semibold">Bulk Purchasing</span>
+                        <span id="advisor-action" class="text-cyan-300 font-semibold font-mono">Synthesizing...</span>
                     </div>
                     <div class="flex justify-between text-slate-400">
-                        <span>Expected Payback:</span>
-                        <span class="text-emerald-400 font-semibold">4.2 Months</span>
+                        <span>Liquidity Outlook:</span>
+                        <span id="advisor-outlook" class="text-emerald-400 font-semibold font-mono">Calculating...</span>
                     </div>
                 </div>
             </div>
@@ -155,7 +196,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
                 <h3 class="text-sm font-bold text-white">Live Transactions Stream</h3>
-                <p class="text-xs text-slate-400">Directly querying SQLite verified ledger table for Shop #{{ active_shop_id }}</p>
+                <p class="text-xs text-slate-400">Directly querying verified SQLite ledger records for <strong class="text-cyan-300">Shop #{{ active_shop_id }}</strong></p>
             </div>
             <a href="/app/finance" class="text-xs font-mono text-cyan-400 hover:underline flex items-center gap-1">
                 <span>View Full P&L & Ledgers</span>
@@ -170,7 +211,7 @@
                         <th class="pb-3 font-semibold">Invoice / ID</th>
                         <th class="pb-3 font-semibold">Customer / Type</th>
                         <th class="pb-3 font-semibold">Payment Mode</th>
-                        <th class="pb-3 font-semibold text-right">Amount (BDT)</th>
+                        <th class="pb-3 font-semibold text-right" id="recent-sales-col-currency">Amount (BDT)</th>
                         <th class="pb-3 font-semibold text-center">Status</th>
                     </tr>
                 </thead>
@@ -188,38 +229,218 @@
 
 {% block extra_scripts %}
 <script>
+const activeShopId = {{ active_shop_id }};
+let dashboardChartInstance = null;
+
 document.addEventListener("DOMContentLoaded", function() {
-    renderDashboardChart();
+    loadDashboardData();
     loadDashboardRecentSales();
 });
 
-function renderDashboardChart() {
-    const ctx = document.getElementById('revenueExpenseChart').getContext('2d');
-    
-    // Generate 30 days of data
-    const labels = [];
-    const revenueData = [];
-    const expenseData = [];
-    
-    for (let i = 29; i >= 0; i--) {
-        const d = new Date();
-        d.setDate(d.getDate() - i);
-        labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
-        // Simulated deterministic curves based on live scale
-        const baseRev = 45000 + Math.sin(i / 3) * 12000 + Math.random() * 8000;
-        const baseExp = 28000 + Math.cos(i / 4) * 6000 + Math.random() * 4000;
-        revenueData.push(Math.round(baseRev));
-        expenseData.push(Math.round(baseExp));
+async function loadDashboardData() {
+    const chartLoading = document.getElementById('chart-loading');
+    const chartEmpty = document.getElementById('chart-empty');
+    const chartError = document.getElementById('chart-error');
+
+    if (chartLoading) chartLoading.classList.remove('hidden');
+    if (chartEmpty) chartEmpty.classList.add('hidden');
+    if (chartError) chartError.classList.add('hidden');
+
+    try {
+        const [summaryRes, streamRes] = await Promise.all([
+            fetch(`/api/finance/summary?shop_id=${activeShopId}`),
+            fetch(`/api/finance/daily-stream?shop_id=${activeShopId}`)
+        ]);
+
+        if (!summaryRes.ok) {
+            throw new Error(`Summary API returned status ${summaryRes.status}`);
+        }
+        if (!streamRes.ok) {
+            throw new Error(`Daily stream API returned status ${streamRes.status}`);
+        }
+
+        const summaryData = await summaryRes.json();
+        const streamData = await streamRes.json();
+
+        updateKpiCards(summaryData);
+        updateAutonomousAdvisor(summaryData);
+        renderDailyChart(streamData);
+        if (chartLoading) chartLoading.classList.add('hidden');
+    } catch (err) {
+        console.error("Dashboard data load error:", err);
+        if (chartLoading) chartLoading.classList.add('hidden');
+        if (chartError) {
+            chartError.classList.remove('hidden');
+            const msgEl = document.getElementById('chart-error-msg');
+            if (msgEl) msgEl.innerText = `Failed to load dashboard data: ${err.message}`;
+        }
+        renderKpiErrorState(err.message);
+    }
+}
+
+function updateKpiCards(data) {
+    const cur = data.currency || 'BDT';
+    const sym = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' }[cur] || cur;
+    const t30 = data.trailing_30d || {};
+    const runway = data.runway || {};
+    const dscr = data.dscr || {};
+
+    // 1. Revenue Card
+    const revEl = document.getElementById('kpi-revenue');
+    const revTrendEl = document.getElementById('kpi-revenue-trend');
+    if (revEl) {
+        const revMinor = (t30.sales_minor !== undefined ? t30.sales_minor : (data.revenue ? data.revenue.total_minor : 0));
+        const revMajor = revMinor / 100;
+        const parts = revMajor.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
+        revEl.innerHTML = `${sym} ${parts[0]}<span class="text-xs font-mono text-cyan-400">.${parts[1]}</span>`;
+    }
+    if (revTrendEl) {
+        const growth = Number(t30.sales_growth_pct || 0);
+        const isPos = growth >= 0;
+        const colorClass = isPos ? 'text-emerald-400' : 'text-rose-400';
+        const iconName = isPos ? 'trending-up' : 'trending-down';
+        revTrendEl.className = `text-[11px] ${colorClass} flex items-center gap-1 mt-2`;
+        revTrendEl.innerHTML = `<i data-lucide="${iconName}" class="w-3 h-3"></i><span>${isPos ? '+' : ''}${growth.toFixed(1)}% vs previous 30 days</span>`;
     }
 
-    new Chart(ctx, {
+    // 2. Net Operating Profit Card
+    const profEl = document.getElementById('kpi-profit');
+    const profMarginEl = document.getElementById('kpi-profit-margin');
+    if (profEl) {
+        const profMinor = (t30.net_profit_minor !== undefined ? t30.net_profit_minor : (data.profitability ? data.profitability.net_profit_minor : 0));
+        const profMajor = profMinor / 100;
+        const isPos = profMajor >= 0;
+        const textClass = isPos ? 'text-emerald-400' : 'text-rose-400';
+        const parts = Math.abs(profMajor).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
+        profEl.className = `font-orbitron text-2xl font-bold ${textClass}`;
+        profEl.innerHTML = `${isPos ? '' : '-'}${sym} ${parts[0]}<span class="text-xs font-mono opacity-80">.${parts[1]}</span>`;
+    }
+    if (profMarginEl) {
+        const margin = Number(t30.net_margin_pct !== undefined ? t30.net_margin_pct : (data.profitability ? data.profitability.net_margin_pct : 0));
+        const statusText = margin >= 15 ? '(Healthy)' : (margin >= 0 ? '(Moderate)' : '(Deficit)');
+        profMarginEl.className = `text-[11px] ${margin >= 0 ? 'text-cyan-400' : 'text-rose-400'} flex items-center gap-1 mt-2`;
+        profMarginEl.innerHTML = `<i data-lucide="${margin >= 0 ? 'check' : 'alert-circle'}" class="w-3 h-3"></i><span>${margin.toFixed(1)}% Net Margin ${statusText}</span>`;
+    }
+
+    // 3. Cash & Liquidity Card
+    const cashEl = document.getElementById('kpi-cash');
+    const cashSubEl = document.getElementById('kpi-cash-subtext');
+    if (cashEl) {
+        const cashMinor = (data.liquidity ? data.liquidity.cash_balance_minor : 0);
+        const cashMajor = cashMinor / 100;
+        const parts = cashMajor.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
+        cashEl.innerHTML = `${sym} ${parts[0]}<span class="text-xs font-mono text-cyan-400">.${parts[1]}</span>`;
+    }
+    if (cashSubEl) {
+        cashSubEl.innerHTML = `<i data-lucide="clock" class="w-3 h-3"></i><span>Reconciled from verified ledgers</span>`;
+    }
+
+    // 4. Runway & DSCR Card
+    const runwayEl = document.getElementById('kpi-runway');
+    const dscrEl = document.getElementById('kpi-dscr');
+    const loanStatusEl = document.getElementById('kpi-loan-status');
+    if (runwayEl) {
+        const days = runway.days !== undefined ? runway.days : 0;
+        const daysText = days >= 999 ? '999+ Days' : `${days} Days`;
+        let colorClass = 'text-amber-300';
+        if (days >= 60) colorClass = 'text-emerald-300';
+        else if (days < 30) colorClass = 'text-rose-400';
+        runwayEl.className = `font-orbitron text-2xl font-bold ${colorClass}`;
+        runwayEl.innerText = daysText;
+    }
+    if (dscrEl) {
+        const ratio = dscr.ratio !== undefined ? dscr.ratio : (t30.dscr_ratio || 0);
+        dscrEl.innerText = `(DSCR ${Number(ratio).toFixed(2)}x)`;
+    }
+    if (loanStatusEl) {
+        const status = dscr.status || 'eligible';
+        const label = dscr.label || (status === 'eligible' ? 'Bank Loan Pre-Qualified' : 'Conditional / Collateral Needed');
+        const isEligible = status === 'eligible';
+        loanStatusEl.className = `text-[11px] ${isEligible ? 'text-emerald-400' : 'text-amber-400'} flex items-center gap-1 mt-2`;
+        loanStatusEl.innerHTML = `<i data-lucide="${isEligible ? 'check-circle' : 'alert-triangle'}" class="w-3 h-3"></i><span>${label}</span>`;
+    }
+
+    // Update currency badge on chart
+    const currBadge = document.getElementById('chart-currency-badge');
+    if (currBadge) currBadge.innerText = cur;
+
+    const colCur = document.getElementById('recent-sales-col-currency');
+    if (colCur) colCur.innerText = `Amount (${cur})`;
+
+    if (window.lucide) lucide.createIcons();
+}
+
+function updateAutonomousAdvisor(data) {
+    const t30 = data.trailing_30d || {};
+    const growth = Number(t30.sales_growth_pct || 0);
+    const dscr = Number((data.dscr && data.dscr.ratio) || t30.dscr_ratio || 0);
+    const runwayDays = Number((data.runway && data.runway.days) || t30.runway_days || 0);
+
+    const titleEl = document.getElementById('advisor-title');
+    const textEl = document.getElementById('advisor-text');
+    const actionEl = document.getElementById('advisor-action');
+    const outlookEl = document.getElementById('advisor-outlook');
+
+    let title = "Stable Operational Trajectory";
+    let action = "Sustain Inventory Levels";
+    let outlook = `${runwayDays} Days Runway`;
+
+    if (growth >= 10) {
+        title = "Growth Momentum Detected";
+        action = dscr >= 1.25 ? "Bulk Purchasing & Trade Credit" : "Selective Supplier Reinvestment";
+    } else if (growth < -5) {
+        title = "Revenue Contraction Flagged";
+        action = "OpEx Optimization & Receivables Chase";
+    } else {
+        title = "Steady Cash Velocity";
+        action = dscr >= 1.25 ? "Working Capital Expansion" : "Preserve Operating Reserves";
+    }
+
+    if (runwayDays >= 60) {
+        outlook = `${runwayDays} Days (Healthy Cushion)`;
+    } else if (runwayDays >= 30) {
+        outlook = `${runwayDays} Days (Moderate Buffer)`;
+    } else {
+        outlook = `${runwayDays} Days (Urgent Attention)`;
+    }
+
+    if (titleEl) titleEl.innerText = title;
+    if (actionEl) actionEl.innerText = action;
+    if (outlookEl) outlookEl.innerText = outlook;
+
+    if (textEl) {
+        textEl.innerHTML = `Sales in <strong>Shop #${data.shop_id}</strong> ${growth >= 0 ? 'grew by' : 'contracted by'} <strong>${Math.abs(growth).toFixed(1)}%</strong> over trailing 30 days. Current liquidity provides <strong>${runwayDays} days</strong> of runway with a verified DSCR of <strong>${dscr.toFixed(2)}x</strong> (Statutory covenant: >1.25x).`;
+    }
+}
+
+function renderDailyChart(streamData) {
+    const chartEmpty = document.getElementById('chart-empty');
+    if (streamData.is_empty) {
+        if (chartEmpty) chartEmpty.classList.remove('hidden');
+        if (dashboardChartInstance) {
+            dashboardChartInstance.destroy();
+            dashboardChartInstance = null;
+        }
+        return;
+    }
+    if (chartEmpty) chartEmpty.classList.add('hidden');
+
+    const ctx = document.getElementById('revenueExpenseChart').getContext('2d');
+    const cur = streamData.currency || 'BDT';
+    const sym = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' }[cur] || cur;
+
+    if (dashboardChartInstance) {
+        dashboardChartInstance.destroy();
+    }
+
+    dashboardChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: streamData.labels || [],
             datasets: [
                 {
-                    label: 'Revenue (BDT)',
-                    data: revenueData,
+                    label: `Revenue (${cur})`,
+                    data: streamData.revenue_major || [],
                     borderColor: '#22d3ee',
                     backgroundColor: 'rgba(34, 211, 238, 0.08)',
                     borderWidth: 2.5,
@@ -229,8 +450,8 @@ function renderDashboardChart() {
                     pointHoverRadius: 5
                 },
                 {
-                    label: 'Expenses (BDT)',
-                    data: expenseData,
+                    label: `Expenses (${cur})`,
+                    data: streamData.expenses_major || [],
                     borderColor: '#f43f5e',
                     backgroundColor: 'rgba(244, 63, 94, 0.04)',
                     borderWidth: 2,
@@ -254,7 +475,7 @@ function renderDashboardChart() {
                     borderWidth: 1,
                     callbacks: {
                         label: function(c) {
-                            return c.dataset.label + ': ৳ ' + c.parsed.y.toLocaleString();
+                            return c.dataset.label + ': ' + sym + ' ' + c.parsed.y.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
                         }
                     }
                 }
@@ -262,14 +483,14 @@ function renderDashboardChart() {
             scales: {
                 x: {
                     grid: { color: 'rgba(255, 255, 255, 0.04)' },
-                    ticks: { color: '#64748b', font: { size: 10 } }
+                    ticks: { color: '#64748b', font: { size: 10 }, maxRotation: 45 }
                 },
                 y: {
                     grid: { color: 'rgba(255, 255, 255, 0.05)' },
                     ticks: {
                         color: '#64748b',
                         font: { size: 10 },
-                        callback: function(v) { return '৳ ' + (v / 1000) + 'k'; }
+                        callback: function(v) { return sym + ' ' + (v >= 1000 ? (v / 1000).toFixed(0) + 'k' : v); }
                     }
                 }
             }
@@ -277,60 +498,68 @@ function renderDashboardChart() {
     });
 }
 
+function renderKpiErrorState(errorMsg) {
+    const revEl = document.getElementById('kpi-revenue');
+    const profEl = document.getElementById('kpi-profit');
+    const cashEl = document.getElementById('kpi-cash');
+    const runwayEl = document.getElementById('kpi-runway');
+
+    if (revEl) revEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error loading</span>`;
+    if (profEl) profEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error loading</span>`;
+    if (cashEl) cashEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error loading</span>`;
+    if (runwayEl) runwayEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error</span>`;
+}
+
 async function loadDashboardRecentSales() {
     const tbody = document.getElementById('dashboard-sales-tbody');
+    if (!tbody) return;
+
     try {
-        const resp = await fetch('/api/finance/sales?limit=6');
-        if (resp.ok) {
-            const data = await resp.json();
-            const items = data.sales || data.items || [];
-            if (items.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="py-4 text-center text-slate-500">No transactions recorded for this period.</td></tr>`;
-                return;
-            }
-            tbody.innerHTML = items.map(s => `
+        const resp = await fetch(`/api/finance/sales?shop_id=${activeShopId}&limit=6`);
+        if (!resp.ok) {
+            throw new Error(`Server returned HTTP ${resp.status}`);
+        }
+        const data = await resp.json();
+        const items = data.items || data.sales || [];
+        if (items.length === 0) {
+            tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500 font-mono">No transactions recorded for this shop.</td></tr>`;
+            return;
+        }
+        tbody.innerHTML = items.map(s => {
+            const inv = s.invoice_number || `INV-${s.id}`;
+            const cust = s.customer_name || 'Walk-in Retail Customer';
+            const mode = (s.payment_method || 'cash').toUpperCase();
+            const amtMajor = ((s.total_amount_minor || 0) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const statusBadge = (s.payment_status || 'paid').toUpperCase();
+            const badgeClass = statusBadge === 'PAID' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+            return `
                 <tr class="hover:bg-white/5 transition-colors">
-                    <td class="py-3 font-mono text-cyan-400 font-semibold">${s.invoice_number || 'INV-' + s.id}</td>
-                    <td class="py-3 text-slate-300">${s.customer_name || 'Walk-in Retail Customer'}</td>
-                    <td class="py-3 font-mono text-slate-400 uppercase">${s.payment_method || 'CASH'}</td>
-                    <td class="py-3 font-orbitron text-right font-bold text-white">৳ ${(s.total_amount_minor / 100).toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
+                    <td class="py-3 font-mono text-cyan-400 font-semibold">${inv}</td>
+                    <td class="py-3 text-slate-300">${cust}</td>
+                    <td class="py-3 font-mono text-slate-400 uppercase">${mode}</td>
+                    <td class="py-3 font-orbitron text-right font-bold text-white">${amtMajor}</td>
                     <td class="py-3 text-center">
-                        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                            POSTED
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono border ${badgeClass}">
+                            ${statusBadge}
                         </span>
                     </td>
                 </tr>
-            `).join('');
-        } else {
-            // Render simulated recent sales for offline demo
-            renderFallbackSalesTable(tbody);
-        }
+            `;
+        }).join('');
+        if (window.lucide) lucide.createIcons();
     } catch (e) {
-        renderFallbackSalesTable(tbody);
+        console.error("Recent sales load error:", e);
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="5" class="py-6 text-center text-slate-500">
+                    <div class="flex flex-col items-center justify-center gap-2">
+                        <span class="text-xs text-rose-400">Failed to load recent sales: ${e.message}</span>
+                        <button type="button" onclick="loadDashboardRecentSales()" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] text-cyan-300 hover:bg-slate-700">Retry</button>
+                    </div>
+                </td>
+            </tr>
+        `;
     }
-}
-
-function renderFallbackSalesTable(tbody) {
-    const demos = [
-        { id: 10842, inv: 'INV-2026-9812', cust: 'Rahim Textiles Ltd.', mode: 'bKash Merchant', amt: 48500.00 },
-        { id: 10841, inv: 'INV-2026-9811', cust: 'Walk-in Retail POS', mode: 'Cash', amt: 12450.00 },
-        { id: 10840, inv: 'INV-2026-9810', cust: 'Apex Enterprise', mode: 'Bank Transfer', amt: 84000.00 },
-        { id: 10839, inv: 'INV-2026-9809', cust: 'Walk-in Retail POS', mode: 'VISA Card', amt: 7200.00 },
-        { id: 10838, inv: 'INV-2026-9808', cust: 'Gulshan Provisions', mode: 'Nagad Pay', amt: 29800.00 }
-    ];
-    tbody.innerHTML = demos.map(s => `
-        <tr class="hover:bg-white/5 transition-colors">
-            <td class="py-3 font-mono text-cyan-400 font-semibold">${s.inv}</td>
-            <td class="py-3 text-slate-300">${s.cust}</td>
-            <td class="py-3 font-mono text-slate-400 uppercase">${s.mode}</td>
-            <td class="py-3 font-orbitron text-right font-bold text-white">৳ ${s.amt.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-            <td class="py-3 text-center">
-                <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    VERIFIED
-                </span>
-            </td>
-        </tr>
-    `).join('');
 }
 </script>
 {% endblock %}

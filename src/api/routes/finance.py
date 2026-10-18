@@ -28,9 +28,11 @@ from src.database.models import (
     CashMovement,
     DemoBank,
     LoanProduct,
+    LoanScenario,
     Forecast,
     AuditLog,
     Document,
+    BusinessMembership,
     utc_now,
 )
 from src.api.dependencies import get_current_user, verify_shop_access_dependency
@@ -115,7 +117,7 @@ class ForecastRequest(BaseModel):
 
 @router.get("/summary")
 def get_financial_summary(
-    shop_id: int = Query(..., description="Shop ID for multi-tenant query"),
+    shop_id: Optional[int] = Query(None, description="Shop ID for multi-tenant query"),
     start_date: Optional[str] = Query(None, description="Optional start date (YYYY-MM-DD)"),
     end_date: Optional[str] = Query(None, description="Optional end date (YYYY-MM-DD)"),
     user: User = Depends(get_current_user),
@@ -127,6 +129,21 @@ def get_financial_summary(
     Inventory Valuation, Outstanding Receivables, and Document Review Queue.
     Supports optional date-range filtering.
     """
+    if shop_id is None:
+        membership = (
+            db.query(BusinessMembership)
+            .filter(BusinessMembership.user_id == user.id, BusinessMembership.is_active == True)
+            .first()
+        )
+        if membership and membership.shop_id:
+            shop_id = membership.shop_id
+        elif membership and membership.business_id:
+            first_shop = db.query(Shop).filter(Shop.business_id == membership.business_id, Shop.is_active == True).first()
+            if first_shop:
+                shop_id = first_shop.id
+    if shop_id is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Shop ID is required.")
+
     verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
     shop = db.get(Shop, shop_id)
     if not shop:
@@ -248,6 +265,105 @@ def get_financial_summary(
 
     currency = shop.business.currency if shop.business else "BDT"
 
+    # 9. Trailing 30-day and previous 30-day calculations
+    max_sale_dt = db.query(func.max(Sale.sale_date)).filter(Sale.shop_id == shop_id).scalar()
+    max_exp_dt = db.query(func.max(Expense.expense_date)).filter(Expense.shop_id == shop_id).scalar()
+    anchor_candidates = [_make_naive_utc(d) for d in [max_sale_dt, max_exp_dt] if d is not None]
+
+    if anchor_candidates:
+        anchor_dt = max(anchor_candidates)
+    else:
+        anchor_dt = datetime.now(timezone.utc).replace(tzinfo=None)
+
+    t30_start = anchor_dt - timedelta(days=30)
+    p30_start = anchor_dt - timedelta(days=60)
+
+    # Trailing 30-day sales
+    t30_sales_minor = (
+        db.query(func.coalesce(func.sum(Sale.total_amount_minor), 0))
+        .filter(Sale.shop_id == shop_id, Sale.sale_date >= t30_start, Sale.sale_date <= anchor_dt)
+        .scalar()
+    ) or 0
+    t30_sales_count = (
+        db.query(Sale)
+        .filter(Sale.shop_id == shop_id, Sale.sale_date >= t30_start, Sale.sale_date <= anchor_dt)
+        .count()
+    )
+
+    # Previous 30-day sales
+    p30_sales_minor = (
+        db.query(func.coalesce(func.sum(Sale.total_amount_minor), 0))
+        .filter(Sale.shop_id == shop_id, Sale.sale_date >= p30_start, Sale.sale_date < t30_start)
+        .scalar()
+    ) or 0
+
+    if p30_sales_minor > 0:
+        sales_growth_pct = round(((t30_sales_minor - p30_sales_minor) / p30_sales_minor) * 100, 1)
+    elif t30_sales_minor > 0:
+        sales_growth_pct = 100.0
+    else:
+        sales_growth_pct = 0.0
+
+    # Trailing 30-day expenses
+    t30_expenses_minor = (
+        db.query(func.coalesce(func.sum(Expense.amount_minor), 0))
+        .filter(Expense.shop_id == shop_id, Expense.expense_date >= t30_start, Expense.expense_date <= anchor_dt)
+        .scalar()
+    ) or 0
+    t30_expenses_count = (
+        db.query(Expense)
+        .filter(Expense.shop_id == shop_id, Expense.expense_date >= t30_start, Expense.expense_date <= anchor_dt)
+        .count()
+    )
+
+    t30_net_profit_minor = t30_sales_minor - t30_expenses_minor
+    t30_net_margin_pct = round((t30_net_profit_minor / t30_sales_minor) * 100, 1) if t30_sales_minor > 0 else 0.0
+
+    # 10. Cash Runway calculation
+    daily_burn_minor = max(1, t30_expenses_minor // 30) if t30_expenses_minor > 0 else 0
+    if daily_burn_minor > 0 and current_cash_balance_minor > 0:
+        runway_days = min(999, max(0, current_cash_balance_minor // daily_burn_minor))
+    elif current_cash_balance_minor > 0:
+        runway_days = 999
+    else:
+        runway_days = 0
+
+    if runway_days >= 60:
+        runway_status = "safe"
+    elif runway_days >= 30:
+        runway_status = "warning"
+    else:
+        runway_status = "critical"
+
+    # 11. DSCR Calculation
+    latest_scenario = (
+        db.query(LoanScenario)
+        .filter(LoanScenario.shop_id == shop_id)
+        .order_by(desc(LoanScenario.id))
+        .first()
+    )
+    if latest_scenario and latest_scenario.dscr_ratio is not None:
+        dscr_val = round(latest_scenario.dscr_ratio, 2)
+        dscr_status = latest_scenario.recommendation_status or ("eligible" if dscr_val >= 1.25 else "borderline")
+    else:
+        monthly_noi = max(0, t30_net_profit_minor)
+        benchmark_debt_service = 3750000  # 37,500 BDT benchmark
+        dscr_val = round(monthly_noi / benchmark_debt_service, 2) if benchmark_debt_service > 0 else 2.0
+        dscr_status = "eligible" if dscr_val >= 1.25 else ("marginal" if dscr_val >= 1.0 else "ineligible")
+
+    if dscr_val >= 1.25:
+        dscr_label = "Bank Loan Pre-Qualified"
+    elif dscr_val >= 1.0:
+        dscr_label = "Conditional / Collateral Needed"
+    else:
+        dscr_label = "Insufficient Coverage"
+
+    is_synthetic = bool(
+        getattr(shop, "is_synthetic", False) or 
+        (shop.business and getattr(shop.business, "is_synthetic", False))
+    )
+    has_data = bool(sales_count > 0 or expenses_count > 0)
+
     return {
         "shop_id": shop_id,
         "shop_name": shop.name,
@@ -292,6 +408,179 @@ def get_financial_summary(
             "pending_count": receivables_count,
         },
         "pending_document_reviews": pending_documents_count,
+        "is_synthetic": is_synthetic,
+        "has_data": has_data,
+        "trailing_30d": {
+            "sales_minor": t30_sales_minor,
+            "sales_formatted": Money.from_minor(t30_sales_minor, currency).format(),
+            "sales_growth_pct": sales_growth_pct,
+            "expenses_minor": t30_expenses_minor,
+            "expenses_formatted": Money.from_minor(t30_expenses_minor, currency).format(),
+            "net_profit_minor": t30_net_profit_minor,
+            "net_profit_formatted": Money.from_minor(t30_net_profit_minor, currency).format(),
+            "net_margin_pct": t30_net_margin_pct,
+            "runway_days": runway_days,
+            "runway_status": runway_status,
+            "daily_burn_minor": daily_burn_minor,
+            "daily_burn_formatted": Money.from_minor(daily_burn_minor, currency).format(),
+            "dscr_ratio": dscr_val,
+            "dscr_formatted": f"{dscr_val:.2f}x",
+            "dscr_status": dscr_status,
+            "dscr_label": dscr_label,
+            "anchor_date": anchor_dt.strftime("%Y-%m-%d"),
+        },
+        "runway": {
+            "days": runway_days,
+            "formatted": f"{runway_days} Days" if runway_days < 999 else "999+ Days",
+            "status": runway_status,
+            "daily_burn_minor": daily_burn_minor,
+            "daily_burn_formatted": Money.from_minor(daily_burn_minor, currency).format(),
+        },
+        "dscr": {
+            "ratio": dscr_val,
+            "formatted": f"{dscr_val:.2f}x",
+            "status": dscr_status,
+            "label": dscr_label,
+        },
+    }
+
+
+# ==============================================================================
+# 1.1 Daily Financial Stream for Live Charts
+# ==============================================================================
+
+@router.get("/daily-stream")
+def get_daily_financial_stream(
+    shop_id: Optional[int] = Query(None, description="Shop ID for multi-tenant query"),
+    days: int = Query(30, ge=7, le=90, description="Trailing number of days to stream"),
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Returns daily chronological revenue and expense stream for Chart.js rendering.
+    Enforces tenant authorization and shop isolation.
+    """
+    if shop_id is None:
+        membership = (
+            db.query(BusinessMembership)
+            .filter(BusinessMembership.user_id == user.id, BusinessMembership.is_active == True)
+            .first()
+        )
+        if membership and membership.shop_id:
+            shop_id = membership.shop_id
+        elif membership and membership.business_id:
+            first_shop = db.query(Shop).filter(Shop.business_id == membership.business_id, Shop.is_active == True).first()
+            if first_shop:
+                shop_id = first_shop.id
+    if shop_id is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Shop ID is required.")
+
+    verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
+    shop = db.get(Shop, shop_id)
+    if not shop:
+        raise HTTPException(status_code=404, detail="Shop not found.")
+
+    currency = shop.business.currency if shop.business else "BDT"
+    is_synthetic = bool(
+        getattr(shop, "is_synthetic", False) or 
+        (shop.business and getattr(shop.business, "is_synthetic", False))
+    )
+
+    max_sale_dt = db.query(func.max(Sale.sale_date)).filter(Sale.shop_id == shop_id).scalar()
+    max_exp_dt = db.query(func.max(Expense.expense_date)).filter(Expense.shop_id == shop_id).scalar()
+    anchor_candidates = [_make_naive_utc(d) for d in [max_sale_dt, max_exp_dt] if d is not None]
+
+    if not anchor_candidates:
+        today = datetime.now(timezone.utc).date()
+        labels = []
+        dates = []
+        revenue_major = []
+        expenses_major = []
+        for i in range(days - 1, -1, -1):
+            d = today - timedelta(days=i)
+            dates.append(d.strftime("%Y-%m-%d"))
+            labels.append(d.strftime("%b %d"))
+            revenue_major.append(0.0)
+            expenses_major.append(0.0)
+        return {
+            "shop_id": shop_id,
+            "shop_name": shop.name,
+            "currency": currency,
+            "days": days,
+            "start_date": dates[0],
+            "end_date": dates[-1],
+            "labels": labels,
+            "dates": dates,
+            "revenue_major": revenue_major,
+            "expenses_major": expenses_major,
+            "total_revenue_major": 0.0,
+            "total_expenses_major": 0.0,
+            "is_synthetic": is_synthetic,
+            "is_empty": True,
+        }
+
+    anchor_dt = max(anchor_candidates)
+    end_date = anchor_dt.date()
+    start_date = end_date - timedelta(days=days - 1)
+
+    s_dt = datetime.combine(start_date, datetime.min.time())
+    e_dt = datetime.combine(end_date, datetime.max.time())
+
+    daily_sales = (
+        db.query(
+            func.date(Sale.sale_date).label("d"),
+            func.coalesce(func.sum(Sale.total_amount_minor), 0).label("tot"),
+        )
+        .filter(Sale.shop_id == shop_id, Sale.sale_date >= s_dt, Sale.sale_date <= e_dt)
+        .group_by(func.date(Sale.sale_date))
+        .all()
+    )
+    sales_map = {str(r.d): r.tot for r in daily_sales}
+
+    daily_expenses = (
+        db.query(
+            func.date(Expense.expense_date).label("d"),
+            func.coalesce(func.sum(Expense.amount_minor), 0).label("tot"),
+        )
+        .filter(Expense.shop_id == shop_id, Expense.expense_date >= s_dt, Expense.expense_date <= e_dt)
+        .group_by(func.date(Expense.expense_date))
+        .all()
+    )
+    expenses_map = {str(r.d): r.tot for r in daily_expenses}
+
+    labels = []
+    dates = []
+    revenue_major = []
+    expenses_major = []
+    curr = start_date
+    while curr <= end_date:
+        d_str = curr.strftime("%Y-%m-%d")
+        dates.append(d_str)
+        labels.append(curr.strftime("%b %d"))
+        rev_minor = sales_map.get(d_str, 0)
+        exp_minor = expenses_map.get(d_str, 0)
+        revenue_major.append(round(rev_minor / 100.0, 2))
+        expenses_major.append(round(exp_minor / 100.0, 2))
+        curr += timedelta(days=1)
+
+    tot_rev = sum(revenue_major)
+    tot_exp = sum(expenses_major)
+
+    return {
+        "shop_id": shop_id,
+        "shop_name": shop.name,
+        "currency": currency,
+        "days": days,
+        "start_date": start_date.strftime("%Y-%m-%d"),
+        "end_date": end_date.strftime("%Y-%m-%d"),
+        "labels": labels,
+        "dates": dates,
+        "revenue_major": revenue_major,
+        "expenses_major": expenses_major,
+        "total_revenue_major": round(tot_rev, 2),
+        "total_expenses_major": round(tot_exp, 2),
+        "is_synthetic": is_synthetic,
+        "is_empty": (tot_rev == 0 and tot_exp == 0),
     }
 
 
@@ -301,7 +590,7 @@ def get_financial_summary(
 
 @router.get("/sales")
 def list_sales(
-    shop_id: int = Query(...),
+    shop_id: Optional[int] = Query(None, description="Shop ID for multi-tenant query"),
     start_date: Optional[str] = Query(None, description="Start date (YYYY-MM-DD)"),
     end_date: Optional[str] = Query(None, description="End date (YYYY-MM-DD)"),
     payment_method: Optional[str] = Query(None, description="cash, card, mobile_money, bank_transfer"),
@@ -315,6 +604,21 @@ def list_sales(
     Retrieves filtered and paginated sales transaction ledger for a shop.
     Supports date range filtering, payment method/status filtering, and line item extraction.
     """
+    if shop_id is None:
+        membership = (
+            db.query(BusinessMembership)
+            .filter(BusinessMembership.user_id == user.id, BusinessMembership.is_active == True)
+            .first()
+        )
+        if membership and membership.shop_id:
+            shop_id = membership.shop_id
+        elif membership and membership.business_id:
+            first_shop = db.query(Shop).filter(Shop.business_id == membership.business_id, Shop.is_active == True).first()
+            if first_shop:
+                shop_id = first_shop.id
+    if shop_id is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Shop ID is required.")
+
     verify_shop_access_dependency(shop_id=shop_id, user=user, db=db)
 
     s_dt = _parse_date_safe(start_date) if start_date else None

@@ -134,16 +134,23 @@ def get_web_context(request: Request) -> dict:
             "name": "Bismillah Store (Synthetic)",
             "tax_identifier": "BIN-99281-002",
             "currency": settings.DEFAULT_CURRENCY,
+            "is_synthetic": True,
         }
     if not active_shop_id:
         active_shop_id = "28"
+
+    active_shop_int = int(active_shop_id) if active_shop_id.isdigit() else 28
+    active_shop_obj = next((s for s in shops_data if s["id"] == active_shop_int), None)
+    active_shop_name = active_shop_obj["name"] if active_shop_obj else f"Shop #{active_shop_int}"
 
     return {
         "request": request,
         "current_user": user_info,
         "business": business_data,
         "shops": shops_data,
-        "active_shop_id": int(active_shop_id) if active_shop_id.isdigit() else 1,
+        "active_shop_id": active_shop_int,
+        "active_shop_name": active_shop_name,
+        "is_synthetic": business_data.get("is_synthetic", True),
         "current_lang": clean_lang,
         "available_languages": [
             {"code": "en", "name": "English", "native": "English", "flag": "🇬🇧"},

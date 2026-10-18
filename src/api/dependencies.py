@@ -5,7 +5,7 @@ FastAPI Dependencies: Database Sessions, Authentication, and Shop Isolation.
 from __future__ import annotations
 
 from typing import Generator, Optional
-from fastapi import Depends, HTTPException, Header, status
+from fastapi import Depends, HTTPException, Header, Cookie, status
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
@@ -18,18 +18,19 @@ from src.database.models import User, BusinessMembership
 
 def get_current_user(
     authorization: Optional[str] = Header(None),
+    sme_auth_token: Optional[str] = Cookie(None),
     db: Session = Depends(get_db),
 ) -> User:
     """
-    Extracts and verifies session user from Authorization header.
+    Extracts and verifies session user from Authorization header or signed session cookie.
     
     Security Guarantee:
     Client-supplied headers such as X-User-ID, X-Business-ID, and X-Shop-ID are
     NEVER used for authentication and cannot forge identity. Identity is strictly
-    established via signed HMAC session tokens (Authorization: Bearer <token>)
-    issued by /api/auth/login or /api/auth/register.
+    established via signed HMAC session tokens (Authorization: Bearer <token> or
+    sme_auth_token cookie) issued by /api/auth/login or /api/auth/register.
     """
-    if not authorization:
+    if authorization is None and sme_auth_token is None:
         # In production, require an explicit, valid Authorization header unconditionally
         if settings.ENVIRONMENT.lower() == "production":
             raise HTTPException(
@@ -52,7 +53,18 @@ def get_current_user(
             detail="Missing Authorization header or no active users in database.",
         )
 
-    token = authorization.replace("Bearer ", "").strip()
+    # Credentials were provided in header or cookie
+    if authorization is not None:
+        token = authorization.replace("Bearer ", "").strip()
+    else:
+        token = (sme_auth_token or "").strip()
+
+    if not token:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired session token.",
+        )
+
     user_id = verify_token(token, settings.SECRET_KEY)
     if not user_id:
         raise HTTPException(
