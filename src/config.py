@@ -72,6 +72,14 @@ class Settings:
             os.getenv("MAX_UPLOAD_SIZE_BYTES", str(10 * 1024 * 1024))
         )
 
+        # Generative LLM & Copilot Configuration (Configurable Provider: deterministic, openai, ollama, custom)
+        self.LLM_PROVIDER: str = os.getenv("LLM_PROVIDER", "deterministic").lower()
+        self.LLM_API_KEY: str = os.getenv("LLM_API_KEY", os.getenv("OPENAI_API_KEY", ""))
+        self.LLM_BASE_URL: str = os.getenv("LLM_BASE_URL", "https://api.openai.com/v1")
+        self.LLM_MODEL: str = os.getenv("LLM_MODEL", "gpt-4o-mini")
+        self.LLM_TEMPERATURE: float = float(os.getenv("LLM_TEMPERATURE", "0.2"))
+        self.LLM_TIMEOUT_SECONDS: float = float(os.getenv("LLM_TIMEOUT_SECONDS", "8.0"))
+
         # Ensure directories exist
         self.DOCUMENTS_STORAGE_PATH.mkdir(parents=True, exist_ok=True)
         self.SYNTHETIC_DATA_PATH.mkdir(parents=True, exist_ok=True)

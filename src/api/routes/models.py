@@ -249,6 +249,8 @@ class CopilotQueryResponse(BaseModel):
     citations: List[Dict[str, Any]]
     verified_metrics: Dict[str, Any]
     has_evidence: bool
+    evidence_count: int = 0
+    generation_mode: str = "deterministic_rule_based"
 
 
 @router.post("/copilot/query", response_model=CopilotQueryResponse)

@@ -80,18 +80,19 @@
 - **UI Screen:** `/app/simulations`
 - **Status:** `VERIFIED COMPLETE`
 
-### Concept 8: AI Business Copilot & Business Workflow Automation (with Local-First RAG)
-- **Business Purpose:** Provide an autonomous 24/7 financial advisor capable of answering complex merchant queries grounded in verifiable business documents and ledger facts.
+### Concept 8: AI Business Copilot & Business Workflow Automation (RAG & Multi-Provider LLM)
+- **Business Purpose:** Provide an autonomous 24/7 financial advisor capable of answering complex merchant queries grounded in verifiable business documents and deterministic ledger facts.
 - **Workflow Verified:**
   1. Context-aware conversational assistant grounded in actual shop database records and indexed documents.
-  2. Local-First Vector Retrieval Engine (`SimpleVectorEmbedder` with 512-dim sublinear TF-IDF + cosine similarity) over SQLite `document_chunks`.
-  3. Grounded answer generation with dynamic source citations (`[Doc #X: title]`), relevance scores, and explicit zero-evidence disclosures.
-  4. Tenant-Isolated Retrieval strictly bounded by `business_id` and `shop_id` via SQL constraint.
-  5. Multilingual prompt injection defense (blocking instruction overrides, DAN modes, and unauthorized approval triggers across 7 languages).
-  6. Real-time PII redaction of credit cards, emails, and phone numbers.
+  2. Local-First Vector Retrieval Engine (`SimpleVectorEmbedder` with 1024-dim CRC32 sublinear TF-IDF + cosine similarity) over SQLite `document_chunks`.
+  3. Configurable Generative LLM Orchestration (`openai`, `ollama`, or `custom` providers) with safe deterministic fallback for edge environments.
+  4. Grounded answer generation with dynamic source citations (`[Doc #X: title]`), relevance scores, and explicit zero-evidence disclosures for unsupported queries.
+  5. Tenant-Isolated Retrieval strictly bounded by `business_id` and `shop_id` via SQL constraint.
+  6. Multilingual prompt injection defense (blocking instruction overrides, DAN modes, and unauthorized approval triggers across 7 languages).
+  7. Real-time PII redaction of credit cards, emails, and phone numbers.
 - **API Endpoint:** `POST /api/models/copilot/query`, `POST /api/ai/audit-prompt`, `/app/copilot`
 - **UI Screen:** `/app/copilot`
-- **Test Suite:** `tests/test_rag_pipeline.py` (7/7 tests passing)
+- **Test Suite:** `tests/test_rag_pipeline.py` (11/11 tests passing)
 - **Status:** `VERIFIED COMPLETE`
 
 ---

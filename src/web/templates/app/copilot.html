@@ -188,11 +188,27 @@ function handleCopilotSend(e) {
             `;
         }
 
+        const modeBadge = data.generation_mode === 'generative_llm'
+            ? '<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">✨ Generative LLM (Grounded)</span>'
+            : data.generation_mode === 'deterministic_fallback'
+            ? '<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">🛡️ Deterministic Fallback</span>'
+            : data.security_alert
+            ? '<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/30">🚨 Security Shield</span>'
+            : '<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">⚡ Local Edge Engine</span>';
+
+        const evidenceBadge = data.has_evidence
+            ? `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">📚 ${data.evidence_count || data.citations.length} Verified Sources</span>`
+            : '';
+
         botDiv.innerHTML = `
             <div class="w-8 h-8 rounded-lg ${data.security_alert ? 'bg-rose-500/20 border border-rose-500/50 text-rose-400' : 'bg-cyan-500/20 border border-cyan-500/40 text-cyan-400'} flex items-center justify-center shrink-0 mt-1">
                 <i data-lucide="${data.security_alert ? 'shield-alert' : 'bot'}" class="w-4 h-4"></i>
             </div>
             <div class="glass-panel p-4 rounded-2xl border ${data.security_alert ? 'border-rose-500/40 text-rose-200' : 'border-white/10 text-slate-200'} text-xs space-y-2">
+                <div class="flex items-center gap-2 mb-1.5 flex-wrap">
+                    ${modeBadge}
+                    ${evidenceBadge}
+                </div>
                 <div class="whitespace-pre-line leading-relaxed">${data.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
                 ${citationsHtml}
             </div>

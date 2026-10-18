@@ -1,14 +1,17 @@
 """
-Unit and integration tests for the Local-First RAG Pipeline.
+Unit and integration tests for the Local-First RAG Pipeline and LLM Orchestration.
 Verifies vector embeddings, chunking, database ingestion, tenant isolation,
-prompt-injection defense, and grounded citation generation.
+adversarial prompt-injection defense, multilingual synthesis (EN, BN, ZH),
+unsupported query handling, and configurable LLM provider with graceful deterministic fallback.
 """
 
 import json
+from unittest.mock import patch
 import pytest
 from sqlalchemy import text
 from src.database.models import DocumentChunk
 from src.ai.rag_service import SimpleVectorEmbedder, RagService
+from src.config import settings
 
 
 def test_vector_embedder_math():
@@ -22,9 +25,9 @@ def test_vector_embedder_math():
     vec_c = SimpleVectorEmbedder.embed(text_c)
 
     # 1. Dimension check
-    assert len(vec_a) == SimpleVectorEmbedder.VOCAB_SIZE == 512
-    assert len(vec_b) == 512
-    assert len(vec_c) == 512
+    assert len(vec_a) == SimpleVectorEmbedder.VOCAB_SIZE == 1024
+    assert len(vec_b) == 1024
+    assert len(vec_c) == 1024
 
     # 2. L2 norm check (~1.0 for non-empty text)
     norm_a = sum(x**2 for x in vec_a) ** 0.5
@@ -140,6 +143,7 @@ def test_prompt_injection_defense(db_session, seeded_shop_context):
         assert res["security_alert"] is True
         assert "Security Alert: Query rejected" in res["answer"]
         assert len(res["citations"]) == 0
+        assert res["generation_mode"] == "security_guardrail"
 
 
 def test_grounded_response_with_citations(db_session, seeded_shop_context):
@@ -175,6 +179,138 @@ def test_grounded_response_with_citations(db_session, seeded_shop_context):
     # Citations should be present
     assert len(res["citations"]) >= 1
     assert "Mushak 6.3" in res["citations"][0]["source"]
+    assert res["has_evidence"] is True
+    assert res["evidence_count"] >= 1
+
+
+def test_irrelevant_query_handling(db_session, seeded_shop_context):
+    """Verify irrelevant questions return 0 chunks, has_evidence=False, and clear disclosure."""
+    b1_id = seeded_shop_context["business1"].id
+    s1_id = seeded_shop_context["shop1"].id
+
+    res = RagService.generate_grounded_response(
+        session=db_session,
+        query="What is the boiling point of liquid nitrogen in outer space?",
+        business_id=b1_id,
+        shop_id=s1_id,
+    )
+
+    assert res["security_alert"] is False
+    assert res["has_evidence"] is False
+    assert len(res["citations"]) == 0
+    assert "No Relevant Business Records Found" in res["answer"]
+    assert "Verified Ledger Summary" in res["answer"]
+
+
+def test_multilingual_bengali_and_chinese(db_session, seeded_shop_context):
+    """Verify end-to-end multilingual retrieval and response in Bengali and Chinese."""
+    b1_id = seeded_shop_context["business1"].id
+    s1_id = seeded_shop_context["shop1"].id
+
+    # Ingest bilingual documents
+    RagService.ingest_document(
+        session=db_session,
+        business_id=b1_id,
+        shop_id=s1_id,
+        document_id=None,
+        title="Pran Foods Supplier Contract",
+        content="প্রাণ ফুডস সরবরাহকারী চুক্তি এবং বাকির শর্তাবলী: ৩০ দিনের মধ্যে সম্পূর্ণ পরিশোধ করতে হবে।",
+    )
+    RagService.ingest_document(
+        session=db_session,
+        business_id=b1_id,
+        shop_id=s1_id,
+        document_id=None,
+        title="China Import Tax Fapiao",
+        content="增值税专用发票 纳税人识别号: 911100000000000000，税率 13% 标准进项抵扣。",
+    )
+
+    # 1. Bengali Query
+    res_bn = RagService.generate_grounded_response(
+        session=db_session,
+        query="প্রাণ ফুডস এর সাথে বাকির শর্ত কি?",
+        business_id=b1_id,
+        shop_id=s1_id,
+    )
+    assert res_bn["has_evidence"] is True
+    assert len(res_bn["citations"]) >= 1
+    assert "Pran Foods" in res_bn["citations"][0]["source"]
+    assert "যাচাইকৃত নথি" in res_bn["answer"] or "শর্তাবলী" in res_bn["answer"]
+
+    # 2. Chinese Query
+    res_zh = RagService.generate_grounded_response(
+        session=db_session,
+        query="增值税专用发票纳税人识别号税率是多少？",
+        business_id=b1_id,
+        shop_id=s1_id,
+    )
+    assert res_zh["has_evidence"] is True
+    assert len(res_zh["citations"]) >= 1
+    assert "China Import Tax Fapiao" in res_zh["citations"][0]["source"]
+    assert "业务文档" in res_zh["answer"] or "增值税" in res_zh["answer"]
+
+
+def test_unsupported_questions_missing_evidence(db_session, seeded_shop_context):
+    """Verify questions about nonexistent topics explicitly report missing evidence without hallucinations."""
+    b1_id = seeded_shop_context["business1"].id
+    s1_id = seeded_shop_context["shop1"].id
+
+    res = RagService.generate_grounded_response(
+        session=db_session,
+        query="What is our corporate policy regarding executive yacht allowances?",
+        business_id=b1_id,
+        shop_id=s1_id,
+    )
+
+    assert res["has_evidence"] is False
+    assert len(res["citations"]) == 0
+    assert "No Relevant Business Records Found" in res["answer"]
+
+
+def test_configurable_llm_and_graceful_fallback(db_session, seeded_shop_context):
+    """
+    Verify LLM provider execution flow:
+    1. Deterministic mode returns generation_mode="deterministic_rule_based"
+    2. Simulated Generative LLM returns generation_mode="generative_llm"
+    3. Simulated LLM network exception safely falls back with generation_mode="deterministic_fallback"
+    """
+    b1_id = seeded_shop_context["business1"].id
+    s1_id = seeded_shop_context["shop1"].id
+
+    # 1. Deterministic mode (Default)
+    res_default = RagService.generate_grounded_response(
+        session=db_session,
+        query="What is my cash runway?",
+        business_id=b1_id,
+        shop_id=s1_id,
+    )
+    assert res_default["generation_mode"] == "deterministic_rule_based"
+
+    # 2. Generative LLM successful invocation
+    with patch.object(RagService, "_generate_with_llm", return_value=("Grounded LLM response citing [Doc #1].", "generative_llm")):
+        with patch.object(settings, "LLM_PROVIDER", "openai"):
+            with patch.object(settings, "LLM_API_KEY", "sk-mock-key-for-test"):
+                res_llm = RagService.generate_grounded_response(
+                    session=db_session,
+                    query="What is my cash runway?",
+                    business_id=b1_id,
+                    shop_id=s1_id,
+                )
+                assert res_llm["generation_mode"] == "generative_llm"
+                assert "Grounded LLM response" in res_llm["answer"]
+
+    # 3. Generative LLM failure triggers safe deterministic fallback without crashing
+    with patch.object(RagService, "_generate_with_llm", side_effect=TimeoutError("Connection timed out")):
+        with patch.object(settings, "LLM_PROVIDER", "openai"):
+            with patch.object(settings, "LLM_API_KEY", "sk-mock-key-for-test"):
+                res_fallback = RagService.generate_grounded_response(
+                    session=db_session,
+                    query="What is my cash runway?",
+                    business_id=b1_id,
+                    shop_id=s1_id,
+                )
+                assert res_fallback["generation_mode"] == "deterministic_fallback"
+                assert "Liquidity" in res_fallback["answer"] or "runway" in res_fallback["answer"].lower()
 
 
 def test_copilot_api_endpoint(test_client, seeded_shop_context):
@@ -197,4 +333,6 @@ def test_copilot_api_endpoint(test_client, seeded_shop_context):
     assert "security_alert" in data
     assert "citations" in data
     assert "verified_metrics" in data
+    assert "evidence_count" in data
+    assert "generation_mode" in data
     assert isinstance(data["citations"], list)
