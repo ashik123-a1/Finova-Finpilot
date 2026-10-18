@@ -55,7 +55,7 @@ Execute the comprehensive PyTest suite:
 ```powershell
 python -m pytest
 ```
-Output: `17 passed` validating foreign keys, multi-tenant isolation, financial math, document pipeline, and synthetic generation.
+Output: `148 passed in 14.41s` validating foreign keys, multi-tenant shop isolation, RBAC permissions, financial math, document OCR pipeline, live RAG retrieval, multilingual voice AI, and synthetic benchmarks.
 
 ### 5. Generate the Synthetic Dataset (100,000+ Records)
 To generate the full relational dataset:
@@ -81,26 +81,36 @@ python scripts/generate_synthetic_images.py --count 20
 Output images and manifest are saved to `storage/synthetic_images/`.
 
 ### 8. Start the Application & Web Portal
-Start the FastAPI server:
+Start the application via automated script or direct command:
 ```powershell
-uvicorn src.api.app:app --host 127.0.0.1 --port 8000 --reload
-```
-- **Web Application Portal:** [http://127.0.0.1:8000/](http://127.0.0.1:8000/) (or `/landing`)
-- **Executive Dashboard:** [http://127.0.0.1:8000/app/dashboard](http://127.0.0.1:8000/app/dashboard)
-- **1-Click Demo Personas (Owner, Accountant, Cashier, Auditor):** [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login)
-- **Interactive Swagger API Documentation:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-- **API Health Telemetry:** [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)
+# Option A: One-click runner
+.\start.bat
 
-### Implemented Web Portal Modules (Phase 5):
+# Option B: Direct Python execution
+python -m uvicorn src.api.app:app --host 127.0.0.1 --port 8050
+```
+- **Web Application Portal:** [http://127.0.0.1:8050/](http://127.0.0.1:8050/) (or `/landing`)
+- **Executive Dashboard:** [http://127.0.0.1:8050/app/dashboard](http://127.0.0.1:8050/app/dashboard)
+- **1-Click Demo Personas & Sign In:** [http://127.0.0.1:8050/login](http://127.0.0.1:8050/login)
+- **Interactive Swagger API Documentation:** [http://127.0.0.1:8050/docs](http://127.0.0.1:8050/docs)
+- **API Health Telemetry:** [http://127.0.0.1:8050/health](http://127.0.0.1:8050/health)
+
+### Documented Demo Credentials (Pre-Seeded Sandbox):
+- **Store Owner:** `demo_owner` / `demo12345` (Full multi-shop governance, finance, loan simulations)
+- **Accountant:** `demo_accountant` / `password123` (P&L statements, VAT reconciliation, OCR approval)
+- **Cashier:** `demo_cashier` / `password123` (POS sales, customer receivables, ledger write restricted)
+- **Bank Auditor:** `demo_auditor` / `password123` (Read-only audit trails, cryptographic verification)
+
+### Implemented Web Portal Modules:
 - **Landing Page (`/landing`):** Modern high-converting UI with live metrics ticker, interactive DSCR sandbox, feature grid, and preloader animations.
-- **Authentication & Onboarding (`/login`, `/register`):** Glassmorphic screens with 1-click persona switcher (Owner, Accountant, Cashier, Auditor).
-- **Executive Dashboard (`/app/dashboard`):** 30-day revenue vs expense stream chart (Chart.js), net profit, cash runway, and live transactions stream.
+- **Authentication & Onboarding (`/login`, `/register`, `/app/onboarding`):** Glassmorphic screens with 1-click persona switcher and commercial workspace registration.
+- **Executive Dashboard (`/app/dashboard`):** Real-time API-bound 30-day revenue vs expense stream chart (Chart.js), net profit, cash runway, and live transactions stream with zero hardcoded numbers.
 - **Financial Ledger & P&L (`/app/finance`):** P&L statements, verified sales & expense ledgers, date range filters, minor-unit formatting, and statutory CSV exports.
-- **AI Cash-Flow Forecasting (`/app/forecast`):** Multi-horizon forecasting (7D, 14D, 30D, 60D, 90D), 95% confidence intervals, and automated liquidity runway estimation.
+- **AI Cash-Flow Forecasting (`/app/forecast`):** Multi-horizon forecasting (7D, 14D, 30D, 60D, 90D), Ridge Autoregressive models, and automated liquidity runway estimation.
 - **Document OCR Hub (`/app/documents`):** Drag-and-drop file upload, magic byte verification, extracted line items reconciliation, and human review approval gateway before posting to general ledger.
-- **SME Loans & DSCR Underwriting (`/app/loans`):** Debt Service Coverage Ratio calculator, reducing-balance amortized EMI schedules, and institutional bank comparison matrix (BRAC Bank, City Tara, EBL Shurjo).
+- **SME Loans & DSCR Underwriting (`/app/loans`):** Debt Service Coverage Ratio calculator, reducing-balance amortized EMI schedules, and institutional bank comparison matrix (BRAC Bank, City Bank).
 - **Inventory & Aging (`/app/inventory`):** Stock valuation, low-stock reorder warnings, and accounts receivable aging buckets (0-30, 31-60, 61-90, 90+ days).
-- **Autonomous Financial AI Copilot (`/app/copilot`):** Conversational AI participant grounded in verified SQLite records for debt simulation, tax advisory, and cash diagnosis.
+- **Autonomous Financial AI Copilot (`/app/copilot`):** Conversational AI grounded in verified SQLite records and document chunks with source citations, multilingual voice AI (EN/BN/ZH), and single-use confirmation barriers.
 - **Security Audit & Integrity (`/app/audit`):** Tamper-evident audit trail, cryptographic HMAC signature verification, and active model registry benchmarks.
 - **Settings & Organization (`/app/settings`):** Multi-shop branch switcher, statutory tax profile, 100-language selector, and local SQLite engine telemetry.
 

@@ -455,9 +455,12 @@ async function handleCopilotSend(e, isVoiceQuery = false) {
                     'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify({
+                    transcript: msg,
                     text: msg,
                     business_id: bizId,
-                    language_code: hasBengali ? 'bn-BD' : hasChinese ? 'zh-CN' : currentLang
+                    shop_id: parseInt('{{ active_shop_id or 28 }}'),
+                    language_code: hasBengali ? 'bn-BD' : hasChinese ? 'zh-CN' : currentLang,
+                    preferred_locale: hasBengali ? 'bn' : hasChinese ? 'zh' : currentLang.split('-')[0]
                 })
             });
             if (resp.ok) {
@@ -502,6 +505,10 @@ function renderVoiceResponse(typingId, data) {
     const botDiv = document.createElement('div');
     botDiv.className = 'flex items-start gap-3 max-w-3xl';
 
+    const actionData = data.action_summary || data.proposed_action || {};
+    const textOutput = data.text_response || data.voice_response || data.spoken_response || '';
+    const spokenOutput = data.spoken_response || data.voice_response || textOutput;
+
     let confirmationBarrierHtml = '';
     if (data.requires_confirmation) {
         confirmationBarrierHtml = `
@@ -514,7 +521,7 @@ function renderVoiceResponse(typingId, data) {
                     This operation will modify production ledgers. Please review the parameters carefully before authorizing execution:
                 </p>
                 <div class="p-2.5 rounded-lg bg-slate-950 font-mono text-[11px] text-slate-300 border border-white/10">
-                    <pre class="whitespace-pre-wrap">${JSON.stringify(data.proposed_action, null, 2)}</pre>
+                    <pre class="whitespace-pre-wrap">${JSON.stringify(actionData, null, 2)}</pre>
                 </div>
                 <div class="flex items-center gap-2 pt-1">
                     <button type="button" onclick="confirmAction('${data.confirmation_token}')" class="px-4 py-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all shadow-md">
@@ -529,8 +536,8 @@ function renderVoiceResponse(typingId, data) {
         `;
     }
 
-    const intentBadge = `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">🎯 Intent: ${data.intent}</span>`;
-    const langBadge = `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">🌐 ${data.language_code || 'en'}</span>`;
+    const intentBadge = `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">🎯 Intent: ${data.intent || 'processed'}</span>`;
+    const langBadge = `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">🌐 ${data.language_code || data.locale || 'en'}</span>`;
     const modeBadge = `<span class="text-[9px] font-mono px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">⚡ Deterministic Voice AI</span>`;
 
     botDiv.innerHTML = `
@@ -544,11 +551,11 @@ function renderVoiceResponse(typingId, data) {
                     ${intentBadge}
                     ${langBadge}
                 </div>
-                <button type="button" onclick="speakText('${escapeForAudio(data.voice_response || data.text_response)}', '${data.language_code || "en-US"}')" class="text-slate-400 hover:text-cyan-400 p-1" title="Play audio">
+                <button type="button" onclick="speakText('${escapeForAudio(spokenOutput)}', '${data.language_code || 'en-US'}')" class="text-slate-400 hover:text-cyan-400 p-1" title="Play audio">
                     <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
                 </button>
             </div>
-            <div class="whitespace-pre-line leading-relaxed text-white font-medium">${(data.voice_response || data.text_response).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
+            <div class="whitespace-pre-line leading-relaxed text-white font-medium">${textOutput.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
             ${confirmationBarrierHtml}
         </div>
     `;
@@ -557,7 +564,7 @@ function renderVoiceResponse(typingId, data) {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
     if (autoTts) {
-        speakText(data.voice_response || data.text_response, data.language_code || 'en-US');
+        speakText(spokenOutput, data.language_code || 'en-US');
     }
 }
 
@@ -635,18 +642,26 @@ async function confirmAction(token) {
                 'Authorization': `Bearer ${authHeader}`
             },
             body: JSON.stringify({
+                transcript: 'confirm',
                 text: 'confirm',
                 business_id: bizId,
+                shop_id: parseInt('{{ active_shop_id or 28 }}'),
+                confirmation_token: token,
                 confirm_token: token
             })
         });
 
         if (resp.ok) {
             const result = await resp.json();
-            showToast('Consequential transaction executed and recorded in tamper-evident audit ledger!', 'success');
+            if (result.status === 'success') {
+                showToast('Consequential transaction executed and recorded in tamper-evident audit ledger!', 'success');
+            } else {
+                showToast(result.text_response || 'Confirmation rejected.', 'danger');
+            }
             renderVoiceResponse('none', result);
         } else {
-            showToast('Confirmation failed or token expired.', 'danger');
+            const errData = await resp.json().catch(() => ({}));
+            showToast(errData.detail || 'Confirmation failed or token expired.', 'danger');
         }
     } catch (e) {
         showToast('Confirmation execution error.', 'danger');

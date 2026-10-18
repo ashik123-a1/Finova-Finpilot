@@ -40,3 +40,6 @@ build/
 .idea/
 *.swp
 *.swo
+
+# Local scratch directory
+scratch/

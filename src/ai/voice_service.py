@@ -123,7 +123,7 @@ class VoiceService:
             return "cash_forecast_shortage"
 
         # Financial Status
-        if re.search(r"\b(earn|revenue|sales|income|profit|expenses?)\b|বিক্রি|আয়|লাভ|খরচ|টাকা|赚|收入|利润|开支", t):
+        if re.search(r"\b(earn|revenue|sales|income|profit|expenses?)\b|বিক্রি|আয়|লাভ|খরচ|টাকা|赚|收入|营业额|销售|流水|利润|开支", t):
             return "financial_status"
 
         return "general_query"

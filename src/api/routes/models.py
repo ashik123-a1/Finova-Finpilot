@@ -331,11 +331,14 @@ def copilot_query_endpoint(
 # ==============================================================================
 
 class VoiceProcessRequest(BaseModel):
-    transcript: str
-    preferred_locale: Optional[str] = "en"
+    transcript: Optional[str] = None
+    text: Optional[str] = None
+    preferred_locale: Optional[str] = None
+    language_code: Optional[str] = None
     business_id: Optional[int] = None
     shop_id: Optional[int] = None
     confirmation_token: Optional[str] = None
+    confirm_token: Optional[str] = None
 
 
 class VoiceProcessResponse(BaseModel):
@@ -351,6 +354,7 @@ class VoiceProcessResponse(BaseModel):
     data: Optional[Dict[str, Any]] = None
     generation_mode: Optional[str] = "voice_ai_grounded"
     security_alert: bool = False
+    error: Optional[str] = None
 
 
 @router.post("/voice/process", response_model=VoiceProcessResponse)
@@ -411,15 +415,19 @@ def process_voice_endpoint(
 
     from src.ai.voice_service import VoiceService
 
+    t_input = (req.transcript or req.text or "").strip()
+    loc_input = (req.preferred_locale or req.language_code or "en").split("-")[0].strip()
+    conf_token = req.confirmation_token or req.confirm_token
+
     res = VoiceService.process_voice_command(
         session=db,
-        transcript=req.transcript,
+        transcript=t_input,
         user_id=user.id,
         user_role=matched_role,
         business_id=biz_id,
         shop_id=shop_id,
-        locale=req.preferred_locale or "en",
-        confirmation_token=req.confirmation_token,
+        locale=loc_input,
+        confirmation_token=conf_token,
     )
     return VoiceProcessResponse(**res)
 

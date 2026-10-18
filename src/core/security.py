@@ -128,6 +128,10 @@ CANONICAL_ROLE_PERMISSIONS: dict[str, set[str]] = {
         "business.view", "finance.create", "document.upload", "crm.manage",
         "inventory.manage", "data.export"
     },
+    "cashier": {
+        "business.view", "finance.create", "document.upload", "crm.manage",
+        "data.export"
+    },
 }
 
 
