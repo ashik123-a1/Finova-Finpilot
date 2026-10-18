@@ -336,3 +336,160 @@ def test_copilot_api_endpoint(test_client, seeded_shop_context):
     assert "evidence_count" in data
     assert "generation_mode" in data
     assert isinstance(data["citations"], list)
+
+
+def test_server_side_tenant_authorization_cross_business_denial(test_client, seeded_shop_context):
+    """
+    CRITICAL SECURITY TEST:
+    Verify that an authenticated user for Business 1 cannot query Business 2's records,
+    even if they explicitly pass Business 2's ID in the request body.
+    Server MUST reject with HTTP 403 Forbidden.
+    """
+    b2_id = seeded_shop_context["business2"].id
+    s2_id = seeded_shop_context["shop2"].id
+
+    # User 1 is logged in (default dev user in conftest)
+    # User 1 attempts to query Business 2
+    response = test_client.post(
+        "/api/models/copilot/query",
+        json={
+            "query": "Show me the financial statements and tax invoices",
+            "business_id": b2_id,
+            "shop_id": s2_id,
+        },
+    )
+
+    assert response.status_code == 403
+    detail = response.json()["detail"]
+    assert "Forbidden" in detail
+    assert str(b2_id) in detail or "authorized" in detail
+
+
+def test_genuine_outbound_http_api_call(db_session, seeded_shop_context):
+    """
+    INDEPENDENT VERIFICATION TEST:
+    Spins up a real local HTTP server to prove that configured LLM providers
+    make genuine outbound network requests with Authorization headers and chat completion payloads.
+    """
+    import http.server
+    import threading
+    import time
+
+    request_received = {}
+
+    class RealMockHttpHandler(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):
+            content_len = int(self.headers.get("Content-Length", 0))
+            body_bytes = self.rfile.read(content_len)
+            request_received["path"] = self.path
+            request_received["auth"] = self.headers.get("Authorization", "")
+            request_received["body"] = json.loads(body_bytes.decode("utf-8"))
+
+            if "chat/completions" in self.path:
+                resp = {
+                    "id": "chatcmpl-test-outbound",
+                    "object": "chat.completion",
+                    "created": int(time.time()),
+                    "model": "edge-model",
+                    "choices": [{
+                        "index": 0,
+                        "message": {
+                            "role": "assistant",
+                            "content": "Verified live LLM completion grounded in [Doc #1: Tax Invoice].",
+                        },
+                        "finish_reason": "stop"
+                    }]
+                }
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(json.dumps(resp).encode("utf-8"))
+            else:
+                self.send_response(404)
+                self.end_headers()
+
+        def log_message(self, format, *args):
+            pass  # Suppress console clutter during tests
+
+    server = http.server.HTTPServer(("127.0.0.1", 19988), RealMockHttpHandler)
+    server_thread = threading.Thread(target=server.handle_request, daemon=True)
+    server_thread.start()
+
+    try:
+        b1_id = seeded_shop_context["business1"].id
+        s1_id = seeded_shop_context["shop1"].id
+
+        with patch.object(settings, "LLM_PROVIDER", "custom"):
+            with patch.object(settings, "LLM_BASE_URL", "http://127.0.0.1:19988/v1"):
+                with patch.object(settings, "LLM_API_KEY", "sk-custom-secret-key-xyz"):
+                    with patch.object(settings, "LLM_TIMEOUT_SECONDS", 2.0):
+                        res = RagService.generate_grounded_response(
+                            session=db_session,
+                            query="What is my current runway and DSCR?",
+                            business_id=b1_id,
+                            shop_id=s1_id,
+                        )
+
+                        # 1. Assert genuine HTTP request was transmitted
+                        assert request_received["path"] == "/v1/chat/completions"
+                        assert request_received["auth"] == "Bearer sk-custom-secret-key-xyz"
+                        assert "messages" in request_received["body"]
+
+                        # 2. Assert genuine LLM response was incorporated
+                        assert res["generation_mode"] == "generative_llm"
+                        assert "Verified live LLM completion" in res["answer"]
+    finally:
+        server.server_close()
+
+
+def test_llm_failure_modes_and_safe_fallback(db_session, seeded_shop_context):
+    """
+    INDEPENDENT VERIFICATION OF SAFE FAILURE HANDLING:
+    Verifies that 401 Unauthorized, 429 Rate Limit, and timeout errors
+    all fall back smoothly to deterministic synthesis without breaking or raising 500 errors.
+    """
+    b1_id = seeded_shop_context["business1"].id
+    s1_id = seeded_shop_context["shop1"].id
+
+    from openai import AuthenticationError, RateLimitError, APITimeoutError
+    import httpx
+
+    dummy_request = httpx.Request("POST", "https://api.openai.com/v1/chat/completions")
+
+    # 1. Test 401 Invalid Credentials
+    with patch.object(RagService, "_generate_with_llm", side_effect=AuthenticationError("Invalid API Key", response=httpx.Response(401, request=dummy_request), body=None)):
+        with patch.object(settings, "LLM_PROVIDER", "openai"):
+            with patch.object(settings, "LLM_API_KEY", "sk-invalid-key"):
+                res_401 = RagService.generate_grounded_response(
+                    session=db_session,
+                    query="What is my cash runway?",
+                    business_id=b1_id,
+                    shop_id=s1_id,
+                )
+                assert res_401["generation_mode"] == "deterministic_fallback"
+                assert "Liquidity" in res_401["answer"] or "runway" in res_401["answer"].lower()
+
+    # 2. Test 429 Rate Limit Exceeded
+    with patch.object(RagService, "_generate_with_llm", side_effect=RateLimitError("Rate limit exceeded", response=httpx.Response(429, request=dummy_request), body=None)):
+        with patch.object(settings, "LLM_PROVIDER", "openai"):
+            with patch.object(settings, "LLM_API_KEY", "sk-valid-key"):
+                res_429 = RagService.generate_grounded_response(
+                    session=db_session,
+                    query="What is my cash runway?",
+                    business_id=b1_id,
+                    shop_id=s1_id,
+                )
+                assert res_429["generation_mode"] == "deterministic_fallback"
+
+    # 3. Test Provider Timeout
+    with patch.object(RagService, "_generate_with_llm", side_effect=APITimeoutError(request=dummy_request)):
+        with patch.object(settings, "LLM_PROVIDER", "openai"):
+            with patch.object(settings, "LLM_API_KEY", "sk-valid-key"):
+                res_timeout = RagService.generate_grounded_response(
+                    session=db_session,
+                    query="What is my cash runway?",
+                    business_id=b1_id,
+                    shop_id=s1_id,
+                )
+                assert res_timeout["generation_mode"] == "deterministic_fallback"
+

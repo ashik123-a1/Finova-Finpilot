@@ -11,13 +11,15 @@ import json
 from pathlib import Path
 from typing import List, Optional, Dict, Any
 from pydantic import BaseModel
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from src.database.connection import get_db
-from src.database.models import ModelVersion, EvaluationRun
+from src.database.models import ModelVersion, EvaluationRun, User, BusinessMembership
 from src.ai.registry import ModelRegistry
+from src.api.dependencies import get_current_user
+from src.core.security import enforce_shop_isolation
 
 router = APIRouter(prefix="/models", tags=["Model Registry & Evaluation"])
 
@@ -256,15 +258,60 @@ class CopilotQueryResponse(BaseModel):
 @router.post("/copilot/query", response_model=CopilotQueryResponse)
 def copilot_query_endpoint(
     req: CopilotQueryRequest,
+    user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
     """
     RAG-grounded Copilot querying endpoint.
     Retrieves tenant-isolated document chunks, enforces prompt injection checks,
     and returns grounded explanations with verifiable source citations.
+    Enforces strict server-side tenant authorization derived from authenticated user identity.
     """
-    biz_id = req.business_id or 19
-    shop_id = req.shop_id or 28
+    # 1. Server-side Tenant Authorization: Verify user memberships
+    stmt = select(BusinessMembership).where(
+        BusinessMembership.user_id == user.id,
+        BusinessMembership.is_active == True,
+    )
+    user_memberships = db.scalars(stmt).all()
+    if not user_memberships:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Forbidden: Authenticated user has no active business memberships.",
+        )
+
+    authorized_biz_ids = {m.business_id for m in user_memberships}
+    memberships_dict = [
+        {"user_id": m.user_id, "business_id": m.business_id, "shop_id": m.shop_id, "role_code": m.role_code}
+        for m in user_memberships
+    ]
+
+    # Verify or resolve business_id
+    if req.business_id is not None:
+        if req.business_id not in authorized_biz_ids:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Forbidden: You are not authorized to access documents or records for Business #{req.business_id}.",
+            )
+        biz_id = req.business_id
+    else:
+        biz_id = user_memberships[0].business_id
+
+    # Verify or resolve shop_id
+    if req.shop_id is not None:
+        try:
+            enforce_shop_isolation(user.id, req.shop_id, memberships_dict)
+            shop_id = req.shop_id
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Forbidden: You are not authorized to access Shop #{req.shop_id}.",
+            )
+    else:
+        biz_shops = [m.shop_id for m in user_memberships if m.business_id == biz_id and m.shop_id is not None]
+        shop_id = biz_shops[0] if biz_shops else None
+
+    # Derive role
+    matched_role = next((m.role_code for m in user_memberships if m.business_id == biz_id), "owner")
 
     from src.ai.rag_service import RagService
 
@@ -273,7 +320,7 @@ def copilot_query_endpoint(
         query=req.query,
         business_id=biz_id,
         shop_id=shop_id,
-        user_role="owner",
+        user_role=matched_role,
         preferred_locale=req.preferred_locale or "en",
     )
     return CopilotQueryResponse(**res)
