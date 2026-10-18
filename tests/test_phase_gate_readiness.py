@@ -83,8 +83,8 @@ def test_isolated_db_initialization_and_fk_enforcement(isolated_session, isolate
     """Test 1: Verify clean initialization, migration table, and FK constraints."""
     # Check migration version
     mig = isolated_session.execute(text("SELECT version FROM schema_migrations;")).fetchall()
-    assert len(mig) == 1
-    assert mig[0][0] == "001_initial_schema.sql"
+    mig_versions = [m[0] for m in mig]
+    assert "001_initial_schema.sql" in mig_versions
 
     # Attempt to insert orphan child record without parent business
     with pytest.raises(IntegrityError):

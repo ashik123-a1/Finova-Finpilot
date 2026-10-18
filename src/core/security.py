@@ -77,6 +77,68 @@ def verify_token(token: str, secret_key: str) -> Optional[int]:
         return None
 
 
+# Canonical in-memory fallback permission matrix (guarantees zero overhead and instant lookups)
+CANONICAL_ROLE_PERMISSIONS: dict[str, set[str]] = {
+    "super_admin": {
+        "business.view", "business.edit", "finance.view", "forecast.view",
+        "loan.compare", "loan.risk_assess", "team.invite", "team.remove",
+        "team.roles", "integration.manage", "data.export", "audit.view",
+        "system.execute", "admin.access"
+    },
+    "owner": {
+        "business.view", "business.edit", "finance.view", "finance.create",
+        "finance.edit", "finance.delete", "document.upload", "document.review",
+        "document.post", "forecast.view", "loan.compare", "loan.risk_assess",
+        "crm.manage", "inventory.manage", "team.invite", "team.remove",
+        "team.roles", "integration.manage", "data.export", "audit.view",
+        "system.execute"
+    },
+    "manager": {
+        "business.view", "business.edit", "finance.view", "finance.create",
+        "finance.edit", "document.upload", "document.review", "document.post",
+        "forecast.view", "loan.compare", "loan.risk_assess", "crm.manage",
+        "inventory.manage", "team.invite", "data.export", "audit.view"
+    },
+    "accountant": {
+        "business.view", "finance.view", "finance.create", "finance.edit",
+        "document.upload", "document.review", "document.post", "forecast.view",
+        "loan.compare", "loan.risk_assess", "data.export", "audit.view"
+    },
+    "sales": {
+        "business.view", "finance.create", "document.upload", "crm.manage",
+        "data.export"
+    },
+    "inventory": {
+        "business.view", "document.upload", "inventory.manage", "data.export"
+    },
+    "auditor": {
+        "business.view", "finance.view", "document.review", "forecast.view",
+        "loan.compare", "loan.risk_assess", "data.export", "audit.view"
+    },
+    # Backwards-compatible aliases
+    "admin": {
+        "business.view", "business.edit", "finance.view", "finance.create",
+        "finance.edit", "finance.delete", "document.upload", "document.review",
+        "document.post", "forecast.view", "loan.compare", "loan.risk_assess",
+        "crm.manage", "inventory.manage", "team.invite", "team.remove",
+        "team.roles", "integration.manage", "data.export", "audit.view",
+        "system.execute"
+    },
+    "staff": {
+        "business.view", "finance.create", "document.upload", "crm.manage",
+        "inventory.manage", "data.export"
+    },
+}
+
+
+def has_permission(role_code: str, permission_code: str) -> bool:
+    """Returns True if the role is granted the requested permission."""
+    perms = CANONICAL_ROLE_PERMISSIONS.get(role_code.lower())
+    if not perms:
+        return False
+    return permission_code in perms
+
+
 def enforce_shop_isolation(
     user_id: int,
     shop_id: int,
@@ -94,7 +156,12 @@ def enforce_shop_isolation(
             if m.get("shop_id") is None or m.get("shop_id") == shop_id:
                 # Role check
                 role = m.get("role_code", "")
-                if role in ("owner", "admin", "manager", "staff", "accountant"):
+                if required_permission:
+                    if not has_permission(role, required_permission):
+                        raise ShopAccessDeniedError(
+                            f"Permission Denied: User role '{role}' lacks '{required_permission}'."
+                        )
+                if role in CANONICAL_ROLE_PERMISSIONS:
                     return True
 
     raise ShopAccessDeniedError(

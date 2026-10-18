@@ -59,8 +59,9 @@ def get_web_context(request: Request) -> dict:
         token = request.cookies.get("sme_auth_token")
 
     user_info = None
-    active_shop_id = request.cookies.get("sme_active_shop_id") or "1"
-    active_business_id = request.cookies.get("sme_active_business_id") or "1"
+    active_shop_id = request.cookies.get("sme_active_shop_id")
+    active_business_id = request.cookies.get("sme_active_business_id")
+    active_role = request.cookies.get("sme_role") or "owner"
 
     if token:
         try:
@@ -70,22 +71,22 @@ def get_web_context(request: Request) -> dict:
                     "user_id": uid,
                     "username": f"user_{uid}",
                     "email": "owner@dhakaretail.com",
-                    "role": "owner",
-                    "business_id": int(active_business_id),
+                    "role": active_role,
+                    "business_id": int(active_business_id) if active_business_id else None,
                     "token": token,
                 }
         except Exception:
             user_info = None
 
-    # Fallback to local demo owner for immediate out-of-the-box exploration
+    # Fallback to local demo user for immediate out-of-the-box exploration
     if not user_info:
         user_info = {
             "user_id": 1,
-            "username": "demo_owner",
-            "full_name": "Ashikur Rahman (CEO)",
-            "email": "owner@dhakaretail.com",
-            "role": "owner",
-            "business_id": int(active_business_id),
+            "username": f"demo_{active_role}",
+            "full_name": f"Ashikur Rahman ({active_role.title()})",
+            "email": f"{active_role}@smedemo.com",
+            "role": active_role,
+            "business_id": int(active_business_id) if active_business_id else 19,
             "is_demo": True,
         }
 
@@ -94,38 +95,48 @@ def get_web_context(request: Request) -> dict:
     business_data = None
     try:
         with SessionLocal() as db:
-            b = db.query(Business).filter(Business.id == int(active_business_id)).first()
+            b = None
+            if active_business_id:
+                try:
+                    b = db.query(Business).filter(Business.id == int(active_business_id)).first()
+                except Exception:
+                    b = None
+            if not b:
+                b = db.query(Business).first()
+
             if b:
+                active_business_id = str(b.id)
+                user_info["business_id"] = b.id
                 business_data = {
                     "id": b.id,
                     "name": b.name,
-                    "tax_identifier": b.tax_identifier,
+                    "tax_identifier": b.tax_id or "BIN-99281-002",
                     "currency": b.currency,
                 }
-            shops = db.query(Shop).filter(Shop.business_id == int(active_business_id)).all()
-            for s in shops:
-                shops_data.append({
-                    "id": s.id,
-                    "name": s.name,
-                    "address": s.address or "Dhaka, Bangladesh",
-                    "is_active": s.is_active,
-                })
+                shops = db.query(Shop).filter(Shop.business_id == b.id).all()
+                for s in shops:
+                    shops_data.append({
+                        "id": s.id,
+                        "name": s.name,
+                        "address": s.address or "Dhaka, Bangladesh",
+                        "is_active": s.is_active,
+                    })
+                if shops:
+                    valid_ids = [str(s.id) for s in shops]
+                    if not active_shop_id or active_shop_id not in valid_ids:
+                        active_shop_id = str(shops[0].id)
     except Exception as e:
         logger.debug("Could not query DB for shop switcher: %s", e)
-        # Default fallback shop list
-        shops_data = [
-            {"id": 1, "name": "Dhanmondi Flagship Store", "address": "Road 27, Dhanmondi", "is_active": True},
-            {"id": 2, "name": "Gulshan Retail Outlet", "address": "Gulshan Avenue 1", "is_active": True},
-            {"id": 3, "name": "Uttara Branch Store", "address": "Sector 3, Uttara", "is_active": True},
-        ]
 
     if not business_data:
         business_data = {
-            "id": int(active_business_id),
-            "name": "Dhaka Premier Retailers Ltd.",
+            "id": int(active_business_id or 19),
+            "name": "Bismillah Store (Synthetic)",
             "tax_identifier": "BIN-99281-002",
             "currency": settings.DEFAULT_CURRENCY,
         }
+    if not active_shop_id:
+        active_shop_id = "28"
 
     return {
         "request": request,
