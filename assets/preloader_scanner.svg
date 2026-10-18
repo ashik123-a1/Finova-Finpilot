@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 320" width="100%" height="100%">
+  <defs>
+    <linearGradient id="scanBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080D1A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+
+    <linearGradient id="laserGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="rgba(56, 189, 248, 0)"/>
+      <stop offset="50%" stop-color="rgba(6, 182, 212, 1)"/>
+      <stop offset="100%" stop-color="rgba(16, 185, 129, 0)"/>
+    </linearGradient>
+
+    <linearGradient id="beamAura" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(6, 182, 212, 0.4)"/>
+      <stop offset="100%" stop-color="rgba(6, 182, 212, 0)"/>
+    </linearGradient>
+
+    <filter id="laserGlow" x="-20%" y="-50%" width="140%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes laserSweep {
+      0%, 100% { transform: translateY(45px); }
+      50% { transform: translateY(165px); }
+    }
+    @keyframes textGlow {
+      0%, 100% { opacity: 0.75; }
+      50% { opacity: 1; }
+    }
+    @keyframes lineReveal {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.85; }
+    }
+    .scan-beam {
+      animation: laserSweep 3s ease-in-out infinite;
+    }
+    .scan-text {
+      animation: textGlow 2s ease-in-out infinite;
+    }
+    .scan-line {
+      animation: lineReveal 2s ease-in-out infinite;
+    }
+  </style>
+
+  <!-- Card Background -->
+  <rect x="5" y="5" width="490" height="310" rx="16" fill="url(#scanBg)" stroke="#1E293B" stroke-width="1.5"/>
+
+  <!-- Document Silhouette -->
+  <g transform="translate(190, 40)">
+    <!-- Document Body -->
+    <rect x="0" y="0" width="120" height="150" rx="8" fill="#1E293B" stroke="#334155" stroke-width="2"/>
+    
+    <!-- Top Fold Corner -->
+    <path d="M 95 0 L 120 25 L 95 25 Z" fill="#334155"/>
+
+    <!-- Document Header Badge -->
+    <rect x="15" y="15" width="45" height="10" rx="3" fill="#38BDF8" opacity="0.8"/>
+
+    <!-- Document Content Lines -->
+    <rect class="scan-line" x="15" y="38" width="90" height="5" rx="2.5" fill="#94A3B8"/>
+    <rect class="scan-line" x="15" y="52" width="75" height="5" rx="2.5" fill="#94A3B8"/>
+    <rect class="scan-line" x="15" y="66" width="85" height="5" rx="2.5" fill="#94A3B8"/>
+    <rect class="scan-line" x="15" y="80" width="60" height="5" rx="2.5" fill="#94A3B8"/>
+
+    <!-- Total Amount Field Placeholder -->
+    <rect x="15" y="115" width="40" height="8" rx="2" fill="#64748B"/>
+    <rect x="65" y="112" width="40" height="14" rx="3" fill="#10B981" opacity="0.85"/>
+  </g>
+
+  <!-- Animated Scanning Laser Beam -->
+  <g class="scan-beam">
+    <!-- Laser Aura Spread -->
+    <polygon points="175,-15 325,-15 325,0 175,0" fill="url(#beamAura)"/>
+    <!-- Intense Beam Line -->
+    <rect x="170" y="0" width="160" height="3.5" rx="1.75" fill="url(#laserGrad)" filter="url(#laserGlow)"/>
+  </g>
+
+  <!-- Typography -->
+  <g text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif">
+    <text x="250" y="235" font-size="18" font-weight="700" fill="#F8FAFC" letter-spacing="2">
+      DOCUMENT INTELLIGENCE
+    </text>
+    <text class="scan-text" x="250" y="265" font-size="13" font-weight="500" fill="#38BDF8" letter-spacing="1">
+      Extracting Receipts &amp; Auditing Tax Mushak...
+    </text>
+  </g>
+</svg>
