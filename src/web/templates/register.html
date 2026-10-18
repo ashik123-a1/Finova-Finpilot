@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block title %}Register Business — SME Finance Copilot{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#030712]">
+    <!-- Ambient Backdrop Light -->
+    <div class="absolute w-[600px] h-[400px] bg-gradient-to-tr from-cyan-500/20 via-emerald-500/10 to-indigo-500/20 blur-[130px] rounded-full pointer-events-none"></div>
+
+    <div class="w-full max-w-lg relative z-10">
+        <!-- Logo and Title -->
+        <div class="text-center mb-8">
+            <a href="/landing" class="inline-flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 p-[1.5px] shadow-lg shadow-cyan-500/20">
+                    <div class="w-full h-full bg-[#080e1e] rounded-[10px] flex items-center justify-center">
+                        <i data-lucide="sparkles" class="w-6 h-6 text-cyan-400"></i>
+                    </div>
+                </div>
+                <div class="text-left">
+                    <span class="font-orbitron font-extrabold text-lg tracking-wider text-white">SME<span class="text-cyan-400">FINANCE</span></span>
+                    <span class="block text-[10px] font-mono text-emerald-400 tracking-widest uppercase -mt-1">COPILOT AI</span>
+                </div>
+            </a>
+            <h2 class="text-xl font-bold text-white mt-4">Onboard Your Business</h2>
+            <p class="text-xs text-slate-400 mt-1">Deploy an autonomous financial participant in under 60 seconds</p>
+        </div>
+
+        <!-- Glass Register Card -->
+        <div class="glass-panel-glow p-8 rounded-3xl border border-cyan-500/30 shadow-2xl relative">
+            <form id="register-form" onsubmit="handleRegister(event)" class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">Business / Legal Name</label>
+                        <input type="text" id="reg-biz-name" required value="Dhaka Premier Retailers Ltd." class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium" placeholder="Legal Entity Name">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">Tax Identifier (BIN / TIN)</label>
+                        <input type="text" id="reg-tax-id" required value="BIN-99281-002" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium" placeholder="e.g. BIN-001234567">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">First Shop Name</label>
+                        <input type="text" id="reg-shop-name" required value="Dhanmondi Flagship Store" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium" placeholder="e.g. Flagship Store">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">Operating Currency</label>
+                        <select id="reg-currency" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer">
+                            <option value="BDT" selected>BDT — Bangladeshi Taka (৳)</option>
+                            <option value="CNY">CNY — Chinese Yuan (¥)</option>
+                            <option value="USD">USD — US Dollar ($)</option>
+                            <option value="EUR">EUR — Euro (€)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">Administrator Email</label>
+                        <input type="email" id="reg-email" required value="owner@dhakaretail.com" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium" placeholder="admin@domain.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-medium text-slate-300 mb-1.5">Create Password</label>
+                        <input type="password" id="reg-password" required value="demo12345" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium" placeholder="••••••••">
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="btn-reg-submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 via-emerald-500 to-emerald-400 text-slate-950 font-bold text-xs tracking-wider transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+                        <i data-lucide="check-circle" class="w-4 h-4"></i>
+                        <span>Initialize Business & Enter Portal</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Bottom Link -->
+        <p class="text-center text-xs text-slate-400 mt-6">
+            Already registered? 
+            <a href="/login" class="text-cyan-400 hover:underline font-semibold">Sign in here</a>
+        </p>
+    </div>
+</div>
+
+<script>
+async function handleRegister(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-reg-submit');
+    btn.disabled = true;
+    btn.innerHTML = `<span class="animate-spin mr-2">◌</span> Initializing...`;
+
+    showToast('Business initialized successfully! Opening portal...', 'success');
+    setTimeout(() => {
+        window.location.href = '/app/dashboard';
+    }, 600);
+}
+</script>
+{% endblock %}

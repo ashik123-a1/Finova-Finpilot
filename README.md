@@ -80,25 +80,29 @@ python scripts/generate_synthetic_images.py --count 20
 ```
 Output images and manifest are saved to `storage/synthetic_images/`.
 
-### 8. Start the Local API Server
+### 8. Start the Application & Web Portal
 Start the FastAPI server:
 ```powershell
 uvicorn src.api.app:app --host 127.0.0.1 --port 8000 --reload
 ```
-- Interactive Swagger API Documentation: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
-- API Health Status: [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)
-- API Root: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+- **Web Application Portal:** [http://127.0.0.1:8000/](http://127.0.0.1:8000/) (or `/landing`)
+- **Executive Dashboard:** [http://127.0.0.1:8000/app/dashboard](http://127.0.0.1:8000/app/dashboard)
+- **1-Click Demo Personas (Owner, Accountant, Cashier, Auditor):** [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login)
+- **Interactive Swagger API Documentation:** [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- **API Health Telemetry:** [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)
 
-### Implemented API Workflows (Phase 2):
-- **Health:** `GET /health`, `GET /api/health`, `GET /`
-- **Business & Multi-Tenant:** `GET /api/business/list`, `GET /api/business/{business_id}/shops`, `GET /api/business/shops/{shop_id}`
-- **Finance Dashboard & Ledger:** `GET /api/finance/summary`, `GET /api/finance/sales`, `GET /api/finance/expenses`, `GET /api/finance/profit-loss`, `GET /api/finance/cash-flow`
-- **Forecasting & Loan Intelligence:** `POST /api/finance/forecast`, `GET /api/finance/forecast`, `POST /api/finance/loan-risk-assessment`, `GET /api/finance/loan-products`, `POST /api/finance/loan-comparison`, `POST /api/finance/break-even`
-- **Inventory & Receivables:** `GET /api/finance/inventory-summary`, `GET /api/finance/receivables-summary`
-- **Document Processing Pipeline:** `POST /api/documents/upload`, `GET /api/documents/{document_id}`, `POST /api/documents/confirm-post`, `GET /api/documents/list`
-- **Model Registry & Evaluations:** `GET /api/models/active`, `GET /api/models/evaluations`, `GET /api/models/evaluations/summary`
-- **Security & Audit Logs:** `GET /api/audit/logs`
-- **Multilingual i18n:** `GET /api/i18n/languages`, `GET /api/i18n/countries`, `GET /api/i18n/translations`, `GET /api/i18n/format/currency`
+### Implemented Web Portal Modules (Phase 5):
+- **Landing Page (`/landing`):** Modern high-converting UI with live metrics ticker, interactive DSCR sandbox, feature grid, and preloader animations.
+- **Authentication & Onboarding (`/login`, `/register`):** Glassmorphic screens with 1-click persona switcher (Owner, Accountant, Cashier, Auditor).
+- **Executive Dashboard (`/app/dashboard`):** 30-day revenue vs expense stream chart (Chart.js), net profit, cash runway, and live transactions stream.
+- **Financial Ledger & P&L (`/app/finance`):** P&L statements, verified sales & expense ledgers, date range filters, minor-unit formatting, and statutory CSV exports.
+- **AI Cash-Flow Forecasting (`/app/forecast`):** Multi-horizon forecasting (7D, 14D, 30D, 60D, 90D), 95% confidence intervals, and automated liquidity runway estimation.
+- **Document OCR Hub (`/app/documents`):** Drag-and-drop file upload, magic byte verification, extracted line items reconciliation, and human review approval gateway before posting to general ledger.
+- **SME Loans & DSCR Underwriting (`/app/loans`):** Debt Service Coverage Ratio calculator, reducing-balance amortized EMI schedules, and institutional bank comparison matrix (BRAC Bank, City Tara, EBL Shurjo).
+- **Inventory & Aging (`/app/inventory`):** Stock valuation, low-stock reorder warnings, and accounts receivable aging buckets (0-30, 31-60, 61-90, 90+ days).
+- **Autonomous Financial AI Copilot (`/app/copilot`):** Conversational AI participant grounded in verified SQLite records for debt simulation, tax advisory, and cash diagnosis.
+- **Security Audit & Integrity (`/app/audit`):** Tamper-evident audit trail, cryptographic HMAC signature verification, and active model registry benchmarks.
+- **Settings & Organization (`/app/settings`):** Multi-shop branch switcher, statutory tax profile, 100-language selector, and local SQLite engine telemetry.
 
 ---
 
@@ -111,6 +115,7 @@ F:\china project\
 ├── README.md                        # Project documentation & run guide
 ├── ARCHITECTURE.md                  # System architecture & Mermaid ER diagrams
 ├── API_READINESS_REPORT.md          # Phase 2 API readiness report
+├── API_SECURITY_VERIFICATION_REPORT.md # Phase 2.1 API security audit report
 ├── PHASE_GATE_REPORT.md             # Phase 1 database & model audit gate
 ├── DATABASE_READINESS_REPORT.md     # Relational database audit report
 ├── MODEL_READINESS_REPORT.md        # AI model benchmark validation report
@@ -128,16 +133,22 @@ F:\china project\
 │   ├── documents/                   # Document validation, OCR, classification, routing, posting
 │   ├── ai/                          # Model registry, forecasting, loan risk, segmentation, guardrails
 │   ├── data/                        # Synthetic data generator, validator, image tooling
-│   └── api/                         # FastAPI routes (auth, business, documents, finance, datasets, models, i18n, audit)
+│   ├── api/                         # FastAPI routes (auth, business, documents, finance, datasets, models, i18n, audit)
+│   └── web/                         # Web portal layer (Jinja2 templates, CSS tokens, JS client, images)
+│       ├── router.py                # Web page route controller
+│       ├── static/css/theme.css     # Glassmorphic dark theme design tokens & animations
+│       ├── static/js/app.js         # Client-side API bridge, toast alerts, currency formatting
+│       ├── static/images/           # Favicons, background assets, preloader SVGs
+│       └── templates/               # HTML templates (landing, auth, app portal layout & modules)
 ├── storage/                         # Local filesystem storage
 │   ├── documents/                   # Uploaded document scans and receipts
 │   ├── synthetic_data/              # Dataset validation reports
 │   └── synthetic_images/            # Sample synthetic document images & manifests
-├── tests/                           # 81 automated unit and integration tests (100% pass)
+├── tests/                           # 107 automated unit, security and web tests (100% pass)
 └── scripts/                         # CLI utility runners (init_db, generate, validate, images)
 ```
 
 ---
 
 ## Security & Multi-Tenant Isolation Notice
-All records belong strictly to a `business_id` and `shop_id`. Cross-shop access is enforced and verified at the database query and repository layer, preventing unauthorized visibility or cross-contamination of financial records. Any unauthorized tenant access raises `ShopAccessDeniedError` and returns `403 Forbidden` with clean, stack-trace-free error details.
+All records belong strictly to a `business_id` and `shop_id`. Cross-shop access is enforced and verified at the database query and repository layer, preventing unauthorized visibility or cross-contamination of financial records. Any unauthorized tenant access raises `ShopAccessDeniedError` and returns `403 Forbidden` with clean, stack-trace-free error details. Client identity headers are ignored in favor of signed HMAC session tokens.

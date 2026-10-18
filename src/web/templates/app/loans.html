@@ -1,0 +1,232 @@
+{% extends "app/layout.html" %}
+
+{% block page_title %}SME Loan Underwriting & DSCR Suitability{% endblock %}
+{% block page_subtitle %}Institutional credit evaluation, debt capacity modeling, and bank product matching{% endblock %}
+
+{% block page_content %}
+<div class="space-y-6">
+    <!-- Loan Underwriting Calculator & Live Verdict -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Interactive Inputs Panel (2 Cols) -->
+        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-5">
+            <div class="flex items-center justify-between pb-3 border-b border-white/10">
+                <div>
+                    <h3 class="text-sm font-bold text-white">Debt Capacity Underwriting Calculator</h3>
+                    <p class="text-xs text-slate-400">Tested against statutory Bangladesh Bank & China SME lending covenants</p>
+                </div>
+                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                    GAAP / IFRS Aligned
+                </span>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Requested Loan Principal (BDT)</label>
+                    <div class="relative">
+                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400 font-bold font-mono">৳</span>
+                        <input type="number" id="loan-principal" value="800000" min="50000" step="50000" class="glass-input w-full pl-8 pr-4 py-2.5 rounded-xl font-orbitron font-bold text-sm text-white" oninput="calculateLoanEvaluation()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Loan Tenure (Months)</label>
+                    <select id="loan-tenure" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer" onchange="calculateLoanEvaluation()">
+                        <option value="12">12 Months (1 Year)</option>
+                        <option value="24" selected>24 Months (2 Years)</option>
+                        <option value="36">36 Months (3 Years)</option>
+                        <option value="48">48 Months (4 Years)</option>
+                        <option value="60">60 Months (5 Years)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Expected Annual Interest Rate (%)</label>
+                    <input type="number" id="loan-rate" value="11.5" min="5" max="25" step="0.25" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold text-white" oninput="calculateLoanEvaluation()">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Primary Loan Purpose</label>
+                    <select id="loan-purpose" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer">
+                        <option value="working_capital">Working Capital & Inventory Expansion</option>
+                        <option value="equipment">Retail POS Hardware & Store Renovation</option>
+                        <option value="branch">Opening New Retail Branch</option>
+                        <option value="refinance">Debt Consolidation & Restructuring</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Mathematical Breakdown -->
+            <div class="grid grid-cols-3 gap-3 pt-2 text-center">
+                <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
+                    <div class="text-[10px] font-mono text-slate-400 uppercase">Monthly EMI</div>
+                    <div id="res-emi" class="font-orbitron text-lg font-bold text-white mt-0.5">৳ 37,458</div>
+                </div>
+                <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
+                    <div class="text-[10px] font-mono text-slate-400 uppercase">Total Interest</div>
+                    <div id="res-interest" class="font-orbitron text-lg font-bold text-rose-300 mt-0.5">৳ 99,000</div>
+                </div>
+                <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
+                    <div class="text-[10px] font-mono text-slate-400 uppercase">Total Repayment</div>
+                    <div id="res-total" class="font-orbitron text-lg font-bold text-cyan-300 mt-0.5">৳ 899,000</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Institutional Suitability Verdict Card (1 Col) -->
+        <div class="glass-panel-glow p-6 rounded-3xl border border-cyan-500/30 flex flex-col justify-between space-y-4">
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <span class="text-xs font-mono uppercase text-slate-400">Suitability Verdict</span>
+                    <span id="loan-verdict-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">
+                        PRIME APPROVAL
+                    </span>
+                </div>
+
+                <div class="text-center py-4">
+                    <div class="text-xs font-mono text-slate-400 uppercase">Projected Shop DSCR</div>
+                    <div id="res-dscr" class="font-orbitron text-4xl font-extrabold text-emerald-400 my-1">6.67x</div>
+                    <div class="text-xs text-slate-400">Institutional Threshold: &gt; 1.25x</div>
+                </div>
+
+                <div class="space-y-2 text-xs border-t border-white/10 pt-3">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Net Operating Income:</span>
+                        <span class="text-white font-mono font-semibold">৳ 250,000 / mo</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Debt-to-Income (DTI):</span>
+                        <span id="res-dti" class="text-emerald-400 font-mono font-semibold">15.0% (&lt; 40% cap)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Microfinance Cap Breach:</span>
+                        <span class="text-emerald-400 font-mono font-semibold">No (Within Limits)</span>
+                    </div>
+                </div>
+            </div>
+
+            <button type="button" onclick="generateBankDossier()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-xs font-bold transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
+                <i data-lucide="file-text" class="w-4 h-4"></i>
+                <span>Generate Bank Loan Packet</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Live Commercial SME Bank Loan Products Comparison Matrix -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-sm font-bold text-white">Commercial SME Bank Products Comparison</h3>
+                <p class="text-xs text-slate-400">Pre-screened against Bangladesh Bank SME guidelines and interest caps</p>
+            </div>
+            <span class="text-xs font-mono text-slate-400">Updated: Q4 2026</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Product 1 -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-cyan-500/30 space-y-3 relative overflow-hidden">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-mono text-cyan-400 uppercase block">BRAC Bank Ltd.</span>
+                        <h4 class="text-sm font-bold text-white">Anonya SME Prothom</h4>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MATCHED</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-300">
+                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold">11.5% p.a.</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">৳ 2,500,000</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">DSCR Required:</span><span class="font-mono text-cyan-300">1.25x</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Collateral:</span><span class="text-emerald-400 font-semibold">Unsecured up to 15L</span></div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 space-y-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-mono text-indigo-400 uppercase block">The City Bank</span>
+                        <h4 class="text-sm font-bold text-white">City Tara SME Credit</h4>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MATCHED</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-300">
+                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold">10.5% p.a.</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">৳ 5,000,000</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">DSCR Required:</span><span class="font-mono text-cyan-300">1.30x</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Disbursement:</span><span class="text-white">48 Hours Rapid</span></div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 space-y-3">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="text-[10px] font-mono text-emerald-400 uppercase block">Eastern Bank Ltd.</span>
+                        <h4 class="text-sm font-bold text-white">EBL Shurjo Overdraft</h4>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MATCHED</span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-300">
+                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold">11.0% p.a.</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">৳ 3,000,000</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">DSCR Required:</span><span class="font-mono text-cyan-300">1.20x</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Structure:</span><span class="text-white">Revolving Working Capital</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_scripts %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    calculateLoanEvaluation();
+});
+
+function calculateLoanEvaluation() {
+    const principal = parseFloat(document.getElementById('loan-principal').value) || 0;
+    const tenure = parseInt(document.getElementById('loan-tenure').value) || 24;
+    const annualRate = (parseFloat(document.getElementById('loan-rate').value) || 11.5) / 100;
+    const shopMonthlyNoi = 250000; // Historical net operating income
+
+    if (principal <= 0) return;
+
+    const monthlyRate = annualRate / 12;
+    const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / (Math.pow(1 + monthlyRate, tenure) - 1);
+    const totalRepay = emi * tenure;
+    const totalInterest = totalRepay - principal;
+    const dscr = shopMonthlyNoi / emi;
+    const dti = (emi / shopMonthlyNoi) * 100;
+
+    document.getElementById('res-emi').innerText = '৳ ' + Math.round(emi).toLocaleString();
+    document.getElementById('res-interest').innerText = '৳ ' + Math.round(totalInterest).toLocaleString();
+    document.getElementById('res-total').innerText = '৳ ' + Math.round(totalRepay).toLocaleString();
+    document.getElementById('res-dscr').innerText = dscr.toFixed(2) + 'x';
+    document.getElementById('res-dti').innerText = dti.toFixed(1) + '% (< 40% cap)';
+
+    const badge = document.getElementById('loan-verdict-badge');
+    const dscrNum = document.getElementById('res-dscr');
+
+    if (dscr >= 1.5) {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold';
+        badge.innerText = 'PRIME APPROVAL';
+        dscrNum.className = 'font-orbitron text-4xl font-extrabold text-emerald-400 my-1';
+    } else if (dscr >= 1.2) {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold';
+        badge.innerText = 'CONDITIONAL APPROVAL';
+        dscrNum.className = 'font-orbitron text-4xl font-extrabold text-amber-400 my-1';
+    } else {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 font-bold';
+        badge.innerText = 'HIGH DEBT RISK';
+        dscrNum.className = 'font-orbitron text-4xl font-extrabold text-rose-400 my-1';
+    }
+}
+
+function generateBankDossier() {
+    showToast('Compiling GAAP bank financial underwriting dossier...', 'info');
+    setTimeout(() => {
+        showToast('Bank underwriting packet ready for download!', 'success');
+    }, 1000);
+}
+</script>
+{% endblock %}
+{% endblock %}

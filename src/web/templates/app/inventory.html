@@ -1,0 +1,138 @@
+{% extends "app/layout.html" %}
+
+{% block page_title %}Inventory Valuation & Receivables Aging{% endblock %}
+{% block page_subtitle %}Stock turnover telemetry, SKU gross margins, and accounts receivable credit exposure{% endblock %}
+
+{% block page_content %}
+<div class="space-y-6">
+    <!-- Top Summary Metrics -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="glass-panel p-5 rounded-2xl border border-white/5">
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Stock Valuation</div>
+            <div class="font-orbitron text-2xl font-bold text-white mt-1">৳ 3,450,000<span class="text-xs font-mono text-cyan-400">.00</span></div>
+            <div class="text-[11px] text-cyan-400 mt-1">Weighted Cost Basis</div>
+        </div>
+
+        <div class="glass-panel p-5 rounded-2xl border border-white/5">
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Active SKUs</div>
+            <div class="font-orbitron text-2xl font-bold text-emerald-400 mt-1">142 SKUs</div>
+            <div class="text-[11px] text-slate-400 mt-1">Shop #{{ active_shop_id }} Catalog</div>
+        </div>
+
+        <div class="glass-panel p-5 rounded-2xl border border-white/5">
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Outstanding Receivables</div>
+            <div class="font-orbitron text-2xl font-bold text-amber-300 mt-1">৳ 284,500<span class="text-xs font-mono text-slate-400">.00</span></div>
+            <div class="text-[11px] text-amber-400 mt-1">Trade Credit Extended</div>
+        </div>
+
+        <div class="glass-panel p-5 rounded-2xl border border-white/5">
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Low Stock Reorder Alerts</div>
+            <div class="font-orbitron text-2xl font-bold text-rose-400 mt-1">4 Items</div>
+            <div class="text-[11px] text-rose-300 mt-1">Reorder Threshold Breached</div>
+        </div>
+    </div>
+
+    <!-- Receivables Aging Breakdown -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-sm font-bold text-white">Accounts Receivable Aging Buckets</h3>
+                <p class="text-xs text-slate-400">Aging classification according to IFRS 9 expected credit loss guidelines</p>
+            </div>
+            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                100% Reconciled
+            </span>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="p-4 rounded-2xl bg-slate-900 border border-emerald-500/30 space-y-1">
+                <div class="text-[10px] font-mono uppercase text-emerald-400">0 - 30 Days (Current)</div>
+                <div class="font-orbitron text-lg font-bold text-white">৳ 195,000</div>
+                <div class="text-[10px] text-slate-400">Low Risk • Normal Terms</div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900 border border-cyan-500/30 space-y-1">
+                <div class="text-[10px] font-mono uppercase text-cyan-400">31 - 60 Days</div>
+                <div class="font-orbitron text-lg font-bold text-white">৳ 58,500</div>
+                <div class="text-[10px] text-slate-400">Follow-up Notice Sent</div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900 border border-amber-500/30 space-y-1">
+                <div class="text-[10px] font-mono uppercase text-amber-400">61 - 90 Days</div>
+                <div class="font-orbitron text-lg font-bold text-white">৳ 22,000</div>
+                <div class="text-[10px] text-amber-300">Overdue Reminders Active</div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900 border border-rose-500/30 space-y-1">
+                <div class="text-[10px] font-mono uppercase text-rose-400">90+ Days (Doubtful)</div>
+                <div class="font-orbitron text-lg font-bold text-rose-300">৳ 9,000</div>
+                <div class="text-[10px] text-rose-400">Provision Reserved (3.1%)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Low Stock Inventory Alerts Table -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">SKU Inventory & Reorder Monitoring</h3>
+            <button type="button" onclick="showToast('Reorder Purchase Orders Drafted!', 'success')" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all">
+                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
+                <span>Auto-Draft Purchase Orders</span>
+            </button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-white/10 text-slate-400 font-mono uppercase tracking-wider text-[11px]">
+                        <th class="pb-3 font-semibold">SKU Code</th>
+                        <th class="pb-3 font-semibold">Product Description</th>
+                        <th class="pb-3 font-semibold text-center">Current Qty</th>
+                        <th class="pb-3 font-semibold text-center">Safety Reorder Point</th>
+                        <th class="pb-3 font-semibold text-right">Unit Cost</th>
+                        <th class="pb-3 font-semibold text-center">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-white/5">
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 font-mono text-cyan-400 font-semibold">SKU-TX-004</td>
+                        <td class="py-3 text-white font-medium">Premium Cotton Kurta (Size M)</td>
+                        <td class="py-3 font-mono text-center text-rose-400 font-bold">4 pcs</td>
+                        <td class="py-3 font-mono text-center text-slate-400">20 pcs</td>
+                        <td class="py-3 font-mono text-right text-slate-300">৳ 1,450.00</td>
+                        <td class="py-3 text-center">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/30">
+                                CRITICAL LOW
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 font-mono text-cyan-400 font-semibold">SKU-FB-019</td>
+                        <td class="py-3 text-white font-medium">Silk Weave Fabric (Roll 50m)</td>
+                        <td class="py-3 font-mono text-center text-amber-300 font-bold">8 rolls</td>
+                        <td class="py-3 font-mono text-center text-slate-400">15 rolls</td>
+                        <td class="py-3 font-mono text-right text-slate-300">৳ 8,200.00</td>
+                        <td class="py-3 text-center">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">
+                                LOW STOCK
+                            </span>
+                        </td>
+                    </tr>
+                    <tr class="hover:bg-white/5 transition-colors">
+                        <td class="py-3 font-mono text-cyan-400 font-semibold">SKU-AP-102</td>
+                        <td class="py-3 text-white font-medium">Embroidery Thread Spools (Pack 24)</td>
+                        <td class="py-3 font-mono text-center text-emerald-400 font-bold">94 packs</td>
+                        <td class="py-3 font-mono text-center text-slate-400">30 packs</td>
+                        <td class="py-3 font-mono text-right text-slate-300">৳ 480.00</td>
+                        <td class="py-3 text-center">
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                                OPTIMAL
+                            </span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

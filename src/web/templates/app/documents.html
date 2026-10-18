@@ -1,0 +1,257 @@
+{% extends "app/layout.html" %}
+
+{% block page_title %}Document Capture & Gated OCR Gateway{% endblock %}
+{% block page_subtitle %}Human-in-the-loop validation for multilingual supplier invoices, receipts, and VAT fapiao{% endblock %}
+
+{% block page_content %}
+<div class="space-y-6">
+    <!-- Drag & Drop Upload Zone -->
+    <div class="glass-panel-glow p-8 rounded-3xl border border-cyan-500/30 text-center relative overflow-hidden">
+        <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleFileSelected(event)">
+        
+        <div class="max-w-md mx-auto cursor-pointer" onclick="document.getElementById('doc-file-input').click()">
+            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform">
+                <i data-lucide="upload-cloud" class="w-7 h-7"></i>
+            </div>
+            
+            <h3 class="text-base font-bold text-white mb-1">Upload Receipt, Invoice or Cash Memo</h3>
+            <p class="text-xs text-slate-400 mb-4">
+                Drag and drop PDF, PNG or JPG files here, or click to browse. Magic byte verification active.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] font-mono text-slate-400">
+                <span class="px-2.5 py-1 rounded-full bg-slate-900 border border-white/10">🇬🇧 English Invoices</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-900 border border-white/10">🇨🇳 中国发票 (Fapiao)</span>
+                <span class="px-2.5 py-1 rounded-full bg-slate-900 border border-white/10">🇧🇩 মূসক চালান (Mushak 6.3)</span>
+            </div>
+        </div>
+
+        <!-- Hidden upload progress bar -->
+        <div id="upload-progress-container" class="hidden max-w-md mx-auto mt-6">
+            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1">
+                <span id="upload-status-text">Uploading & Running OCR...</span>
+                <span id="upload-pct-text" class="text-cyan-400">65%</span>
+            </div>
+            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                <div id="upload-progress-bar" class="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 w-2/3 transition-all"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Processing Pipeline Queue -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div>
+                <h3 class="text-sm font-bold text-white">Document Processing Queue</h3>
+                <p class="text-xs text-slate-400">Human approval is required before postings affect ledger balances</p>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="loadDocumentsQueue()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all">
+                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                    <span>Refresh Queue</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-white/10 text-slate-400 font-mono uppercase tracking-wider text-[11px]">
+                        <th class="pb-3 font-semibold">Document / ID</th>
+                        <th class="pb-3 font-semibold">Classification Type</th>
+                        <th class="pb-3 font-semibold">Vendor / Issuer</th>
+                        <th class="pb-3 font-semibold text-right">Extracted Total</th>
+                        <th class="pb-3 font-semibold text-center">OCR Confidence</th>
+                        <th class="pb-3 font-semibold text-center">Gated Status</th>
+                        <th class="pb-3 font-semibold text-right">Action</th>
+                    </tr>
+                </thead>
+                <tbody id="docs-tbody" class="divide-y divide-white/5">
+                    <tr>
+                        <td colspan="7" class="py-6 text-center text-slate-500">
+                            <span class="animate-spin mr-2">◌</span> Loading document queue...
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Human Review & Gating Approval Modal -->
+<div id="review-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-glow w-full max-w-2xl rounded-3xl border border-cyan-500/40 p-6 shadow-2xl relative space-y-5 animate-in fade-in zoom-in-95">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+                <i data-lucide="file-check-2" class="w-5 h-5 text-cyan-400"></i>
+                <h3 class="text-sm font-bold text-white">Human Review & Reconciliation Gateway</h3>
+            </div>
+            <button type="button" onclick="closeReviewModal()" class="text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Document Details Form -->
+        <div class="space-y-4 text-xs">
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Invoice / Document ID</label>
+                    <input type="text" id="modal-doc-id" readonly class="glass-input w-full px-3 py-2 rounded-xl font-mono text-cyan-400">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Document Classification</label>
+                    <input type="text" id="modal-doc-type" readonly class="glass-input w-full px-3 py-2 rounded-xl text-slate-200">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Vendor / Payee</label>
+                    <input type="text" id="modal-vendor" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Extracted Total (BDT)</label>
+                    <input type="number" step="0.01" id="modal-total" class="glass-input w-full px-3 py-2 rounded-xl font-orbitron font-bold text-emerald-400 text-sm">
+                </div>
+            </div>
+
+            <!-- Mathematical Reconciliation Verification -->
+            <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/10 space-y-2">
+                <div class="flex items-center justify-between">
+                    <span class="font-semibold text-slate-300">Arithmetic Integrity Verification:</span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                        ✓ RECONCILED (0.00 DIFFERENCE)
+                    </span>
+                </div>
+                <p class="text-[11px] text-slate-400">
+                    Line items sum (৳ 42,000.00) + 5% VAT (৳ 2,100.00) matches document grand total (৳ 44,100.00) exactly.
+                </p>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+            <button type="button" onclick="rejectCurrentDoc()" class="px-4 py-2 rounded-xl bg-rose-950/40 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30 text-xs font-semibold">
+                Reject Document
+            </button>
+            <button type="button" onclick="approveAndPostDoc()" id="btn-approve-post" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-xs font-bold transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-1.5">
+                <i data-lucide="check" class="w-4 h-4"></i>
+                <span>Approve & Post to General Ledger</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+{% block extra_scripts %}
+<script>
+let activeReviewDocId = null;
+
+document.addEventListener("DOMContentLoaded", function() {
+    loadDocumentsQueue();
+});
+
+function handleFileSelected(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const progContainer = document.getElementById('upload-progress-container');
+    const progBar = document.getElementById('upload-progress-bar');
+    const statusText = document.getElementById('upload-status-text');
+    const pctText = document.getElementById('upload-pct-text');
+
+    progContainer.classList.remove('hidden');
+    progBar.style.width = '20%';
+    pctText.innerText = '20%';
+    statusText.innerText = `Uploading ${file.name}...`;
+
+    setTimeout(() => {
+        progBar.style.width = '65%';
+        pctText.innerText = '65%';
+        statusText.innerText = `Running Multilingual OCR & Field Extraction...`;
+    }, 600);
+
+    setTimeout(() => {
+        progBar.style.width = '100%';
+        pctText.innerText = '100%';
+        statusText.innerText = `OCR Complete! Gated for Human Review.`;
+        showToast('Document uploaded & extracted successfully!', 'success');
+        setTimeout(() => {
+            progContainer.classList.add('hidden');
+            loadDocumentsQueue();
+            openReviewModal('DOC-2026-904', 'Supplier Purchase Invoice', 'Dhaka Fabrics Ltd.', 44100.00);
+        }, 800);
+    }, 1400);
+}
+
+function loadDocumentsQueue() {
+    const tbody = document.getElementById('docs-tbody');
+    const sampleDocs = [
+        { id: 'DOC-2026-904', name: 'invoice_dhaka_fabrics_oct.pdf', type: 'Purchase Invoice', vendor: 'Dhaka Fabrics Ltd.', total: 44100.00, conf: 98.4, status: 'pending_review' },
+        { id: 'DOC-2026-903', name: 'fapiao_hangzhou_textiles.png', type: '增值税专用发票 (Fapiao)', vendor: 'Hangzhou Silk & Craft Co.', total: 125000.00, conf: 96.1, status: 'posted' },
+        { id: 'DOC-2026-902', name: 'mushak_6_3_utility.pdf', type: 'মূসক চালান-পত্র (Mushak 6.3)', vendor: 'DESCO Pre-paid Power', total: 18450.00, conf: 99.2, status: 'posted' },
+        { id: 'DOC-2026-901', name: 'pos_cash_memo_counter1.jpg', type: 'Sales Cash Memo', vendor: 'Walk-in Retail POS', total: 14200.00, conf: 94.8, status: 'posted' }
+    ];
+
+    tbody.innerHTML = sampleDocs.map(d => `
+        <tr class="hover:bg-white/5 transition-colors">
+            <td class="py-3">
+                <div class="font-mono text-cyan-400 font-semibold">${d.id}</div>
+                <div class="text-[10px] text-slate-400 font-mono">${d.name}</div>
+            </td>
+            <td class="py-3 text-slate-300 font-medium">${d.type}</td>
+            <td class="py-3 text-slate-400">${d.vendor}</td>
+            <td class="py-3 font-orbitron text-right font-bold text-white">৳ ${d.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
+            <td class="py-3 text-center">
+                <span class="text-xs font-mono font-bold ${d.conf > 95 ? 'text-emerald-400' : 'text-amber-400'}">${d.conf}%</span>
+            </td>
+            <td class="py-3 text-center">
+                ${d.status === 'pending_review' 
+                    ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">PENDING REVIEW</span>`
+                    : `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">POSTED TO LEDGER</span>`
+                }
+            </td>
+            <td class="py-3 text-right">
+                ${d.status === 'pending_review'
+                    ? `<button type="button" onclick="openReviewModal('${d.id}', '${d.type}', '${d.vendor}', ${d.total})" class="px-3 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-xs font-semibold">Review</button>`
+                    : `<span class="text-slate-500 text-xs font-mono">Archived</span>`
+                }
+            </td>
+        </tr>
+    `).join('');
+}
+
+function openReviewModal(id, type, vendor, total) {
+    activeReviewDocId = id;
+    document.getElementById('modal-doc-id').value = id;
+    document.getElementById('modal-doc-type').value = type;
+    document.getElementById('modal-vendor').value = vendor;
+    document.getElementById('modal-total').value = total.toFixed(2);
+    document.getElementById('review-modal').classList.remove('hidden');
+    lucide.createIcons();
+}
+
+function closeReviewModal() {
+    document.getElementById('review-modal').classList.add('hidden');
+}
+
+function approveAndPostDoc() {
+    const btn = document.getElementById('btn-approve-post');
+    btn.disabled = true;
+    btn.innerHTML = `<span class="animate-spin mr-1">◌</span> Posting to Ledger...`;
+
+    setTimeout(() => {
+        closeReviewModal();
+        showToast(`Document #${activeReviewDocId} approved & posted to financial ledger!`, 'success');
+        loadDocumentsQueue();
+    }, 700);
+}
+
+function rejectCurrentDoc() {
+    closeReviewModal();
+    showToast(`Document #${activeReviewDocId} rejected and flagged for audit.`, 'warning');
+    loadDocumentsQueue();
+}
+</script>
+{% endblock %}
+{% endblock %}

@@ -8,9 +8,11 @@ and CORS middleware for local frontend clients.
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 
@@ -37,6 +39,7 @@ from src.api.routes import (
     i18n,
     audit,
 )
+from src.web.router import router as web_router, templates, get_web_context
 
 logger = logging.getLogger("sme_finance_copilot")
 
@@ -177,7 +180,19 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 
 
 # ==============================================================================
-# Route Module Registration
+# Static Files & Web Router Registration
+# ==============================================================================
+
+STATIC_DIR = Path(__file__).resolve().parent.parent / "web" / "static"
+if STATIC_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+# Web UI HTML Router
+app.include_router(web_router)
+
+
+# ==============================================================================
+# API Route Module Registration
 # ==============================================================================
 
 app.include_router(auth.router, prefix="/api")
@@ -195,7 +210,15 @@ app.include_router(audit.router, prefix="/api")
 # ==============================================================================
 
 @app.get("/")
-def root():
+def root(request: Request):
+    """
+    Root endpoint supporting both browser HTML requests (Landing Page)
+    and automated API status checks.
+    """
+    accept = request.headers.get("accept", "")
+    if "text/html" in accept and not accept.startswith("*/*"):
+        ctx = get_web_context(request)
+        return templates.TemplateResponse("landing.html", ctx)
     return {
         "app": settings.APP_NAME,
         "version": "0.1.0",
