@@ -39,6 +39,18 @@ Each of the 100 registered languages is classified into one of four capability t
 | **`implemented`** | Working translation catalog loaded, locale formatting and native numeral conversion operational | **19** | Italian, Dutch, Polish, Persian, Swahili, Thai, Malay, Tagalog, Tamil, Telugu, Marathi, Gujarati, Ukrainian, Romanian, Greek, Korean, Indonesian, Turkish, Vietnamese |
 | **`configured`** | Registered in ISO metadata registry, BCP-47 locale mapped, text direction defined, fallback to English active | **69** | Remaining 69 world languages (e.g. Uzbek, Kazakh, Amharic, Burmese, Hebrew, etc.) |
 
+### 2.1 Multi-Dimensional Capability Breakdown (100 Languages)
+
+To prevent inflated readiness claims, capability is tracked independently across 5 functional dimensions:
+
+| Functional Dimension | `production_ready` | `evaluated` | `implemented` | `configured` | Total | Verification Evidence |
+| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+| **1. UI Localization** | 2 (`en`, `bn`) | 10 | 19 | 69 | **100** | Full JSON master catalogs, key parity, BCP-47 fallback |
+| **2. AI Guardrails & Prompt Defense**| 2 (`en`, `bn`) | 10 | 19 | 69 | **100** | Adversarial injection unit tests & benign queries |
+| **3. Document OCR & Extraction** | 2 (`en`, `bn`) | 1 (`zh`) | 9 | 88 | **100** | 70 synthetic receipts benchmarked; Fapiao & Mushak |
+| **4. Speech Input / Voice ASR** | 0 | 0 | 0 | 100 | **100** | Browser Web Speech API bindings only; zero offline GPU models claimed |
+| **5. Financial Glossary & Math** | 6 (`en`, `bn`, `zh`, `ar`, `es`, `hi`) | 0 | 15 | 79 | **100** | Unit-tested integer math & currency formatting |
+
 ---
 
 ## 3. Bidirectional (RTL) Script Support

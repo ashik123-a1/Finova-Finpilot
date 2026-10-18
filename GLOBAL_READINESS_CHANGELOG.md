@@ -76,8 +76,12 @@ This release upgrades SME Finance Copilot from a single-locale prototype into a 
 9. `src/i18n/translator.py` (Enhancement):
    - Added robust POSIX and BCP-47 locale normalization resolving `zh-CN`, `zh_CN`, `en-US`, and `bn-BD` to master translation catalogs.
 10. `src/documents/extractor.py` (Enhancement):
-   - Decoupled ASCII `\b` word boundary matching from non-ASCII Unicode terms across all regex categories.
-   - Prioritized `发票号码` over `发票代码` for Chinese Fapiao and added `চালানপত্র নম্বর` for Bengali Mushak-6.3.
+    - Decoupled ASCII `\b` word boundary matching from non-ASCII Unicode terms across all regex categories.
+    - Prioritized `发票号码` over `发票代码` for Chinese Fapiao and added `চালানপত্র নম্বর` for Bengali Mushak-6.3.
+    - Added `tax_minor` and `subtotal_minor` to `extract_from_text` return dictionary.
+11. `src/core/country_profiles.py` (Enhancement):
+    - Added `source_url: str = ""` field to `RegulatorySourceEntry` linking official legal gazettes and tax authority portals.
+    - Clarified in profile notes that the 1.30x DSCR is a commercial banking underwriting covenant guideline under PBOC inclusive finance risk practices, treated as a configurable threshold assumption rather than a statutory tax statute.
 
 ### New Test Suites & Evaluation Scripts
 1. `tests/test_i18n_multilingual.py`:
@@ -91,7 +95,7 @@ This release upgrades SME Finance Copilot from a single-locale prototype into a 
 5. `src/evaluation/eval_multilingual.py`:
    - Reproducible benchmark harness evaluating fact preservation, calculation parity, classification, and prompt injection defense.
 6. `scripts/demo_multilingual_competition.py`:
-   - 7-step competition demonstration script structured around English-first, China-second operational priority.
+   - Complete 10-step competition demonstration script structured around English-first, China-second operational priority.
 
 ---
 

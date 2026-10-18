@@ -28,6 +28,7 @@ class RegulatorySourceEntry:
     retrieval_date: str
     verification_status: VerificationStatus
     notes: str
+    source_url: str = ""
 
     def to_dict(self) -> Dict[str, Any]:
         d = asdict(self)
@@ -162,7 +163,8 @@ class CountryRegistry:
                         effective_date="2023-07-01",
                         retrieval_date="2026-10-18",
                         verification_status=VerificationStatus.VERIFIED_OFFICIAL,
-                        notes="Governs digital electronic fapiao (数电发票) formatting, tax classification codes, and anti-fraud verification."
+                        notes="Governs digital electronic fapiao (数电发票) formatting, tax classification codes, and anti-fraud verification.",
+                        source_url="http://www.gov.cn/zhengce/content/202307/content_6767597.htm",
                     ),
                     RegulatorySourceEntry(
                         topic="Small Enterprise Income Tax Relief",
@@ -170,7 +172,8 @@ class CountryRegistry:
                         effective_date="2023-01-01",
                         retrieval_date="2026-10-18",
                         verification_status=VerificationStatus.VERIFIED_OFFICIAL,
-                        notes="Taxable income under 3M CNY taxed at an effective preferential rate of 5% through 2027."
+                        notes="Taxable income under 3M CNY taxed at an effective preferential rate of 5% through 2027.",
+                        source_url="http://www.chinatax.gov.cn/chinatax/n810341/n810755/c5212519/content.html",
                     ),
                     RegulatorySourceEntry(
                         topic="PBOC Inclusive SME Finance",
@@ -178,7 +181,8 @@ class CountryRegistry:
                         effective_date="2021-12-01",
                         retrieval_date="2026-10-18",
                         verification_status=VerificationStatus.VERIFIED_OFFICIAL,
-                        notes="Mandates transparent loan pricing tied to LPR benchmark and strict risk-based debt service evaluation."
+                        notes="Mandates transparent loan pricing tied to LPR benchmark. The 1.30x DSCR is a commercial banking underwriting covenant guideline under PBOC inclusive finance risk practices, treated as a configurable threshold assumption rather than a statutory statute.",
+                        source_url="http://www.pbc.gov.cn/tiaofasi/144941/144957/22216/index.html",
                     )
                 ]
             ),

@@ -39,7 +39,8 @@
           "effective_date": "2019-07-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Mandatory issuance of Form Mushak-6.3 before goods depart premises."
+          "notes": "Mandatory issuance of Form Mushak-6.3 before goods depart premises.",
+          "source_url": ""
         },
         {
           "topic": "SME Credit Covenants",
@@ -47,7 +48,8 @@
           "effective_date": "2022-01-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Enforces minimum DSCR of 1.25x and debt service cap of 40% monthly net income."
+          "notes": "Enforces minimum DSCR of 1.25x and debt service cap of 40% monthly net income.",
+          "source_url": ""
         },
         {
           "topic": "Microcredit Ceiling",
@@ -55,7 +57,8 @@
           "effective_date": "2010-12-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Caps microenterprise borrowing at BDT 1,500,000 without institutional collateral."
+          "notes": "Caps microenterprise borrowing at BDT 1,500,000 without institutional collateral.",
+          "source_url": ""
         }
       ]
     },
@@ -97,7 +100,8 @@
           "effective_date": "2023-07-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Governs digital electronic fapiao (数电发票) formatting, tax classification codes, and anti-fraud verification."
+          "notes": "Governs digital electronic fapiao (数电发票) formatting, tax classification codes, and anti-fraud verification.",
+          "source_url": "http://www.gov.cn/zhengce/content/202307/content_6767597.htm"
         },
         {
           "topic": "Small Enterprise Income Tax Relief",
@@ -105,7 +109,8 @@
           "effective_date": "2023-01-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Taxable income under 3M CNY taxed at an effective preferential rate of 5% through 2027."
+          "notes": "Taxable income under 3M CNY taxed at an effective preferential rate of 5% through 2027.",
+          "source_url": "http://www.chinatax.gov.cn/chinatax/n810341/n810755/c5212519/content.html"
         },
         {
           "topic": "PBOC Inclusive SME Finance",
@@ -113,7 +118,8 @@
           "effective_date": "2021-12-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Mandates transparent loan pricing tied to LPR benchmark and strict risk-based debt service evaluation."
+          "notes": "Mandates transparent loan pricing tied to LPR benchmark. The 1.30x DSCR is a commercial banking underwriting covenant guideline under PBOC inclusive finance risk practices, treated as a configurable threshold assumption rather than a statutory statute.",
+          "source_url": "http://www.pbc.gov.cn/tiaofasi/144941/144957/22216/index.html"
         }
       ]
     },
@@ -152,7 +158,8 @@
           "effective_date": "2023-01-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Mandates cryptographic stamping, UUID, and TLV-encoded Base64 QR code for all B2B and B2C invoices."
+          "notes": "Mandates cryptographic stamping, UUID, and TLV-encoded Base64 QR code for all B2B and B2C invoices.",
+          "source_url": ""
         },
         {
           "topic": "SAMA Responsible Lending Principles",
@@ -160,7 +167,8 @@
           "effective_date": "2018-08-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Enforces Debt Burden Ratio (DBR) / DTI caps and Murabaha / Tawaruq Islamic finance transparency."
+          "notes": "Enforces Debt Burden Ratio (DBR) / DTI caps and Murabaha / Tawaruq Islamic finance transparency.",
+          "source_url": ""
         }
       ]
     },
@@ -197,7 +205,8 @@
           "effective_date": "2023-11-15",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Requires historical and projected DSCR of at least 1.15x to 1.25x for SBA 7(a) loan approval."
+          "notes": "Requires historical and projected DSCR of at least 1.15x to 1.25x for SBA 7(a) loan approval.",
+          "source_url": ""
         }
       ]
     },
@@ -235,7 +244,8 @@
           "effective_date": "2000-07-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Prescribes mandatory ABN, GST itemization, and tax invoice header requirements."
+          "notes": "Prescribes mandatory ABN, GST itemization, and tax invoice header requirements.",
+          "source_url": ""
         }
       ]
     },
@@ -272,7 +282,8 @@
           "effective_date": "2008-01-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Three-decimal currency precision (Fils). Zakat applied at 1% of annual net profit under Law 46/2006."
+          "notes": "Three-decimal currency precision (Fils). Zakat applied at 1% of annual net profit under Law 46/2006.",
+          "source_url": ""
         },
         {
           "topic": "CBK Consumer and SME Lending Instructions",
@@ -280,7 +291,8 @@
           "effective_date": "2018-12-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Strict debt burden ratios capped at 40% of net monthly income."
+          "notes": "Strict debt burden ratios capped at 40% of net monthly income.",
+          "source_url": ""
         }
       ]
     },
@@ -320,7 +332,8 @@
           "effective_date": "2023-01-01",
           "retrieval_date": "2026-10-18",
           "verification_status": "VERIFIED_OFFICIAL",
-          "notes": "Mandates electronic invoices (EHF) via accredited electronic document management operators."
+          "notes": "Mandates electronic invoices (EHF) via accredited electronic document management operators.",
+          "source_url": ""
         }
       ]
     }

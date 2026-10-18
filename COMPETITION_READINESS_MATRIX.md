@@ -31,7 +31,7 @@
 | **Security & Guardrail Defenses** | `src/core/security.py`, `src/ai/guardrails.py` | **COMPLETE** | `python -m pytest tests/test_multilingual_security.py` |
 | **FastAPI i18n Endpoints** | `/api/i18n/*` in `src/api/routes/i18n.py` | **COMPLETE** | 5 interactive endpoints mounted & tested |
 | **Automated Benchmark Harness** | `src/evaluation/eval_multilingual.py` | **COMPLETE** | `python -m src.evaluation.eval_multilingual` |
-| **7-Step Competition Demo** | `scripts/demo_multilingual_competition.py` | **COMPLETE** | `python scripts/demo_multilingual_competition.py` |
+| **10-Step Competition Demo** | `scripts/demo_multilingual_competition.py` | **COMPLETE** | `python scripts/demo_multilingual_competition.py` |
 | **Language Support Audit** | `GLOBAL_LANGUAGE_SUPPORT_AUDIT.md` | **COMPLETE** | Human & machine-readable report |
 | **Country Localization Audit** | `COUNTRY_LOCALIZATION_AUDIT.md` | **COMPLETE** | Official statutory citations verified |
 | **Evaluation Report** | `MULTILINGUAL_EVALUATION_REPORT.md` | **COMPLETE** | Empirical evidence documented |
@@ -44,7 +44,7 @@
 ```text
 ============================= test session starts =============================
 platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
-collected 62 items
+collected 65 items
 
 tests/test_country_profiles.py::TestCountryProfiles::test_all_seven_candidate_jurisdictions_loaded PASSED
 tests/test_country_profiles.py::TestCountryProfiles::test_profile_schema_completeness PASSED

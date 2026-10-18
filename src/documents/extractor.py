@@ -433,6 +433,8 @@ class StructuredDocumentExtractor:
             "invoice_number": extracted.get("invoice_number"),
             "total_amount": extracted.get("total_amount_minor"),
             "total_amount_minor": extracted.get("total_amount_minor"),
+            "tax_minor": extracted.get("tax_minor", 0),
+            "subtotal_minor": extracted.get("subtotal_minor", 0),
         }
 
 
