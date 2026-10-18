@@ -1,0 +1,211 @@
+{
+  "framework": "Demand Estimation, Safety Stock & Price Elasticity Benchmark",
+  "random_seed": 42,
+  "inventory_replenishment": {
+    "simulation_cycles_per_sector": 10000,
+    "sectors_evaluated": 5,
+    "benchmarks": [
+      {
+        "sector": "Grocery & Daily Essentials",
+        "lead_time_days": 4,
+        "target_service_level_pct": 95.0,
+        "lead_time_demand_mean_units": 340,
+        "safety_stock_units": 73,
+        "dynamic_reorder_point_units": 413,
+        "economic_order_quantity_units": 394,
+        "naive_stockout_rate_pct": 50.09,
+        "dynamic_stockout_rate_pct": 5.07,
+        "relative_stockout_reduction_pct": 89.9
+      },
+      {
+        "sector": "Retail Pharmacy",
+        "lead_time_days": 5,
+        "target_service_level_pct": 98.0,
+        "lead_time_demand_mean_units": 200,
+        "safety_stock_units": 56,
+        "dynamic_reorder_point_units": 256,
+        "economic_order_quantity_units": 205,
+        "naive_stockout_rate_pct": 49.3,
+        "dynamic_stockout_rate_pct": 1.72,
+        "relative_stockout_reduction_pct": 96.5
+      },
+      {
+        "sector": "Electronics & Accessories",
+        "lead_time_days": 10,
+        "target_service_level_pct": 95.0,
+        "lead_time_demand_mean_units": 150,
+        "safety_stock_units": 34,
+        "dynamic_reorder_point_units": 184,
+        "economic_order_quantity_units": 56,
+        "naive_stockout_rate_pct": 50.08,
+        "dynamic_stockout_rate_pct": 4.93,
+        "relative_stockout_reduction_pct": 90.2
+      },
+      {
+        "sector": "Clothing & Apparel",
+        "lead_time_days": 7,
+        "target_service_level_pct": 90.0,
+        "lead_time_demand_mean_units": 196,
+        "safety_stock_units": 34,
+        "dynamic_reorder_point_units": 230,
+        "economic_order_quantity_units": 107,
+        "naive_stockout_rate_pct": 50.67,
+        "dynamic_stockout_rate_pct": 9.67,
+        "relative_stockout_reduction_pct": 80.9
+      },
+      {
+        "sector": "Restaurant & Fast Food",
+        "lead_time_days": 2,
+        "target_service_level_pct": 95.0,
+        "lead_time_demand_mean_units": 220,
+        "safety_stock_units": 82,
+        "dynamic_reorder_point_units": 302,
+        "economic_order_quantity_units": 518,
+        "naive_stockout_rate_pct": 50.34,
+        "dynamic_stockout_rate_pct": 5.2,
+        "relative_stockout_reduction_pct": 89.7
+      }
+    ]
+  },
+  "price_elasticity": {
+    "mathematical_identity_passed": true,
+    "total_cases_evaluated": 3,
+    "case_evaluations": [
+      {
+        "product_type": "Essential Medicine (Inelastic Demand)",
+        "current_price_bdt": 100.0,
+        "unit_cost_bdt": 60.0,
+        "current_monthly_units": 1000.0,
+        "elasticity": -0.4,
+        "scenarios": [
+          {
+            "price_change_pct": -15,
+            "proposed_price_bdt": 85.0,
+            "projected_monthly_units": 1060.0,
+            "profit_delta_bdt": -13500.0,
+            "recommendation": "unfavorable",
+            "breakeven_units": 1600.0,
+            "has_risk_warning": true
+          },
+          {
+            "price_change_pct": -5,
+            "proposed_price_bdt": 95.0,
+            "projected_monthly_units": 1020.0,
+            "profit_delta_bdt": -4300.0,
+            "recommendation": "unfavorable",
+            "breakeven_units": 1142.9,
+            "has_risk_warning": true
+          },
+          {
+            "price_change_pct": 5,
+            "proposed_price_bdt": 105.0,
+            "projected_monthly_units": 980.0,
+            "profit_delta_bdt": 4100.0,
+            "recommendation": "favorable",
+            "breakeven_units": 888.9,
+            "has_risk_warning": false
+          },
+          {
+            "price_change_pct": 15,
+            "proposed_price_bdt": 115.0,
+            "projected_monthly_units": 940.0,
+            "profit_delta_bdt": 11700.0,
+            "recommendation": "favorable",
+            "breakeven_units": 727.3,
+            "has_risk_warning": false
+          }
+        ]
+      },
+      {
+        "product_type": "Packaged Food / Grocery (Moderately Elastic)",
+        "current_price_bdt": 200.0,
+        "unit_cost_bdt": 140.0,
+        "current_monthly_units": 800.0,
+        "elasticity": -1.2,
+        "scenarios": [
+          {
+            "price_change_pct": -15,
+            "proposed_price_bdt": 170.0,
+            "projected_monthly_units": 944.0,
+            "profit_delta_bdt": -19680.0,
+            "recommendation": "unfavorable",
+            "breakeven_units": 1600.0,
+            "has_risk_warning": true
+          },
+          {
+            "price_change_pct": -5,
+            "proposed_price_bdt": 190.0,
+            "projected_monthly_units": 848.0,
+            "profit_delta_bdt": -5600.0,
+            "recommendation": "unfavorable",
+            "breakeven_units": 960.0,
+            "has_risk_warning": true
+          },
+          {
+            "price_change_pct": 5,
+            "proposed_price_bdt": 210.0,
+            "projected_monthly_units": 752.0,
+            "profit_delta_bdt": 4640.0,
+            "recommendation": "favorable",
+            "breakeven_units": 685.7,
+            "has_risk_warning": false
+          },
+          {
+            "price_change_pct": 15,
+            "proposed_price_bdt": 230.0,
+            "projected_monthly_units": 656.0,
+            "profit_delta_bdt": 11040.0,
+            "recommendation": "favorable",
+            "breakeven_units": 533.3,
+            "has_risk_warning": false
+          }
+        ]
+      },
+      {
+        "product_type": "Consumer Electronics / Gadget (Highly Elastic)",
+        "current_price_bdt": 1500.0,
+        "unit_cost_bdt": 1050.0,
+        "current_monthly_units": 150.0,
+        "elasticity": -2.2,
+        "scenarios": [
+          {
+            "price_change_pct": -15,
+            "proposed_price_bdt": 1275.0,
+            "projected_monthly_units": 199.5,
+            "profit_delta_bdt": -22612.5,
+            "recommendation": "unfavorable",
+            "breakeven_units": 300.0,
+            "has_risk_warning": true
+          },
+          {
+            "price_change_pct": -5,
+            "proposed_price_bdt": 1425.0,
+            "projected_monthly_units": 166.5,
+            "profit_delta_bdt": -5062.5,
+            "recommendation": "unfavorable",
+            "breakeven_units": 180.0,
+            "has_risk_warning": true
+          },
+          {
+            "price_change_pct": 5,
+            "proposed_price_bdt": 1575.0,
+            "projected_monthly_units": 133.5,
+            "profit_delta_bdt": 2587.5,
+            "recommendation": "favorable",
+            "breakeven_units": 128.6,
+            "has_risk_warning": false
+          },
+          {
+            "price_change_pct": 15,
+            "proposed_price_bdt": 1725.0,
+            "projected_monthly_units": 100.5,
+            "profit_delta_bdt": 337.5,
+            "recommendation": "favorable",
+            "breakeven_units": 100.0,
+            "has_risk_warning": false
+          }
+        ]
+      }
+    ]
+  }
+}

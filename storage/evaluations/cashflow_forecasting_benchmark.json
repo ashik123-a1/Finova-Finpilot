@@ -1,0 +1,190 @@
+{
+  "evaluation_task": "cashflow_forecasting",
+  "backtest_method": "chronological_rolling_origin",
+  "horizon_days": 14,
+  "min_train_days": 60,
+  "total_folds_evaluated": 216,
+  "overall_model_comparison": {
+    "naive_persistence": {
+      "mean_mae_minor": 1454150.62,
+      "mean_rmse_minor": 1712860.97,
+      "mean_mase": 1.0031,
+      "empirical_80_ci_coverage": "N/A"
+    },
+    "seasonal_naive_7d": {
+      "mean_mae_minor": 1447382.32,
+      "mean_rmse_minor": 1757202.2,
+      "mean_mase": 0.9926,
+      "empirical_80_ci_coverage": "N/A"
+    },
+    "rolling_moving_average_7d": {
+      "mean_mae_minor": 1114867.77,
+      "mean_rmse_minor": 1344935.67,
+      "mean_mase": 0.7689,
+      "empirical_80_ci_coverage": 0.6693
+    },
+    "autoregressive_ridge_ml": {
+      "mean_mae_minor": 1073028.97,
+      "mean_rmse_minor": 1293865.1,
+      "mean_mase": 0.7396,
+      "empirical_80_ci_coverage": 0.7364
+    }
+  },
+  "performance_by_sector": {
+    "grocery": {
+      "naive_persistence": 1454004.48,
+      "seasonal_naive_7d": 1516546.43,
+      "rolling_moving_average_7d": 1094216.45,
+      "autoregressive_ridge_ml": 1059947.29
+    },
+    "clothing": {
+      "naive_persistence": 1475746.48,
+      "seasonal_naive_7d": 1455166.87,
+      "rolling_moving_average_7d": 1079587.04,
+      "autoregressive_ridge_ml": 1051397.33
+    },
+    "restaurant": {
+      "naive_persistence": 1474582.44,
+      "seasonal_naive_7d": 1402266.16,
+      "rolling_moving_average_7d": 1075601.79,
+      "autoregressive_ridge_ml": 1053644.62
+    },
+    "pharmacy": {
+      "naive_persistence": 1362762.49,
+      "seasonal_naive_7d": 1336991.36,
+      "rolling_moving_average_7d": 1075432.47,
+      "autoregressive_ridge_ml": 1057394.99
+    },
+    "electronics": {
+      "naive_persistence": 1502385.06,
+      "seasonal_naive_7d": 1356374.95,
+      "rolling_moving_average_7d": 1153218.26,
+      "autoregressive_ridge_ml": 1077310.51
+    },
+    "wholesale": {
+      "naive_persistence": 1513921.37,
+      "seasonal_naive_7d": 1621481.08,
+      "rolling_moving_average_7d": 1246834.12,
+      "autoregressive_ridge_ml": 1182495.79
+    },
+    "manufacturing": {
+      "naive_persistence": 1504944.48,
+      "seasonal_naive_7d": 1507824.21,
+      "rolling_moving_average_7d": 1152039.01,
+      "autoregressive_ridge_ml": 1084903.89
+    },
+    "service": {
+      "naive_persistence": 1499663.04,
+      "seasonal_naive_7d": 1422203.82,
+      "rolling_moving_average_7d": 1124884.72,
+      "autoregressive_ridge_ml": 1073230.21
+    },
+    "online_seller": {
+      "naive_persistence": 1299345.74,
+      "seasonal_naive_7d": 1407585.98,
+      "rolling_moving_average_7d": 1031996.03,
+      "autoregressive_ridge_ml": 1016936.13
+    }
+  },
+  "visualization_sample": {
+    "shop_id": "28",
+    "sector": "grocery",
+    "horizon_days": 14,
+    "actual_test_series": [
+      -2071.51,
+      25046.34,
+      10560.36,
+      -7136.72,
+      -14836.66,
+      3901.66,
+      -12592.72,
+      12041.79,
+      -7591.27,
+      22722.65,
+      3429.34,
+      -19131.26,
+      18586.66,
+      6475.05
+    ],
+    "naive_pred": [
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89,
+      -733.89
+    ],
+    "moving_avg_pred": [
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43,
+      2517.43
+    ],
+    "ridge_pred": [
+      7797.99,
+      10221.52,
+      7092.01,
+      6351.47,
+      11051.0,
+      6415.84,
+      5283.09,
+      6182.58,
+      7141.17,
+      7357.01,
+      5967.79,
+      7155.31,
+      7260.42,
+      6810.17
+    ],
+    "ridge_ci_lower_80": [
+      -5255.17,
+      -2831.64,
+      -5961.15,
+      -6701.69,
+      -2002.16,
+      -6637.32,
+      -7770.07,
+      -6870.58,
+      -5911.99,
+      -5696.15,
+      -7085.37,
+      -5897.85,
+      -5792.74,
+      -6242.99
+    ],
+    "ridge_ci_upper_80": [
+      20851.15,
+      23274.68,
+      20145.17,
+      19404.63,
+      24104.16,
+      19469.0,
+      18336.25,
+      19235.74,
+      20194.33,
+      20410.17,
+      19020.95,
+      20208.47,
+      20313.58,
+      19863.33
+    ]
+  }
+}

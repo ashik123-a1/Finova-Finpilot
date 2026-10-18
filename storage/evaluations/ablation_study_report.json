@@ -1,0 +1,145 @@
+{
+  "report_title": "SME Finance Copilot System Ablation Study",
+  "doc_pipeline_ablation": {
+    "samples_evaluated": 5,
+    "stages": [
+      {
+        "stage": "Stage 0: Raw OCR Only",
+        "structured_field_capture_pct": 0.0,
+        "document_routing_accuracy_pct": 0.0,
+        "arithmetic_integrity_check_pct": 0.0,
+        "unverified_corruptions_posted": 1
+      },
+      {
+        "stage": "Stage 1: OCR + Classifier",
+        "structured_field_capture_pct": 0.0,
+        "document_routing_accuracy_pct": 80.0,
+        "arithmetic_integrity_check_pct": 0.0,
+        "unverified_corruptions_posted": 1
+      },
+      {
+        "stage": "Stage 2: OCR + Classifier + Regex Extraction (No Math Audit)",
+        "structured_field_capture_pct": 100.0,
+        "document_routing_accuracy_pct": 80.0,
+        "arithmetic_integrity_check_pct": 0.0,
+        "unverified_corruptions_posted": 1
+      },
+      {
+        "stage": "Stage 3 (Full System): OCR + Classifier + Regex + Math Audit",
+        "structured_field_capture_pct": 100.0,
+        "document_routing_accuracy_pct": 80.0,
+        "arithmetic_integrity_check_pct": 100.0,
+        "unverified_corruptions_posted": 0
+      }
+    ]
+  },
+  "routing_policy_ablation": {
+    "total_documents_tested": 10,
+    "clean_documents": 5,
+    "anomalous_documents": 5,
+    "policies": [
+      {
+        "policy_name": "Policy A: Blind Auto-Post (No Gating)",
+        "auto_posted_count": 10,
+        "sent_to_review_count": 0,
+        "contaminated_transactions_in_ledger": 5,
+        "ledger_contamination_rate_pct": 50.0,
+        "audit_safety_level": "CRITICAL RISK"
+      },
+      {
+        "policy_name": "Policy B (Active System): Confidence-Gated Review (Threshold >= 0.85 & 0 Math Errors)",
+        "auto_posted_count": 5,
+        "sent_to_review_count": 5,
+        "contaminated_transactions_in_ledger": 0,
+        "ledger_contamination_rate_pct": 0.0,
+        "audit_safety_level": "ZERO CONTAMINATION"
+      }
+    ]
+  },
+  "forecasting_ablation": {
+    "total_backtest_folds": 216,
+    "forecast_horizon_days": 7,
+    "models": [
+      {
+        "model_name": "Model 0: Naive Persistence (Last Observation)",
+        "mase": 1.003,
+        "mae_bdt": 14541.51,
+        "rmse_bdt": 23620.4,
+        "empirical_80pct_coverage": "N/A",
+        "relative_error_vs_naive_pct": 0.0
+      },
+      {
+        "model_name": "Model 1: Seasonal Naive (7-Day Lag)",
+        "mase": 0.993,
+        "mae_bdt": 14402.04,
+        "rmse_bdt": 23410.15,
+        "empirical_80pct_coverage": "N/A",
+        "relative_error_vs_naive_pct": -1.0
+      },
+      {
+        "model_name": "Model 2: 7-Day Rolling Moving Average",
+        "mase": 0.769,
+        "mae_bdt": 11148.68,
+        "rmse_bdt": 19584.22,
+        "empirical_80pct_coverage": "66.9%",
+        "relative_error_vs_naive_pct": -23.3
+      },
+      {
+        "model_name": "Model 3 (Active System): Autoregressive Ridge (Lagged + DOW + L2)",
+        "mase": 0.74,
+        "mae_bdt": 10730.29,
+        "rmse_bdt": 19124.85,
+        "empirical_80pct_coverage": "73.6%",
+        "relative_error_vs_naive_pct": -26.2
+      }
+    ]
+  },
+  "assistant_guardrails_ablation": {
+    "scenarios_evaluated": 5,
+    "unconstrained_arithmetic_drift_rate_pct": 100.0,
+    "guardrail_arithmetic_drift_rate_pct": 0.0,
+    "regulatory_dscr_compliance_pct": 100.0,
+    "scenario_details": [
+      {
+        "loan_amount_bdt": 500000.0,
+        "exact_emi_bdt": 23536.74,
+        "exact_total_interest_bdt": 64881.76,
+        "dscr": 1.05,
+        "approved_by_guardrails": false,
+        "float_rounding_drift_minor_units": 1
+      },
+      {
+        "loan_amount_bdt": 1000000.0,
+        "exact_emi_bdt": 32032.95,
+        "exact_total_interest_bdt": 153186.2,
+        "dscr": 0.62,
+        "approved_by_guardrails": false,
+        "float_rounding_drift_minor_units": 1
+      },
+      {
+        "loan_amount_bdt": 300000.0,
+        "exact_emi_bdt": 26936.14,
+        "exact_total_interest_bdt": 23233.68,
+        "dscr": 0.56,
+        "approved_by_guardrails": false,
+        "float_rounding_drift_minor_units": 1
+      },
+      {
+        "loan_amount_bdt": 2500000.0,
+        "exact_emi_bdt": 63406.46,
+        "exact_total_interest_bdt": 543510.08,
+        "dscr": 0.68,
+        "approved_by_guardrails": false,
+        "float_rounding_drift_minor_units": 1
+      },
+      {
+        "loan_amount_bdt": 400000.0,
+        "exact_emi_bdt": 24300.02,
+        "exact_total_interest_bdt": 37400.36,
+        "dscr": 0.61,
+        "approved_by_guardrails": false,
+        "float_rounding_drift_minor_units": 1
+      }
+    ]
+  }
+}

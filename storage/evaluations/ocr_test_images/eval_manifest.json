@@ -1,0 +1,740 @@
+[
+  {
+    "image_id": 1,
+    "document_class": "purchase_invoice",
+    "language": "bn",
+    "image_filename": "doc_purchase_invoice_bn_00001.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_purchase_invoice_bn_00001.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.0,
+      "lighting": "uniform",
+      "handwriting_present": false
+    },
+    "ground_truth": {
+      "document_title": "\u09b8\u09b0\u09ac\u09b0\u09be\u09b9 \u099a\u09be\u09b2\u09be\u09a8",
+      "vendor_name": "Pran Agro Distributorship Ltd",
+      "invoice_number": "REC-00001",
+      "date": "2026-10-11",
+      "subtotal_minor": 75000,
+      "total_minor": 75000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "\u09b8\u09b0\u09ac\u09b0\u09be\u09b9 \u099a\u09be\u09b2\u09be\u09a8\nPran Agro Distributorship Ltd\nInvoice #: REC-00001\nDate: 2026-10-11\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTOTAL: BDT 750.00",
+    "is_degraded": false
+  },
+  {
+    "image_id": 2,
+    "document_class": "expense_receipt",
+    "language": "bn_en",
+    "image_filename": "doc_expense_receipt_bn_en_00002.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_expense_receipt_bn_en_00002.png",
+    "width": 450,
+    "height": 650,
+    "split": "test",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.7,
+      "lighting": "uniform",
+      "handwriting_present": false,
+      "faded": true
+    },
+    "ground_truth": {
+      "document_title": "EXPENSE / \u09ad\u09be\u0989\u099a\u09be\u09b0",
+      "vendor_name": "Commercial Premises Office",
+      "invoice_number": "REC-00002",
+      "date": "2026-10-04",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "EXPENSE / \u09ad\u09be\u0989\u099a\u09be\u09b0\nCommercial Premises Office\nInvoice #: REC-00002\nDate: 2026-10-04\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": true
+  },
+  {
+    "image_id": 3,
+    "document_class": "payment_receipt",
+    "language": "en",
+    "image_filename": "doc_payment_receipt_en_00003.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_payment_receipt_en_00003.png",
+    "width": 450,
+    "height": 650,
+    "split": "val",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.0,
+      "lighting": "uniform",
+      "handwriting_present": false
+    },
+    "ground_truth": {
+      "document_title": "PAYMENT RECEIPT",
+      "vendor_name": "SME Counter Collection",
+      "invoice_number": "REC-00003",
+      "date": "2026-10-11",
+      "subtotal_minor": 75000,
+      "total_minor": 75000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "PAYMENT RECEIPT\nSME Counter Collection\nInvoice #: REC-00003\nDate: 2026-10-11\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTOTAL: BDT 750.00",
+    "is_degraded": false
+  },
+  {
+    "image_id": 4,
+    "document_class": "sales_receipt",
+    "language": "bn",
+    "image_filename": "doc_sales_receipt_bn_00004.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_sales_receipt_bn_00004.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.7,
+      "lighting": "uniform",
+      "handwriting_present": false,
+      "faded": true
+    },
+    "ground_truth": {
+      "document_title": "\u0995\u09cd\u09af\u09be\u09b6 \u09ae\u09c7\u09ae\u09cb",
+      "vendor_name": "\u0986\u09b2-\u09ae\u09a6\u09bf\u09a8\u09be \u099c\u09c7\u09a8\u09be\u09b0\u09c7\u09b2 \u09b8\u09cd\u099f\u09cb\u09b0",
+      "invoice_number": "REC-00004",
+      "date": "2026-10-23",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "\u0995\u09cd\u09af\u09be\u09b6 \u09ae\u09c7\u09ae\u09cb\n\u0986\u09b2-\u09ae\u09a6\u09bf\u09a8\u09be \u099c\u09c7\u09a8\u09be\u09b0\u09c7\u09b2 \u09b8\u09cd\u099f\u09cb\u09b0\nInvoice #: REC-00004\nDate: 2026-10-23\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": true
+  },
+  {
+    "image_id": 5,
+    "document_class": "purchase_invoice",
+    "language": "bn_en",
+    "image_filename": "doc_purchase_invoice_bn_en_00005.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_purchase_invoice_bn_en_00005.png",
+    "width": 450,
+    "height": 650,
+    "split": "val",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.0,
+      "lighting": "uniform",
+      "handwriting_present": false
+    },
+    "ground_truth": {
+      "document_title": "CHALLAN / \u099a\u09be\u09b2\u09be\u09a8",
+      "vendor_name": "Pran Agro Distributorship Ltd",
+      "invoice_number": "REC-00005",
+      "date": "2026-10-08",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "CHALLAN / \u099a\u09be\u09b2\u09be\u09a8\nPran Agro Distributorship Ltd\nInvoice #: REC-00005\nDate: 2026-10-08\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": false
+  },
+  {
+    "image_id": 6,
+    "document_class": "expense_receipt",
+    "language": "en",
+    "image_filename": "doc_expense_receipt_en_00006.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_expense_receipt_en_00006.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.7,
+      "lighting": "uniform",
+      "handwriting_present": false,
+      "faded": true
+    },
+    "ground_truth": {
+      "document_title": "EXPENSE VOUCHER",
+      "vendor_name": "Commercial Premises Office",
+      "invoice_number": "REC-00006",
+      "date": "2026-10-16",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "EXPENSE VOUCHER\nCommercial Premises Office\nInvoice #: REC-00006\nDate: 2026-10-16\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": true
+  },
+  {
+    "image_id": 7,
+    "document_class": "payment_receipt",
+    "language": "bn",
+    "image_filename": "doc_payment_receipt_bn_00007.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_payment_receipt_bn_00007.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.0,
+      "lighting": "uniform",
+      "handwriting_present": false
+    },
+    "ground_truth": {
+      "document_title": "\u099f\u09be\u0995\u09be \u09aa\u09cd\u09b0\u09be\u09aa\u09cd\u09a4\u09bf \u09b0\u09b8\u09bf\u09a6",
+      "vendor_name": "SME Counter Collection",
+      "invoice_number": "REC-00007",
+      "date": "2026-10-07",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "\u099f\u09be\u0995\u09be \u09aa\u09cd\u09b0\u09be\u09aa\u09cd\u09a4\u09bf \u09b0\u09b8\u09bf\u09a6\nSME Counter Collection\nInvoice #: REC-00007\nDate: 2026-10-07\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": false
+  },
+  {
+    "image_id": 8,
+    "document_class": "sales_receipt",
+    "language": "bn_en",
+    "image_filename": "doc_sales_receipt_bn_en_00008.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_sales_receipt_bn_en_00008.png",
+    "width": 450,
+    "height": 650,
+    "split": "test",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.7,
+      "lighting": "uniform",
+      "handwriting_present": false,
+      "faded": true
+    },
+    "ground_truth": {
+      "document_title": "CASH MEMO / \u0995\u09cd\u09af\u09be\u09b6 \u09ae\u09c7\u09ae\u09cb",
+      "vendor_name": "Al-Madina General Store",
+      "invoice_number": "REC-00008",
+      "date": "2026-10-16",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "CASH MEMO / \u0995\u09cd\u09af\u09be\u09b6 \u09ae\u09c7\u09ae\u09cb\nAl-Madina General Store\nInvoice #: REC-00008\nDate: 2026-10-16\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": true
+  },
+  {
+    "image_id": 9,
+    "document_class": "purchase_invoice",
+    "language": "en",
+    "image_filename": "doc_purchase_invoice_en_00009.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_purchase_invoice_en_00009.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.0,
+      "lighting": "uniform",
+      "handwriting_present": false
+    },
+    "ground_truth": {
+      "document_title": "SUPPLIER INVOICE",
+      "vendor_name": "Pran Agro Distributorship Ltd",
+      "invoice_number": "REC-00009",
+      "date": "2026-10-03",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "SUPPLIER INVOICE\nPran Agro Distributorship Ltd\nInvoice #: REC-00009\nDate: 2026-10-03\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": false
+  },
+  {
+    "image_id": 10,
+    "document_class": "expense_receipt",
+    "language": "bn",
+    "image_filename": "doc_expense_receipt_bn_00010.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_expense_receipt_bn_00010.png",
+    "width": 450,
+    "height": 650,
+    "split": "test",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.7,
+      "lighting": "uniform",
+      "handwriting_present": false,
+      "faded": true
+    },
+    "ground_truth": {
+      "document_title": "\u0996\u09b0\u099a \u09ad\u09be\u0989\u099a\u09be\u09b0",
+      "vendor_name": "Commercial Premises Office",
+      "invoice_number": "REC-00010",
+      "date": "2026-10-19",
+      "subtotal_minor": 75000,
+      "total_minor": 75000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "\u0996\u09b0\u099a \u09ad\u09be\u0989\u099a\u09be\u09b0\nCommercial Premises Office\nInvoice #: REC-00010\nDate: 2026-10-19\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTOTAL: BDT 750.00",
+    "is_degraded": true
+  },
+  {
+    "image_id": 11,
+    "document_class": "payment_receipt",
+    "language": "bn_en",
+    "image_filename": "doc_payment_receipt_bn_en_00011.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_payment_receipt_bn_en_00011.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.0,
+      "lighting": "uniform",
+      "handwriting_present": false
+    },
+    "ground_truth": {
+      "document_title": "PAYMENT / \u09b0\u09b8\u09bf\u09a6",
+      "vendor_name": "SME Counter Collection",
+      "invoice_number": "REC-00011",
+      "date": "2026-10-06",
+      "subtotal_minor": 75000,
+      "total_minor": 75000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "PAYMENT / \u09b0\u09b8\u09bf\u09a6\nSME Counter Collection\nInvoice #: REC-00011\nDate: 2026-10-06\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTOTAL: BDT 750.00",
+    "is_degraded": false
+  },
+  {
+    "image_id": 12,
+    "document_class": "sales_receipt",
+    "language": "en",
+    "image_filename": "doc_sales_receipt_en_00012.png",
+    "image_path": "F:\\china project\\storage\\evaluations\\ocr_test_images\\doc_sales_receipt_en_00012.png",
+    "width": 450,
+    "height": 650,
+    "split": "train",
+    "provenance": "synthetic",
+    "quality": {
+      "rotation_deg": 0.0,
+      "blur_score": 0.7,
+      "lighting": "uniform",
+      "handwriting_present": false,
+      "faded": true
+    },
+    "ground_truth": {
+      "document_title": "CASH MEMO",
+      "vendor_name": "Al-Madina General Store",
+      "invoice_number": "REC-00012",
+      "date": "2026-10-03",
+      "subtotal_minor": 101000,
+      "total_minor": 101000,
+      "items": [
+        {
+          "description": "Miniket Rice 5kg",
+          "quantity": 1,
+          "unit_price_minor": 38000,
+          "line_total_minor": 38000,
+          "bbox": [
+            35,
+            140,
+            415,
+            156
+          ]
+        },
+        {
+          "description": "Soybean Oil 1L",
+          "quantity": 2,
+          "unit_price_minor": 18500,
+          "line_total_minor": 37000,
+          "bbox": [
+            35,
+            164,
+            415,
+            180
+          ]
+        },
+        {
+          "description": "Teer Sugar 1kg",
+          "quantity": 2,
+          "unit_price_minor": 13000,
+          "line_total_minor": 26000,
+          "bbox": [
+            35,
+            188,
+            415,
+            204
+          ]
+        }
+      ]
+    },
+    "ground_truth_full_text": "CASH MEMO\nAl-Madina General Store\nInvoice #: REC-00012\nDate: 2026-10-03\nMiniket Rice 5kg x1 BDT 380.00\nSoybean Oil 1L x2 BDT 370.00\nTeer Sugar 1kg x2 BDT 260.00\nTOTAL: BDT 1010.00",
+    "is_degraded": true
+  }
+]

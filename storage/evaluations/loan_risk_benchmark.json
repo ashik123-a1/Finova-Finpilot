@@ -1,0 +1,75 @@
+{
+  "evaluation_task": "loan_matching_and_risk_policy",
+  "evidence_status": "measured_hand_verified",
+  "regulatory_disclaimer": "Deterministic underwriting rules only. Not a statistical default risk model.",
+  "total_test_cases": 5,
+  "passed_cases": 5,
+  "pass_rate_pct": 100.0,
+  "test_cases": [
+    {
+      "case_id": "CASE-01-HEALTHY",
+      "description": "Healthy grocery shop with strong cash surplus and low debt.",
+      "passed": true,
+      "status_match": true,
+      "math_consistent": true,
+      "evaluated_status": "eligible",
+      "expected_status": "eligible",
+      "dscr_ratio": 4.67,
+      "monthly_emi_minor": 2284237,
+      "total_payment_minor": 54821688,
+      "max_safe_borrowing_minor": 285600000
+    },
+    {
+      "case_id": "CASE-02-BORDERLINE-DSCR",
+      "description": "Clothing retailer near DSCR boundary (DSCR ~ 1.15).",
+      "passed": true,
+      "status_match": true,
+      "math_consistent": true,
+      "evaluated_status": "borderline",
+      "expected_status": "borderline",
+      "dscr_ratio": 1.22,
+      "monthly_emi_minor": 3246323,
+      "total_payment_minor": 77911752,
+      "max_safe_borrowing_minor": 63240000
+    },
+    {
+      "case_id": "CASE-03-INSUFFICIENT-CASHFLOW",
+      "description": "Restaurant requesting loan exceeding its debt service capacity.",
+      "passed": true,
+      "status_match": true,
+      "math_consistent": true,
+      "evaluated_status": "ineligible",
+      "expected_status": "ineligible",
+      "dscr_ratio": 0.49,
+      "monthly_emi_minor": 4568474,
+      "total_payment_minor": 109643376,
+      "max_safe_borrowing_minor": 18360000
+    },
+    {
+      "case_id": "CASE-04-NEGATIVE-OPERATING-INCOME",
+      "description": "Loss-making business with monthly expenses exceeding revenue.",
+      "passed": true,
+      "status_match": true,
+      "math_consistent": true,
+      "evaluated_status": "ineligible",
+      "expected_status": "ineligible",
+      "dscr_ratio": -1.14,
+      "monthly_emi_minor": 1749030,
+      "total_payment_minor": 20988360,
+      "max_safe_borrowing_minor": 0
+    },
+    {
+      "case_id": "CASE-05-ZERO-EXISTING-DEBT",
+      "description": "First-time borrower with zero existing debt obligation.",
+      "passed": true,
+      "status_match": true,
+      "math_consistent": true,
+      "evaluated_status": "eligible",
+      "expected_status": "eligible",
+      "dscr_ratio": 5.72,
+      "monthly_emi_minor": 2623544,
+      "total_payment_minor": 31482528,
+      "max_safe_borrowing_minor": 122400000
+    }
+  ]
+}
