@@ -282,3 +282,12 @@ def settings_view(request: Request):
     ctx = get_web_context(request)
     ctx["active_page"] = "settings"
     return templates.TemplateResponse("app/settings.html", ctx)
+
+
+@router.get("/app/onboarding", response_class=HTMLResponse)
+def onboarding_view(request: Request):
+    """Progressive 4-Step Commercial Workspace Onboarding Wizard."""
+    ctx = get_web_context(request)
+    ctx["active_page"] = "onboarding"
+    return templates.TemplateResponse("app/onboarding.html", ctx)
+

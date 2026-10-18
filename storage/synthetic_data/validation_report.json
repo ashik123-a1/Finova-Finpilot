@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-18T09:41:55.237458+00:00",
+  "timestamp": "2026-10-18T22:30:38.850608+00:00",
   "status": "PASS",
   "table_record_counts": {
     "approvals": 0,
@@ -28,6 +28,7 @@
     "loan_scenarios": 81,
     "model_versions": 0,
     "notifications": 0,
+    "password_reset_tokens": 0,
     "payments": 0,
     "permissions": 22,
     "predictions": 0,
@@ -41,13 +42,14 @@
     "roles": 7,
     "sale_items": 978,
     "sales": 540,
-    "schema_migrations": 3,
+    "schema_migrations": 4,
     "shops": 27,
     "stock_adjustments": 540,
     "suppliers": 270,
-    "users": 30
+    "users": 30,
+    "workspace_invitations": 0
   },
-  "total_records": 17539,
+  "total_records": 17540,
   "referential_integrity": {
     "status": "PASS",
     "orphaned_records_found": 0,

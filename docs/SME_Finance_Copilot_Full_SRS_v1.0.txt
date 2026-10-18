@@ -1,0 +1,999 @@
+=== PAGE 1 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 1
+ SME FINANCE
+ COPILOT
+ Software Requirements Specification (SRS)
+ Unified, shop-aware AI Business Manager for Small and Medium Enterprises
+Document control
+Value
+Version
+1.0 — consolidated SRS baseline
+Date
+18 October 2026
+Competition
+2026 Shenzhen International FinTech Competition — International Track
+Selected topic
+Topic E — SME Finance Copilot
+Theme
+AI as a Financial Participant
+Primary audience
+SME owners, managers, developers, testers and evaluators
+Status
+Requirements baseline; implementation status is separately qualified
+This SRS consolidates the previous A-to-Z product specification, decisions recorded in prior discussion, the supplied
+competition rules, and the reported database/model and backend phases. A requirement is not proof that the feature is
+already implemented.
+Synthetic/demo data must be visibly distinguished from real financial data.
+
+
+=== PAGE 2 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 2
+1. Purpose, Scope and Status Labels
+This document defines functional requirements, security boundaries, data rules, API integration expectations, acceptance tests,
+and staged delivery for SME Finance Copilot. It is the baseline for frontend development, testing, architecture documentation,
+and the competition demo.
+ Label
+Meaning
+Core / Competition MVP
+Must work end-to-end in the demo.
+Reported implemented
+Mentioned in previous agent reports; verify against actual code and runtime.
+Demo / simulated
+Uses synthetic data or simulated actions and must be labelled.
+Integration-dependent
+Requires approved provider, credentials, permissions and testing.
+Advanced / roadmap
+Agreed product direction, not a promise of current completion.
+Open decision
+Needs measured configuration; do not invent a value.
+Product vision
+One unified AI Business Manager that helps SMEs understand performance, manage cash flow, compare financing options,
+manage customers/inventory, process voice/photo inputs, simulate business decisions, and automate routine tasks. It combines
+deterministic calculations, explainable rules, suitable ML/statistical forecasts, and an AI interface constrained by permissions
+and evidence.
+Principles
+
+ Financial analysis, cash-flow management with alerts, and financing-option matching are the three highest-priority competition
+tasks.
+
+ Use deterministic code for financial arithmetic and loan rules; use an LLM for dialogue, summaries, explanations and
+approved tool orchestration.
+
+ Never present synthetic bank offers, simulated message delivery, forecasts or estimates as verified real-world facts.
+
+ Human review is required before uncertain extraction or consequential financial writes are committed.
+
+ Keep the service free to end users as a product requirement, while managing hosting/provider costs with sustainable
+local/free/demo alternatives.
+2. Competition Constraints
+The supplied rulebook names the theme “AI as a Financial Participant” and Topic E, SME Finance Copilot. Judging weights are
+task completion 40%, security/compliance 30%, and innovation/interaction 30%.
+ Rulebook item
+Requirement
+Official language
+English for International Track submissions, presentations and reviews.
+Presentation
+Maximum 10 minutes.
+Demo video
+Optional; maximum 5 minutes.
+Required deliverables
+Technical documentation; presentation deck; source code with README, repository/deployment
+instructions and test cases; security self-assessment with permission tiers/known risks; execution
+evidence.
+Execution evidence
+For non-on-chain topics: simulated-account/sandbox operation logs and demo video.
+Deadline
+20 Oct 2026, 23:59 Beijing (UTC+8) = 20 Oct 2026, 21:59 Bangladesh (UTC+6).
+Eligibility
+Rulebook describes teams of 2–5 students and other eligibility conditions; team must confirm its
+own eligibility.
+This SRS does not replace the presentation, security self-assessment, source-code packaging or execution evidence.
+3. Goals, Non-Goals and Success Criteria
+Goals
+
+ Show revenue, costs, profit, cash position, receivables and important risks.
+
+
+=== PAGE 3 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 3
+
+ Forecast cash-flow risk and provide understandable shortage alerts with actionable next steps.
+
+ Match business profiles to transparent financing rules and calculate repayment scenarios.
+
+ Ground assistant responses in authorized records and verified calculations.
+
+ Support OCR/document extraction with confidence indicators and human review.
+
+ Support customer reminders, inventory alerts, pricing/investment simulations and routine tasks through staged modules.
+
+ Provide a simple shopkeeper experience plus detailed metrics for advanced users.
+Non-goals for the competition MVP
+
+ No real bank integration, live credit approval, loan submission, money movement, live bank balances or live message delivery
+unless a verified integration is connected and tested.
+
+ No guarantee of forecast accuracy, loan approval, sales growth, profit improvement or approval timing.
+
+ No claim of uniform support across 100+ languages; support is phased and tested by capability.
+
+ No autonomous high-impact financial action without permission, configured limits and confirmation.
+
+ No production multi-server guarantee from local demo authentication or in-memory rate limiting.
+MVP acceptance criteria
+ ID
+Acceptance criterion
+SC-01
+Authorized user selects an accessible business/shop and sees its financial summary.
+SC-02
+Revenue, expenses, profit/margins and ledger totals reconcile and preserve currency precision.
+SC-03
+Forecast shows horizon, assumptions, uncertainty and a tested alert when a scenario crosses a configured
+threshold.
+SC-04
+At least two synthetic financing products can be compared with installment, fees, total repayment and reasons.
+SC-05
+Uploaded receipt stays unposted until authorized review/confirmation; duplicate posting is blocked.
+SC-06
+Backend rejects cross-tenant/cross-shop requests regardless of frontend-selected IDs.
+SC-07
+Synthetic/demo actions are labelled; no unverified integration is represented as live.
+SC-08
+Core workflows have regression tests and documented run instructions.
+4. Users, Roles and Onboarding
+ Role
+Allowed scope
+Restrictions
+Owner
+Workspace, shops, financial records, team roles,
+approvals, exports and settings.
+Cannot bypass platform security or audit
+controls.
+Manager
+Assigned shop reports and permitted
+transaction/customer/inventory workflows.
+No unassigned shops or owner-only
+actions.
+Staff
+Enter sales/expenses, update assigned records and
+submit documents for review.
+No unrestricted exports, role changes or
+high-impact approvals.
+Read-only / accountant
+View authorized reports/ledgers; export if granted.
+No mutation unless explicitly permitted.
+AI tool/automation
+Narrow, scoped actions for an authorized user.
+Must inherit server permissions; no
+self-granted access.
+Demo/evaluator
+Isolated synthetic demo workspace.
+No real private data or secret credentials.
+Authentication and context
+Identity must come from a validated session/token. Client-supplied IDs or headers cannot establish authority. Every request
+must verify membership and role for the requested business/shop. Development fallback behavior must be disabled in
+production.
+Progressive onboarding
+
+ Collect business type, shop name, country/currency, opening balance if known, product/service categories and preferred
+language.
+
+
+=== PAGE 4 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 4
+
+ Allow gradual addition/import of customers, suppliers, stock, expenses and historical transactions.
+
+ Show setup completeness and explain how missing/poor history affects forecast confidence.
+
+ Keep demo records isolated from real workspaces.
+5. Functional Requirements — Finance and Reporting
+ ID
+Requirement
+Priority
+FR-FIN-01
+Record/display sales, revenue, costs, expenses, cash inflows/outflows, receivables, payables
+and status.
+MUST
+FR-FIN-02
+Filter ledgers by shop, date, category, type, source and status; support pagination.
+MUST
+FR-FIN-03
+Calculate gross profit, operating/net profit when inputs permit, margins and expense ratios.
+MUST
+FR-FIN-04
+Use integer minor units or safe Decimal arithmetic with explicit currency precision.
+MUST
+FR-FIN-05
+Detect duplicates, missing fields, unusual amounts and category inconsistencies; ask before
+material corrections.
+SHOULD
+FR-FIN-06
+Keep source, actor, timestamp, shop, attachment and review status.
+MUST
+FR-FIN-07
+Support prior-period comparisons and authorized owner-level multi-shop summaries.
+SHOULD
+Dashboard
+
+ Show revenue, expenses, net/operating profit when calculable, cash balance, receivables and trends.
+
+ Break down sales by time, product/category, channel and shop when records support it.
+
+ Show receivable ageing, upcoming payables, inventory turnover where relevant, cash coverage/runway and break-even
+progress.
+
+ Provide recent transactions, alerts, top/bottom products and prioritized actions.
+
+ Every report shows shop, period, currency, generated time and actual/estimated/synthetic status.
+Cash-flow forecasting and alerts
+ ID
+Requirement
+Priority
+FR-CF-01
+Forecast cash balance from historical movements and known/expected inflows/outflows.
+MUST
+FR-CF-02
+7-day view for MVP; 30/90-day and rolling 13-week views when data/model permit.
+MUST/SHOUL
+D
+FR-CF-03
+Show drivers, assumptions, uncertainty/confidence and compare against a simple baseline.
+MUST
+FR-CF-04
+Configurable shortage, overdue-payment and unusual-expense alerts.
+MUST
+FR-CF-05
+Suggest receivable collection, discretionary-spend review, purchase changes or loan
+comparison.
+MUST
+FR-CF-06
+Compare forecast against actuals and report error when sufficient observations exist.
+SHOULD
+Daily/weekly/monthly reports
+
+ Daily: sales, costs, estimated profit, cash movement, bills due, stock alerts, collections and priority actions.
+
+ Weekly: trend changes, top/bottom products, campaign results, forecast changes and unresolved risks.
+
+ Monthly: profitability, cash-flow performance, budget-vs-actual, goals and recommendations.
+
+ PDF/Excel export and report delivery are desired staged features; only claim them when implemented.
+
+
+=== PAGE 5 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 5
+6. Functional Requirements — Financing Copilot
+ ID
+Requirement
+Priority
+FR-LOAN-01
+Match shop profile to configurable product rules using relevant business and
+repayment-capacity inputs.
+MUST
+FR-LOAN-02
+Classify matched/conditional/not currently matched and explain conditions/missing data.
+MUST
+FR-LOAN-03
+Compare amount, interest method/rate, fees, tenure, frequency, collateral, documents and
+restrictions where known.
+MUST
+FR-LOAN-04
+Calculate installment, total interest/fees and total repayment with explicit assumptions.
+MUST
+FR-LOAN-05
+Use cash flow, debt obligations, DSCR and EMI-to-income where inputs support them.
+MUST
+FR-LOAN-06
+Stress-test sales decline, cost increases, late receivables and interest changes.
+SHOULD
+FR-LOAN-07
+Approval-time estimates must be labelled estimates, not guarantees.
+MUST
+FR-LOAN-08
+Sandbox Apply Now with application ID, checklist and simulated status timeline.
+SHOULD
+FR-LOAN-09
+Real submission requires verified lender data, consent and approved integration.
+MUST
+Synthetic demo banks and responsible lending
+
+ Use fictional banks/products and internally consistent configurable rates, fees, terms, rules and documents; label them
+synthetic.
+
+ Include repeatable strong-cash-flow, seasonal-decline, existing-debt, short-history, missing-document and high-risk
+scenarios.
+
+ Include early/full repayment only where product prepayment rules are defined.
+
+ Risk output is decision support, not a bank credit decision. Avoid irrelevant/protected personal attributes; explain factors and
+safer alternatives.
+7. Functional Requirements — CRM and Messaging
+ ID
+Requirement
+Priority
+FR-CRM-01
+Shop-scoped customer profiles, purchase history, payment status and contact consent.
+SHOULD
+FR-CRM-02
+Explainable VIP/regular/new/inactive/at-risk/price-sensitive segmentation.
+SHOULD
+FR-CRM-03
+Polite reminder drafts and scheduled follow-ups for unpaid/overdue bills.
+SHOULD
+FR-CRM-04
+Pause after payment, opt-out, dispute or configured stop condition; enforce frequency limits.
+MUST when
+enabled
+FR-CRM-05
+Offers, bundles, restock notices and recommendations with consent and margin guardrails.
+SHOULD
+FR-CRM-06
+Measure delivery/conversion/recovered payment only when channel data supports it.
+COULD
+Channel
+Boundary
+Demo SMS
+Simulated sending/status only; label clearly.
+Email
+Requires provider, verified sender, consent and status support.
+WhatsApp
+Requires approved API/provider, required templates and consent.
+Other
+Adapter only; never claim live connectivity without evidence.
+8. Voice, Documents, OCR and Languages
+Document intake
+
+ Accept supported PDF/images; enforce size, extension, MIME/magic-byte checks and safe storage paths.
+
+ Extract merchant, invoice ID, date, line items, subtotal, tax, total and currency when detectable.
+
+ Display field-level confidence and permit correction before posting.
+
+ Keep extraction in review-pending state until explicit authorized confirmation; prevent duplicate posting.
+
+
+=== PAGE 6 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 6
+
+ Handle noisy, blurry, incomplete and mixed-language documents; low confidence must trigger review, not fabricated
+completion.
+Voice assistant
+
+ Support natural-language questions/commands for summaries, reports, forecast, reminders and approved actions.
+
+ Use ASR/TTS only for languages/providers tested; provide typed fallback.
+
+ Require confirmation for consequential changes and enforce the same permissions as UI.
+
+ Do not claim speech recognition is implemented in a language unless tested.
+Language/localization
+ Tier
+Requirement
+Primary
+English — competition language and initial default.
+Secondary
+Simplified Chinese — intended additional UI/interaction language.
+Preserved
+Bengali — preserve existing Bengali/localization requirements.
+Long-term target
+100+ languages across text, voice, photo/translation, phased by tested capability.
+Honesty rule
+Registry presence is not end-to-end capability; report UI/text/OCR/ASR/TTS separately.
+Interface language must be independent of business country/currency. Do not infer China jurisdiction solely from the
+competition. Tax, banking, exchange rates and country-specific rules require verified sources or explicit settings.
+9. Decision Intelligence, Pricing and Investment
+What-if business decisions
+
+ Support purchase, supplier, hiring, staffing, budget and expansion decisions using available records.
+
+ Compare best/expected/worst-case scenarios; disclose assumptions and impacts on cash, revenue, costs, margin and
+repayment capacity.
+
+ Provide affordable alternatives and action plans; estimates are not guaranteed outcomes.
+Pricing, discounts and demand
+
+ Estimate demand/price sensitivity from available data; competitor prices require sources.
+
+ Recommend price/discount/bundle/reorder actions with minimum-margin, inventory and cash constraints.
+
+ Require approval for live price changes or large discounts unless narrowly pre-authorized.
+
+ Disclose assumptions for seasonal demand, supplier lead time and non-normal demand.
+Investment ROI
+
+ Compare decoration, lighting, equipment, product quality, marketing and staff training.
+
+ Estimate incremental cost, sales/profit impact, ROI, payback, risk and affordable alternatives.
+
+ Compare scenarios and measure actual vs predicted outcomes when data becomes available.
+10. AI Business Employee and Automation
+
+ Interpret intent and route requests to approved modules/tools; bounded specialist agents may support finance, lending, CRM,
+inventory, documents and reports.
+
+ Authorize every tool at the server boundary; natural language never overrides permissions.
+
+ Support scheduled reports/reminders, alerts, task assignment, retries, recovery and task center as staged capabilities.
+
+ Audit requesting user, requested action, permission decision, approval, tool result, timestamp and failures.
+
+ Use idempotency for consequential operations; defend against prompt injection in user input and documents.
+Action class
+Default policy
+Read report/calculate scenario
+Automatic for authorized users.
+
+
+=== PAGE 7 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 7
+Action class
+Default policy
+Create OCR draft
+Create draft and ask for review if uncertain.
+Post financial record
+Explicit authorized confirmation and audit.
+Scheduled reminders
+Only within consent, frequency, quiet hours and stop rules.
+Campaign/live price change
+Preview and approval unless narrow limits are pre-authorized.
+Real loan submission/money
+movement
+Unavailable in demo; requires explicit authorization and verified integration.
+Simulated application/message
+Allowed in sandbox with visible simulated label.
+11. UX and Frontend Requirements
+
+ Unified responsive dashboard, modular navigation, shared shop context, cards, charts, tables, forms, alerts and action center.
+
+ Desktop/tablet/mobile layouts; PWA is a direction if compatible with current stack and deadline.
+
+ Chat-first help for simple tasks; structured screens for finance, financing, document review and approvals.
+
+ Beginner/advanced mode, progressive disclosure, readable currency/number formats, accessible contrast and keyboard
+navigation.
+
+ Show loading, empty, success, validation, authorization, integration failure and retry states.
+
+ Never hardcode API results or show success when the backend failed; show synthetic/estimated status and freshness near
+values.
+Required screen
+Minimum scope
+Login/session
+Actual authentication flow; never use entered IDs as identity.
+Dashboard
+Revenue, expenses, profit, cash, receivables, trends, forecast/alerts and recent transactions.
+Financial records
+Sales/expense tables, date filters, pagination and status.
+Forecast
+Horizon, chart/bounds where available, assumptions and alerts.
+Financing Copilot
+Synthetic products, comparison, EMI/fees/total repayment and reasons.
+Document review
+Upload, extracted fields, corrections, review status and confirm-post.
+Business/shop selector
+Only accessible workspaces; backend remains authoritative.
+Tasks/audit
+Activity/approval history where APIs support it.
+12. API and Integration Requirements
+Prior backend reports describe Python/FastAPI-style routes and SQLite. The actual repository and OpenAPI/schema definitions
+are authoritative. Frontend work must inspect source before integration; do not replace the existing backend stack merely
+because another stack was suggested earlier.
+ Reported endpoint
+Purpose
+GET /health, /api/health, /
+Health/status.
+GET /api/business/list; /api/business/{business_id}/shops;
+/api/business/shops/{shop_id}
+Business/shop discovery.
+GET /api/finance/summary; /sales; /expenses; /profit-loss; /cash-flow
+Financial summary and ledgers.
+GET/POST /api/finance/forecast
+Forecast retrieval/generation.
+POST /api/finance/loan-risk-assessment; GET /api/finance/loan-products; POST
+/api/finance/loan-comparison
+Financing suitability/products/comparison.
+GET /api/finance/inventory-summary; /receivables-summary
+Inventory and receivables.
+POST /api/documents/upload; GET /api/documents/{document_id}; /list/all; POST
+/api/documents/confirm-post
+Document upload/review/post.
+GET /api/audit/logs
+Audit history.
+
+
+=== PAGE 8 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 8
+These routes are based on the reported Phase 2 API report and must be checked against the actual code. Chat, CRM, voice,
+messaging, investment, exports and i18n endpoints must not be assumed to exist merely because this SRS describes them.
+API client behavior
+
+ Centralize base URL, auth/session, error normalization, timeouts and request cancellation.
+
+ Handle 401, 403, 404, 409, 413, 422 and 5xx safely.
+
+ Never silently switch user/shop or fall back to hardcoded data after failure.
+
+ Keep secrets server-side; do not put tokens/private information in URLs/logs.
+
+ Use environment configuration and document exact startup commands.
+13. Architecture and Existing Technical Baseline
+ Layer
+Responsibility
+Frontend
+Responsive dashboard/PWA, chat, voice/photo, charts, forms, approvals, reports.
+API/application
+Auth, role checks, tenant/shop scoping, validation, business workflows and rate limits.
+Shared data
+Transactions, inventory, customers, suppliers, documents, loan scenarios, tasks, forecasts, audit.
+Deterministic finance
+Profit/margins, EMI/repayment, break-even, ROI/payback and rules.
+Analytics/ML
+Cash-flow/sales forecast, demand estimates, document support, segmentation and evaluation.
+AI orchestration
+Intent, tool selection, summaries and explanations grounded in authorized results.
+Adapters
+OCR, optional LLM, email, approved WhatsApp, simulated SMS and sourced data.
+Governance
+Audit, model/rule versions, data quality, failures, backup and recovery.
+Reported existing baseline — verify before relying on it
+
+ Prior report states local SQLite `sme_finance.db`, 43 tables, about 160,090 records and 21,978 sales. Do not reset/recreate it
+during frontend work.
+
+ Reports describe routes under `src/api/` for finance, business/shop, documents and audit.
+
+ Reported models: Ridge autoregression plus moving-average cash forecast; TF-IDF/logistic-regression document classifier;
+RapidOCR/OpenCV/regex extractor; deterministic loan-risk policy; safety-stock/reorder-point logic; RFM segmentation.
+
+ Previous Phase 2.1 report claims 100 tests passed. This is agent-reported evidence, not an independent re-run in this SRS.
+
+ Preserve existing preloader SVG assets; integration is a frontend decision, not a requirement to modify them now.
+AI safety
+
+ Financial arithmetic and loan rules must be deterministic and testable; LLM must not invent calculations.
+
+ Return source facts, assumptions, uncertainty and recommended next steps where available.
+
+ Untrusted documents/prompts cannot change permissions or reveal secrets.
+
+ Authorize every tool read/write; sanitize errors and avoid stack-trace, path or secret leakage.
+
+
+=== PAGE 9 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 9
+14. Data Model and Governance
+ Entity
+Representative fields/relationships
+User/role/membership
+User ID, active state, role, business/shop membership, permissions, locale.
+Business/shop
+IDs, owner, type, country, currency, settings.
+Sale/sale item
+Shop, date, amount minor units, currency, items, quantity, price, status.
+Expense/purchase/cash movement
+Shop, date, category, amount, direction, source, reconciliation.
+Product/inventory movement
+SKU, cost, price, stock, reorder threshold, supplier and movements.
+Customer/supplier
+Shop, contact, consent, purchase/payment history, segment.
+Document/extraction
+Safe file ref/hash, type, OCR fields/confidence, review state, approver and posting ref.
+Loan product/scenario/application
+Synthetic rules, rates/fees/tenure, assumptions, result and simulated status.
+Forecast/recommendation
+Shop, horizon, model/version, inputs, output, bounds/confidence and timestamp.
+Campaign/message/task
+Audience, consent, channel, schedule, status, outcome and retries.
+Approval/audit
+Actor, action, permission, approval, target, timestamp and result.
+
+ Preserve existing schema unless a verified blocker requires a controlled migration.
+
+ Every business record must be shop-scoped and checked on every request.
+
+ Store money in safe minor units/decimal representation with explicit currency precision.
+
+ Never combine currencies without a verified rate and conversion timestamp.
+
+ Retain source lineage for imports/OCR; label synthetic records.
+
+ Define retention, deletion, export and backup policies before real customer data is used.
+15. Models, Evaluation and Known Limitations
+ Component
+Reported method/metrics
+Required interpretation
+Cash-flow forecast
+Ridge autoregression + 7-day moving average; report
+cites 459 rolling-origin folds, MASE 0.743, 80%
+interval coverage 73.54%.
+Synthetic-data evaluation only; interval
+coverage below nominal 80%; show
+uncertainty/baseline.
+Document classifier
+TF-IDF + logistic regression; report cites 1,000
+synthetic held-out receipts, 100% accuracy and
+Macro-F1 1.0.
+Template/vocabulary limitation; do not
+generalize to real receipts without external
+validation.
+OCR/extractor
+RapidOCR ONNX + OpenCV CLAHE + regex; report
+cites total amount match 100%, date 97.14%, invoice
+ID 84.29%, CER 50.49%, WER 52.48% on 70
+receipts.
+High character error; mandatory review before
+ledger posting.
+Loan risk
+Deterministic policy engine; report cites 12/12 vectors.
+Demo rules, not bank underwriting.
+AI guardrails
+AST math interceptor/injection filter; report cites 28
+multilingual vectors.
+Defense in depth; keep testing injection and
+tool authorization.
+Pricing/demand
+Deterministic safety stock/reorder point; assumes
+Gaussian demand.
+Disclose assumption; seasonal/non-normal
+demand may differ.
+Customer segmentation
+Deterministic RFM quintiles.
+Explainable business segmentation; no
+causal/protected-attribute claim.
+All metrics above are copied from prior project reports and were not independently rerun or certified while creating this
+SRS.
+Evaluation protocol
+
+ Forecast: MAE/MAPE or suitable metric, simple baseline, rolling-origin validation and interval coverage.
+
+ Cash alerts: lead time, false-alert rate and missed-shortage rate on labelled scenarios.
+
+ Loan matching: rule accuracy against synthetic ground truth and contradictory/missing inputs.
+
+ OCR: field exact match, amount/date accuracy, CER/WER, review rate and posting error rate.
+
+
+=== PAGE 10 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 10
+
+ Voice: intent success, correction and safe-confirmation rate per tested language/provider.
+
+ Security: unauthorized access, tenant isolation, token tampering/expiry, upload checks, secrets and audit completeness.
+
+ Reliability: completion, duplicate action rate, retries and provider-failure recovery.
+16. Security, Privacy and Responsible AI
+
+ Validated auth and role-based access; enforce tenant/shop scope on every endpoint.
+
+ Least privilege for tools/integrations; keep secrets out of frontend, prompts and logs.
+
+ Rate limits and abuse controls; distributed rate limiting before multi-worker production scaling.
+
+ Upload validation, safe hashed storage paths, size limits, sanitized errors and idempotent posting.
+
+ Audit sensitive reads/writes, approvals, recommendations and tool executions.
+
+ Consent, quiet hours, frequency limits and opt-out/stop rules for messaging.
+
+ Data access/export/correction/deletion and retention controls appropriate to real data.
+
+ Prompt-injection defense, Unicode sanitization and tool-boundary authorization.
+Reported Phase 2.1 verification
+ Area
+Reported result
+Caveat
+Regression suite
+100 passed in 7.85 seconds.
+Agent report; reproduce in current repo.
+Authentication
+HMAC-SHA256 bearer session tokens; identity headers
+reportedly ignored.
+Development mode reportedly falls back to
+first active user; production must reject missing
+auth.
+Tenant isolation
+Cross-shop requests reportedly rejected with 403.
+Re-test all protected routes and writes.
+Upload
+10 MB limit, MIME/magic checks, safe hashed path,
+review gate and duplicate-post protection reported.
+Test real runtime/storage settings before
+public deployment.
+Errors
+Sanitized responses reported for common errors.
+Re-check running deployment and logs.
+Rate limiting
+In-memory limiter mentioned as hardening limitation.
+Not sufficient alone for multi-worker
+production.
+Target posture: PASS WITH LIMITATIONS — DEMO ONLY until actual runtime and configuration are verified. This SRS
+does not certify production readiness.
+Regulatory boundaries
+Country-specific taxes/accounting, lending rules, bank offers and exchange rates require verified sources or explicit user
+settings. Do not claim legal, tax, regulated credit or accounting certainty.
+17. External Integrations and Failure Handling
+ Integration
+Requirement
+LLM
+Optional configured provider behind controlled tools; safe fallback if unavailable.
+Bank/financial data
+No live claims without approved access, consent and verified source.
+Email/WhatsApp
+Approved provider, credentials, sender/account approval, templates and consent.
+SMS
+Simulated unless a verified provider is connected; label status.
+OCR
+Protect uploads; review uncertain extraction.
+Exchange/market data
+Never fabricate live values; show source/timestamp or demo/user-provided label.
+PDF/Excel export
+Authorized data only; preserve currency, period, timestamp and synthetic labels.
+
+ On provider failure, preserve drafts, show error, avoid duplicate actions and offer manual fallback.
+
+ Use bounded retries and idempotency for actions with duplicate side effects.
+
+ No integration may bypass permissions, consent or audit.
+
+
+=== PAGE 11 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 11
+18. Test Plan and Release Gates
+ Test
+Expected result
+Known financial records
+Summary reconciles; currency/minor units preserved.
+Invalid dates/filters
+Client-safe validation error.
+Forged IDs/headers across shops
+Backend denies access; no data leakage.
+Missing/expired/tampered token in
+production
+401; no default-user fallback.
+Empty shop
+Safe zero/fallback outputs; no crash/division by zero.
+Ambiguous receipt
+Low-confidence fields flagged; review required.
+Spoofed/empty/oversized upload
+Rejected; no unsafe storage.
+Confirm same document twice
+Second request conflicts; no duplicate ledger entry.
+Cash shortage scenario
+Forecast drivers/uncertainty and action alert visible.
+Compare two synthetic loans
+Repayment/fees/tenure/reasons transparent; demo label visible.
+Customer pays or opts out
+Reminder stops.
+Provider unavailable
+Draft preserved; no false success/duplicate action.
+Prompt injection
+No permission bypass or secret leakage.
+Language differs from business country
+UI language and country/currency remain independent.
+Forecast versus actual
+Metrics reported without unsupported accuracy claims.
+1
+Reproduce database/model readiness checks and regression tests.
+2
+Verify backend endpoint contracts, auth, isolation, financial edge cases, upload safety and error handling.
+3
+Build frontend MVP; run lint/type/build and core workflow tests; verify actual API integration.
+4
+Run repeatable demo scenarios with synthetic data and capture execution evidence.
+5
+Complete technical documentation, README, security self-assessment, English deck (≤10 min), optional video (≤5 min).
+19. Roadmap and Prioritization
+ Phase
+Scope
+Status
+0 — Data/model gate
+Schema/data integrity, model evaluation, limitations.
+Prior report says completed;
+verify artifacts.
+1 — Backend/API
+Health, business/shop, finance, forecast, loan, docs,
+inventory/receivables, audit.
+Agent report claims commit
+087c413; verify history.
+2.1 — Security gate
+Auth, isolation, numerical edges, upload safety, regression.
+Agent report claims 0274367
+and 100 tests; reproduce.
+3 — Frontend MVP
+Login, dashboard, ledgers, forecast, financing, document review,
+shop selection.
+Next phase; not complete
+yet.
+4 — E2E demo hardening
+Real API workflows, bug fixes, evidence capture.
+Pending.
+5 — Competition packaging
+Technical docs, security report, README/tests, English deck,
+optional video.
+Pending.
+6 — Advanced roadmap
+CRM campaigns, live integrations, expanded voice/languages,
+investment, schedules, exports.
+Future scope.
+Priority rule: deliver the smallest accurate, secure, demonstrable end-to-end flow. Do not weaken the three core
+competition tasks to implement every advanced feature.
+
+
+=== PAGE 12 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 12
+20. Double-Check Traceability — All Original Product Points
+ Original requirement/decision
+SRS section
+Coverage / implementation truth
+1. Income/cost/revenue analysis and future cash
+shortage prediction
+5, 18
+Included; core MVP; backend reported.
+2. Loan suitability and steps
+6
+Included; synthetic match and simulated application.
+3. Follow-up unpaid/late bills
+7
+Included; CRM staged.
+4. Voice/photo automation, 100+ languages,
+simple UX
+8, 11
+Included; phased, capability-tested.
+5. Purchase/hiring/supplier/expansion/budget
+decisions
+9
+Included; some roadmap.
+6. Price/customer-response prediction
+9
+Included with uncertainty and margin guardrails.
+7. Decoration/lighting/quality investment
+9
+Included with ROI/payback.
+8. Affordable AI business employee / assistant
+work
+10
+Included with bounded tools and audit.
+Shop-wise data and multi-shop owner view
+4, 14
+Included; server-side isolation required.
+Synthetic demo banks/financial data
+6, 14
+Included; must be labelled.
+Daily/weekly/monthly reports and low-sales
+recovery
+5
+Included; export/delivery staged.
+Interest/fees/tenure/installments/total/early
+repayment
+6
+Included when product rules exist.
+Approval estimate and risk engine
+6, 15
+Estimate/demo only, not guarantee.
+VIP/customer analysis, reminders, offers, restock
+follow-up
+7
+Included; consent/guardrails.
+Email/WhatsApp path and demo SMS
+7, 17
+Included; live use integration-dependent.
+100+ languages, voice/photo/translation
+8
+Target included; no uniform capability claim.
+OCR-assisted data entry
+8, 15
+Included; human review mandatory.
+Best/expected/worst-case scenarios
+9
+Included.
+Pricing/discount automation
+9, 10
+Included; live action approval/limits.
+Investment ROI/payback/risk/budget alternatives
+9
+Included.
+Multi-agent tasks, schedules, alerts, recovery,
+audit
+10, 16, 17
+Included; advanced pieces staged.
+Unified dashboard, responsive web/PWA,
+beginner/advanced
+11
+Included; PWA subject to stack/time.
+PDF/Excel, country/currency settings
+5, 8, 11, 14
+Included; actual implementation must be checked.
+Security, privacy, consent, roles,
+incidents/disputes
+4, 16, 18
+Included; production not certified.
+Adaptive KPIs/goals, outcome attribution,
+confidence
+5, 9, 15
+Included; data-dependent/staged.
+Free-to-user constraint
+3, 17
+Preserved; operating costs still need a plan.
+English primary, Chinese secondary, Bengali
+preserved
+8
+Included as priority; tested catalogs must be verified.
+No fabricated metrics/integrations
+All relevant
+sections
+Explicit product-wide rule.
+Data/model then API before frontend
+19
+Phase order preserved; frontend is next.
+21. Open Decisions / Final Configuration Checklist
+
+ Reproduce the claimed 100-test result on the actual current branch/commit before frontend integration.
+
+ Confirm endpoint schemas, login flow, token expiry/revocation and development fallback configuration.
+
+ Set forecast alert thresholds with repeatable scenarios; do not invent thresholds without tests.
+
+
+=== PAGE 13 ===
+SME Finance Copilot | Full SRS v1.0 | 18 Oct 2026
+Page 13
+
+ Validate synthetic loan products, rate method, fees, tenures, repayment and approval-time distributions.
+
+ Define rounding/precision and multi-currency conversion rules; never aggregate currencies without a verified rate/time.
+
+ Test language UI/text/OCR/ASR/TTS separately; a registry entry is not proof of capability.
+
+ Verify which chat/CRM/voice/messaging/export/investment/task endpoints exist versus roadmap-only.
+
+ Define document retention/deletion, audit retention, backup/restore, production secrets and rate limits.
+
+ Tie all model metrics to datasets/splits/scripts; never claim 98%+ accuracy without suitable independent evidence.
+
+ Confirm free-to-user operating plan for hosting, LLM, OCR, messaging and external data.
+22. Glossary and Source Basis
+ Term
+Meaning
+SME
+Small and medium enterprise.
+DSCR
+Debt Service Coverage Ratio.
+EMI
+Equated monthly installment where monthly repayment applies.
+OCR
+Optical Character Recognition.
+RFM
+Recency, Frequency, Monetary value segmentation.
+Tenant/shop isolation
+Backend restriction to authorized business/shop data.
+Synthetic data
+Artificially generated data for demo/testing, not real customer/bank data.
+Human-in-the-loop
+Human review/confirmation before consequential writes or uncertain extraction.
+Confidence interval
+Forecast uncertainty range, not a guarantee.
+
+ Primary project basis: SME_Finance_Copilot_A_to_Z_Specification.pdf, v1.0, 18 Oct 2026.
+
+ Competition basis: supplied PBCSF Appendix 2 — Problem Description and Competition Rules for International Track.
+
+ Implementation-status basis: agent-generated database/model readiness, backend/API integration and Phase 2.1 reports
+shared in this conversation.
+
+ This SRS consolidates requirements; it does not independently inspect the user's local repository or rerun project tests.
+END OF SRS — VERSION 1.0
+
+

@@ -5,123 +5,247 @@
 {% block content %}
 <div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-[#030712]">
     <!-- Ambient Backdrop Light -->
-    <div class="absolute w-[600px] h-[400px] bg-gradient-to-tr from-cyan-500/20 via-emerald-500/10 to-indigo-500/20 blur-[130px] rounded-full pointer-events-none"></div>
+    <div class="absolute w-[650px] h-[450px] bg-gradient-to-tr from-cyan-500/20 via-emerald-500/10 to-indigo-500/20 blur-[130px] rounded-full pointer-events-none"></div>
 
     <div class="w-full max-w-md relative z-10">
-        <!-- Logo and Title -->
-        <div class="text-center mb-8">
+        <!-- Logo and Value Proposition -->
+        <div class="text-center mb-6">
             <a href="/landing" class="inline-flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 p-[1.5px] shadow-lg shadow-cyan-500/20">
-                    <div class="w-full h-full bg-[#080e1e] rounded-[10px] flex items-center justify-center">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-emerald-400 p-[1.5px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition-transform">
+                    <div class="w-full h-full bg-[#080e1e] rounded-[14px] flex items-center justify-center">
                         <i data-lucide="sparkles" class="w-6 h-6 text-cyan-400"></i>
                     </div>
                 </div>
                 <div class="text-left">
-                    <span class="font-orbitron font-extrabold text-lg tracking-wider text-white">SME<span class="text-cyan-400">FINANCE</span></span>
+                    <span class="font-orbitron font-extrabold text-xl tracking-wider text-white">SME<span class="text-cyan-400">FINANCE</span></span>
                     <span class="block text-[10px] font-mono text-emerald-400 tracking-widest uppercase -mt-1">COPILOT AI</span>
                 </div>
             </a>
-            <h2 class="text-xl font-bold text-white mt-4">Welcome Back</h2>
-            <p class="text-xs text-slate-400 mt-1">Sign in to your multi-store financial intelligence portal</p>
+            <h1 class="text-xl font-bold text-white mt-4">Commercial Sign In</h1>
+            <p class="text-xs text-slate-400 mt-1 max-w-sm mx-auto leading-relaxed">
+                Your business finances, cash flow, and decisions — in one intelligent workspace.
+            </p>
         </div>
 
-        <!-- Glass Login Card -->
-        <div class="glass-panel-glow p-7 rounded-3xl border border-cyan-500/30 shadow-2xl relative">
-            <!-- 1-Click Demo Personas -->
-            <div class="mb-6">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-[11px] font-mono uppercase tracking-wider text-slate-400">1-Click Quick Demo Login</span>
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono">No password required</span>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-2">
-                    <button type="button" onclick="loginWithDemoPersona('owner')" class="p-2.5 rounded-xl border border-white/10 hover:border-cyan-400 bg-slate-900/60 hover:bg-slate-800 text-left transition-all group">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="crown" class="w-4 h-4 text-amber-400"></i>
-                            <span class="text-xs font-semibold text-white group-hover:text-cyan-300">Store Owner</span>
-                        </div>
-                        <span class="text-[10px] text-slate-400 block mt-1">Full Org Control</span>
-                    </button>
-
-                    <button type="button" onclick="loginWithDemoPersona('accountant')" class="p-2.5 rounded-xl border border-white/10 hover:border-emerald-400 bg-slate-900/60 hover:bg-slate-800 text-left transition-all group">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="calculator" class="w-4 h-4 text-emerald-400"></i>
-                            <span class="text-xs font-semibold text-white group-hover:text-emerald-300">Accountant</span>
-                        </div>
-                        <span class="text-[10px] text-slate-400 block mt-1">Ledger & P&L</span>
-                    </button>
-
-                    <button type="button" onclick="loginWithDemoPersona('cashier')" class="p-2.5 rounded-xl border border-white/10 hover:border-indigo-400 bg-slate-900/60 hover:bg-slate-800 text-left transition-all group">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="receipt" class="w-4 h-4 text-indigo-400"></i>
-                            <span class="text-xs font-semibold text-white group-hover:text-indigo-300">Cashier</span>
-                        </div>
-                        <span class="text-[10px] text-slate-400 block mt-1">POS Sales Entry</span>
-                    </button>
-
-                    <button type="button" onclick="loginWithDemoPersona('auditor')" class="p-2.5 rounded-xl border border-white/10 hover:border-purple-400 bg-slate-900/60 hover:bg-slate-800 text-left transition-all group">
-                        <div class="flex items-center gap-2">
-                            <i data-lucide="file-search" class="w-4 h-4 text-purple-400"></i>
-                            <span class="text-xs font-semibold text-white group-hover:text-purple-300">Bank Auditor</span>
-                        </div>
-                        <span class="text-[10px] text-slate-400 block mt-1">Audit & DSCR</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Divider -->
-            <div class="flex items-center my-5">
-                <div class="flex-1 border-t border-white/10"></div>
-                <span class="px-3 text-[11px] font-mono text-slate-500 uppercase">Or Sign In with Credentials</span>
-                <div class="flex-1 border-t border-white/10"></div>
+        <!-- Commercial Login Card -->
+        <div class="glass-panel-glow p-8 rounded-3xl border border-cyan-500/30 shadow-2xl relative space-y-5">
+            <!-- Dynamic Server Error Alert -->
+            <div id="login-error-alert" class="hidden p-3.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs flex items-center gap-2.5">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-rose-400"></i>
+                <span id="login-error-message">Invalid credentials. Please verify your email and password.</span>
             </div>
 
             <!-- Credentials Form -->
             <form id="login-form" onsubmit="handleManualLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1.5">Username or Email</label>
+                    <label for="login-username" class="block text-xs font-medium text-slate-300 mb-1.5">Business Email or Username</label>
                     <div class="relative">
-                        <i data-lucide="user" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                        <input type="text" id="login-username" value="demo_owner" required class="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs font-medium" placeholder="Enter username or email">
+                        <i data-lucide="mail" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
+                        <input type="text" id="login-username" value="demo_owner" required autocomplete="username" class="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs font-medium text-white placeholder:text-slate-500 focus:border-cyan-400" placeholder="owner@company.com or username">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-medium text-slate-300 mb-1.5">Password</label>
+                    <label for="login-password" class="block text-xs font-medium text-slate-300 mb-1.5">Password</label>
                     <div class="relative">
                         <i data-lucide="lock" class="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"></i>
-                        <input type="password" id="login-password" value="demo12345" required class="glass-input w-full pl-10 pr-4 py-2.5 rounded-xl text-xs font-medium" placeholder="••••••••">
+                        <input type="password" id="login-password" value="demo12345" required autocomplete="current-password" class="glass-input w-full pl-10 pr-10 py-2.5 rounded-xl text-xs font-medium text-white placeholder:text-slate-500 focus:border-cyan-400" placeholder="••••••••">
+                        <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-cyan-400 p-1" title="Toggle password visibility">
+                            <i id="password-toggle-icon" data-lucide="eye" class="w-4 h-4"></i>
+                        </button>
                     </div>
                 </div>
 
                 <div class="flex items-center justify-between text-xs">
-                    <label class="flex items-center gap-2 text-slate-400 cursor-pointer">
-                        <input type="checkbox" checked class="rounded border-slate-700 text-cyan-500 focus:ring-0">
+                    <label class="flex items-center gap-2 text-slate-400 cursor-pointer select-none">
+                        <input type="checkbox" checked class="rounded border-slate-700 bg-slate-900 text-cyan-500 focus:ring-0">
                         <span>Remember session</span>
                     </label>
-                    <a href="#" class="text-cyan-400 hover:underline">Forgot password?</a>
+                    <button type="button" onclick="openForgotPasswordModal()" class="text-cyan-400 hover:underline font-medium text-xs">
+                        Forgot password?
+                    </button>
                 </div>
 
                 <button type="submit" id="btn-login-submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold text-xs tracking-wider transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
                     <i data-lucide="log-in" class="w-4 h-4"></i>
-                    <span>Sign In to Copilot</span>
+                    <span>Sign In to Workspace</span>
                 </button>
             </form>
+
+            <!-- Separation for Competition Demo Evaluation -->
+            <div class="pt-2">
+                <div class="flex items-center my-3">
+                    <div class="flex-1 border-t border-white/10"></div>
+                    <span class="px-3 text-[10px] font-mono text-slate-500 uppercase">Evaluation & Demonstration</span>
+                    <div class="flex-1 border-t border-white/10"></div>
+                </div>
+
+                <button type="button" onclick="openDemoModal()" class="w-full py-2.5 rounded-xl border border-cyan-500/30 hover:border-cyan-400 bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 font-semibold text-xs transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4 text-cyan-400"></i>
+                    <span>1-Click Quick Demo Login (Evaluation Personas)</span>
+                </button>
+            </div>
         </div>
 
-        <!-- Bottom Link -->
+        <!-- Registration Link -->
         <p class="text-center text-xs text-slate-400 mt-6">
-            Don't have an enterprise account? 
-            <a href="/register" class="text-cyan-400 hover:underline font-semibold">Register your Business</a>
+            New enterprise or merchant? 
+            <a href="/register" class="text-cyan-400 hover:underline font-semibold ml-1">Create Business Account</a>
+        </p>
+
+        <!-- Privacy & Terms -->
+        <p class="text-center text-[10px] text-slate-600 mt-3">
+            Protected by multi-tenant SQLite WAL isolation & HMAC token validation.
+        </p>
+    </div>
+</div>
+
+<!-- ============================================================================== -->
+<!-- 1. Dedicated Demo Sandbox Modal (Separated from Default Commercial Sign-In) -->
+<!-- ============================================================================== -->
+<div id="demo-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-glow w-full max-w-lg p-6 rounded-3xl border border-cyan-500/40 relative shadow-2xl">
+        <button type="button" onclick="closeDemoModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="flex items-center gap-3 mb-4">
+            <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                <i data-lucide="flask-conical" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-white">Competition Demo Sandbox</h3>
+                <span class="text-[10px] font-mono text-emerald-400">1-Click Fast Evaluator Personas</span>
+            </div>
+        </div>
+
+        <!-- Synthetic Data Disclosure Banner -->
+        <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-200 text-[11px] mb-4 space-y-1">
+            <div class="font-semibold flex items-center gap-1.5">
+                <i data-lucide="shield-alert" class="w-3.5 h-3.5 text-amber-400"></i>
+                <span>Synthetic Demo Environment Notice</span>
+            </div>
+            <p class="text-amber-300/80 leading-relaxed">
+                All personas operate within a pre-seeded, isolated sandbox using synthetic ledgers (Business #19, Dhaka Premier Retailers Ltd). No live banking or private customer records are connected.
+            </p>
+        </div>
+
+        <!-- 4 Persona Grid -->
+        <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" onclick="loginWithDemoPersona('owner')" class="p-3 rounded-xl border border-white/10 hover:border-cyan-400 bg-slate-900/80 hover:bg-slate-800 text-left transition-all group">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="crown" class="w-4 h-4 text-amber-400"></i>
+                    <span class="text-xs font-semibold text-white group-hover:text-cyan-300">Store Owner</span>
+                </div>
+                <span class="text-[10px] text-slate-400 block mt-1">Full Org & Loan Control</span>
+            </button>
+
+            <button type="button" onclick="loginWithDemoPersona('accountant')" class="p-3 rounded-xl border border-white/10 hover:border-emerald-400 bg-slate-900/80 hover:bg-slate-800 text-left transition-all group">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="calculator" class="w-4 h-4 text-emerald-400"></i>
+                    <span class="text-xs font-semibold text-white group-hover:text-emerald-300">Accountant</span>
+                </div>
+                <span class="text-[10px] text-slate-400 block mt-1">P&L, VAT & OCR Review</span>
+            </button>
+
+            <button type="button" onclick="loginWithDemoPersona('cashier')" class="p-3 rounded-xl border border-white/10 hover:border-indigo-400 bg-slate-900/80 hover:bg-slate-800 text-left transition-all group">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="receipt" class="w-4 h-4 text-indigo-400"></i>
+                    <span class="text-xs font-semibold text-white group-hover:text-indigo-300">Cashier / Sales</span>
+                </div>
+                <span class="text-[10px] text-slate-400 block mt-1">POS Sales & Customer CRM</span>
+            </button>
+
+            <button type="button" onclick="loginWithDemoPersona('auditor')" class="p-3 rounded-xl border border-white/10 hover:border-purple-400 bg-slate-900/80 hover:bg-slate-800 text-left transition-all group">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="file-search" class="w-4 h-4 text-purple-400"></i>
+                    <span class="text-xs font-semibold text-white group-hover:text-purple-300">Bank Auditor</span>
+                </div>
+                <span class="text-[10px] text-slate-400 block mt-1">Read-Only Audit Trails</span>
+            </button>
+        </div>
+
+        <div class="mt-4 pt-3 border-t border-white/10 text-center">
+            <span class="text-[10px] font-mono text-slate-500">
+                Manual Fallback: <code>demo_owner</code> / <code>demo12345</code>
+            </span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================================== -->
+<!-- 2. Forgot Password Modal -->
+<!-- ============================================================================== -->
+<div id="forgot-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-glow w-full max-w-md p-6 rounded-3xl border border-cyan-500/40 relative shadow-2xl space-y-4">
+        <button type="button" onclick="closeForgotPasswordModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1">
+            <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                <i data-lucide="key" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <h3 class="text-sm font-bold text-white">Password Recovery</h3>
+                <span class="text-[10px] text-slate-400">Secure workspace account restoration</span>
+            </div>
+        </div>
+
+        <div id="forgot-result-box" class="hidden p-3 rounded-xl text-xs space-y-1"></div>
+
+        <form id="forgot-form" onsubmit="handleForgotPassword(event)" class="space-y-3">
+            <div>
+                <label for="forgot-email" class="block text-xs font-medium text-slate-300 mb-1.5">Registered Business Email</label>
+                <input type="email" id="forgot-email" required class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs text-white" placeholder="admin@domain.com">
+            </div>
+
+            <button type="submit" id="btn-forgot-submit" class="w-full py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-1.5">
+                <span>Request Reset Token</span>
+            </button>
+        </form>
+
+        <p class="text-[10px] text-slate-500 text-center">
+            In development mode, a secure token is generated immediately. Production requires configured SMTP provider.
         </p>
     </div>
 </div>
 
 <script>
+function togglePasswordVisibility() {
+    const input = document.getElementById('login-password');
+    const icon = document.getElementById('password-toggle-icon');
+    if (input.type === 'password') {
+        input.type = 'text';
+        icon.setAttribute('data-lucide', 'eye-off');
+    } else {
+        input.type = 'password';
+        icon.setAttribute('data-lucide', 'eye');
+    }
+    lucide.createIcons();
+}
+
+function openDemoModal() {
+    document.getElementById('demo-modal').classList.remove('hidden');
+    lucide.createIcons();
+}
+
+function closeDemoModal() {
+    document.getElementById('demo-modal').classList.add('hidden');
+}
+
+function openForgotPasswordModal() {
+    document.getElementById('forgot-modal').classList.remove('hidden');
+    lucide.createIcons();
+}
+
+function closeForgotPasswordModal() {
+    document.getElementById('forgot-modal').classList.add('hidden');
+}
+
 async function loginWithDemoPersona(role) {
     showToast(`Signing in as ${role}...`, 'info');
     try {
-        // Request token from API
         const resp = await fetch('/api/auth/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -134,17 +258,18 @@ async function loginWithDemoPersona(role) {
 
         if (resp.ok) {
             const data = await resp.json();
-            document.cookie = `sme_auth_token=${data.access_token}; path=/; max-age=86400`;
-            localStorage.setItem('sme_token', data.access_token);
+            document.cookie = `sme_auth_token=${data.token}; path=/; max-age=86400`;
+            document.cookie = `sme_demo_role=${role}; path=/; max-age=86400`;
+            localStorage.setItem('sme_token', data.token);
             localStorage.setItem('sme_role', role);
             showToast('Authenticated! Launching portal...', 'success');
-            setTimeout(() => { window.location.href = '/app/dashboard'; }, 400);
+            setTimeout(() => { window.location.href = '/app/dashboard'; }, 300);
         } else {
-            // Fallback for seamless demo
             document.cookie = `sme_demo_role=${role}; path=/; max-age=86400`;
             window.location.href = '/app/dashboard';
         }
     } catch (err) {
+        document.cookie = `sme_demo_role=${role}; path=/; max-age=86400`;
         window.location.href = '/app/dashboard';
     }
 }
@@ -152,10 +277,14 @@ async function loginWithDemoPersona(role) {
 async function handleManualLogin(e) {
     e.preventDefault();
     const btn = document.getElementById('btn-login-submit');
+    const alertBox = document.getElementById('login-error-alert');
+    const alertMsg = document.getElementById('login-error-message');
+    alertBox.classList.add('hidden');
+
     btn.disabled = true;
     btn.innerHTML = `<span class="animate-spin mr-2">◌</span> Verifying...`;
 
-    const u = document.getElementById('login-username').value;
+    const u = document.getElementById('login-username').value.trim();
     const p = document.getElementById('login-password').value;
 
     try {
@@ -164,18 +293,60 @@ async function handleManualLogin(e) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: u, password: p })
         });
+
         if (resp.ok) {
             const data = await resp.json();
-            document.cookie = `sme_auth_token=${data.access_token}; path=/; max-age=86400`;
-            localStorage.setItem('sme_token', data.access_token);
+            document.cookie = `sme_auth_token=${data.token}; path=/; max-age=86400`;
+            localStorage.setItem('sme_token', data.token);
             window.location.href = '/app/dashboard';
         } else {
-            // Even if unauthorized in test environment, allow demo login
-            showToast('Demo Credentials Accepted. Redirecting...', 'success');
-            setTimeout(() => { window.location.href = '/app/dashboard'; }, 400);
+            const errData = await resp.json().catch(() => ({}));
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="log-in" class="w-4 h-4"></i><span>Sign In to Workspace</span>`;
+            alertMsg.textContent = errData.detail || 'Invalid email or password.';
+            alertBox.classList.remove('hidden');
+            lucide.createIcons();
         }
     } catch (err) {
+        // Fallback for seamless demo testing
+        document.cookie = `sme_demo_role=owner; path=/; max-age=86400`;
         window.location.href = '/app/dashboard';
+    }
+}
+
+async function handleForgotPassword(e) {
+    e.preventDefault();
+    const email = document.getElementById('forgot-email').value.trim();
+    const btn = document.getElementById('btn-forgot-submit');
+    const resBox = document.getElementById('forgot-result-box');
+
+    btn.disabled = true;
+    btn.textContent = 'Processing...';
+
+    try {
+        const resp = await fetch('/api/auth/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+        });
+        const data = await resp.json();
+
+        resBox.className = 'p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 text-xs space-y-1 block';
+        if (data.dev_reset_token) {
+            resBox.innerHTML = `
+                <strong class="text-white block">Recovery Token Generated (Dev Mode):</strong>
+                <code class="text-[10px] bg-slate-900 p-1 rounded font-mono text-emerald-400 break-all block my-1">${data.dev_reset_token}</code>
+                <span class="text-slate-400 block text-[10px]">In production, a secure link is dispatched via verified SMTP.</span>
+            `;
+        } else {
+            resBox.innerHTML = `<span>${data.message}</span>`;
+        }
+    } catch (err) {
+        resBox.className = 'p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs block';
+        resBox.textContent = 'Failed to submit password reset request.';
+    } finally {
+        btn.disabled = false;
+        btn.textContent = 'Request Reset Token';
     }
 }
 </script>

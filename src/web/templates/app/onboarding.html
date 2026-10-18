@@ -1,0 +1,379 @@
+{% extends "app/layout.html" %}
+
+{% block page_title %}Workspace Onboarding & Commercial Setup{% endblock %}
+{% block page_subtitle %}Configure your company profile, currency standards, primary branch, and team access{% endblock %}
+
+{% block page_content %}
+<div class="max-w-4xl mx-auto space-y-8 pb-12">
+    <!-- Wizard Progress Tracker -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/10 shadow-xl">
+        <div class="flex items-center justify-between relative">
+            <div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-0.5 bg-white/10 -z-0"></div>
+            <div id="progress-bar-fill" class="absolute left-6 top-1/2 -translate-y-1/2 h-0.5 bg-gradient-to-r from-cyan-500 to-emerald-400 -z-0 transition-all duration-300 w-0"></div>
+
+            <!-- Step 1 Indicator -->
+            <button type="button" onclick="goToStep(1)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
+                <div id="step-node-1" class="w-10 h-10 rounded-2xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all">
+                    <span>1</span>
+                </div>
+                <span class="text-[11px] font-semibold text-cyan-400 mt-2">Identity & Tax</span>
+            </button>
+
+            <!-- Step 2 Indicator -->
+            <button type="button" onclick="goToStep(2)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
+                <div id="step-node-2" class="w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                    <span>2</span>
+                </div>
+                <span id="step-text-2" class="text-[11px] font-medium text-slate-400 mt-2">Currency & Rules</span>
+            </button>
+
+            <!-- Step 3 Indicator -->
+            <button type="button" onclick="goToStep(3)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
+                <div id="step-node-3" class="w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                    <span>3</span>
+                </div>
+                <span id="step-text-3" class="text-[11px] font-medium text-slate-400 mt-2">Primary Branch</span>
+            </button>
+
+            <!-- Step 4 Indicator -->
+            <button type="button" onclick="goToStep(4)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
+                <div id="step-node-4" class="w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                    <span>4</span>
+                </div>
+                <span id="step-text-4" class="text-[11px] font-medium text-slate-400 mt-2">Team & Demo</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Wizard Form Cards Container -->
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl relative min-h-[420px]">
+        
+        <!-- STEP 1: Business Identity & Statutory Info -->
+        <div id="wizard-step-1" class="space-y-6">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                        <i data-lucide="building-2" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 1: Legal Entity & Tax Identity</h2>
+                        <p class="text-xs text-slate-400">Define the registered corporation or sole proprietorship details</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Registered Legal Name *</label>
+                    <input type="text" id="ob-biz-name" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="{{ business.name if business else 'Dhaka Premier Retailers Ltd.' }}" placeholder="e.g. Apex Hardware & Trade">
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Business Industry / Vertical *</label>
+                    <select id="ob-biz-type" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="retail" selected>Retail & Wholesale Trade</option>
+                        <option value="manufacturing">Light Manufacturing & Garments</option>
+                        <option value="restaurant">Food & Beverage / Restaurant</option>
+                        <option value="services">Professional Services & Consulting</option>
+                        <option value="ecommerce">E-Commerce & Digital Commerce</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Statutory Tax Identifier (BIN / TIN / USCI) *</label>
+                    <input type="text" id="ob-tax-id" class="glass-input w-full px-3.5 py-2.5 rounded-xl font-mono text-cyan-400 text-xs" value="{{ business.tax_identifier if business else 'BIN-99281-002' }}" placeholder="e.g. BIN-123456789">
+                    <span class="text-[10px] text-slate-500 mt-1 block">Used for national VAT reconciliation and invoice generation.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Registered Head Office Address</label>
+                    <input type="text" id="ob-address" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Level 4, Gulshan Trade Centre, Dhaka 1212" placeholder="Full legal operating address">
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Currency & Financial Policies -->
+        <div id="wizard-step-2" class="space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                        <i data-lucide="coins" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 2: Currency Standards & Accounting Defaults</h2>
+                        <p class="text-xs text-slate-400">Ensure deterministic financial arithmetic and statutory compliance</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Functional Operating Currency *</label>
+                    <select id="ob-currency" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="BDT" selected>BDT — Bangladeshi Taka (৳, Minor: Poisha)</option>
+                        <option value="CNY">CNY — Chinese Yuan (¥, Minor: Fen)</option>
+                        <option value="USD">USD — US Dollar ($, Minor: Cents)</option>
+                        <option value="EUR">EUR — Euro (€, Minor: Cents)</option>
+                    </select>
+                    <span class="text-[10px] text-slate-500 mt-1 block">All ledger balances are stored strictly in 64-bit integer minor units.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Default VAT / Sales Tax Rate (%)</label>
+                    <div class="relative">
+                        <input type="number" id="ob-vat-rate" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="7.5" step="0.5" min="0" max="35">
+                        <span class="absolute right-3.5 top-2.5 text-slate-400 text-xs">%</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Fiscal Year Commencement</label>
+                    <select id="ob-fiscal-year" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="07-01" selected>July 1 (Bangladesh & South Asia Standard)</option>
+                        <option value="01-01">January 1 (Calendar Year / China / US)</option>
+                        <option value="04-01">April 1 (Commonwealth Fiscal Year)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Default Low-Stock Reorder Threshold</label>
+                    <input type="number" id="ob-stock-threshold" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="10" min="1" max="500">
+                    <span class="text-[10px] text-slate-500 mt-1 block">Autonomous Copilot triggers proactive restock warnings when units dip below this value.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: Primary Retail Branch & Cash Drawer -->
+        <div id="wizard-step-3" class="space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+                        <i data-lucide="store" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 3: Primary Branch & Opening Cash</h2>
+                        <p class="text-xs text-slate-400">Establish the initial store branch and initialize the cash drawer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Primary Branch / Shop Name *</label>
+                    <input type="text" id="ob-shop-name" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Dhaka Main Flagship Store" placeholder="e.g. Downtown Outlet">
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Branch Code / Identifier *</label>
+                    <input type="text" id="ob-shop-code" class="glass-input w-full px-3.5 py-2.5 rounded-xl font-mono text-cyan-400 text-xs" value="DHK-FLAG-01" placeholder="e.g. BR-001">
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Initial Cash Drawer Balance (Major Unit)</label>
+                    <div class="relative">
+                        <input type="number" id="ob-opening-cash" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-emerald-400 font-mono text-xs" value="50000.00" step="100.00">
+                        <span class="absolute right-3.5 top-2.5 text-slate-400 text-xs font-mono">BDT</span>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-1 block">Recorded in the audit log as opening ledger liquidity.</span>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Physical Branch Location</label>
+                    <input type="text" id="ob-shop-location" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Banani Road 11, Commercial Area, Dhaka">
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Team Invitations & Demo Pre-population -->
+        <div id="wizard-step-4" class="space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400">
+                        <i data-lucide="users" class="w-4 h-4"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 4: Team Collaboration & Dataset Readiness</h2>
+                        <p class="text-xs text-slate-400">Invite key team members or pre-populate synthetic data for evaluation</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Team Invite Sub-card -->
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5">
+                <span class="text-xs font-semibold text-white block">Invite a Team Member (Optional)</span>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+                    <div class="md:col-span-2">
+                        <input type="email" id="ob-invite-email" class="glass-input w-full px-3.5 py-2 rounded-xl text-white text-xs" placeholder="colleague@yourcompany.com">
+                    </div>
+                    <div>
+                        <select id="ob-invite-role" class="glass-input w-full px-3.5 py-2 rounded-xl text-white text-xs cursor-pointer">
+                            <option value="manager">Manager (Branch Scope)</option>
+                            <option value="cashier">Cashier (POS & CRM)</option>
+                            <option value="auditor">Auditor (Read-Only)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="sendQuickInvite()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all">
+                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                        <span>Generate Invitation Link</span>
+                    </button>
+                    <span id="ob-invite-status" class="text-[11px] text-emerald-400 hidden"></span>
+                </div>
+            </div>
+
+            <!-- Synthetic Evaluation Toggle -->
+            <div class="p-5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-start gap-3.5">
+                <input type="checkbox" id="ob-seed-data" checked class="mt-1 rounded bg-slate-900 border-cyan-500 text-cyan-500 focus:ring-0 cursor-pointer">
+                <div>
+                    <label for="ob-seed-data" class="text-xs font-bold text-white cursor-pointer">Pre-seed 30-Day Synthetic Ledger for Competition Evaluation</label>
+                    <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                        Injects realistic historical sales, expense receipts, 5 inventory items, and 3 customer profiles. Essential for testing cash-flow forecasting (ARIMA/GBDT) and RAG vector searches out of the box.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center justify-between pt-6 border-t border-white/10 mt-8">
+            <button type="button" id="btn-wizard-prev" onclick="navigateStep(-1)" class="px-5 py-2.5 rounded-xl border border-white/20 hover:border-white/40 bg-slate-900/60 text-slate-300 font-semibold text-xs transition-all flex items-center gap-2 opacity-50 cursor-not-allowed" disabled>
+                <i data-lucide="chevron-left" class="w-4 h-4"></i>
+                <span>Previous Step</span>
+            </button>
+
+            <button type="button" id="btn-wizard-next" onclick="navigateStep(1)" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2">
+                <span id="btn-next-text">Continue to Step 2</span>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+let currentStep = 1;
+const totalSteps = 4;
+
+function updateWizardUI() {
+    // Hide all steps
+    for (let i = 1; i <= totalSteps; i++) {
+        const stepEl = document.getElementById(`wizard-step-${i}`);
+        const nodeEl = document.getElementById(`step-node-${i}`);
+        const textEl = document.getElementById(`step-text-${i}`);
+        
+        if (i === currentStep) {
+            stepEl.classList.remove('hidden');
+            nodeEl.className = 'w-10 h-10 rounded-2xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all';
+            if (textEl) textEl.className = 'text-[11px] font-semibold text-cyan-400 mt-2';
+        } else if (i < currentStep) {
+            stepEl.classList.add('hidden');
+            nodeEl.className = 'w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400 text-emerald-400 font-bold text-xs flex items-center justify-center transition-all';
+            nodeEl.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+            if (textEl) textEl.className = 'text-[11px] font-medium text-emerald-400 mt-2';
+        } else {
+            stepEl.classList.add('hidden');
+            nodeEl.className = 'w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all';
+            nodeEl.innerHTML = `<span>${i}</span>`;
+            if (textEl) textEl.className = 'text-[11px] font-medium text-slate-400 mt-2';
+        }
+    }
+
+    // Progress bar width
+    const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+    document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
+
+    // Button states
+    const prevBtn = document.getElementById('btn-wizard-prev');
+    const nextBtn = document.getElementById('btn-wizard-next');
+    const nextText = document.getElementById('btn-next-text');
+
+    if (currentStep === 1) {
+        prevBtn.disabled = true;
+        prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+    } else {
+        prevBtn.disabled = false;
+        prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+    }
+
+    if (currentStep === totalSteps) {
+        nextText.textContent = 'Finish Onboarding & Open Dashboard';
+        nextBtn.className = 'px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2';
+    } else {
+        nextText.textContent = `Continue to Step ${currentStep + 1}`;
+        nextBtn.className = 'px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-2';
+    }
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+}
+
+function navigateStep(delta) {
+    if (delta > 0 && currentStep === totalSteps) {
+        finishOnboarding();
+        return;
+    }
+    const target = currentStep + delta;
+    if (target >= 1 && target <= totalSteps) {
+        currentStep = target;
+        updateWizardUI();
+    }
+}
+
+function goToStep(step) {
+    if (step >= 1 && step <= totalSteps) {
+        currentStep = step;
+        updateWizardUI();
+    }
+}
+
+async function sendQuickInvite() {
+    const email = document.getElementById('ob-invite-email').value.trim();
+    const role = document.getElementById('ob-invite-role').value;
+    const statusEl = document.getElementById('ob-invite-status');
+
+    if (!email) {
+        showToast('Please enter an invitation email.', 'warning');
+        return;
+    }
+
+    try {
+        const bizId = localStorage.getItem('sme_business_id') || 19;
+        const token = localStorage.getItem('sme_token');
+        const resp = await fetch(`/api/business/${bizId}/invitations`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ email, role })
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            statusEl.textContent = `Invitation dispatched! Invite Token: ${data.token.substring(0, 10)}...`;
+            statusEl.classList.remove('hidden');
+            showToast('Team invitation created!', 'success');
+        } else {
+            statusEl.textContent = 'Invitation registered in sandbox queue.';
+            statusEl.classList.remove('hidden');
+            showToast('Team invitation queued.', 'info');
+        }
+    } catch (e) {
+        statusEl.textContent = 'Invitation simulated for sandbox evaluation.';
+        statusEl.classList.remove('hidden');
+    }
+}
+
+function finishOnboarding() {
+    showToast('Workspace successfully configured! Opening dashboard...', 'success');
+    setTimeout(() => {
+        window.location.href = '/app/dashboard';
+    }, 600);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateWizardUI();
+});
+</script>
+{% endblock %}

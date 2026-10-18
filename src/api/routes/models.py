@@ -325,3 +325,102 @@ def copilot_query_endpoint(
     )
     return CopilotQueryResponse(**res)
 
+
+# ==============================================================================
+# Voice AI Assistant & Spoken Interaction Engine (Phase 10)
+# ==============================================================================
+
+class VoiceProcessRequest(BaseModel):
+    transcript: str
+    preferred_locale: Optional[str] = "en"
+    business_id: Optional[int] = None
+    shop_id: Optional[int] = None
+    confirmation_token: Optional[str] = None
+
+
+class VoiceProcessResponse(BaseModel):
+    status: str
+    intent: Optional[str] = None
+    requires_confirmation: bool = False
+    confirmation_token: Optional[str] = None
+    confirmation_prompt: Optional[str] = None
+    action_summary: Optional[Dict[str, Any]] = None
+    text_response: str
+    spoken_response: str
+    citations: Optional[List[Dict[str, Any]]] = None
+    data: Optional[Dict[str, Any]] = None
+    generation_mode: Optional[str] = "voice_ai_grounded"
+    security_alert: bool = False
+
+
+@router.post("/voice/process", response_model=VoiceProcessResponse)
+def process_voice_endpoint(
+    req: VoiceProcessRequest,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Processes spoken voice transcripts across English, Bengali, and Chinese.
+    Enforces multi-tenant shop authorization, intent classification, deterministic
+    financial calculation, and confirmation barriers for consequential writes.
+    """
+    stmt = select(BusinessMembership).where(
+        BusinessMembership.user_id == user.id,
+        BusinessMembership.is_active == True,
+    )
+    user_memberships = db.scalars(stmt).all()
+    if not user_memberships:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Forbidden: Authenticated user has no active business memberships.",
+        )
+
+    authorized_biz_ids = {m.business_id for m in user_memberships}
+    memberships_dict = [
+        {"user_id": m.user_id, "business_id": m.business_id, "shop_id": m.shop_id, "role_code": m.role_code}
+        for m in user_memberships
+    ]
+
+    # Resolve and authorize business_id
+    if req.business_id is not None:
+        if req.business_id not in authorized_biz_ids:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Forbidden: You are not authorized to access records for Business #{req.business_id}.",
+            )
+        biz_id = req.business_id
+    else:
+        biz_id = user_memberships[0].business_id
+
+    # Resolve and authorize shop_id
+    if req.shop_id is not None:
+        try:
+            enforce_shop_isolation(user.id, req.shop_id, memberships_dict)
+            shop_id = req.shop_id
+        except Exception:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail=f"Forbidden: You are not authorized to access Shop #{req.shop_id}.",
+            )
+    else:
+        biz_shops = [m.shop_id for m in user_memberships if m.business_id == biz_id and m.shop_id is not None]
+        shop_id = biz_shops[0] if biz_shops else None
+
+    # Derive role
+    matched_role = next((m.role_code for m in user_memberships if m.business_id == biz_id), "owner")
+
+    from src.ai.voice_service import VoiceService
+
+    res = VoiceService.process_voice_command(
+        session=db,
+        transcript=req.transcript,
+        user_id=user.id,
+        user_role=matched_role,
+        business_id=biz_id,
+        shop_id=shop_id,
+        locale=req.preferred_locale or "en",
+        confirmation_token=req.confirmation_token,
+    )
+    return VoiceProcessResponse(**res)
+
+

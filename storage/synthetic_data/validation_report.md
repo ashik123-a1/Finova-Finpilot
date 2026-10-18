@@ -1,7 +1,7 @@
 # SME Finance Copilot — Dataset Validation & Integrity Audit Report
-**Audit Timestamp:** 2026-10-18T09:41:55.237458+00:00  
+**Audit Timestamp:** 2026-10-18T22:30:38.850608+00:00  
 **Overall Audit Status:** `PASS`  
-**Total Database Records Audited:** **17,539**  
+**Total Database Records Audited:** **17,540**  
 
 ## 1. Table Record Distribution
 
@@ -33,6 +33,7 @@
 | loan_scenarios           |             81 |
 | model_versions           |              0 |
 | notifications            |              0 |
+| password_reset_tokens    |              0 |
 | payments                 |              0 |
 | permissions              |             22 |
 | predictions              |              0 |
@@ -46,11 +47,12 @@
 | roles                    |              7 |
 | sale_items               |            978 |
 | sales                    |            540 |
-| schema_migrations        |              3 |
+| schema_migrations        |              4 |
 | shops                    |             27 |
 | stock_adjustments        |            540 |
 | suppliers                |            270 |
 | users                    |             30 |
+| workspace_invitations    |              0 |
 
 ## 2. Referential Integrity & Foreign Key Audit
 > [!NOTE]

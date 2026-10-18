@@ -161,3 +161,14 @@ class Money:
 
     def __repr__(self) -> str:
         return f"Money({self._amount_minor} minor units [{self.format()}])"
+
+
+def minor_to_major(amount_minor: int, currency: str = "BDT") -> float:
+    """Convenience helper to convert integer minor units to major float."""
+    return float(Money(amount_minor, currency).amount_major)
+
+
+def major_to_minor(amount_major: Union[int, float, Decimal], currency: str = "BDT") -> int:
+    """Convenience helper to convert major amount to integer minor units."""
+    return Money.from_major(amount_major, currency).amount_minor
+

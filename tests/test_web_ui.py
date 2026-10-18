@@ -61,6 +61,7 @@ def test_portal_views_render_successfully(test_client: TestClient):
         ("/app/copilot", "Autonomous Financial AI Copilot"),
         ("/app/audit", "Security Audit"),
         ("/app/settings", "Organization Settings"),
+        ("/app/onboarding", "Workspace Onboarding & Commercial Setup"),
     ]
 
     for path, expected_title in endpoints:
