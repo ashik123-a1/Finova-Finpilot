@@ -25,34 +25,34 @@
   },
   "cluster_stability_sweep": {
     "k_2": {
-      "silhouette_score": 0.2854,
-      "davies_bouldin_index": 1.3556,
-      "calinski_harabasz_score": 662.68
+      "silhouette_score": 0.2838,
+      "davies_bouldin_index": 1.3573,
+      "calinski_harabasz_score": 662.37
     },
     "k_3": {
-      "silhouette_score": 0.306,
-      "davies_bouldin_index": 1.1381,
-      "calinski_harabasz_score": 711.94
+      "silhouette_score": 0.3051,
+      "davies_bouldin_index": 1.1387,
+      "calinski_harabasz_score": 711.75
     },
     "k_4": {
-      "silhouette_score": 0.2989,
+      "silhouette_score": 0.2982,
       "davies_bouldin_index": 1.0616,
-      "calinski_harabasz_score": 749.65
+      "calinski_harabasz_score": 749.5
     },
     "k_5": {
-      "silhouette_score": 0.2786,
-      "davies_bouldin_index": 1.1388,
-      "calinski_harabasz_score": 683.14
+      "silhouette_score": 0.2785,
+      "davies_bouldin_index": 1.136,
+      "calinski_harabasz_score": 682.67
     },
     "k_6": {
-      "silhouette_score": 0.2654,
-      "davies_bouldin_index": 1.1538,
-      "calinski_harabasz_score": 661.54
+      "silhouette_score": 0.2619,
+      "davies_bouldin_index": 1.1884,
+      "calinski_harabasz_score": 660.46
     }
   },
   "optimal_k_recommendation": {
     "optimal_k": 3,
-    "highest_silhouette_score": 0.306,
+    "highest_silhouette_score": 0.3051,
     "interpretation": "k=3 achieves optimal trade-off between cluster separation and cohesion. Higher k values fragment natural spend tiers without increasing actionable insight."
   }
 }

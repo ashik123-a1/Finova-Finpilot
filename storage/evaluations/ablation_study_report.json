@@ -13,21 +13,21 @@
       {
         "stage": "Stage 1: OCR + Classifier",
         "structured_field_capture_pct": 0.0,
-        "document_routing_accuracy_pct": 93.0,
+        "document_routing_accuracy_pct": 100.0,
         "arithmetic_integrity_check_pct": 0.0,
         "unverified_corruptions_posted": 10
       },
       {
         "stage": "Stage 2: OCR + Classifier + Regex Extraction (No Math Audit)",
         "structured_field_capture_pct": 100.0,
-        "document_routing_accuracy_pct": 93.0,
+        "document_routing_accuracy_pct": 100.0,
         "arithmetic_integrity_check_pct": 0.0,
         "unverified_corruptions_posted": 10
       },
       {
         "stage": "Stage 3 (Full System): OCR + Classifier + Regex + Math Audit",
         "structured_field_capture_pct": 100.0,
-        "document_routing_accuracy_pct": 93.0,
+        "document_routing_accuracy_pct": 100.0,
         "arithmetic_integrity_check_pct": 100.0,
         "unverified_corruptions_posted": 0
       }

@@ -5,9 +5,9 @@ This report isolates and measures the precise empirical contribution of each sub
 | Pipeline Stage | Structured Field Capture | Form Routing Accuracy | Arithmetic Audit | Unverified Corruptions Saved |
 | :--- | :---: | :---: | :---: | :---: |
 | **Stage 0: Raw OCR Only** | 0.0% | 0.0% | 0.0% | **10** |
-| **Stage 1: OCR + Classifier** | 0.0% | 93.0% | 0.0% | **10** |
-| **Stage 2: OCR + Classifier + Regex Extraction (No Math Audit)** | 100.0% | 93.0% | 0.0% | **10** |
-| **Stage 3 (Full System): OCR + Classifier + Regex + Math Audit** | 100.0% | 93.0% | 100.0% | **0** |
+| **Stage 1: OCR + Classifier** | 0.0% | 100.0% | 0.0% | **10** |
+| **Stage 2: OCR + Classifier + Regex Extraction (No Math Audit)** | 100.0% | 100.0% | 0.0% | **10** |
+| **Stage 3 (Full System): OCR + Classifier + Regex + Math Audit** | 100.0% | 100.0% | 100.0% | **0** |
 
 > [!NOTE]
 > Adding regex entity extraction increases structured capture from 0% to 100%, but only the **Stage 3 Arithmetic Audit** catches corrupted documents where line items do not sum to total.

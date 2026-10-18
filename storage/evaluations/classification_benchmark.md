@@ -6,7 +6,7 @@
 | Model Architecture | Accuracy | Accuracy (95% CI) | Macro-F1 | Macro-F1 (95% CI) | Test Failures |
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | **Majority Class Baseline** | 20.0% | N/A | 6.7% | N/A | 800 / 1000 |
-| **Heuristic Rule Classifier** | 95.8% | [94.6%, 97.1%] | 95.9% | [94.7%, 97.1%] | 42 / 1000 |
+| **Heuristic Rule Classifier** | 100.0% | [100.0%, 100.0%] | 100.0% | [100.0%, 100.0%] | 0 / 1000 |
 | **TF-IDF + Logistic Regression** | **100.0%** | **[100.0%, 100.0%]** | **100.0%** | **[100.0%, 100.0%]** | **0 / 1000** |
 
 ## 2. Per-Class Performance (TF-IDF + Logistic Regression, N=1,000)

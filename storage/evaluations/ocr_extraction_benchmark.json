@@ -4,65 +4,65 @@
   "total_dataset_images": 1000,
   "evaluated_test_images": 70,
   "overall_metrics": {
-    "mean_character_error_rate_pct": 49.76,
-    "mean_word_error_rate_pct": 48.43,
-    "field_match_date_pct": 87.14,
-    "field_match_total_pct": 90.0,
-    "field_match_invoice_no_pct": 54.29,
-    "document_classification_accuracy_pct": 41.43,
-    "arithmetic_reconciliation_success_pct": 45.71
+    "mean_character_error_rate_pct": 50.49,
+    "mean_word_error_rate_pct": 52.48,
+    "field_match_date_pct": 97.14,
+    "field_match_total_pct": 100.0,
+    "field_match_invoice_no_pct": 84.29,
+    "document_classification_accuracy_pct": 40.0,
+    "arithmetic_reconciliation_success_pct": 31.43
   },
   "breakdown_by_language": {
     "bn": {
-      "cer_pct": 61.18,
-      "wer_pct": 67.71,
+      "cer_pct": 62.59,
+      "wer_pct": 72.26,
       "samples": 24
     },
     "bilingual": {
-      "cer_pct": 50.25,
-      "wer_pct": 48.54,
+      "cer_pct": 50.13,
+      "wer_pct": 51.91,
       "samples": 23
     },
     "en": {
-      "cer_pct": 37.37,
-      "wer_pct": 28.21,
+      "cer_pct": 38.24,
+      "wer_pct": 32.41,
       "samples": 23
     }
   },
   "breakdown_by_quality": {
     "blur": {
-      "cer_pct": 54.23,
-      "wer_pct": 68.23,
+      "cer_pct": 58.37,
+      "wer_pct": 94.16,
       "samples": 10
     },
     "rotated": {
-      "cer_pct": 49.44,
-      "wer_pct": 50.56,
+      "cer_pct": 48.99,
+      "wer_pct": 49.75,
       "samples": 10
     },
     "low_light": {
-      "cer_pct": 46.18,
-      "wer_pct": 35.28,
+      "cer_pct": 46.49,
+      "wer_pct": 37.69,
       "samples": 10
     },
     "faded_thermal": {
-      "cer_pct": 52.14,
-      "wer_pct": 50.99,
+      "cer_pct": 53.2,
+      "wer_pct": 52.16,
       "samples": 10
     },
     "shadow": {
-      "cer_pct": 47.99,
-      "wer_pct": 41.32,
+      "cer_pct": 48.34,
+      "wer_pct": 43.08,
       "samples": 10
     },
     "cropped": {
-      "cer_pct": 46.86,
-      "wer_pct": 43.12,
+      "cer_pct": 46.8,
+      "wer_pct": 43.96,
       "samples": 10
     },
     "clean": {
-      "cer_pct": 51.5,
-      "wer_pct": 49.54,
+      "cer_pct": 51.28,
+      "wer_pct": 46.54,
       "samples": 10
     }
   },

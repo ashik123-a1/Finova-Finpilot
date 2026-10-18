@@ -5,31 +5,31 @@
 ## 1. Overall System Metrics
 | Metric Dimension | Measured Score | Evaluation Standard |
 | :--- | :---: | :--- |
-| **Character Error Rate (CER)** | **49.76%** | Levenshtein edit distance on full text |
-| **Word Error Rate (WER)** | **48.43%** | Token-level edit distance |
-| **Date Field Exact Match** | **87.1%** | Normalized DD/MM/YYYY match |
-| **Total Amount Exact Match** | **90.0%** | Exact minor unit match vs ground truth |
-| **Invoice Number Exact Match** | **54.3%** | Alphanumeric invoice code extraction |
-| **Document Classification Accuracy** | **41.4%** | Categorization from raw OCR output |
-| **Arithmetic Reconciliation Rate** | **45.7%** | Line-item sum vs extracted total consistency |
+| **Character Error Rate (CER)** | **50.49%** | Levenshtein edit distance on full text |
+| **Word Error Rate (WER)** | **52.48%** | Token-level edit distance |
+| **Date Field Exact Match** | **97.1%** | Normalized DD/MM/YYYY match |
+| **Total Amount Exact Match** | **100.0%** | Exact minor unit match vs ground truth |
+| **Invoice Number Exact Match** | **84.3%** | Alphanumeric invoice code extraction |
+| **Document Classification Accuracy** | **40.0%** | Categorization from raw OCR output |
+| **Arithmetic Reconciliation Rate** | **31.4%** | Line-item sum vs extracted total consistency |
 
 ## 2. Performance Breakdown by Language
 | Language | Character Error Rate (CER) | Word Error Rate (WER) | Samples Evaluated |
 | :--- | :---: | :---: | :---: |
-| **BN** | 61.18% | 67.71% | 24 |
-| **BILINGUAL** | 50.25% | 48.54% | 23 |
-| **EN** | 37.37% | 28.21% | 23 |
+| **BN** | 62.59% | 72.26% | 24 |
+| **BILINGUAL** | 50.13% | 51.91% | 23 |
+| **EN** | 38.24% | 32.41% | 23 |
 
 ## 3. Performance Breakdown by Optical Degradation Category
 | Degradation Category | CER (%) | WER (%) | Samples | Optical Impact |
 | :--- | :---: | :---: | :---: | :--- |
-| **Blur** | 54.23% | 68.23% | 10 | Simulated blur distortion |
-| **Rotated** | 49.44% | 50.56% | 10 | Simulated rotated distortion |
-| **Low Light** | 46.18% | 35.28% | 10 | Simulated low_light distortion |
-| **Faded Thermal** | 52.14% | 50.99% | 10 | Simulated faded_thermal distortion |
-| **Shadow** | 47.99% | 41.32% | 10 | Simulated shadow distortion |
-| **Cropped** | 46.86% | 43.12% | 10 | Simulated cropped distortion |
-| **Clean** | 51.5% | 49.54% | 10 | High clarity |
+| **Blur** | 58.37% | 94.16% | 10 | Simulated blur distortion |
+| **Rotated** | 48.99% | 49.75% | 10 | Simulated rotated distortion |
+| **Low Light** | 46.49% | 37.69% | 10 | Simulated low_light distortion |
+| **Faded Thermal** | 53.2% | 52.16% | 10 | Simulated faded_thermal distortion |
+| **Shadow** | 48.34% | 43.08% | 10 | Simulated shadow distortion |
+| **Cropped** | 46.8% | 43.96% | 10 | Simulated cropped distortion |
+| **Clean** | 51.28% | 46.54% | 10 | High clarity |
 
 > [!NOTE]
 > **Prediction Traceability:** All individual image predictions, extracted fields, and errors are saved in `storage/evaluations/ocr_predictions.jsonl`.
