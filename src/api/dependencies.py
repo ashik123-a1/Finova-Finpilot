@@ -36,8 +36,15 @@ def get_current_user(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Missing Authorization header.",
             )
-        # For development / local demo only, allow fallback to first active user if header is absent
-        user = db.query(User).filter_by(is_active=True).first()
+        # For development / local demo only, allow fallback to first active user with a membership if header is absent
+        user = (
+            db.query(User)
+            .join(BusinessMembership, BusinessMembership.user_id == User.id)
+            .filter(User.is_active == True, BusinessMembership.is_active == True)
+            .first()
+        )
+        if not user:
+            user = db.query(User).filter_by(is_active=True).first()
         if user:
             return user
         raise HTTPException(
