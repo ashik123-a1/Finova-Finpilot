@@ -1,0 +1,101 @@
+{
+  "timestamp": "2026-10-18T01:30:39.044842+00:00",
+  "status": "PASS",
+  "table_record_counts": {
+    "approvals": 0,
+    "audit_logs": 27,
+    "automated_tasks": 0,
+    "business_memberships": 27,
+    "businesses": 18,
+    "cash_movements": 9720,
+    "customers": 1620,
+    "datasets": 0,
+    "demo_banks": 4,
+    "document_classifications": 0,
+    "document_extractions": 0,
+    "document_pages": 0,
+    "document_processing_jobs": 0,
+    "document_reviews": 0,
+    "documents": 0,
+    "evaluation_runs": 0,
+    "expenses": 270,
+    "forecasts": 27,
+    "inventory_movements": 1449,
+    "loan_applications": 0,
+    "loan_products": 16,
+    "loan_rules": 0,
+    "loan_scenarios": 81,
+    "model_versions": 0,
+    "notifications": 0,
+    "payments": 0,
+    "permissions": 0,
+    "predictions": 0,
+    "products": 1080,
+    "purchase_items": 471,
+    "purchase_orders": 0,
+    "purchases": 135,
+    "receivables": 70,
+    "recommendations": 27,
+    "role_permissions": 0,
+    "roles": 0,
+    "sale_items": 978,
+    "sales": 540,
+    "schema_migrations": 1,
+    "shops": 27,
+    "stock_adjustments": 540,
+    "suppliers": 270,
+    "users": 30
+  },
+  "total_records": 17428,
+  "referential_integrity": {
+    "status": "PASS",
+    "orphaned_records_found": 0,
+    "details": []
+  },
+  "financial_consistency": {
+    "status": "PASS",
+    "discrepancies_found": 0,
+    "details": []
+  },
+  "scenario_coverage": {
+    "status": "PASS",
+    "sectors_covered": [
+      {
+        "sector": "clothing",
+        "business_count": 2
+      },
+      {
+        "sector": "electronics",
+        "business_count": 2
+      },
+      {
+        "sector": "grocery",
+        "business_count": 2
+      },
+      {
+        "sector": "manufacturing",
+        "business_count": 2
+      },
+      {
+        "sector": "online_seller",
+        "business_count": 2
+      },
+      {
+        "sector": "pharmacy",
+        "business_count": 2
+      },
+      {
+        "sector": "restaurant",
+        "business_count": 2
+      },
+      {
+        "sector": "service",
+        "business_count": 2
+      },
+      {
+        "sector": "wholesale",
+        "business_count": 2
+      }
+    ]
+  }
+}

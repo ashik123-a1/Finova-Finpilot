@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=65.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sme-finance-copilot"
+version = "0.1.0"
+description = "SME Finance Copilot: Local-first Database, Synthetic Data & AI Foundation"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "SME Finance Copilot Team"}
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+filterwarnings = [
+    "ignore::DeprecationWarning",
+]
+addopts = "-v --tb=short"
