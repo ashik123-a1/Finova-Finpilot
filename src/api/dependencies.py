@@ -62,10 +62,4 @@ def verify_shop_access_dependency(
         {"user_id": m.user_id, "business_id": m.business_id, "shop_id": m.shop_id, "role_code": m.role_code}
         for m in db.scalars(stmt).all()
     ]
-    try:
-        return enforce_shop_isolation(user.id, shop_id, memberships)
-    except ShopAccessDeniedError as e:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail=str(e),
-        )
+    return enforce_shop_isolation(user.id, shop_id, memberships)

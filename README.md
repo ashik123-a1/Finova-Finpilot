@@ -87,6 +87,18 @@ uvicorn src.api.app:app --host 127.0.0.1 --port 8000 --reload
 ```
 - Interactive Swagger API Documentation: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
 - API Health Status: [http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)
+- API Root: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+### Implemented API Workflows (Phase 2):
+- **Health:** `GET /health`, `GET /api/health`, `GET /`
+- **Business & Multi-Tenant:** `GET /api/business/list`, `GET /api/business/{business_id}/shops`, `GET /api/business/shops/{shop_id}`
+- **Finance Dashboard & Ledger:** `GET /api/finance/summary`, `GET /api/finance/sales`, `GET /api/finance/expenses`, `GET /api/finance/profit-loss`, `GET /api/finance/cash-flow`
+- **Forecasting & Loan Intelligence:** `POST /api/finance/forecast`, `GET /api/finance/forecast`, `POST /api/finance/loan-risk-assessment`, `GET /api/finance/loan-products`, `POST /api/finance/loan-comparison`, `POST /api/finance/break-even`
+- **Inventory & Receivables:** `GET /api/finance/inventory-summary`, `GET /api/finance/receivables-summary`
+- **Document Processing Pipeline:** `POST /api/documents/upload`, `GET /api/documents/{document_id}`, `POST /api/documents/confirm-post`, `GET /api/documents/list`
+- **Model Registry & Evaluations:** `GET /api/models/active`, `GET /api/models/evaluations`, `GET /api/models/evaluations/summary`
+- **Security & Audit Logs:** `GET /api/audit/logs`
+- **Multilingual i18n:** `GET /api/i18n/languages`, `GET /api/i18n/countries`, `GET /api/i18n/translations`, `GET /api/i18n/format/currency`
 
 ---
 
@@ -98,10 +110,16 @@ F:\china project\
 ├── .gitignore                       # Git exclusion rules
 ├── README.md                        # Project documentation & run guide
 ├── ARCHITECTURE.md                  # System architecture & Mermaid ER diagrams
-├── IMPLEMENTATION_REPORT.md         # Phase 1 completion report
+├── API_READINESS_REPORT.md          # Phase 2 API readiness report
+├── PHASE_GATE_REPORT.md             # Phase 1 database & model audit gate
+├── DATABASE_READINESS_REPORT.md     # Relational database audit report
+├── MODEL_READINESS_REPORT.md        # AI model benchmark validation report
+├── DATA_QUALITY_REPORT.md           # Synthetic data quality audit
+├── FINANCIAL_VALIDATION_REPORT.md   # Deterministic financial math verification
 ├── pyproject.toml                   # Project metadata & pytest configuration
 ├── requirements.txt                 # Project dependencies
-├── sme_finance.db                   # Local SQLite database (WAL mode)
+├── sme_finance.db                   # Local SQLite database (WAL mode, 160,090 rows)
+├── assets/                          # Animated SVG preloaders (preserved)
 ├── src/
 │   ├── config.py                    # Typed environment configuration
 │   ├── core/                        # Money (integer minor units), security, exceptions
@@ -110,16 +128,16 @@ F:\china project\
 │   ├── documents/                   # Document validation, OCR, classification, routing, posting
 │   ├── ai/                          # Model registry, forecasting, loan risk, segmentation, guardrails
 │   ├── data/                        # Synthetic data generator, validator, image tooling
-│   └── api/                         # FastAPI routes (auth, documents, finance, datasets, models)
+│   └── api/                         # FastAPI routes (auth, business, documents, finance, datasets, models, i18n, audit)
 ├── storage/                         # Local filesystem storage
 │   ├── documents/                   # Uploaded document scans and receipts
 │   ├── synthetic_data/              # Dataset validation reports
 │   └── synthetic_images/            # Sample synthetic document images & manifests
-├── tests/                           # 17 automated unit and integration tests
+├── tests/                           # 81 automated unit and integration tests (100% pass)
 └── scripts/                         # CLI utility runners (init_db, generate, validate, images)
 ```
 
 ---
 
 ## Security & Multi-Tenant Isolation Notice
-All records belong strictly to a `business_id` and `shop_id`. Cross-shop access is enforced and verified at the database query and repository layer, preventing unauthorized visibility or cross-contamination of financial records.
+All records belong strictly to a `business_id` and `shop_id`. Cross-shop access is enforced and verified at the database query and repository layer, preventing unauthorized visibility or cross-contamination of financial records. Any unauthorized tenant access raises `ShopAccessDeniedError` and returns `403 Forbidden` with clean, stack-trace-free error details.
