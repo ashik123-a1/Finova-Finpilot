@@ -56,6 +56,8 @@ def test_portal_views_render_successfully(test_client: TestClient):
         ("/app/documents", "Document Capture"),
         ("/app/loans", "SME Loan Underwriting"),
         ("/app/inventory", "Inventory Valuation"),
+        ("/app/customers", "Customer Management"),
+        ("/app/simulations", "Business Decision Intelligence"),
         ("/app/copilot", "Autonomous Financial AI Copilot"),
         ("/app/audit", "Security Audit"),
         ("/app/settings", "Organization Settings"),

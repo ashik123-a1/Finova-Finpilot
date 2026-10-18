@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900;950&display=swap');
 
 /**
- * LandGuard AI Design System & Unified Theme Tokens
+ * SME Finance Copilot Design System & Unified Theme Tokens
  * Centralized theme specification for Login, Authenticated Glass Sidebar, and Motion System.
  */
 
@@ -67,12 +67,11 @@
    LOGIN REDESIGN STYLES
    ========================================================================== */
 
-/* Farmland aerial backdrop with clear cinema vignette (high clarity, unblurred) */
+/* SME Finance Copilot dark cinema vignette */
 .lg-login-backdrop {
   background-color: var(--lg-bg);
   background-image: 
-    radial-gradient(circle at center, rgba(7, 11, 22, 0.42) 0%, rgba(2, 6, 23, 0.75) 100%),
-    url('/static/images/login-farmland-bg.jpg');
+    radial-gradient(circle at 50% 30%, rgba(34, 211, 238, 0.15) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(2, 6, 23, 0.95) 100%);
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -816,12 +815,12 @@
   position: fixed;
   inset: 0;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.09), transparent 55%),
-    url('/static/images/login-farmland-bg.jpg');
+    radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.08), transparent 60%),
+    radial-gradient(circle at 10% 80%, rgba(16, 185, 129, 0.04), transparent 50%);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: 0.085;
+  opacity: 0.9;
   pointer-events: none;
   z-index: 0;
 }
@@ -830,7 +829,7 @@ html.light .lg-portal-ambient-bg::before {
 }
 
 /* ==========================================================================
-   LANDGUARD ANIMATED CYBER SHIELD BRAND LOGO (SHARED ACROSS PAGES)
+   SME FINANCE COPILOT BRAND LOGO & BADGE (SHARED ACROSS PAGES)
    ========================================================================== */
 
 /* 1. Base Container: Sleek, Elongated (Lobate) & Flatter (Sapta) Profile */

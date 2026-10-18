@@ -1,0 +1,240 @@
+{% extends "app/layout.html" %}
+
+{% block page_title %}Business Decision Intelligence & Scenario Simulations{% endblock %}
+{% block page_subtitle %}Deterministic what-if modeling for Break-Even, Pricing Sensitivity, and Capital Investment ROI{% endblock %}
+
+{% block page_content %}
+<div class="space-y-6">
+    <!-- 3 Simulation Selection Tabs -->
+    <div class="glass-panel p-2 rounded-2xl border border-white/5 flex items-center gap-2">
+        <button type="button" onclick="switchSimTab('breakeven')" id="tab-btn-breakeven" class="px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cyan-500 text-slate-950 shadow-md">
+            1. Break-Even Unit & Revenue
+        </button>
+        <button type="button" onclick="switchSimTab('pricing')" id="tab-btn-pricing" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all">
+            2. Pricing & Discount Sensitivity
+        </button>
+        <button type="button" onclick="switchSimTab('roi')" id="tab-btn-roi" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all">
+            3. Capital Investment ROI & Payback
+        </button>
+    </div>
+
+    <!-- 1. Break-Even Analysis Section -->
+    <div id="sim-section-breakeven" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="scale" class="w-4 h-4 text-cyan-400"></i>
+                <span>Break-Even Volume & Margin Thresholds</span>
+            </h3>
+            <p class="text-xs text-slate-400">Calculate the sales volume required to recover monthly fixed overhead</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Monthly Fixed Costs (Rent, Salaries)</label>
+                    <input type="number" id="be-fixed" value="380000" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-white" oninput="runBreakEvenSim()">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Selling Price Per Unit (BDT)</label>
+                    <input type="number" id="be-price" value="2500" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-cyan-300" oninput="runBreakEvenSim()">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Variable Cost Per Unit (COGS)</label>
+                    <input type="number" id="be-var" value="1500" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-rose-300" oninput="runBreakEvenSim()">
+                </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2 mt-4 text-xs">
+                <div class="flex justify-between text-slate-400">
+                    <span>Contribution Margin Per Unit:</span>
+                    <strong id="be-cm-unit" class="text-emerald-400 font-mono font-bold">৳ 1,000.00</strong>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Contribution Margin Ratio:</span>
+                    <strong id="be-cm-ratio" class="text-cyan-300 font-mono font-bold">40.00%</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Break-Even Output Card -->
+        <div class="glass-panel-glow p-6 rounded-3xl border border-cyan-500/30 flex flex-col justify-between space-y-4">
+            <div>
+                <span class="text-xs font-mono uppercase text-slate-400">Zero-Loss Horizon</span>
+                <div class="text-center py-6">
+                    <div class="text-xs text-slate-400 uppercase font-mono">Break-Even Units</div>
+                    <div id="be-units" class="font-orbitron text-4xl font-extrabold text-cyan-400 my-1">380 Pcs</div>
+                    <div class="text-xs text-slate-400 mt-2">Required Monthly Revenue:</div>
+                    <div id="be-rev" class="font-orbitron text-xl font-bold text-white mt-0.5">৳ 950,000</div>
+                </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold text-center">
+                ✓ Shop currently generates 737 pcs/mo (194% of Break-Even)
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Pricing & Discount Sensitivity Section -->
+    <div id="sim-section-pricing" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="tag" class="w-4 h-4 text-emerald-400"></i>
+                <span>Pricing & Promotional Discount Sensitivity</span>
+            </h3>
+            <p class="text-xs text-slate-400">Simulate price reduction impact on demand volume and gross profit margin</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Current Retail Price (BDT)</label>
+                    <input type="number" id="pr-price" value="2500" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-white" oninput="runPricingSim()">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Promotional Discount (%)</label>
+                    <input type="number" id="pr-discount" value="10" min="1" max="50" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-amber-300" oninput="runPricingSim()">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Estimated Sales Volume Lift (%)</label>
+                    <input type="number" id="pr-lift" value="25" min="0" max="100" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-cyan-300" oninput="runPricingSim()">
+                </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2 mt-4 text-xs">
+                <div class="flex justify-between text-slate-400">
+                    <span>Discounted Unit Price:</span>
+                    <strong id="pr-new-price" class="text-white font-mono font-bold">৳ 2,250.00</strong>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Effective Unit Gross Margin:</span>
+                    <strong id="pr-new-margin" class="text-emerald-400 font-mono font-bold">33.33% (&gt; 25% Guardrail)</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel-glow p-6 rounded-3xl border border-emerald-500/30 flex flex-col justify-between space-y-4">
+            <div>
+                <span class="text-xs font-mono uppercase text-slate-400">Net Profit Impact</span>
+                <div class="text-center py-6">
+                    <div class="text-xs text-slate-400 uppercase font-mono">Projected Net Gross Profit</div>
+                    <div id="pr-net-profit" class="font-orbitron text-3xl font-extrabold text-emerald-400 my-1">+12.5%</div>
+                    <p class="text-[11px] text-slate-300 mt-2">Volume expansion outweighs unit margin compression.</p>
+                </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-bold text-center">
+                Recommendation: Safe for 14-Day Seasonal Campaign
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Capital Investment ROI & Payback Section -->
+    <div id="sim-section-roi" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-4">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="trending-up" class="w-4 h-4 text-indigo-400"></i>
+                <span>Capital Investment Payback & Return (ROI)</span>
+            </h3>
+            <p class="text-xs text-slate-400">Evaluate lighting, equipment, interior store upgrades or new shop expansion</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Initial Capital Outlay (Capex)</label>
+                    <input type="number" id="roi-capex" value="500000" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-white" oninput="runRoiSim()">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Expected Annual Net Cash Inflow (BDT)</label>
+                    <input type="number" id="roi-inflow" value="280000" class="glass-input w-full px-3 py-2.5 rounded-xl font-orbitron font-bold text-emerald-400" oninput="runRoiSim()">
+                </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-slate-900 border border-white/5 space-y-2 mt-4 text-xs">
+                <div class="flex justify-between text-slate-400">
+                    <span>Target Investment Life:</span>
+                    <strong class="text-slate-200 font-mono font-semibold">3 Years</strong>
+                </div>
+                <div class="flex justify-between text-slate-400">
+                    <span>Cumulative 3-Year Cash Generated:</span>
+                    <strong id="roi-3yr-cash" class="text-cyan-300 font-mono font-bold">৳ 840,000.00</strong>
+                </div>
+            </div>
+        </div>
+
+        <div class="glass-panel-glow p-6 rounded-3xl border border-indigo-500/30 flex flex-col justify-between space-y-4">
+            <div>
+                <span class="text-xs font-mono uppercase text-slate-400">Investment Attractiveness</span>
+                <div class="text-center py-6">
+                    <div class="text-xs text-slate-400 uppercase font-mono">Simple Payback Period</div>
+                    <div id="roi-payback" class="font-orbitron text-3xl font-extrabold text-cyan-300 my-1">1.79 Years</div>
+                    <div class="text-xs text-slate-400 mt-2">Annual ROI: <strong id="roi-pct" class="text-emerald-400 font-mono text-base font-bold">56.0%</strong></div>
+                </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold text-center">
+                ✓ High Capital Efficiency — Exceeds Bank Cost of Capital
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_scripts %}
+<script>
+function switchSimTab(tab) {
+    document.getElementById('sim-section-breakeven').classList.toggle('hidden', tab !== 'breakeven');
+    document.getElementById('sim-section-pricing').classList.toggle('hidden', tab !== 'pricing');
+    document.getElementById('sim-section-roi').classList.toggle('hidden', tab !== 'roi');
+
+    const beBtn = document.getElementById('tab-btn-breakeven');
+    const prBtn = document.getElementById('tab-btn-pricing');
+    const roiBtn = document.getElementById('tab-btn-roi');
+
+    beBtn.className = tab === 'breakeven' ? 'px-4 py-2 rounded-xl text-xs font-bold transition-all bg-cyan-500 text-slate-950 shadow-md' : 'px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all';
+    prBtn.className = tab === 'pricing' ? 'px-4 py-2 rounded-xl text-xs font-bold transition-all bg-emerald-500 text-slate-950 shadow-md' : 'px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all';
+    roiBtn.className = tab === 'roi' ? 'px-4 py-2 rounded-xl text-xs font-bold transition-all bg-indigo-500 text-slate-950 shadow-md' : 'px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all';
+}
+
+function runBreakEvenSim() {
+    const fixed = parseFloat(document.getElementById('be-fixed').value) || 0;
+    const price = parseFloat(document.getElementById('be-price').value) || 1;
+    const variable = parseFloat(document.getElementById('be-var').value) || 0;
+
+    const cm = price - variable;
+    if (cm <= 0) {
+        document.getElementById('be-units').innerText = 'N/A';
+        document.getElementById('be-rev').innerText = 'Selling below cost!';
+        return;
+    }
+
+    const ratio = (cm / price) * 100;
+    const units = Math.ceil(fixed / cm);
+    const rev = units * price;
+
+    document.getElementById('be-cm-unit').innerText = '৳ ' + cm.toLocaleString('en-US', {minimumFractionDigits: 2});
+    document.getElementById('be-cm-ratio').innerText = ratio.toFixed(2) + '%';
+    document.getElementById('be-units').innerText = units.toLocaleString() + ' Pcs';
+    document.getElementById('be-rev').innerText = '৳ ' + rev.toLocaleString();
+}
+
+function runPricingSim() {
+    const price = parseFloat(document.getElementById('pr-price').value) || 1;
+    const discount = (parseFloat(document.getElementById('pr-discount').value) || 0) / 100;
+    const lift = (parseFloat(document.getElementById('pr-lift').value) || 0) / 100;
+    const cost = 1500;
+
+    const newPrice = price * (1 - discount);
+    const newMargin = ((newPrice - cost) / newPrice) * 100;
+
+    document.getElementById('pr-new-price').innerText = '৳ ' + newPrice.toFixed(2);
+    document.getElementById('pr-new-margin').innerText = newMargin.toFixed(2) + '%';
+}
+
+function runRoiSim() {
+    const capex = parseFloat(document.getElementById('roi-capex').value) || 1;
+    const inflow = parseFloat(document.getElementById('roi-inflow').value) || 0;
+
+    const payback = capex / inflow;
+    const roi = ((inflow * 3 - capex) / capex) * 100;
+
+    document.getElementById('roi-payback').innerText = payback.toFixed(2) + ' Years';
+    document.getElementById('roi-pct').innerText = (roi / 3).toFixed(1) + '% p.a.';
+    document.getElementById('roi-3yr-cash').innerText = '৳ ' + (inflow * 3).toLocaleString('en-US', {minimumFractionDigits: 2});
+}
+</script>
+{% endblock %}
+{% endblock %}

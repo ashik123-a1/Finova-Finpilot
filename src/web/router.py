@@ -249,6 +249,22 @@ def audit_view(request: Request):
     return templates.TemplateResponse("app/audit.html", ctx)
 
 
+@router.get("/app/customers", response_class=HTMLResponse)
+def customers_view(request: Request):
+    """Customer Directory, RFM Segmentation, and Polite Payment Reminders."""
+    ctx = get_web_context(request)
+    ctx["active_page"] = "customers"
+    return templates.TemplateResponse("app/customers.html", ctx)
+
+
+@router.get("/app/simulations", response_class=HTMLResponse)
+def simulations_view(request: Request):
+    """What-if Business Decision Simulations: Break-even, Pricing, and Capex ROI."""
+    ctx = get_web_context(request)
+    ctx["active_page"] = "simulations"
+    return templates.TemplateResponse("app/simulations.html", ctx)
+
+
 @router.get("/app/settings", response_class=HTMLResponse)
 def settings_view(request: Request):
     """Business Profile, Shop Settings, User Permissions, and Local DB Info."""
