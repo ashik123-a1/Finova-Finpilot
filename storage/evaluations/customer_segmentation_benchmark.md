@@ -15,11 +15,11 @@
 
 | Clusters (k) | Silhouette Score (Higher is Better) | Davies-Bouldin (Lower is Better) | Calinski-Harabasz (Higher is Better) |
 | :---: | :---: | :---: | :---: |
-| **k = 2** | **0.2838** | 1.3573 | 662.4 |
-| **k = 3** | **0.3051** | 1.1387 | 711.8 |
-| **k = 4** | **0.2982** | 1.0616 | 749.5 |
-| **k = 5** | **0.2785** | 1.1360 | 682.7 |
-| **k = 6** | **0.2619** | 1.1884 | 660.5 |
+| **k = 2** | **0.2837** | 1.3576 | 662.5 |
+| **k = 3** | **0.3056** | 1.1384 | 712.0 |
+| **k = 4** | **0.2991** | 1.0647 | 749.4 |
+| **k = 5** | **0.2842** | 1.1304 | 680.8 |
+| **k = 6** | **0.2614** | 1.1876 | 659.8 |
 
 > [!TIP]
-> **Optimal Cluster Count:** `k = 3` (Peak Silhouette: `0.3051`). k=3 achieves optimal trade-off between cluster separation and cohesion. Higher k values fragment natural spend tiers without increasing actionable insight.
+> **Optimal Cluster Count:** `k = 3` (Peak Silhouette: `0.3056`). k=3 achieves optimal trade-off between cluster separation and cohesion. Higher k values fragment natural spend tiers without increasing actionable insight.
