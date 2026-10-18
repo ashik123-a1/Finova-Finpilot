@@ -565,6 +565,30 @@ class DocumentProcessingJob(Base):
     completed_at = Column(DateTime, nullable=True)
 
 
+class DocumentChunk(Base):
+    __tablename__ = "document_chunks"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    document_id = Column(Integer, ForeignKey("documents.id", ondelete="CASCADE"), nullable=True, index=True)
+    business_id = Column(Integer, ForeignKey("businesses.id", ondelete="CASCADE"), nullable=False, index=True)
+    shop_id = Column(Integer, ForeignKey("shops.id", ondelete="CASCADE"), nullable=True, index=True)
+    chunk_index = Column(Integer, nullable=False, default=0)
+    chunk_text = Column(Text, nullable=False)
+    metadata_json = Column(Text, nullable=True)
+    embedding_json = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=utc_now, nullable=False)
+
+    document = relationship("Document", backref="chunks")
+    business = relationship("Business")
+    shop = relationship("Shop")
+
+    __table_args__ = (
+        Index("idx_doc_chunks_biz", "business_id"),
+        Index("idx_doc_chunks_shop", "shop_id"),
+        Index("idx_doc_chunks_doc", "document_id"),
+    )
+
+
 # ==============================================================================
 # 6. Loans and Financial Planning (Explicitly Synthetic Demos)
 # ==============================================================================

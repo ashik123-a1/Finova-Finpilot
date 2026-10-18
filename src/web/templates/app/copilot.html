@@ -154,8 +154,54 @@ function handleCopilotSend(e) {
     container.scrollTop = container.scrollHeight;
     lucide.createIcons();
 
-    // Deterministic Financial Reasoning Response
-    setTimeout(() => {
+    // Real RAG-Grounded Copilot API Call with Citations
+    fetch('/api/models/copilot/query', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            query: msg,
+            business_id: parseInt('{{ business.id if business else 19 }}'),
+            shop_id: parseInt('{{ active_shop_id or 28 }}'),
+            preferred_locale: '{{ active_lang or "en" }}'
+        })
+    })
+    .then(r => r.json())
+    .then(data => {
+        const typingEl = document.getElementById(typingId);
+        if (typingEl) typingEl.remove();
+
+        const botDiv = document.createElement('div');
+        botDiv.className = 'flex items-start gap-3 max-w-3xl';
+
+        let citationsHtml = '';
+        if (data.citations && data.citations.length > 0) {
+            citationsHtml = `
+                <div class="mt-2.5 pt-2 border-t border-white/10 text-[10px] space-y-1">
+                    <span class="text-cyan-400 font-mono font-semibold uppercase block">Verified Document Sources & Citations:</span>
+                    ${data.citations.map(c => `
+                        <div class="p-1.5 rounded-lg bg-slate-900/80 border border-cyan-500/20 text-slate-300">
+                            <strong class="text-cyan-300">${c.source}</strong> <span class="text-emerald-400 font-mono">(${c.relevance_score})</span>
+                            <div class="text-slate-400 italic mt-0.5 line-clamp-2">${c.snippet}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        botDiv.innerHTML = `
+            <div class="w-8 h-8 rounded-lg ${data.security_alert ? 'bg-rose-500/20 border border-rose-500/50 text-rose-400' : 'bg-cyan-500/20 border border-cyan-500/40 text-cyan-400'} flex items-center justify-center shrink-0 mt-1">
+                <i data-lucide="${data.security_alert ? 'shield-alert' : 'bot'}" class="w-4 h-4"></i>
+            </div>
+            <div class="glass-panel p-4 rounded-2xl border ${data.security_alert ? 'border-rose-500/40 text-rose-200' : 'border-white/10 text-slate-200'} text-xs space-y-2">
+                <div class="whitespace-pre-line leading-relaxed">${data.answer.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div>
+                ${citationsHtml}
+            </div>
+        `;
+        container.appendChild(botDiv);
+        container.scrollTop = container.scrollHeight;
+        lucide.createIcons();
+    })
+    .catch(err => {
         const typingEl = document.getElementById(typingId);
         if (typingEl) typingEl.remove();
 
@@ -165,7 +211,7 @@ function handleCopilotSend(e) {
         container.appendChild(botDiv);
         container.scrollTop = container.scrollHeight;
         lucide.createIcons();
-    }, 1000);
+    });
 }
 
 function generateCopilotResponse(query) {

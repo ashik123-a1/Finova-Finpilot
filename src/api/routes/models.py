@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import List, Optional, Dict, Any
+from pydantic import BaseModel
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import select
@@ -233,3 +234,45 @@ def get_specific_benchmark(benchmark_name: str):
         raise HTTPException(status_code=404, detail=f"Benchmark '{benchmark_name}' not found.")
     with open(target_path, "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+class CopilotQueryRequest(BaseModel):
+    query: str
+    business_id: Optional[int] = None
+    shop_id: Optional[int] = None
+    preferred_locale: Optional[str] = "en"
+
+
+class CopilotQueryResponse(BaseModel):
+    answer: str
+    security_alert: bool
+    citations: List[Dict[str, Any]]
+    verified_metrics: Dict[str, Any]
+    has_evidence: bool
+
+
+@router.post("/copilot/query", response_model=CopilotQueryResponse)
+def copilot_query_endpoint(
+    req: CopilotQueryRequest,
+    db: Session = Depends(get_db),
+):
+    """
+    RAG-grounded Copilot querying endpoint.
+    Retrieves tenant-isolated document chunks, enforces prompt injection checks,
+    and returns grounded explanations with verifiable source citations.
+    """
+    biz_id = req.business_id or 19
+    shop_id = req.shop_id or 28
+
+    from src.ai.rag_service import RagService
+
+    res = RagService.generate_grounded_response(
+        session=db,
+        query=req.query,
+        business_id=biz_id,
+        shop_id=shop_id,
+        user_role="owner",
+        preferred_locale=req.preferred_locale or "en",
+    )
+    return CopilotQueryResponse(**res)
+

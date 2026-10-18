@@ -212,11 +212,11 @@ def detect_multilingual_prompt_injection(text: str) -> tuple[bool, str]:
 
     injection_patterns = [
         # English
-        (r"(?i)\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:previous|prior)\s+(?:instructions|prompts|rules)", "EN: Instruction override"),
-        (r"(?i)\b(?:system\s+prompt\s+override|prompt\s+override)", "EN: System prompt override"),
-        (r"(?i)\b(?:bypass|disable)[^.\n]{0,30}(?:security|verification|dscr|guardrail|check|limit|rule|loan\s+risk)", "EN: Security bypass attempt"),
-        (r"(?i)\bapprove\s+(?:all|this)\s+loan", "EN: Unauthorized loan approval trigger"),
-        (r"(?i)\b(?:jailbreak|dan\s+mode|developer\s+mode|act\s+as\s+root)\b", "EN: Jailbreak signature"),
+        (r"(?i)\b(?:ignore|disregard|forget)\s+(?:all\s+)?(?:your\s+)?(?:previous\s+|prior\s+)?(?:instructions|prompts|rules)", "EN: Instruction override"),
+        (r"(?i)\b(?:system\s+(?:prompt\s+)?override|prompt\s+override)", "EN: System prompt override"),
+        (r"(?i)\b(?:bypass|disable)[^.\n]{0,30}(?:security|verification|dscr|guardrail|check|limit|rule|loan\s+risk|risk\s+policy)", "EN: Security bypass attempt"),
+        (r"(?i)\bapprove\s+(?:all|this)\s+(?:loan|facility|financing)", "EN: Unauthorized loan approval trigger"),
+        (r"(?i)\b(?:jailbreak|dan\s+mode|you\s+are\s+now\s+dan|developer\s+mode|act\s+as\s+root)\b", "EN: Jailbreak signature"),
         (r"(?i)\b(?:drop\s+table|delete\s+from|rm\s+-rf|format\s+c:)", "EN: Malicious command execution"),
         # Bengali
         (r"(?:পূর্বের|পূর্ববর্তী|আগের)\s+(?:সমস্ত|সব|সকল)\s+(?:নির্দেশ|নির্দেশনা|নিয়ম)\s+(?:ভুলে|উপেক্ষা)", "BN: Instruction override"),

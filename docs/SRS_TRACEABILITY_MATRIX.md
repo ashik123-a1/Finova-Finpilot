@@ -2,7 +2,7 @@
 
 **Specification Version:** v1.0 (Master SRS & Competition Standard)  
 **Overall Status:** `VERIFIED COMPLETE`  
-**Test Suite Status:** 110/110 Automated Tests Passing (100%)  
+**Test Suite Status:** 117/117 Automated Tests Passing (100%)  
 **Audit Scope:** End-to-End Traceability across Requirements, Roles, Screens, APIs, DB Entities, Models, Security, and Tests.
 
 ---
@@ -44,7 +44,7 @@
 | **ORIG-005** | Business decision simulations (Purchasing, Hiring, Expansion) | Owner, Manager | `/app/simulations` | `/app/simulations`, `POST /api/finance/break-even` | `expenses`, `sales` | Cost-Volume-Profit (CVP) and Working Capital sensitivity | `test_finance_calculator.py::test_break_even_analysis` | `VERIFIED COMPLETE` |
 | **ORIG-006** | Pricing, discount, demand and sales-related analysis | Owner, Manager, Sales | `/app/simulations` | `POST /api/models/pricing-demand/simulate` | `products`, `sales` | Elasticity Demand Engine with 25% gross margin guardrail | `test_evaluation_framework.py::test_pricing_demand_engine_replenishment_and_breakeven` | `VERIFIED COMPLETE` |
 | **ORIG-007** | Investment return, ROI and payback analysis | Owner, Manager, Auditor | `/app/simulations` | `POST /api/finance/roi-payback` | `expenses`, `businesses` | Capital budgeting model: $\text{ROI} = \frac{\text{Net Gain}}{\text{Cost}}$, Payback Months | `test_finance_calculator.py::test_roi_and_payback` | `VERIFIED COMPLETE` |
-| **ORIG-008** | AI Business Copilot & workflow automation | All Roles (RBAC restricted) | `/app/copilot` | `POST /api/ai/audit-prompt`, `/app/copilot` | `audit_logs`, `model_versions` | Multilingual NLP assistant with PII redaction & prompt safety | `test_multilingual_security.py::*` (16 tests) | `VERIFIED COMPLETE` |
+| **ORIG-008** | AI Business Copilot & workflow automation (Local-First RAG) | All Roles (RBAC restricted) | `/app/copilot` | `POST /api/models/copilot/query`, `POST /api/ai/audit-prompt`, `/app/copilot` | `document_chunks`, `audit_logs`, `model_versions` | Local-First RAG with 512-dim vector retrieval, source citations, PII redaction & prompt safety | `test_rag_pipeline.py::*` (7 tests), `test_multilingual_security.py::*` (16 tests) | `VERIFIED COMPLETE` |
 
 ---
 
