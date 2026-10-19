@@ -59,8 +59,8 @@ def get_web_context(request: Request) -> dict:
         token = request.cookies.get("sme_auth_token")
 
     user_info = None
-    active_shop_id = request.cookies.get("sme_active_shop_id")
-    active_business_id = request.cookies.get("sme_active_business_id")
+    active_shop_id = request.query_params.get("shop_id") or request.cookies.get("sme_active_shop_id")
+    active_business_id = request.query_params.get("business_id") or request.cookies.get("sme_active_business_id")
     active_role = request.cookies.get("sme_role") or "owner"
 
     if token:

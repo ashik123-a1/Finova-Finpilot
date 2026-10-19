@@ -114,7 +114,7 @@
 
     <!-- Message Input Bar -->
     <div class="p-4 border-t border-white/10 bg-slate-950/80 shrink-0">
-        <form onsubmit="handleCopilotSend(event)" class="flex items-center gap-3">
+        <form id="copilot-form" onsubmit="handleCopilotSend(event)" class="flex items-center gap-3">
             <div class="relative flex-1">
                 <input type="text" id="copilot-input" required placeholder="Type a financial question or click the mic for voice AI (EN / BN / ZH)..." class="glass-input w-full pl-4 pr-12 py-3 rounded-2xl text-xs text-white placeholder:text-slate-500">
                 <!-- Microphone Button: Opens Voice Modal -->
@@ -442,12 +442,13 @@ async function handleCopilotSend(e, isVoiceQuery = false) {
         // Decide whether to call Voice AI Engine or standard Copilot RAG API
         let resp, data;
         
-        // Try Voice AI processing endpoint first if voice query or contains non-English characters
+        // Try Voice AI processing endpoint if voice query, multilingual, or contains transactional/decision action intent
         const hasBengali = /[\u0980-\u09FF]/.test(msg);
         const hasChinese = /[\u4E00-\u9FFF]/.test(msg);
-        const isVoiceOrMultilingual = isVoiceQuery || hasBengali || hasChinese;
+        const isActionIntent = /record\s+an?\s+expense|post\s+an?\s+expense|add\s+expense|approve.*loan|what\s+if/i.test(msg);
+        const isVoiceOrAction = isVoiceQuery || hasBengali || hasChinese || isActionIntent;
 
-        if (isVoiceOrMultilingual) {
+        if (isVoiceOrAction) {
             resp = await fetch('/api/models/voice/process', {
                 method: 'POST',
                 headers: {
@@ -466,6 +467,15 @@ async function handleCopilotSend(e, isVoiceQuery = false) {
             if (resp.ok) {
                 data = await resp.json();
                 renderVoiceResponse(typingId, data);
+                return;
+            } else if (resp.status === 403) {
+                const errData = await resp.json().catch(() => ({}));
+                renderVoiceResponse(typingId, {
+                    status: 'forbidden',
+                    intent: 'permission_denied',
+                    text_response: `🚨 **Permission Denied:** ${errData.detail || 'Your role does not have authorization to post ledger transactions.'}`,
+                    spoken_response: 'Access denied. Your role cannot record financial transactions.'
+                });
                 return;
             }
         }
