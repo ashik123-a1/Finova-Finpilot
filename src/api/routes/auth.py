@@ -300,7 +300,7 @@ def login(req: LoginRequest, response: Response, db: Session = Depends(get_db)):
     ]
     pw_matches = verify_password(req.password, user.hashed_password) if user else False
     if not pw_matches and is_demo and user and settings.ENVIRONMENT != "production":
-        if req.password in ["demo12345", "password123"]:
+        if req.password in ["DemoPass123!", "demo12345", "password123"]:
             pw_matches = True
 
     if not user or not pw_matches:

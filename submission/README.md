@@ -1,30 +1,30 @@
-# FinTechathon 2026 — SME Finance Copilot (Topic E)
+# FinTechathon 2026 — Finova Finpilot: SME Finance Copilot (Topic E)
 
 **Competition:** FinTechathon 2026 — International Track  
 **Topic:** Topic E — SME Finance Copilot  
 **Theme:** AI as an Autonomous Financial Participant  
-**Submission Status:** Production Ready & Independently Verified (220/220 Tests Passed)  
-**Primary Repository:** `F:\china project`
+**Submission Status:** Production Ready & Independently Verified (224/224 Tests Passed)  
+**Primary Repository:** [https://github.com/ashik123-a1/Finova-Finpilot](https://github.com/ashik123-a1/Finova-Finpilot)
 
 ---
 
 ## 1. Executive Summary
 
-SME Finance Copilot is a local-first autonomous financial operating system built for micro, small, and medium enterprises. It combines deterministic zero-float accounting, institutional credit underwriting (DSCR modeling), grounded RAG conversational intelligence, and an autonomous voice HUD with consequential action safeguards.
+**Finova Finpilot** is a local-first autonomous financial operating system built for micro, small, and medium enterprises. It combines deterministic zero-float accounting, institutional credit underwriting (DSCR modeling), grounded RAG conversational intelligence, and an autonomous voice HUD with consequential action safeguards.
 
 ---
 
 ## 2. Quick Evaluation Links
 
 * **1-Click Launch (Windows):** Run `start.bat` (Starts on `http://127.0.0.1:8050`)
-* **Local Installation Manual:** [`docs/INSTRUCTION_BOOK.md`](file:///F:/china%20project/docs/INSTRUCTION_BOOK.md)
-* **Canonical Test Catalogue (TC-01..TC-50):** [`docs/TESTING.md`](file:///F:/china%20project/docs/TESTING.md)
-* **System Architecture:** [`docs/ARCHITECTURE.md`](file:///F:/china%20project/docs/ARCHITECTURE.md)
-* **Visual Directory Tree:** [`docs/PROJECT_STRUCTURE.md`](file:///F:/china%20project/docs/PROJECT_STRUCTURE.md)
-* **10-Step Live Demo Script:** [`submission/demo_script.md`](file:///F:/china%20project/submission/demo_script.md)
-* **5-Minute Presentation Script:** [`submission/presentation_script.md`](file:///F:/china%20project/submission/presentation_script.md)
-* **Full Release Audit Report:** [`reports/release_audit.md`](file:///F:/china%20project/reports/release_audit.md)
-* **Deliverables Checklist:** [`submission/deliverables_checklist.md`](file:///F:/china%20project/submission/deliverables_checklist.md)
+* **Local Installation Manual:** [`docs/INSTRUCTION_BOOK.md`](../docs/INSTRUCTION_BOOK.md)
+* **Canonical Test Catalogue (TC-01..TC-50):** [`docs/TESTING.md`](../docs/TESTING.md)
+* **System Architecture:** [`docs/ARCHITECTURE.md`](../docs/ARCHITECTURE.md)
+* **Visual Directory Tree:** [`docs/PROJECT_STRUCTURE.md`](../docs/PROJECT_STRUCTURE.md)
+* **10-Step Live Demo Script:** [`submission/demo_script.md`](demo_script.md)
+* **5-Minute Presentation Script:** [`submission/presentation_script.md`](presentation_script.md)
+* **Full Release Audit Report:** [`reports/release_audit.md`](../reports/release_audit.md)
+* **Deliverables Checklist:** [`submission/deliverables_checklist.md`](deliverables_checklist.md)
 
 ---
 
@@ -43,7 +43,7 @@ Navigate to `http://127.0.0.1:8050/login` and use **1-Click Demo Login** or manu
 
 ## 4. Key Verification Metrics
 
-* **Automated Regression Suite:** 220 / 220 tests passed (100% pass rate in 18.89s).
+* **Automated Regression Suite:** 224 / 224 tests passed (100% pass rate in ~20s).
 * **Database Ledger Integrity:** Integer minor-unit math ($1,525,400.00 revenue, $4,868,176.68 expenses, -$3,342,776.68 loss).
 * **Disaster Recovery:** Verified SQLite WAL backup snapshot (`23.46 MB`, 163,054 records) in `var/backups/`.
 * **Zero Cloud Lock-In:** Operates 100% locally with offline edge deterministic synthesis.

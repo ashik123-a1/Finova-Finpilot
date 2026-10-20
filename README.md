@@ -30,11 +30,11 @@ Finova Finpilot acts as an **Autonomous Financial Participant**:
 
 Every screenshot below captures the real, unmocked application executing on the local-first engine:
 
-### 1. Financial AI Copilot — Deterministic Turnaround (English & Bengali)
-| 🤖 English Loss Recovery & Turnaround Scenarios | 🌐 Native Multilingual AI Turnaround (Bengali) |
-| :---: | :---: |
-| ![Copilot English Recovery](submission/execution_evidence/copilot_loss_recovery_verified.png) | ![Copilot Bengali Recovery](submission/execution_evidence/copilot_loss_recovery_bengali_verified.png) |
-| *Root-cause diagnosis, audited 100% expense breakdown, duplicate voice entry detection, and Scenarios A/B/C* | *Identical underlying ledger calculations preserved across Bengali, English, and Chinese locales* |
+### 1. Financial AI Copilot — Deterministic Turnaround (English, Bengali & Chinese)
+| 🤖 English Loss Recovery & Scenarios | 🌐 Native Bengali Turnaround HUD | 🇨🇳 Native Simplified Chinese Turnaround |
+| :---: | :---: | :---: |
+| ![Copilot English Recovery](submission/execution_evidence/copilot_loss_recovery_verified.png) | ![Copilot Bengali Recovery](submission/execution_evidence/copilot_loss_recovery_bengali_verified.png) | ![Copilot Chinese Recovery](submission/execution_evidence/copilot_loss_recovery_chinese_verified.png) |
+| *Root-cause diagnosis, audited 100% expense breakdown, duplicate voice entry detection, and Scenarios A/B/C* | *Identical underlying ledger calculations preserved across Bengali, English, and Chinese locales* | *Full Chinese financial vernacular with identical zero-float calculations ($1.525M revenue, $4.868M expenses)* |
 
 ### 2. Operational Control & Topic E Simulated Sandbox
 | 📊 Executive Financial Cockpit & Ledger | 🔬 Topic E Simulated Sandbox & Agent Trace |
@@ -716,6 +716,7 @@ Finova-Finpilot/                                   # Competition submission root
     └── execution_evidence/                        # Genuine sanitized execution evidence
         ├── copilot_loss_recovery_verified.png     # Browser evidence: English loss recovery turnaround response
         ├── copilot_loss_recovery_bengali_verified.png # Browser evidence: Bengali localized loss recovery response
+        ├── copilot_loss_recovery_chinese_verified.png # Browser evidence: Simplified Chinese localized turnaround response
         ├── dashboard_executive_cockpit_verified.png # Live financial dashboard
         ├── dscr_underwriting_packet_verified.png  # Credit underwriting loan calculator
         └── sandbox_agent_execution_evidence_verified.png # Simulated API & agent execution trace

@@ -192,5 +192,9 @@ Finova-Finpilot/                                   # Competition submission root
     ├── presentation.pptx                          # Editable pitch deck presentation slide deck PPTX
     └── execution_evidence/                        # Genuine sanitized execution evidence
         ├── copilot_loss_recovery_verified.png     # Browser evidence: English loss recovery turnaround response
-        └── copilot_loss_recovery_bengali_verified.png # Browser evidence: Bengali localized loss recovery response
+        ├── copilot_loss_recovery_bengali_verified.png # Browser evidence: Bengali localized loss recovery response
+        ├── copilot_loss_recovery_chinese_verified.png # Browser evidence: Simplified Chinese localized turnaround response
+        ├── dashboard_executive_cockpit_verified.png # Live financial dashboard
+        ├── dscr_underwriting_packet_verified.png  # Credit underwriting loan calculator
+        └── sandbox_agent_execution_evidence_verified.png # Simulated API & agent execution trace
 ```

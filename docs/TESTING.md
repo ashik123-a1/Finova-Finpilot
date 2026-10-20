@@ -1,8 +1,8 @@
-# FinTechathon 2026: SME Finance Copilot — Canonical Test Catalogue & Verification Report
+# Finova Finpilot: SME Finance Copilot — Canonical Test Catalogue & Verification Report
 
 **Document Version:** 1.0.0 (Master Release)  
-**Execution Timestamp:** 2026-10-20 16:50:09 UTC+6  
-**Test Suite Pass Rate:** **220 / 220 Passed (100%)**  
+**Execution Timestamp:** 2026-10-20 18:37:28 UTC+6  
+**Test Suite Pass Rate:** **224 / 224 Passed (100%)**  
 **Execution Engine:** Python 3.11.9, pytest-9.1.1, pluggy-1.6.0, AnyIO 4.12.1, SQLite 3 (WAL Mode)  
 **Primary Target Application:** `F:\china project`
 
@@ -10,7 +10,7 @@
 
 ## 1. Executive Summary & Verification Methodology
 
-The SME Finance Copilot application has undergone a comprehensive multi-tier verification process spanning:
+The Finova Finpilot application has undergone a comprehensive multi-tier verification process spanning:
 1. **Cryptographic & Tenant Security:** Session token validation, role-based access control (RBAC), cross-tenant denial, and prompt-injection defenses.
 2. **Deterministic Ledger & Numerical Integrity:** Integer minor-unit calculations (`total_amount_minor`, `amount_minor`), zero floating-point drift, and financial reconciliation (`Revenue - Expenses == Net Profit/Loss`).
 3. **Credit Underwriting & Risk Modeling:** Amortization formulas, EMI precision, Debt Service Coverage Ratio (DSCR) benchmarks (1.25x threshold), and loan suitability scoring.
@@ -24,28 +24,28 @@ The SME Finance Copilot application has undergone a comprehensive multi-tier ver
 
 | Test File | Focus Area | Items | Passed | Failed | Status |
 | :--- | :--- | :---: | :---: | :---: | :---: |
-| `tests/test_ai_copilot_intelligence.py` | AI Intent Routing, Loss Recovery, Scenarios, Margin Guardrails | 9 | 9 | 0 | **PASS** |
+| `tests/test_ai_copilot_intelligence.py` | AI Intent Routing, Loss Recovery, Scenarios, Margin Guardrails | 13 | 13 | 0 | **PASS** |
 | `tests/test_rag_pipeline.py` | Vector Embedder, Tenant Isolation, Prompt Injection, Multilingual RAG | 14 | 14 | 0 | **PASS** |
 | `tests/test_api_integration.py` | End-to-End API Routes, Financial Summary, Cash Forecasting, OCR | 10 | 10 | 0 | **PASS** |
 | `tests/test_api_security_verification.py` | Auth Header Forgery, Path Traversal, Division by Zero, Schema Bounds | 19 | 19 | 0 | **PASS** |
-| `tests/test_auth_and_rbac.py` | Registration, Persona Logins, Role Permissions, Super Admin Boundary | 8 | 8 | 0 | **PASS** |
+| `tests/test_auth_and_rbac.py` | Registration, Persona Logins, Role Permissions, Super Admin Boundary | 9 | 9 | 0 | **PASS** |
 | `tests/test_commercial_onboarding.py` | Commercial Registration, Password Reset, Workspace Invites | 5 | 5 | 0 | **PASS** |
-| `tests/test_country_profiles.py` | 7 Jurisdictions, Currency Precision, Kuwait 3-decimal handling | 10 | 10 | 0 | **PASS** |
-| `tests/test_crm_and_inventory.py` | RFM Segmentation, Receivables Dunning, Low Stock Alerts, PO Drafts | 9 | 9 | 0 | **PASS** |
-| `tests/test_dashboard.py` | Real-time Dashboard KPIs, Historical Trends, Ledger Reconciliation | 11 | 11 | 0 | **PASS** |
-| `tests/test_i18n_and_voice.py` | Catalogs completeness, Voice Action Barrier, Locale Switching | 12 | 12 | 0 | **PASS** |
+| `tests/test_country_profiles.py` | 7 Jurisdictions, Currency Precision, Kuwait 3-decimal handling | 7 | 7 | 0 | **PASS** |
+| `tests/test_crm_and_inventory.py` | RFM Segmentation, Receivables Dunning, Low Stock Alerts, PO Drafts | 13 | 13 | 0 | **PASS** |
+| `tests/test_dashboard_live_kpi.py` | Real-time Dashboard KPIs, Historical Trends, Ledger Reconciliation | 8 | 8 | 0 | **PASS** |
+| `tests/test_i18n_and_voice.py` | Catalogs completeness, Voice Action Barrier, Locale Switching | 18 | 18 | 0 | **PASS** |
 | `tests/test_isolation.py` | Shop Isolation, Cross-Shop Inventory/Transaction Denial | 2 | 2 | 0 | **PASS** |
-| `tests/test_loan_and_dscr_module.py` | Loan EMI, DSCR Guardrails, Partner Matching, PDF Generation | 8 | 8 | 0 | **PASS** |
-| `tests/test_master_completion_phase.py` | 6-Step Onboarding Wizard, 7 Demo Personas End-to-End Verification | 2 | 2 | 0 | **PASS** |
-| `tests/test_multilingual_security.py` | XSS Injections, Locale Normalization, Currency Formatting API | 4 | 4 | 0 | **PASS** |
+| `tests/test_loan_and_dscr_module.py` | Loan EMI, DSCR Guardrails, Partner Matching, PDF Generation | 7 | 7 | 0 | **PASS** |
+| `tests/test_master_completion_phase.py` | 6-Step Onboarding Wizard, 7 Demo Personas End-to-End Verification | 4 | 4 | 0 | **PASS** |
+| `tests/test_multilingual_security.py` | XSS Injections, Locale Normalization, Currency Formatting API | 16 | 16 | 0 | **PASS** |
 | `tests/test_notifications.py` | Notification Deduplication, Unread Count, Mark as Read | 5 | 5 | 0 | **PASS** |
 | `tests/test_phase_gate_readiness.py` | FK Enforcement, Transaction Rollback, Restart Persistence, OCR Flow | 6 | 6 | 0 | **PASS** |
 | `tests/test_rbac_permissions.py` | Least Privilege Boundaries, Shop Permission Enforcements | 3 | 3 | 0 | **PASS** |
-| `tests/test_report_generation_and_storage.py` | Persistence across restarts, CSV Injection, PDF Exporters, Backups | 8 | 8 | 0 | **PASS** |
+| `tests/test_report_generation_and_storage.py` | Persistence across restarts, CSV Injection, PDF Exporters, Backups | 7 | 7 | 0 | **PASS** |
 | `tests/test_synthetic_generator.py` | Realistic Synthetic Sandbox Generator & Reset Capability | 1 | 1 | 0 | **PASS** |
-| `tests/test_voice_ai.py` | Voice Intent Parsing, What-If Simulation, Confirmation Barrier | 10 | 10 | 0 | **PASS** |
+| `tests/test_voice_ai.py` | Voice Intent Parsing, What-If Simulation, Confirmation Barrier | 11 | 11 | 0 | **PASS** |
 | `tests/test_web_ui.py` | Landing Page, Login, App Portals, Static Assets, Language Switches | 7 | 7 | 0 | **PASS** |
-| **TOTAL** | **Full System Regression Suite** | **220** | **220** | **0** | **100% PASS** |
+| **TOTAL** | **Full System Regression Suite (21 Suites)** | **224** | **224** | **0** | **100% PASS** |
 
 ---
 

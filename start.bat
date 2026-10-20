@@ -38,11 +38,14 @@ echo [INFO] Same Wi-Fi Access: http://192.168.0.113:%PORT%/landing
 echo [INFO] Global Internet  : Run "share_online.bat" for instant public HTTPS link!
 echo [INFO] API Swagger Docs : http://localhost:%PORT%/docs
 echo.
-echo [DEMO PERSONAS]
-echo  - Store Owner  : demo_owner  / demo12345 or 1-Click quick login
-echo  - Accountant   : demo_accountant / password123
-echo  - Cashier      : demo_cashier    / password123
-echo  - Bank Auditor : demo_auditor    / password123
+echo [DEMO PERSONAS - 1-Click Quick Login on http://localhost:%PORT%/login]
+echo  - Business Owner   : demo_owner@smefinance.local      / DemoPass123!
+echo  - Business Manager : demo_manager@smefinance.local    / DemoPass123!
+echo  - Accountant Staff : demo_accountant@smefinance.local / DemoPass123!
+echo  - Sales Executive  : demo_sales@smefinance.local      / DemoPass123!
+echo  - Inventory Officer: demo_inventory@smefinance.local  / DemoPass123!
+echo  - Financial Auditor: demo_auditor@smefinance.local    / DemoPass123!
+echo  - Super Admin HUD  : demo_superadmin@smefinance.local / DemoPass123!
 echo.
 echo [INFO] Launching browser in 2 seconds...
 start "" cmd /c "timeout /t 2 /nobreak >nul & start http://localhost:%PORT%/landing"

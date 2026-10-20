@@ -227,9 +227,9 @@ python -c "from src.database.backup_service import DatabaseBackupService; print(
 ## 9. Test Case Catalogue Cross-Reference
 
 A complete, formal catalogue of **50 Numbered Test Cases (TC-01 through TC-50)** is documented in:  
-📄 [`docs/TESTING.md`](file:///F:/china%20project/docs/TESTING.md)
+📄 [`docs/TESTING.md`](TESTING.md)
 
-All 220 automated unit, integration, and security tests can be verified at any time with:
+All 224 automated unit, integration, and security tests can be verified at any time with:
 ```powershell
 python -m pytest
 ```
