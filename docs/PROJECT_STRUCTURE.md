@@ -3,13 +3,15 @@
 ```text
 Finova-Finpilot/                                   # Competition submission root directory
 ├── README.md                                      # Executive overview, architecture, test badges & quickstart
+├── LICENSE                                        # Official MIT Open Source License
 ├── .gitignore                                     # Excludes secrets (.env), SQLite binaries, WAL files & private caches
 ├── .env.example                                   # Secure environment variable configuration template
 ├── pyproject.toml                                 # Python packaging, toolchain configurations & pytest settings
 ├── requirements.txt                               # Pinned backend dependencies (FastAPI, SQLAlchemy, ReportLab, etc.)
 ├── start.bat                                      # 1-Click Windows launch script (Uvicorn on port 8050)
 ├── share_online.bat                               # Optional encrypted public tunnel launcher for live evaluation
-├── sme_finance.db                                 # Primary SQLite database with WAL mode enabled (163,000+ records)
+├── sme_finance.db                                 # Local SQLite database (WAL mode, auto-initialized on first run)
+├── ashik/                                         # Sample SME receipts & invoices (4 document types for OCR testing)
 │
 ├── docs/                                          # Formal technical & competition documentation
 │   ├── ARCHITECTURE.md                            # Comprehensive system architecture & data pipeline flow
@@ -174,8 +176,9 @@ Finova-Finpilot/                                   # Competition submission root
 │       └── .gitkeep                               # Retains directory structure in repository
 │
 ├── reports/                                       # Independent Evaluation & Audit Reports
+│   ├── historical/                                # Archived Phase-1 & Phase-2 audit and readiness reports
 │   ├── release_audit.md                           # Final release audit across all 18 modules (PASS classifications)
-│   ├── test_report.md                             # Exhaustive 220-test execution report with exact terminal logs
+│   ├── test_report.md                             # Exhaustive 224-test execution report with exact terminal logs
 │   ├── dependency_inventory.md                    # Verified dependency inventory & software versions
 │   ├── reproducibility_report.md                  # Clean-checkout reproducibility & local installation audit
 │   ├── cleanup_manifest.md                        # File hygiene, scratch scripts inventory & quarantine status

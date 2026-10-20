@@ -1,5 +1,10 @@
-# Ashik Test Data Suite — 4 Financial Document Types
+# Document Test Suite — 4 Realistic SME Financial Document Samples (OCR & Review Queue)
 
+> **Evaluator Guide:** This directory contains 4 realistic sample commercial documents (Purchase Invoice, Sales Receipt, Utility Bill, Bank Loan Receipt) designed to test the Smart OCR Document Upload & Human-in-the-Loop Review Queue at \/app/documents\.
+
+---
+
+### বাংলা নির্দেশিকা (Bengali Instructions):
 এই ফোল্ডারের ফাইলগুলো দিয়ে আপনি সরাসরি **SME Finance Copilot** এর Document Capture & Gated Review Gateway টেস্ট করতে পারবেন।
 
 ---

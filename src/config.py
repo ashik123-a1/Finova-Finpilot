@@ -41,6 +41,9 @@ class Settings:
         self.SECRET_KEY: str = os.getenv(
             "SECRET_KEY", "sme_copilot_dev_secret_key_change_in_production_32bytes_minimum"
         )
+        if self.ENVIRONMENT == "production" and "dev_secret_key" in self.SECRET_KEY:
+            import warnings
+            warnings.warn("CRITICAL SECURITY NOTICE: Default development SECRET_KEY detected in production environment! Define a 32+ character key in .env.")
         self.ACCESS_TOKEN_EXPIRE_MINUTES: int = int(
             os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "1440")
         )

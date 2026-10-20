@@ -54,7 +54,7 @@ Every screenshot below captures the real, unmocked application executing on the 
 
 ### Step 1: Open Terminal & Activate Environment
 ```powershell
-cd "F:\china project"
+cd "Finova-Finpilot"  # Navigate to cloned repository root
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 ```
@@ -455,7 +455,7 @@ sequenceDiagram
         Merchant->>HUD: "Yes, authorize and post"
         HUD->>Barrier: Deliver confirmation with challenge token
         Barrier->>Barrier: Cryptographically validate token integrity
-        Barrier->>Ledger: Execute double-entry integer posting
+        Barrier->>Ledger: Execute validated integer minor ledger posting
         Ledger->>DB: Atomic commit with PRAGMA WAL
         DB-->>Ledger: Transaction success (Entry ID #355)
         Ledger-->>HUD: Return balance telemetry & updated cash runway
@@ -494,7 +494,7 @@ flowchart TD
     SUB --> PACKET
 ```
 
-### 5. Zero-Float Double-Entry Accounting & Integer Precision Engine
+### 5. Zero-Float Dual-Stream Accounting & Integer Precision Engine
 
 ```mermaid
 flowchart LR
@@ -506,9 +506,9 @@ flowchart LR
 
     SOURCE["Raw Monetary Inputs<br/>• POS Sales Receipts<br/>• OCR Invoice Scans<br/>• Voice HUD Transactions"]:::source --> CONVERT["Zero-Float Minor Unit Converter<br/>Stores amounts in 64-bit integer cents<br/>$1,525.40 ➔ 152540 minor units"]:::integer
 
-    CONVERT --> POST["Double-Entry Balanced Journal Engine<br/>Every entry has equal Debit & Credit"]:::journal
+    CONVERT --> POST["Dual-Stream Ledger Engine<br/>Revenue Stream & Operating Expenses"]:::journal
 
-    POST --> INVARIANT{"Arithmetic Invariant Check<br/>Assets == Liabilities + Equity<br/>Debits == Credits"}:::journal
+    POST --> INVARIANT{"Deterministic Arithmetic Check<br/>Net Operating Income == Revenue - Expenses<br/>Zero Floating-Point Drift"}:::journal
 
     INVARIANT -->|Passed| WAL["SQLite 3 WAL Commit<br/>Atomic Disk Flush & Hot Backup Safe"]:::wal
     INVARIANT -->|Failed| REVERT["Automatic Rollback<br/>Zero Corrupted Ledger State"]:::source
@@ -526,13 +526,15 @@ The complete, annotated file catalog of the Finova Finpilot application:
 ```text
 Finova-Finpilot/                                   # Competition submission root directory
 ├── README.md                                      # Executive overview, architecture, test badges & quickstart
+├── LICENSE                                        # Official MIT Open Source License
 ├── .gitignore                                     # Excludes secrets (.env), SQLite binaries, WAL files & private caches
 ├── .env.example                                   # Secure environment variable configuration template
 ├── pyproject.toml                                 # Python packaging, toolchain configurations & pytest settings
 ├── requirements.txt                               # Pinned backend dependencies (FastAPI, SQLAlchemy, ReportLab, etc.)
 ├── start.bat                                      # 1-Click Windows launch script (Uvicorn on port 8050)
 ├── share_online.bat                               # Optional encrypted public tunnel launcher for live evaluation
-├── sme_finance.db                                 # Primary SQLite database with WAL mode enabled (163,000+ records)
+├── sme_finance.db                                 # Local SQLite database (WAL mode, auto-initialized on first run)
+├── ashik/                                         # Sample SME receipts & invoices (4 document types for OCR testing)
 │
 ├── docs/                                          # Formal technical & competition documentation (12 Detailed Books)
 │   ├── ARCHITECTURE.md                            # Comprehensive system architecture & data pipeline flow
@@ -697,6 +699,7 @@ Finova-Finpilot/                                   # Competition submission root
 │       └── .gitkeep                               # Retains directory structure in repository
 │
 ├── reports/                                       # Independent Evaluation & Audit Reports
+│   ├── historical/                                # Archived Phase-1 & Phase-2 audit and readiness reports
 │   ├── release_audit.md                           # Final release audit across all 18 modules (PASS classifications)
 │   ├── test_report.md                             # Exhaustive 224-test execution report with exact terminal logs
 │   ├── dependency_inventory.md                    # Verified dependency inventory & software versions
