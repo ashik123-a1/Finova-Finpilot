@@ -1,7 +1,7 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Cash-Flow Forecasting & AI Runway Analysis{% endblock %}
-{% block page_subtitle %}Chronological rolling-origin ARIMA + GBDT ensemble with 95% confidence bands{% endblock %}
+{% block page_title %}{{ _('forecast.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('forecast.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
@@ -70,7 +70,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
                 <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                    <span>Projected Cash Balance & 95% Confidence Interval</span>
+                    <span>Projected Cash Balance & 95% {{ _('forecast.confidence_level') }}</span>
                     <span id="forecast-days-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">30-Day Outlook</span>
                 </h3>
                 <p class="text-xs text-slate-400">Historical actuals (Solid Cyan) transitioning to predicted mean with upper/lower bounds (Shaded)</p>

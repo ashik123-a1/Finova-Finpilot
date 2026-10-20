@@ -472,3 +472,456 @@
 html.light .lg-portal-ambient-bg::before {
   display: none;
 }
+
+/* ==========================================================================
+   PORTAL AMBIENT BACKGROUND WALLPAPER (METROPOLIS GROWTH ASCENT)
+   ========================================================================== */
+
+.portal-app-shell {
+  position: relative;
+  min-height: 100vh;
+  background-color: #030712 !important;
+  background-image: 
+    radial-gradient(circle at 50% 20%, rgba(3, 7, 18, 0.14) 0%, rgba(3, 7, 18, 0.48) 65%, #030712 100%),
+    linear-gradient(180deg, rgba(3, 7, 18, 0.18) 0%, rgba(3, 7, 18, 0.44) 45%, rgba(3, 7, 18, 0.84) 100%),
+    url('/static/images/city_growth_bg.jpg?v=5') !important;
+  background-size: cover, cover, cover !important;
+  background-position: center top, center top, center 30% !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+.portal-bg-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.portal-bg-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/static/images/city_growth_bg.jpg?v=5');
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  opacity: 0.70;
+  filter: brightness(0.85) contrast(1.15) saturate(1.2);
+  transform: scale(1.02);
+  transition: opacity var(--lg-duration-smooth) ease;
+}
+
+.portal-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 95% 75% at 50% 20%, rgba(3, 7, 18, 0.10) 0%, rgba(3, 7, 18, 0.44) 65%, #030712 100%),
+    linear-gradient(180deg, rgba(3, 7, 18, 0.16) 0%, rgba(3, 7, 18, 0.42) 45%, rgba(3, 7, 18, 0.82) 100%);
+  backdrop-filter: blur(0.5px);
+  -webkit-backdrop-filter: blur(0.5px);
+}
+
+html.light .portal-bg-canvas,
+html.light .portal-app-shell {
+  background-image: none !important;
+}
+
+/* ==========================================================================
+   LANDING HERO VIDEO BACKGROUND (LANDGUARD BENCHMARK)
+   ========================================================================== */
+
+#hero-bg-video,
+#landing-hero-video {
+  pointer-events: none;
+  object-fit: cover;
+  object-position: center;
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+
+
+
+
+/* ==========================================================================
+   FINOVA FINPILOT — MASTER ANIMATED HIGH-TECH LOGO COMPONENT
+   100% Transparent Background, Kinetic Monogram & Liquid Laser Lighting
+   ========================================================================== */
+
+.ff-brand-core {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  font-family: 'Orbitron', 'Inter', -apple-system, sans-serif;
+  padding: 8px 16px;
+  border-radius: 16px;
+  background: transparent !important;
+  user-select: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.ff-brand-core:hover {
+  transform: translateY(-2px);
+}
+
+/* 1. Main Row: FINOVA [ ICON ] FINPILOT */
+.ff-main-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+}
+
+/* Shared Typography Properties */
+.ff-word {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: 2.8px;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: auto !important;
+  text-align: left !important;
+}
+
+/* Custom Chevron Λ for Finova */
+.ff-lambda {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  letter-spacing: 0px;
+  display: inline-block;
+}
+
+/* FINOVA - Hollow Green Base */
+.ff-word-finova {
+  padding: 0 !important;
+  text-align: left !important;
+  justify-self: end !important;
+  margin-right: 12px !important;
+  white-space: nowrap;
+  color: rgba(0, 229, 153, 0.18);
+  -webkit-text-stroke: 1.3px #00E599;
+}
+
+/* FINPILOT - Hollow Cyan Base */
+.ff-word-finpilot {
+  padding: 0 !important;
+  text-align: left !important;
+  justify-self: start !important;
+  margin-left: 12px !important;
+  white-space: nowrap;
+  color: rgba(34, 211, 238, 0.18);
+  -webkit-text-stroke: 1.3px #22D3EE;
+}
+
+/* Liquid Fill Overlay Layer */
+.ff-word::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-text-stroke: 0px;
+  overflow: hidden;
+}
+
+/* FINOVA Animation: Rising Liquid Green + Shockwave Blast */
+.ff-word-finova::before {
+  color: #00E599;
+  animation: ffFinovaFill 4.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes ffFinovaFill {
+  0% {
+    clip-path: inset(100% 0 0 0);
+    filter: drop-shadow(0 0 0px #00E599);
+    transform: scale(1);
+  }
+  28% {
+    clip-path: inset(20% 0 0 0);
+  }
+  42% {
+    clip-path: inset(0% 0 0 0);
+    filter: drop-shadow(0 0 6px #00E599);
+    transform: scale(1);
+  }
+  /* GREEN NEON BLAST SHOCKWAVE */
+  46% {
+    clip-path: inset(0% 0 0 0);
+    filter: drop-shadow(0 0 25px #00E599) brightness(1.75);
+    transform: scale(1.06);
+    color: #A7F3D0;
+  }
+  56% {
+    clip-path: inset(0% 0 0 0);
+    filter: drop-shadow(0 0 10px #00E599) brightness(1.2);
+    transform: scale(1);
+    color: #00E599;
+  }
+  86% {
+    clip-path: inset(0% 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.5;
+  }
+}
+
+/* FINPILOT Animation: Rising Liquid Cyan + Shockwave Blast */
+.ff-word-finpilot::before {
+  background: linear-gradient(to top, #0284C7, #22D3EE, #67E8F9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: ffFinpilotFill 4.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes ffFinpilotFill {
+  0%, 15% {
+    clip-path: inset(100% 0 0 0);
+    filter: drop-shadow(0 0 0px #22D3EE);
+    transform: scale(1);
+  }
+  44% {
+    clip-path: inset(20% 0 0 0);
+  }
+  58% {
+    clip-path: inset(0% 0 0 0);
+    filter: drop-shadow(0 0 6px #22D3EE);
+    transform: scale(1);
+  }
+  /* CYAN NEON BLAST SHOCKWAVE */
+  62% {
+    clip-path: inset(0% 0 0 0);
+    filter: drop-shadow(0 0 28px #22D3EE) brightness(1.85);
+    transform: scale(1.06);
+  }
+  72% {
+    clip-path: inset(0% 0 0 0);
+    filter: drop-shadow(0 0 10px #22D3EE) brightness(1.2);
+    transform: scale(1);
+  }
+  86% {
+    clip-path: inset(0% 0 0 0);
+    opacity: 1;
+  }
+  100% {
+    clip-path: inset(100% 0 0 0);
+    opacity: 0.5;
+  }
+}
+
+/* Center Icon Container */
+.ff-center-icon {
+  width: 48px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  filter: drop-shadow(0 2px 10px rgba(0, 229, 153, 0.3));
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s;
+  background: transparent !important;
+}
+
+.ff-brand-core:hover .ff-center-icon {
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 20px rgba(0, 229, 153, 0.65));
+}
+
+.ff-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  background: transparent !important;
+}
+
+/* Monogram Kinetic Animations */
+.ff-arrowhead {
+  animation: ffArrowPulse 2.2s infinite ease-in-out;
+  transform-origin: 80px 28px;
+}
+@keyframes ffArrowPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px #00E599); }
+  50% { transform: scale(1.22) translate(1px, -1px); filter: drop-shadow(0 0 14px #00E599) brightness(1.4); }
+}
+
+.ff-bar {
+  transform-origin: bottom;
+  animation: ffBarBounce 2.4s infinite ease-in-out alternate;
+}
+.ff-bar-1 { animation-delay: 0.1s; }
+.ff-bar-2 { animation-delay: 0.3s; }
+.ff-bar-3 { animation-delay: 0.5s; }
+
+@keyframes ffBarBounce {
+  0% { transform: scaleY(0.85); opacity: 0.8; }
+  100% { transform: scaleY(1.1); opacity: 1; filter: brightness(1.25); }
+}
+
+/* 2. Cyber Base Plate / Divider Wings */
+.ff-divider-deck {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 6px;
+  position: relative;
+  background: transparent !important;
+}
+
+.ff-line-wing {
+  flex: 1;
+  height: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ff-wing-left {
+  background: linear-gradient(to right, transparent, rgba(0, 229, 153, 0.35), #00E599);
+}
+
+.ff-wing-right {
+  background: linear-gradient(to right, #22D3EE, rgba(34, 211, 238, 0.35), transparent);
+}
+
+/* Active Laser Streams Traversing the Wings */
+.ff-line-wing::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 24px;
+  height: 100%;
+  background: #FFFFFF;
+  filter: drop-shadow(0 0 6px #22D3EE);
+  animation: laserFlight 2.8s infinite linear;
+}
+.ff-wing-left::after { right: 0; animation-direction: reverse; }
+.ff-wing-right::after { left: 0; }
+
+@keyframes laserFlight {
+  0% { transform: translateX(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(250%); opacity: 0; }
+}
+
+.ff-center-emblem {
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.6));
+  transition: transform 0.3s ease;
+  background: transparent !important;
+}
+
+.ff-brand-core:hover .ff-center-emblem {
+  transform: scale(1.18);
+}
+
+/* 3. Subtitle / Tagline */
+.ff-subtitle {
+  font-size: 7.5px;
+  font-weight: 800;
+  letter-spacing: 2.8px;
+  color: #94A3B8;
+  margin-top: 5px;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.ff-brand-core:hover .ff-subtitle {
+  color: #22D3EE;
+}
+
+/* ==========================================================================
+   BRAND LOGO SIZE VARIANTS
+   ========================================================================== */
+
+/* Navbar Variant (Compact Height) */
+.ff-brand-nav {
+  padding: 4px 8px !important;
+}
+.ff-brand-nav .ff-word {
+  font-size: 19px !important;
+  letter-spacing: 1.8px !important;
+}
+.ff-brand-nav .ff-center-icon {
+  width: 34px !important;
+  height: 32px !important;
+}
+.ff-brand-nav .ff-main-row {
+  gap: 0 !important;
+}
+.ff-brand-nav .ff-word-finova {
+  padding: 0 !important;
+  margin-right: 8px !important;
+}
+.ff-brand-nav .ff-word-finpilot {
+  padding: 0 !important;
+  margin-left: 8px !important;
+}
+.ff-brand-nav .ff-subtitle {
+  font-size: 6px !important;
+  letter-spacing: 2px !important;
+  margin-top: 3px !important;
+}
+
+/* Sidebar Variant (Fits Inside 240px Navigation Drawer) */
+.ff-brand-sidebar {
+  padding: 4px 6px !important;
+  width: 100% !important;
+}
+.ff-brand-sidebar .ff-word {
+  font-size: 14.5px !important;
+  letter-spacing: 1.2px !important;
+}
+.ff-brand-sidebar .ff-center-icon {
+  width: 26px !important;
+  height: 24px !important;
+}
+.ff-brand-sidebar .ff-main-row {
+  gap: 0 !important;
+}
+.ff-brand-sidebar .ff-word-finova {
+  padding: 0 !important;
+  margin-right: 5px !important;
+}
+.ff-brand-sidebar .ff-word-finpilot {
+  padding: 0 !important;
+  margin-left: 5px !important;
+}
+.ff-brand-sidebar .ff-subtitle {
+  font-size: 5.2px !important;
+  letter-spacing: 1.1px !important;
+  margin-top: 2px !important;
+}
+
+/* Collapsed Sidebar Adaptive Display */
+.lg-sidebar.collapsed .ff-word,
+.lg-sidebar.collapsed .ff-divider-deck,
+.lg-sidebar.collapsed .ff-subtitle,
+.admin-sidebar.collapsed .ff-word,
+.admin-sidebar.collapsed .ff-divider-deck,
+.admin-sidebar.collapsed .ff-subtitle {
+  display: none !important;
+}
+.lg-sidebar.collapsed .ff-brand-sidebar,
+.admin-sidebar.collapsed .ff-brand-sidebar {
+  padding: 4px 0 !important;
+  width: auto !important;
+}

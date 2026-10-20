@@ -31,10 +31,11 @@ class I18nService:
     _CATALOGS: Dict[str, Dict[str, Any]] = {}
 
     @classmethod
-    def _load_catalogs(cls) -> None:
-        if cls._CATALOGS:
+    def _load_catalogs(cls, force: bool = False) -> None:
+        if cls._CATALOGS and not force:
             return
 
+        cls._CATALOGS = {}
         for f in cls._LOCALES_DIR.glob("*.json"):
             lang_code = f.stem.lower()
             try:
@@ -46,6 +47,11 @@ class I18nService:
         # Guarantee English default is loaded
         if cls.DEFAULT_LOCALE not in cls._CATALOGS:
             cls._CATALOGS[cls.DEFAULT_LOCALE] = {}
+
+    @classmethod
+    def reload_catalogs(cls) -> None:
+        """Force reloads all JSON translation files from disk."""
+        cls._load_catalogs(force=True)
 
     @classmethod
     def get_loaded_locales(cls) -> List[str]:

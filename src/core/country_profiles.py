@@ -410,6 +410,17 @@ class CountryRegistry:
         return 100
 
     @classmethod
+    def get_currency_symbol(cls, currency: str) -> str:
+        """Returns currency symbol (e.g. ৳ for BDT, ¥ for CNY, $ for USD)."""
+        cls._initialize()
+        clean = currency.upper().strip()
+        for p in cls._PROFILES.values():
+            if p.primary_currency == clean:
+                return p.currency_symbol
+        symbols = {"BDT": "৳", "CNY": "¥", "USD": "$", "EUR": "€", "GBP": "£", "INR": "₹", "SAR": "﷼"}
+        return symbols.get(clean, clean)
+
+    @classmethod
     def export_json(cls, file_path: Path) -> None:
         """Exports verified country profile registry as JSON artifact."""
         cls._initialize()

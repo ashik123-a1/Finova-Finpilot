@@ -44,6 +44,7 @@ class User(Base):
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(255), nullable=False)
     phone = Column(String(50), nullable=True)
+    preferred_language = Column(String(10), default="en", nullable=True)
     is_active = Column(Boolean, default=True, nullable=False)
     created_at = Column(DateTime, default=utc_now, nullable=False)
     updated_at = Column(DateTime, default=utc_now, onupdate=utc_now, nullable=False)
@@ -207,9 +208,17 @@ class Customer(Base):
     credit_limit_minor = Column(BigInteger, default=0, nullable=False)
     balance_minor = Column(BigInteger, default=0, nullable=False)  # Positive means customer owes shop
     segment = Column(String(50), default="regular", nullable=False)  # VIP, Regular, Occasional, Inactive
+    whatsapp_number = Column(String(50), nullable=True)
+    telegram_handle = Column(String(100), nullable=True)
+    customer_type = Column(String(50), default="retail", nullable=False)  # retail, wholesale, corporate
+    opening_balance_minor = Column(BigInteger, default=0, nullable=False)
+    messaging_consent = Column(Boolean, default=True, nullable=False)
+    notes = Column(Text, nullable=True)
     is_synthetic = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, default=utc_now, nullable=False)
     updated_at = Column(DateTime, default=utc_now, onupdate=utc_now, nullable=False)
+
+    communications = relationship("CustomerCommunication", back_populates="customer", cascade="all, delete-orphan")
 
     __table_args__ = (
         Index("idx_customers_shop_phone", "shop_id", "phone"),
@@ -264,6 +273,73 @@ class PurchaseOrder(Base):
     is_synthetic = Column(Boolean, default=False, nullable=False)
     created_at = Column(DateTime, default=utc_now, nullable=False)
     updated_at = Column(DateTime, default=utc_now, onupdate=utc_now, nullable=False)
+
+    items = relationship("PurchaseOrderItem", back_populates="purchase_order", cascade="all, delete-orphan")
+
+
+class PurchaseOrderItem(Base):
+    __tablename__ = "purchase_order_items"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    purchase_order_id = Column(Integer, ForeignKey("purchase_orders.id", ondelete="CASCADE"), nullable=False, index=True)
+    product_id = Column(Integer, ForeignKey("products.id", ondelete="SET NULL"), nullable=True, index=True)
+    item_description = Column(String(255), nullable=False)
+    quantity = Column(Integer, default=1, nullable=False)
+    unit_cost_minor = Column(BigInteger, nullable=False)
+    line_total_minor = Column(BigInteger, nullable=False)
+
+    purchase_order = relationship("PurchaseOrder", back_populates="items")
+    product = relationship("Product")
+
+
+class CustomerCommunication(Base):
+    __tablename__ = "customer_communications"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    business_id = Column(Integer, ForeignKey("businesses.id", ondelete="CASCADE"), nullable=False, index=True)
+    shop_id = Column(Integer, ForeignKey("shops.id", ondelete="CASCADE"), nullable=False, index=True)
+    customer_id = Column(Integer, ForeignKey("customers.id", ondelete="CASCADE"), nullable=False, index=True)
+    channel = Column(String(50), nullable=False)  # whatsapp, sms, telegram, manual_copy
+    recipient_contact = Column(String(100), nullable=False)
+    message_body = Column(Text, nullable=False)
+    message_type = Column(String(50), default="due_reminder", nullable=False)  # due_reminder, vip_discount, payment_receipt, custom
+    status = Column(String(50), default="draft", nullable=False)  # draft, awaiting_user_action, queued, provider_accepted, delivered, failed, cancelled
+    provider_message_id = Column(String(255), nullable=True)
+    error_message = Column(Text, nullable=True)
+    sent_by_user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    created_at = Column(DateTime, default=utc_now, nullable=False, index=True)
+    updated_at = Column(DateTime, default=utc_now, onupdate=utc_now, nullable=False)
+
+    customer = relationship("Customer", back_populates="communications")
+    sender = relationship("User")
+
+
+class DiscountCampaign(Base):
+    __tablename__ = "discount_campaigns"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    business_id = Column(Integer, ForeignKey("businesses.id", ondelete="CASCADE"), nullable=False, index=True)
+    shop_id = Column(Integer, ForeignKey("shops.id", ondelete="CASCADE"), nullable=False, index=True)
+    title = Column(String(255), nullable=False)
+    description = Column(Text, nullable=True)
+    target_segment = Column(String(50), default="all", nullable=False)  # vip, regular, at_risk, all, single_customer
+    target_customer_id = Column(Integer, ForeignKey("customers.id", ondelete="SET NULL"), nullable=True)
+    discount_type = Column(String(50), default="percentage", nullable=False)  # percentage, fixed_amount
+    discount_value = Column(Float, nullable=False)
+    min_purchase_amount_minor = Column(BigInteger, default=0, nullable=False)
+    eligible_category = Column(String(100), nullable=True)
+    start_date = Column(DateTime, nullable=True)
+    end_date = Column(DateTime, nullable=True)
+    channel = Column(String(50), default="whatsapp", nullable=False)
+    message_template = Column(Text, nullable=False)
+    status = Column(String(50), default="draft", nullable=False)  # draft, active, completed, cancelled
+    recipient_count = Column(Integer, default=0, nullable=False)
+    created_by_user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+    created_at = Column(DateTime, default=utc_now, nullable=False, index=True)
+    updated_at = Column(DateTime, default=utc_now, onupdate=utc_now, nullable=False)
+
+    target_customer = relationship("Customer")
+    creator = relationship("User")
 
 
 class InventoryMovement(Base):
@@ -791,14 +867,18 @@ class Notification(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    business_id = Column(Integer, ForeignKey("businesses.id", ondelete="CASCADE"), nullable=True)
-    shop_id = Column(Integer, ForeignKey("shops.id", ondelete="CASCADE"), nullable=True)
+    business_id = Column(Integer, ForeignKey("businesses.id", ondelete="CASCADE"), nullable=True, index=True)
+    shop_id = Column(Integer, ForeignKey("shops.id", ondelete="CASCADE"), nullable=True, index=True)
     title = Column(String(255), nullable=False)
     message = Column(Text, nullable=False)
-    notification_type = Column(String(50), default="info", nullable=False)  # info, warning, action_required, system
-    is_read = Column(Boolean, default=False, nullable=False)
+    notification_type = Column(String(50), default="info", nullable=False)  # info, warning, action_required, system, financial_alert, ocr_review
+    severity = Column(String(50), default="info", nullable=False)  # info, warning, error, success
+    action_url = Column(String(255), nullable=True)
+    is_read = Column(Boolean, default=False, nullable=False, index=True)
+    read_at = Column(DateTime, nullable=True)
+    dedup_key = Column(String(255), nullable=True, index=True)
     metadata_json = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=utc_now, nullable=False)
+    created_at = Column(DateTime, default=utc_now, nullable=False, index=True)
 
 
 class Dataset(Base):
@@ -878,3 +958,27 @@ class AuditLog(Base):
     __table_args__ = (
         Index("idx_audit_logs_shop_action", "shop_id", "action", "created_at"),
     )
+
+
+class ReportExecution(Base):
+    __tablename__ = "report_executions"
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    report_uuid = Column(String(64), nullable=False, unique=True, index=True)
+    report_type = Column(String(100), nullable=False)  # income_expense, profit_loss, ledger, cash_flow, receivables, inventory, loan_assessment, customer_crm, audit_trail, system_integrity
+    business_id = Column(Integer, ForeignKey("businesses.id", ondelete="CASCADE"), nullable=False, index=True)
+    shop_id = Column(Integer, ForeignKey("shops.id", ondelete="CASCADE"), nullable=True, index=True)
+    requested_by = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
+    filters_json = Column(Text, default="{}", nullable=False)
+    format = Column(String(20), default="preview", nullable=False)  # preview, csv, pdf, json
+    file_path = Column(String(500), nullable=True)
+    file_size_bytes = Column(Integer, default=0, nullable=False)
+    status = Column(String(50), default="completed", nullable=False)  # completed, failed, processing
+    summary_metrics_json = Column(Text, default="{}", nullable=False)
+    created_at = Column(DateTime, default=utc_now, nullable=False, index=True)
+    expires_at = Column(DateTime, nullable=True)
+
+    __table_args__ = (
+        Index("idx_reports_biz_type", "business_id", "report_type"),
+    )
+

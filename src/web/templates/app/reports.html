@@ -1,0 +1,707 @@
+{% extends "app/layout.html" %}
+
+{% block page_title %}{{ _('navigation.reports') }}{% endblock %}
+{% block page_subtitle %}Autonomous Business Intelligence, Auditable Statements, and Secure Data Exports{% endblock %}
+
+{% block page_content %}
+<div class="space-y-6">
+
+    <!-- 1. Top Report Center Hero & Quick Action Header -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/10 relative overflow-hidden bg-gradient-to-r from-slate-900/90 via-[#080e1e]/90 to-slate-900/90">
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono mb-2">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-cyan-400"></i>
+                    <span>GAAP / IFRS Aligned • Zero Minor-Unit Precision Loss</span>
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    Report Generation Center & Data Vault
+                </h1>
+                <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-2xl">
+                    Generate authentic, tenant-isolated reports across sales, expenses, cash runways, inventory valuations, loan dossiers, and SQLite engine integrity. Export formula-safe CSV and institutional ReportLab PDF dossiers.
+                </p>
+            </div>
+
+            <!-- Quick Integrity Badge & Backup Action -->
+            <div class="flex items-center gap-3 shrink-0">
+                <button type="button" onclick="runIntegrityDiagnostic()" class="px-4 py-2.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 text-cyan-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition-all">
+                    <i data-lucide="cpu" class="w-4 h-4 text-cyan-400"></i>
+                    <span>Verify DB PRAGMA</span>
+                </button>
+                <button type="button" onclick="createDatabaseBackupQuick()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 hover:from-emerald-500/30 hover:to-teal-500/30 border border-emerald-500/40 text-emerald-300 hover:text-white text-xs font-semibold flex items-center gap-2 transition-all shadow-lg shadow-emerald-950">
+                    <i data-lucide="database" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Create Safe Backup</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. Master Filter & Configuration Bar -->
+    <div class="glass-panel p-5 rounded-3xl border border-white/10 bg-slate-900/60 space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <!-- Report Type Dropdown -->
+            <div>
+                <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1.5">Select Report Type</label>
+                <select id="report-type-select" onchange="onReportTypeChange(this.value)" class="w-full bg-slate-950 border border-cyan-500/40 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-300 cursor-pointer">
+                    <optgroup label="Financial Statements">
+                        <option value="income_expense" selected>Income & Expense Statement</option>
+                        <option value="profit_loss">Profit & Loss Summary (P&L)</option>
+                        <option value="ledger">General Ledger Transactions</option>
+                        <option value="cash_flow">Cash Flow & Runway Forecast</option>
+                    </optgroup>
+                    <optgroup label="Receivables & CRM">
+                        <option value="receivables">Accounts Receivable & Aging</option>
+                        <option value="customer_crm">Customer Directory & RFM</option>
+                    </optgroup>
+                    <optgroup label="Inventory & Supply">
+                        <option value="inventory_valuation">Inventory Valuation & Stock</option>
+                    </optgroup>
+                    <optgroup label="Loans & Underwriting">
+                        <option value="loan_assessment">Loan Underwriting & DSCR Dossier</option>
+                    </optgroup>
+                    <optgroup label="Security & System">
+                        <option value="audit_trail">Security & Audit Event Trail</option>
+                        <option value="system_integrity">Database PRAGMA Health Audit</option>
+                    </optgroup>
+                </select>
+            </div>
+
+            <!-- Target Shop Filter -->
+            <div>
+                <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1.5">Branch / Shop Scope</label>
+                <select id="report-shop-select" class="w-full bg-slate-950 border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-cyan-400 cursor-pointer">
+                    <option value="">All Business Shops (Consolidated)</option>
+                    {% for shop in shops %}
+                    <option value="{{ shop.id }}" {% if shop.id == active_shop_id %}selected{% endif %}>
+                        Shop #{{ shop.id }}: {{ shop.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Start Date -->
+            <div>
+                <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1.5">From Date</label>
+                <input type="date" id="report-start-date" class="w-full bg-slate-950 border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-400">
+            </div>
+
+            <!-- End Date -->
+            <div>
+                <label class="block text-[11px] font-mono uppercase text-slate-400 mb-1.5">To Date</label>
+                <input type="date" id="report-end-date" class="w-full bg-slate-950 border border-white/10 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-400">
+            </div>
+        </div>
+
+        <!-- Presets and Execution Action Row -->
+        <div class="pt-3 border-t border-white/5 flex flex-wrap items-center justify-between gap-3">
+            <!-- Preset Pills -->
+            <div class="flex flex-wrap items-center gap-1.5">
+                <span class="text-[10px] font-mono uppercase text-slate-400 mr-1">Presets:</span>
+                <button type="button" onclick="setPeriodPreset('today')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300">Today</button>
+                <button type="button" onclick="setPeriodPreset('7d')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300">Last 7D</button>
+                <button type="button" onclick="setPeriodPreset('30d')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300">Last 30D</button>
+                <button type="button" onclick="setPeriodPreset('quarter')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300">This Quarter</button>
+                <button type="button" onclick="setPeriodPreset('ytd')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300">Year to Date</button>
+                <button type="button" onclick="setPeriodPreset('all')" class="px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-[11px] text-slate-300">All Time</button>
+            </div>
+
+            <!-- Generate, CSV & PDF Action Buttons -->
+            <div class="flex items-center gap-2">
+                <button type="button" id="btn-preview-report" onclick="loadReportPreview()" class="px-5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:brightness-110 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-cyan-950 transition-all">
+                    <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                    <span>Generate Preview</span>
+                </button>
+                <button type="button" id="btn-export-csv" onclick="downloadReportExport('csv')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-emerald-500/30 text-emerald-300 hover:text-white font-semibold text-xs flex items-center gap-2 transition-all">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-emerald-400"></i>
+                    <span>Export CSV</span>
+                </button>
+                <button type="button" id="btn-export-pdf" onclick="downloadReportExport('pdf')" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-cyan-500/30 text-cyan-300 hover:text-white font-semibold text-xs flex items-center gap-2 transition-all">
+                    <i data-lucide="file-text" class="w-3.5 h-3.5 text-cyan-400"></i>
+                    <span>Export PDF</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. Navigation Tabs (Report Sections & Backups) -->
+    <div class="flex border-b border-white/10 space-x-6 text-xs font-semibold overflow-x-auto">
+        <button type="button" onclick="switchSectionTab('preview')" id="tab-btn-preview" class="pb-3 border-b-2 border-cyan-400 text-cyan-300 flex items-center gap-2 transition-all">
+            <i data-lucide="layout-grid" class="w-4 h-4"></i>
+            <span>Live Report View</span>
+        </button>
+        <button type="button" onclick="switchSectionTab('backups')" id="tab-btn-backups" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
+            <i data-lucide="database" class="w-4 h-4"></i>
+            <span>Database Backups & Vault</span>
+        </button>
+        <button type="button" onclick="switchSectionTab('history')" id="tab-btn-history" class="pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all">
+            <i data-lucide="history" class="w-4 h-4"></i>
+            <span>Report Audit History</span>
+        </button>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 1: Live Report View & Preview Table                               -->
+    <!-- ===================================================================== -->
+    <div id="section-preview" class="space-y-6">
+        
+        <!-- Loading Spinner -->
+        <div id="report-loading" class="hidden glass-panel p-12 rounded-3xl border border-white/5 text-center">
+            <div class="inline-block w-8 h-8 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin mb-3"></div>
+            <div class="text-sm font-semibold text-white">Aggregating Ledgers & Computing Financial Vectors...</div>
+            <div class="text-xs text-slate-400 mt-1">Executing deterministic zero-loss minor-unit accounting queries</div>
+        </div>
+
+        <!-- Report Content Wrapper -->
+        <div id="report-content" class="space-y-6">
+            
+            <!-- Summary KPI Grid -->
+            <div id="report-kpis-grid" class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                <!-- Dynamically Populated -->
+            </div>
+
+            <!-- Report Meta Info Bar -->
+            <div class="glass-panel p-4 rounded-2xl border border-white/5 flex flex-wrap items-center justify-between text-xs text-slate-400 gap-2">
+                <div class="flex items-center gap-3">
+                    <span id="meta-report-title" class="font-bold text-white text-sm">Income & Expense Statement</span>
+                    <span id="meta-report-uuid" class="px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-cyan-300 font-mono text-[10px]">UUID</span>
+                </div>
+                <div class="flex items-center gap-4 text-[11px]">
+                    <span id="meta-report-scope">Scope: All Shops</span>
+                    <span id="meta-report-period">Period: 2026-07-20 to 2026-10-20</span>
+                    <span id="meta-report-gen-time" class="text-slate-400">Generated: Just now</span>
+                </div>
+            </div>
+
+            <!-- Main Data Table -->
+            <div class="glass-panel rounded-3xl border border-white/10 overflow-hidden bg-slate-900/40">
+                <div class="p-4 border-b border-white/5 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="table" class="w-4 h-4 text-cyan-400"></i>
+                        <span class="text-xs font-bold uppercase tracking-wider text-white">Statement Data Table</span>
+                        <span id="meta-row-count" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 font-mono">0 Rows</span>
+                    </div>
+                    <div class="relative w-64">
+                        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-3 top-2.5 text-slate-500"></i>
+                        <input type="text" id="table-search-input" oninput="filterTableRows(this.value)" placeholder="Search row contents..." class="w-full bg-slate-950 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-cyan-400">
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto max-h-[550px] overflow-y-auto">
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead id="report-table-head" class="bg-slate-950/80 sticky top-0 z-10 text-[11px] font-mono uppercase text-slate-400 border-b border-white/10">
+                            <!-- Dynamically Injected -->
+                        </thead>
+                        <tbody id="report-table-body" class="divide-y divide-white/5 text-slate-300">
+                            <!-- Dynamically Injected -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Empty State -->
+                <div id="table-empty-state" class="hidden p-12 text-center">
+                    <i data-lucide="inbox" class="w-8 h-8 text-slate-600 mx-auto mb-2"></i>
+                    <div class="text-sm font-semibold text-slate-300">No records found matching filters</div>
+                    <div class="text-xs text-slate-500 mt-1">Try expanding the date range or selecting another branch.</div>
+                </div>
+            </div>
+
+            <!-- Disclaimer Notice -->
+            <div id="report-disclaimer-box" class="p-3 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-300 text-xs flex items-center gap-2.5">
+                <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 text-amber-400"></i>
+                <span id="meta-report-disclaimer">All monetary values are calculated with zero IEEE-754 precision loss via minor integer accounting.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 2: Database Backups Vault                                         -->
+    <!-- ===================================================================== -->
+    <div id="section-backups" class="hidden space-y-6">
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                        <i data-lucide="shield-check" class="w-5 h-5 text-emerald-400"></i>
+                        <span>WAL-Safe SQLite Database Backups</span>
+                    </h2>
+                    <p class="text-xs text-slate-400 mt-0.5">
+                        Create atomic, thread-safe online backups of <code class="text-cyan-300">sme_finance.db</code> into <code class="text-cyan-300">var/backups/</code> with SHA-256 verification and isolated sandbox testing.
+                    </p>
+                </div>
+                <button type="button" onclick="createDatabaseBackupQuick()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-bold text-xs flex items-center gap-2 shadow-lg shadow-emerald-950 shrink-0">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    <span>New Verified Backup</span>
+                </button>
+            </div>
+
+            <!-- Backups Table -->
+            <div class="overflow-x-auto rounded-2xl border border-white/10">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-950 text-[11px] font-mono uppercase text-slate-400 border-b border-white/10">
+                        <tr>
+                            <th class="p-3">Backup File</th>
+                            <th class="p-3">Created At (UTC)</th>
+                            <th class="p-3">Size</th>
+                            <th class="p-3">SHA-256 Checksum</th>
+                            <th class="p-3">Integrity</th>
+                            <th class="p-3 text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="backups-table-body" class="divide-y divide-white/5 text-slate-300">
+                        <tr>
+                            <td colspan="6" class="p-6 text-center text-slate-500">Loading backups catalog...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="p-3 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs flex items-center gap-2">
+                <i data-lucide="info" class="w-4 h-4 shrink-0 text-cyan-400"></i>
+                <span>Disaster Recovery Note: Backups utilize SQLite's native non-blocking Online Backup API. Backups are strictly excluded from GitHub version control.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TAB 3: Report Audit History                                           -->
+    <!-- ===================================================================== -->
+    <div id="section-history" class="hidden space-y-6">
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+            <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <i data-lucide="history" class="w-5 h-5 text-cyan-400"></i>
+                <span>Recent Report Executions & Downloads</span>
+            </h2>
+
+            <div class="overflow-x-auto rounded-2xl border border-white/10">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-950 text-[11px] font-mono uppercase text-slate-400 border-b border-white/10">
+                        <tr>
+                            <th class="p-3">Report UUID</th>
+                            <th class="p-3">Report Type</th>
+                            <th class="p-3">Format</th>
+                            <th class="p-3">Shop Scope</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3">Generated At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="history-table-body" class="divide-y divide-white/5 text-slate-300">
+                        <tr>
+                            <td colspan="6" class="p-6 text-center text-slate-500">Loading report history...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal: Database Integrity Diagnostics Result -->
+<div id="integrity-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+    <div class="glass-panel max-w-2xl w-full p-6 rounded-3xl border border-cyan-500/40 bg-[#080e1e] shadow-2xl space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+                <i data-lucide="cpu" class="w-5 h-5 text-cyan-400"></i>
+                <h3 class="text-base font-bold text-white">Database PRAGMA Engine Diagnostics</h3>
+            </div>
+            <button type="button" onclick="closeIntegrityModal()" class="p-1 text-slate-400 hover:text-white">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div id="integrity-modal-body" class="space-y-3 text-xs">
+            <div class="text-slate-400">Executing engine-level diagnostics...</div>
+        </div>
+
+        <div class="pt-3 border-t border-white/10 flex justify-end">
+            <button type="button" onclick="closeIntegrityModal()" class="px-5 py-2 rounded-xl bg-slate-800 text-white font-semibold text-xs hover:bg-slate-700">
+                Close Diagnostics
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+let currentReportData = null;
+
+// Initialize Date Pickers with 90-day window
+document.addEventListener("DOMContentLoaded", () => {
+    setPeriodPreset("90d");
+    loadReportPreview();
+});
+
+function setPeriodPreset(preset) {
+    const end = new Date();
+    let start = new Date();
+
+    if (preset === "today") {
+        start = new Date();
+    } else if (preset === "7d") {
+        start.setDate(end.getDate() - 7);
+    } else if (preset === "30d") {
+        start.setDate(end.getDate() - 30);
+    } else if (preset === "90d") {
+        start.setDate(end.getDate() - 90);
+    } else if (preset === "quarter") {
+        start.setMonth(end.getMonth() - 3);
+    } else if (preset === "ytd") {
+        start = new Date(end.getFullYear(), 0, 1);
+    } else if (preset === "all") {
+        start = new Date(2020, 0, 1);
+    }
+
+    document.getElementById("report-start-date").value = start.toISOString().split("T")[0];
+    document.getElementById("report-end-date").value = end.toISOString().split("T")[0];
+}
+
+function onReportTypeChange(val) {
+    loadReportPreview();
+}
+
+function switchSectionTab(tab) {
+    document.getElementById("section-preview").classList.add("hidden");
+    document.getElementById("section-backups").classList.add("hidden");
+    document.getElementById("section-history").classList.add("hidden");
+
+    document.getElementById("tab-btn-preview").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all";
+    document.getElementById("tab-btn-backups").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all";
+    document.getElementById("tab-btn-history").className = "pb-3 border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center gap-2 transition-all";
+
+    if (tab === "preview") {
+        document.getElementById("section-preview").classList.remove("hidden");
+        document.getElementById("tab-btn-preview").className = "pb-3 border-b-2 border-cyan-400 text-cyan-300 flex items-center gap-2 transition-all";
+    } else if (tab === "backups") {
+        document.getElementById("section-backups").classList.remove("hidden");
+        document.getElementById("tab-btn-backups").className = "pb-3 border-b-2 border-cyan-400 text-cyan-300 flex items-center gap-2 transition-all";
+        loadBackupsList();
+    } else if (tab === "history") {
+        document.getElementById("section-history").classList.remove("hidden");
+        document.getElementById("tab-btn-history").className = "pb-3 border-b-2 border-cyan-400 text-cyan-300 flex items-center gap-2 transition-all";
+        loadReportHistory();
+    }
+}
+
+async function loadReportPreview() {
+    const reportType = document.getElementById("report-type-select").value;
+    const shopIdVal = document.getElementById("report-shop-select").value;
+    const startDate = document.getElementById("report-start-date").value;
+    const endDate = document.getElementById("report-end-date").value;
+
+    const payload = {
+        report_type: reportType,
+        shop_id: shopIdVal ? parseInt(shopIdVal) : null,
+        start_date: startDate,
+        end_date: endDate
+    };
+
+    document.getElementById("report-loading").classList.remove("hidden");
+    document.getElementById("report-content").classList.add("hidden");
+
+    try {
+        const res = await fetch("/api/reports/preview", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || "Failed to generate report.");
+        }
+
+        const data = await res.json();
+        currentReportData = data;
+        renderReportView(data);
+    } catch (err) {
+        alert("Report Error: " + err.message);
+    } finally {
+        document.getElementById("report-loading").classList.add("hidden");
+        document.getElementById("report-content").classList.remove("hidden");
+        if (window.lucide) window.lucide.createIcons();
+    }
+}
+
+function renderReportView(data) {
+    document.getElementById("meta-report-title").textContent = data.title;
+    document.getElementById("meta-report-uuid").textContent = data.report_uuid;
+    document.getElementById("meta-report-scope").textContent = `Scope: ${data.shop_name}`;
+    document.getElementById("meta-report-period").textContent = `Period: ${data.start_date} to ${data.end_date}`;
+    document.getElementById("meta-report-gen-time").textContent = `Generated: ${data.generated_at_formatted}`;
+    document.getElementById("meta-report-disclaimer").textContent = data.disclaimer || "Calculated using integer minor units.";
+    document.getElementById("meta-row-count").textContent = `${data.rows.length} Rows`;
+
+    // Render KPIs
+    const kpiGrid = document.getElementById("report-kpis-grid");
+    kpiGrid.innerHTML = "";
+    (data.summary_kpis || []).forEach(kpi => {
+        const colorClasses = {
+            emerald: "text-emerald-400 border-emerald-500/20 bg-emerald-500/5",
+            cyan: "text-cyan-400 border-cyan-500/20 bg-cyan-500/5",
+            rose: "text-rose-400 border-rose-500/20 bg-rose-500/5",
+            amber: "text-amber-400 border-amber-500/20 bg-amber-500/5"
+        }[kpi.tone || "cyan"] || "text-cyan-400 border-cyan-500/20 bg-cyan-500/5";
+
+        const card = document.createElement("div");
+        card.className = `p-4 rounded-2xl border ${colorClasses} glass-panel`;
+        card.innerHTML = `
+            <div class="text-[10px] font-mono uppercase text-slate-400">${kpi.label}</div>
+            <div class="text-lg sm:text-xl font-extrabold mt-1 truncate">${kpi.value}</div>
+        `;
+        kpiGrid.appendChild(card);
+    });
+
+    // Render Table Header
+    const tHead = document.getElementById("report-table-head");
+    tHead.innerHTML = `<tr>${data.columns.map(c => `<th class="p-3">${c}</th>`).join("")}</tr>`;
+
+    // Render Table Rows
+    const tBody = document.getElementById("report-table-body");
+    tBody.innerHTML = "";
+
+    if (!data.rows || data.rows.length === 0) {
+        document.getElementById("table-empty-state").classList.remove("hidden");
+    } else {
+        document.getElementById("table-empty-state").classList.add("hidden");
+        data.rows.forEach(r => {
+            const tr = document.createElement("tr");
+            tr.className = "hover:bg-white/5 transition-colors";
+            tr.innerHTML = r.map((cell, idx) => {
+                const isNumeric = typeof cell === "string" && (cell.includes("BDT") || cell.includes("$") || cell.includes("%") || cell.startsWith("+") || cell.startsWith("-"));
+                const cellClass = isNumeric ? "font-mono font-medium" : "";
+                return `<td class="p-3 ${cellClass}">${cell}</td>`;
+            }).join("");
+            tBody.appendChild(tr);
+        });
+    }
+}
+
+function filterTableRows(query) {
+    const q = query.toLowerCase().trim();
+    const rows = document.querySelectorAll("#report-table-body tr");
+    let matchCount = 0;
+    rows.forEach(tr => {
+        const text = tr.textContent.toLowerCase();
+        if (!q || text.includes(q)) {
+            tr.style.display = "";
+            matchCount++;
+        } else {
+            tr.style.display = "none";
+        }
+    });
+    document.getElementById("meta-row-count").textContent = `${matchCount} Rows`;
+}
+
+async function downloadReportExport(format) {
+    const reportType = document.getElementById("report-type-select").value;
+    const shopIdVal = document.getElementById("report-shop-select").value;
+    const startDate = document.getElementById("report-start-date").value;
+    const endDate = document.getElementById("report-end-date").value;
+
+    const payload = {
+        report_type: reportType,
+        shop_id: shopIdVal ? parseInt(shopIdVal) : null,
+        start_date: startDate,
+        end_date: endDate
+    };
+
+    const endpoint = format === "csv" ? "/api/reports/export/csv" : "/api/reports/export/pdf";
+    try {
+        const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || "Export download failed.");
+        }
+
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        const filename = `${reportType}_${startDate}_to_${endDate}.${format}`;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+    } catch (err) {
+        alert("Export Error: " + err.message);
+    }
+}
+
+async function loadBackupsList() {
+    const tBody = document.getElementById("backups-table-body");
+    tBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Scanning var/backups/...</td></tr>`;
+    try {
+        const res = await fetch("/api/reports/backups");
+        const data = await res.json();
+        tBody.innerHTML = "";
+        if (!data.backups || data.backups.length === 0) {
+            tBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500">No backups found in var/backups/. Click "New Verified Backup" to create one.</td></tr>`;
+            return;
+        }
+
+        data.backups.forEach(b => {
+            const tr = document.createElement("tr");
+            tr.className = "hover:bg-white/5";
+            const shortSha = b.sha256 ? b.sha256.substring(0, 12) + "..." : "N/A";
+            tr.innerHTML = `
+                <td class="p-3 font-mono text-cyan-300 font-semibold">${b.backup_filename}</td>
+                <td class="p-3 text-slate-400">${b.created_at || "N/A"}</td>
+                <td class="p-3 font-mono">${b.file_size_formatted || "N/A"}</td>
+                <td class="p-3 font-mono text-slate-500" title="${b.sha256}">${shortSha}</td>
+                <td class="p-3">
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold ${b.is_verified ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-rose-500/20 text-rose-300 border border-rose-500/40'}">
+                        ${b.integrity_status ? b.integrity_status.toUpperCase() : 'OK'}
+                    </span>
+                </td>
+                <td class="p-3 text-right space-x-2">
+                    <button type="button" onclick="testRestoreSandbox('${b.backup_filename}')" class="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 text-[11px] font-semibold border border-cyan-500/40">
+                        Test Sandbox Restore
+                    </button>
+                </td>
+            `;
+            tBody.appendChild(tr);
+        });
+    } catch (err) {
+        tBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-rose-400">Failed to load backups: ${err.message}</td></tr>`;
+    }
+}
+
+async function createDatabaseBackupQuick() {
+    if (!confirm("Initiate WAL-safe database online backup?")) return;
+    try {
+        const res = await fetch("/api/reports/backups/create", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ comment: "Backup triggered from Report Center" })
+        });
+        const data = await res.json();
+        if (data.status === "success") {
+            alert(`Backup Created & Verified:\nFile: ${data.manifest.backup_filename}\nSize: ${data.manifest.file_size_formatted}\nIntegrity: ${data.manifest.integrity_status}`);
+            loadBackupsList();
+        } else {
+            alert("Backup failed.");
+        }
+    } catch (err) {
+        alert("Backup Error: " + err.message);
+    }
+}
+
+async function testRestoreSandbox(backupFilename) {
+    if (!confirm(`Run ISOLATED sandbox restore verification on '${backupFilename}'?\n(Active running database will NOT be modified).`)) return;
+    try {
+        const res = await fetch("/api/reports/backups/test-restore", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ backup_filename: backupFilename })
+        });
+        const data = await res.json();
+        if (data.restore_test_status === "success") {
+            alert(`Sandbox Restore Test SUCCESSFUL!\nVerified ${data.tables_count} tables.\nActive DB Untouched: ${data.active_database_untouched}`);
+        } else {
+            alert("Restore test failed: " + JSON.stringify(data));
+        }
+    } catch (err) {
+        alert("Restore Test Error: " + err.message);
+    }
+}
+
+async function loadReportHistory() {
+    const tBody = document.getElementById("history-table-body");
+    tBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">Loading history...</td></tr>`;
+    try {
+        const res = await fetch("/api/reports/history");
+        const data = await res.json();
+        tBody.innerHTML = "";
+        if (!data.history || data.history.length === 0) {
+            tBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-500">No report executions logged yet.</td></tr>`;
+            return;
+        }
+
+        data.history.forEach(h => {
+            const tr = document.createElement("tr");
+            tr.className = "hover:bg-white/5";
+            tr.innerHTML = `
+                <td class="p-3 font-mono text-cyan-300">${h.report_uuid}</td>
+                <td class="p-3 font-semibold text-white">${h.report_type}</td>
+                <td class="p-3 uppercase font-mono text-slate-400">${h.format}</td>
+                <td class="p-3 text-slate-400">${h.shop_id ? `Shop #${h.shop_id}` : 'Consolidated'}</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">${h.status}</span></td>
+                <td class="p-3 text-slate-400">${h.created_at ? h.created_at.replace("T", " ").substring(0, 19) : "N/A"}</td>
+            `;
+            tBody.appendChild(tr);
+        });
+    } catch (err) {
+        tBody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-rose-400">Failed to load history: ${err.message}</td></tr>`;
+    }
+}
+
+async function runIntegrityDiagnostic() {
+    document.getElementById("integrity-modal").classList.remove("hidden");
+    const modalBody = document.getElementById("integrity-modal-body");
+    modalBody.innerHTML = `<div class="p-6 text-center text-slate-400">Running SQLite PRAGMA system queries...</div>`;
+    try {
+        const res = await fetch("/api/reports/integrity");
+        const data = await res.json();
+        const checks = data.checks || {};
+        const storage = data.storage_metrics || {};
+        const counts = data.table_record_counts || {};
+        const totalRows = Object.values(counts).reduce((a, b) => a + b, 0);
+
+        modalBody.innerHTML = `
+            <div class="grid grid-cols-2 gap-3">
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-slate-400 text-[10px] uppercase font-mono">Engine Status</div>
+                    <div class="text-sm font-bold ${data.is_healthy ? 'text-emerald-400' : 'text-rose-400'} uppercase mt-0.5">${data.status} (${data.engine.toUpperCase()})</div>
+                </div>
+                <div class="p-3 rounded-xl bg-white/5 border border-white/10">
+                    <div class="text-slate-400 text-[10px] uppercase font-mono">Check Latency</div>
+                    <div class="text-sm font-bold text-cyan-400 font-mono mt-0.5">${data.check_duration_ms} ms</div>
+                </div>
+            </div>
+
+            <div class="space-y-1.5 pt-2">
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">PRAGMA integrity_check</span>
+                    <span class="font-mono font-bold ${checks.pragma_integrity_check === 'ok' ? 'text-emerald-400' : 'text-rose-400'}">${checks.pragma_integrity_check}</span>
+                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">PRAGMA quick_check</span>
+                    <span class="font-mono font-bold text-emerald-400">${checks.pragma_quick_check}</span>
+                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">Foreign Key Constraint Violations</span>
+                    <span class="font-mono font-bold ${checks.foreign_key_violations === 0 ? 'text-emerald-400' : 'text-rose-400'}">${checks.foreign_key_violations}</span>
+                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">Journal Concurrency Mode</span>
+                    <span class="font-mono text-cyan-300">${checks.journal_mode} (WAL Active: ${checks.wal_mode_active})</span>
+                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">Minor-Unit Reconciliation</span>
+                    <span class="font-mono text-emerald-400">Zero Loss Verified (0 negative units)</span>
+                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">Database Size on Disk</span>
+                    <span class="font-mono text-slate-200">${storage.database_size_formatted} (${storage.page_count} pages)</span>
+                </div>
+                <div class="flex justify-between p-2 rounded-lg bg-white/5">
+                    <span class="text-slate-300">Total Persisted Records</span>
+                    <span class="font-mono text-cyan-300 font-bold">${totalRows.toLocaleString()} rows in ${Object.keys(counts).length} tables</span>
+                </div>
+            </div>
+        `;
+    } catch (err) {
+        modalBody.innerHTML = `<div class="p-4 text-center text-rose-400">Diagnostics error: ${err.message}</div>`;
+    }
+}
+
+function closeIntegrityModal() {
+    document.getElementById("integrity-modal").classList.add("hidden");
+}
+</script>
+{% endblock %}

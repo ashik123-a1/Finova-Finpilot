@@ -11,6 +11,7 @@ from src.api.routes import (
     models,
     i18n,
     audit,
+    reports,
 )
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "models",
     "i18n",
     "audit",
+    "reports",
 ]

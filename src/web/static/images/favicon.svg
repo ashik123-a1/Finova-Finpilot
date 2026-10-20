@@ -1,34 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 95" fill="none">
   <defs>
-    <linearGradient id="smeBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#080e1e"/>
-      <stop offset="50%" stop-color="#030712"/>
-      <stop offset="100%" stop-color="#0a192f"/>
+    <linearGradient id="ffGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E599"/>
+      <stop offset="60%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#0D9488"/>
     </linearGradient>
-    <linearGradient id="smeCyan" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#06b6d4"/>
+
+    <linearGradient id="ffCyanGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="50%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
     </linearGradient>
-    <linearGradient id="smeEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#34d399"/>
-      <stop offset="100%" stop-color="#059669"/>
-    </linearGradient>
+
+    <filter id="ffGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
   </defs>
 
-  <!-- Cyber Badge Base -->
-  <rect x="4" y="4" width="56" height="56" rx="16" fill="url(#smeBg)" stroke="url(#smeCyan)" stroke-width="2"/>
+  <!-- Top 'F' Sweeping Wing -->
+  <path class="ff-shape-f" 
+        d="M38 18 C52 18 64 22 72 26 C64 32 50 34 38 34 C30 34 24 38 22 45 L21 54 C18 42 22 24 38 18 Z" 
+        fill="url(#ffGreenGrad)"/>
 
-  <!-- Subtle Financial Grid -->
-  <line x1="14" y1="44" x2="50" y2="44" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="2 2"/>
-  <line x1="14" y1="32" x2="50" y2="32" stroke="#1e293b" stroke-width="1.5" stroke-dasharray="2 2"/>
+  <!-- Bottom 'P' Cradle with Upward Curving Stem -->
+  <path class="ff-shape-p" 
+        d="M21 54 C26 44 34 38 48 38 C62 38 72 44 76 52 C78 57 78 68 70 76 C62 84 48 84 36 84 C30 84 26 78 26 70 L28 58 C24 64 22 74 24 82 C28 92 38 92 50 92 C68 92 84 82 86 64 C88 48 78 34 58 32 C42 30 30 38 21 54 Z" 
+        fill="url(#ffCyanGrad)"/>
 
-  <!-- Growth Bars -->
-  <rect x="16" y="34" width="6" height="10" rx="2" fill="#0284c7" opacity="0.7"/>
-  <rect x="26" y="26" width="6" height="18" rx="2" fill="url(#smeCyan)"/>
-  <rect x="36" y="18" width="6" height="26" rx="2" fill="url(#smeEmerald)"/>
+  <!-- Continuous Flowing Upward Growth Arrow -->
+  <g class="ff-arrow-group">
+    <path class="ff-arrow-trail" 
+          d="M26 62 C34 54 48 44 68 32 L78 26" 
+          stroke="url(#ffGreenGrad)" stroke-width="3.2" stroke-linecap="round"/>
+    <path class="ff-arrowhead" 
+          d="M72 23 L85 24 L80 37 Z" 
+          fill="#00E599" filter="url(#ffGlow)"/>
+  </g>
 
-  <!-- Upward AI Trend Indicator Line -->
-  <polyline points="18,32 29,24 39,16 48,13" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="48" cy="13" r="3.5" fill="#34d399" stroke="#064e3b" stroke-width="1.5"/>
-  <circle cx="48" cy="13" r="1.5" fill="#ffffff"/>
+  <!-- 3 Financial Growth Chart Bars -->
+  <g class="ff-bars">
+    <rect class="ff-bar ff-bar-1" x="46" y="60" width="4.5" height="15" rx="2" fill="#00E599"/>
+    <rect class="ff-bar ff-bar-2" x="54" y="52" width="4.5" height="23" rx="2" fill="#10B981"/>
+    <rect class="ff-bar ff-bar-3" x="62" y="44" width="4.5" height="31" rx="2" fill="#22D3EE" filter="url(#ffGlow)"/>
+  </g>
 </svg>

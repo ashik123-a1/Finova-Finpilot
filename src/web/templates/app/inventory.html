@@ -1,138 +1,834 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Inventory Valuation & Receivables Aging{% endblock %}
-{% block page_subtitle %}Stock turnover telemetry, SKU gross margins, and accounts receivable credit exposure{% endblock %}
+{% block page_title %}{{ _('inventory.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('inventory.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
-    <!-- Top Summary Metrics -->
+    <!-- Top Summary Metrics Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="glass-panel p-5 rounded-2xl border border-white/5">
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 space-y-1">
             <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Total Stock Valuation</div>
-            <div class="font-orbitron text-2xl font-bold text-white mt-1">৳ 3,450,000<span class="text-xs font-mono text-cyan-400">.00</span></div>
+            <div id="metric-total-valuation" class="font-orbitron text-2xl font-bold text-white mt-1">--</div>
             <div class="text-[11px] text-cyan-400 mt-1">Weighted Cost Basis</div>
         </div>
 
-        <div class="glass-panel p-5 rounded-2xl border border-white/5">
-            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Active SKUs</div>
-            <div class="font-orbitron text-2xl font-bold text-emerald-400 mt-1">142 SKUs</div>
-            <div class="text-[11px] text-slate-400 mt-1">Shop #{{ active_shop_id }} Catalog</div>
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 space-y-1">
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Active SKUs Catalog</div>
+            <div id="metric-total-skus" class="font-orbitron text-2xl font-bold text-emerald-400 mt-1">--</div>
+            <div class="text-[11px] text-slate-400 mt-1">Shop #<span id="label-active-shop">{{ active_shop_id }}</span> Active Items</div>
         </div>
 
-        <div class="glass-panel p-5 rounded-2xl border border-white/5">
-            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Outstanding Receivables</div>
-            <div class="font-orbitron text-2xl font-bold text-amber-300 mt-1">৳ 284,500<span class="text-xs font-mono text-slate-400">.00</span></div>
-            <div class="text-[11px] text-amber-400 mt-1">Trade Credit Extended</div>
+        <div class="glass-panel p-5 rounded-2xl border border-white/5 space-y-1">
+            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Potential Retail Revenue</div>
+            <div id="metric-potential-sales" class="font-orbitron text-2xl font-bold text-cyan-300 mt-1">--</div>
+            <div class="text-[11px] text-slate-400 mt-1">Gross Sales at Full Retail Price</div>
         </div>
 
-        <div class="glass-panel p-5 rounded-2xl border border-white/5">
-            <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Low Stock Reorder Alerts</div>
-            <div class="font-orbitron text-2xl font-bold text-rose-400 mt-1">4 Items</div>
-            <div class="text-[11px] text-rose-300 mt-1">Reorder Threshold Breached</div>
+        <div onclick="filterByStatus('low_stock')" class="glass-panel p-5 rounded-2xl border border-white/5 space-y-1 cursor-pointer hover:border-rose-400/40 transition-all group">
+            <div class="flex justify-between items-center text-xs text-slate-400">
+                <span class="font-semibold uppercase tracking-wider group-hover:text-rose-300 transition-colors">Low Stock Reorder Alerts</span>
+                <span id="low-stock-pulse" class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-[0_0_8px_rgba(244,63,94,0.6)]"></span>
+            </div>
+            <div id="metric-low-stock-count" class="font-orbitron text-2xl font-bold text-rose-400 mt-1">--</div>
+            <div class="text-[11px] text-rose-300 mt-1">Click to Filter Reorder SKUs</div>
         </div>
     </div>
 
-    <!-- Receivables Aging Breakdown -->
-    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
-        <div class="flex items-center justify-between">
+    <!-- Receivables & Stock Aging Breakdown (IFRS 9) -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-2 border-b border-white/5">
             <div>
-                <h3 class="text-sm font-bold text-white">Accounts Receivable Aging Buckets</h3>
-                <p class="text-xs text-slate-400">Aging classification according to IFRS 9 expected credit loss guidelines</p>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-cyan-400"></i>
+                    <span>Accounts Receivable & Stock Aging Analysis</span>
+                </h3>
+                <p class="text-xs text-slate-400">Aging classification according to IFRS 9 expected credit loss guidelines and inventory turnover telemetry</p>
             </div>
-            <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-                100% Reconciled
-            </span>
+            <div class="flex items-center gap-2 text-xs font-mono">
+                <span class="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
+                    Live Ledger Synced
+                </span>
+            </div>
         </div>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="p-4 rounded-2xl bg-slate-900 border border-emerald-500/30 space-y-1">
-                <div class="text-[10px] font-mono uppercase text-emerald-400">0 - 30 Days (Current)</div>
-                <div class="font-orbitron text-lg font-bold text-white">৳ 195,000</div>
-                <div class="text-[10px] text-slate-400">Low Risk • Normal Terms</div>
-            </div>
+        <!-- Receivables Aging Cards -->
+        <div class="space-y-2">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Trade Receivables Credit Risk Buckets:</div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="p-3.5 rounded-2xl bg-slate-900 border border-emerald-500/30 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-emerald-400">0 - 30 Days (Current)</div>
+                    <div id="aging-rec-0-30" class="font-orbitron text-lg font-bold text-white">৳ 0.00</div>
+                    <div class="text-[10px] text-slate-400">Low Risk • Normal Credit Terms</div>
+                </div>
 
-            <div class="p-4 rounded-2xl bg-slate-900 border border-cyan-500/30 space-y-1">
-                <div class="text-[10px] font-mono uppercase text-cyan-400">31 - 60 Days</div>
-                <div class="font-orbitron text-lg font-bold text-white">৳ 58,500</div>
-                <div class="text-[10px] text-slate-400">Follow-up Notice Sent</div>
-            </div>
+                <div class="p-3.5 rounded-2xl bg-slate-900 border border-cyan-500/30 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-cyan-400">31 - 60 Days</div>
+                    <div id="aging-rec-31-60" class="font-orbitron text-lg font-bold text-white">৳ 0.00</div>
+                    <div class="text-[10px] text-slate-400">Follow-up Notice Active</div>
+                </div>
 
-            <div class="p-4 rounded-2xl bg-slate-900 border border-amber-500/30 space-y-1">
-                <div class="text-[10px] font-mono uppercase text-amber-400">61 - 90 Days</div>
-                <div class="font-orbitron text-lg font-bold text-white">৳ 22,000</div>
-                <div class="text-[10px] text-amber-300">Overdue Reminders Active</div>
-            </div>
+                <div class="p-3.5 rounded-2xl bg-slate-900 border border-amber-500/30 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-amber-400">61 - 90 Days</div>
+                    <div id="aging-rec-61-90" class="font-orbitron text-lg font-bold text-white">৳ 0.00</div>
+                    <div class="text-[10px] text-amber-300">Overdue Reminders Triggered</div>
+                </div>
 
-            <div class="p-4 rounded-2xl bg-slate-900 border border-rose-500/30 space-y-1">
-                <div class="text-[10px] font-mono uppercase text-rose-400">90+ Days (Doubtful)</div>
-                <div class="font-orbitron text-lg font-bold text-rose-300">৳ 9,000</div>
-                <div class="text-[10px] text-rose-400">Provision Reserved (3.1%)</div>
+                <div class="p-3.5 rounded-2xl bg-slate-900 border border-rose-500/30 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-rose-400">90+ Days (Doubtful)</div>
+                    <div id="aging-rec-90-plus" class="font-orbitron text-lg font-bold text-rose-300">৳ 0.00</div>
+                    <div class="text-[10px] text-rose-400">ECL Provision Recommended</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inventory Stock Aging Cards -->
+        <div class="space-y-2 pt-2 border-t border-white/5">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Inventory Turnover & Holding Period:</div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="p-3.5 rounded-2xl bg-slate-900/60 border border-white/10 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-emerald-300">0 - 30 Days (Fast Moving)</div>
+                    <div id="aging-stock-0-30" class="font-orbitron text-base font-bold text-slate-200">৳ 0.00</div>
+                    <div class="text-[10px] text-slate-400">Fresh Stock • Active Velocity</div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-slate-900/60 border border-white/10 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-cyan-300">31 - 60 Days (Normal)</div>
+                    <div id="aging-stock-31-60" class="font-orbitron text-base font-bold text-slate-200">৳ 0.00</div>
+                    <div class="text-[10px] text-slate-400">Standard Replenishment</div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-slate-900/60 border border-white/10 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-amber-300">61 - 90 Days (Slow)</div>
+                    <div id="aging-stock-61-90" class="font-orbitron text-base font-bold text-slate-200">৳ 0.00</div>
+                    <div class="text-[10px] text-amber-400">Review Pricing or Bundle</div>
+                </div>
+
+                <div class="p-3.5 rounded-2xl bg-slate-900/60 border border-white/10 space-y-1">
+                    <div class="text-[10px] font-mono uppercase text-rose-300">90+ Days (Clearance)</div>
+                    <div id="aging-stock-90-plus" class="font-orbitron text-base font-bold text-rose-300">৳ 0.00</div>
+                    <div class="text-[10px] text-rose-400">Discount Promotion Target</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Low Stock Inventory Alerts Table -->
-    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
-        <div class="flex items-center justify-between">
-            <h3 class="text-sm font-bold text-white">SKU Inventory & Reorder Monitoring</h3>
-            <button type="button" onclick="showToast('Reorder Purchase Orders Drafted!', 'success')" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 transition-all">
-                <i data-lucide="shopping-cart" class="w-3.5 h-3.5"></i>
-                <span>Auto-Draft Purchase Orders</span>
-            </button>
+    <!-- SKU Inventory & Reorder Monitoring Table Panel -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-5">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+                <h3 class="text-base font-bold text-white flex items-center gap-2">
+                    <i data-lucide="boxes" class="w-5 h-5 text-cyan-400"></i>
+                    <span>SKU Inventory Catalog & Safety Reorder Management</span>
+                </h3>
+                <p class="text-xs text-slate-400">Track unit costs, gross margins, stock movements, and automatic supplier purchase order drafting</p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="triggerAutoDraftPO()" id="btn-auto-draft" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-cyan-500/20 transition-all">
+                    <i data-lucide="shopping-cart" class="w-4 h-4"></i>
+                    <span>Auto-Draft Purchase Orders</span>
+                </button>
+
+                <button type="button" onclick="openAddProductModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 font-bold text-xs flex items-center gap-1.5 transition-all">
+                    <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                    <span>+ Add Product / SKU</span>
+                </button>
+            </div>
         </div>
 
-        <div class="overflow-x-auto">
+        <!-- Filter & Search Toolbar -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-3 bg-slate-900/60 p-3 rounded-2xl border border-white/5">
+            <div class="relative">
+                <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+                <input type="text" id="prod-search" oninput="debounceProductSearch()" placeholder="Search SKU, name, barcode..." class="glass-input w-full pl-9 pr-3 py-1.5 rounded-xl text-xs text-white placeholder:text-slate-500">
+            </div>
+
+            <div>
+                <select id="prod-category-filter" onchange="loadProducts()" class="glass-input w-full px-3 py-1.5 rounded-xl text-xs text-slate-300">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+
+            <div>
+                <select id="prod-stock-filter" onchange="loadProducts()" class="glass-input w-full px-3 py-1.5 rounded-xl text-xs text-slate-300">
+                    <option value="all">All Stock Statuses</option>
+                    <option value="in_stock">In Stock (&gt; 0)</option>
+                    <option value="low_stock">Low Stock (≤ {{ _('inventory.reorder_level') }})</option>
+                    <option value="out_of_stock">Out of Stock (0 units)</option>
+                </select>
+            </div>
+
+            <div class="flex items-center justify-end text-xs text-slate-400">
+                <button type="button" onclick="resetProductFilters()" class="text-cyan-400 hover:text-cyan-300 font-mono text-[11px] flex items-center gap-1">
+                    <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
+                    <span>Reset Filters</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="overflow-x-auto min-h-[300px] relative">
+            <div id="table-loading" class="hidden absolute inset-0 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center z-10">
+                <div class="flex items-center gap-2 text-cyan-400 text-xs font-mono">
+                    <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+                    <span>Loading SKU catalog...</span>
+                </div>
+            </div>
+
             <table class="w-full text-left text-xs">
                 <thead>
                     <tr class="border-b border-white/10 text-slate-400 font-mono uppercase tracking-wider text-[11px]">
-                        <th class="pb-3 font-semibold">SKU Code</th>
+                        <th class="pb-3 font-semibold">SKU / Barcode</th>
                         <th class="pb-3 font-semibold">Product Description</th>
+                        <th class="pb-3 font-semibold">{{ _('inventory.category') }}</th>
                         <th class="pb-3 font-semibold text-center">Current Qty</th>
-                        <th class="pb-3 font-semibold text-center">Safety Reorder Point</th>
+                        <th class="pb-3 font-semibold text-center">Safety Reorder</th>
                         <th class="pb-3 font-semibold text-right">Unit Cost</th>
+                        <th class="pb-3 font-semibold text-right">Selling Price</th>
+                        <th class="pb-3 font-semibold text-center">Margin %</th>
+                        <th class="pb-3 font-semibold text-right">Total Valuation</th>
                         <th class="pb-3 font-semibold text-center">Status</th>
+                        <th class="pb-3 font-semibold text-right">Action</th>
                     </tr>
                 </thead>
-                <tbody class="divide-y divide-white/5">
-                    <tr class="hover:bg-white/5 transition-colors">
-                        <td class="py-3 font-mono text-cyan-400 font-semibold">SKU-TX-004</td>
-                        <td class="py-3 text-white font-medium">Premium Cotton Kurta (Size M)</td>
-                        <td class="py-3 font-mono text-center text-rose-400 font-bold">4 pcs</td>
-                        <td class="py-3 font-mono text-center text-slate-400">20 pcs</td>
-                        <td class="py-3 font-mono text-right text-slate-300">৳ 1,450.00</td>
-                        <td class="py-3 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/30">
-                                CRITICAL LOW
-                            </span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-white/5 transition-colors">
-                        <td class="py-3 font-mono text-cyan-400 font-semibold">SKU-FB-019</td>
-                        <td class="py-3 text-white font-medium">Silk Weave Fabric (Roll 50m)</td>
-                        <td class="py-3 font-mono text-center text-amber-300 font-bold">8 rolls</td>
-                        <td class="py-3 font-mono text-center text-slate-400">15 rolls</td>
-                        <td class="py-3 font-mono text-right text-slate-300">৳ 8,200.00</td>
-                        <td class="py-3 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">
-                                LOW STOCK
-                            </span>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-white/5 transition-colors">
-                        <td class="py-3 font-mono text-cyan-400 font-semibold">SKU-AP-102</td>
-                        <td class="py-3 text-white font-medium">Embroidery Thread Spools (Pack 24)</td>
-                        <td class="py-3 font-mono text-center text-emerald-400 font-bold">94 packs</td>
-                        <td class="py-3 font-mono text-center text-slate-400">30 packs</td>
-                        <td class="py-3 font-mono text-right text-slate-300">৳ 480.00</td>
-                        <td class="py-3 text-center">
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                                OPTIMAL
-                            </span>
-                        </td>
-                    </tr>
+                <tbody id="products-table-body" class="divide-y divide-white/5">
+                    <!-- Populated dynamically via JS -->
                 </tbody>
             </table>
+
+            <div id="empty-state" class="hidden text-center py-12 space-y-2">
+                <i data-lucide="package-x" class="w-10 h-10 text-slate-600 mx-auto"></i>
+                <div class="text-sm font-semibold text-slate-300">No Inventory Items Found</div>
+                <div class="text-xs text-slate-500">Try adjusting your filters or click "+ Add Product / SKU" to register a new item.</div>
+            </div>
         </div>
     </div>
 </div>
+
+<!-- ============================================================================== -->
+<!-- 1. ADD PRODUCT / SKU MODAL -->
+<!-- ============================================================================== -->
+<div id="add-product-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-glow w-full max-w-xl rounded-3xl border border-cyan-500/40 p-6 shadow-2xl relative space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+                <i data-lucide="package-plus" class="w-5 h-5 text-cyan-400"></i>
+                <h3 class="text-base font-bold text-white">Add Product / SKU to Catalog</h3>
+            </div>
+            <button type="button" onclick="closeAddProductModal()" class="text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <form id="add-product-form" onsubmit="submitAddProduct(event)" class="space-y-4 text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">{{ _('inventory.sku') }} *</label>
+                    <input type="text" id="add-sku" required placeholder="e.g. SKU-TX-099" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Barcode / UPC (Optional)</label>
+                    <input type="text" id="add-barcode" placeholder="e.g. 8941100223" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono">
+                </div>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-slate-300 mb-1">Product Description / Title *</label>
+                <input type="text" id="add-prod-name" required placeholder="e.g. Premium Cotton Kurta (Size M)" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Product {{ _('inventory.category') }} *</label>
+                    <input type="text" id="add-prod-category" required placeholder="e.g. Apparel, Fabric, Accessories" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Unit of Measure</label>
+                    <select id="add-prod-uom" class="glass-input w-full px-3 py-2 rounded-xl text-slate-200">
+                        <option value="pcs">Pieces (pcs)</option>
+                        <option value="rolls">Rolls (rolls)</option>
+                        <option value="packs">Packs (packs)</option>
+                        <option value="kg">Kilograms (kg)</option>
+                        <option value="meters">Meters (m)</option>
+                        <option value="boxes">Boxes (box)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Unit Cost Price (BDT) *</label>
+                    <input type="number" id="add-cost-price" required min="0" step="0.5" placeholder="0.00" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">{{ _('inventory.selling_price') }} (BDT) *</label>
+                    <input type="number" id="add-selling-price" required min="0" step="0.5" placeholder="0.00" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Initial Stock Quantity</label>
+                    <input type="number" id="add-initial-stock" min="0" step="1" value="0" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Safety Reorder Point (Threshold)</label>
+                    <input type="number" id="add-reorder-alert" min="1" step="1" value="10" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono">
+                </div>
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+                <button type="button" onclick="closeAddProductModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold">
+                    Cancel
+                </button>
+                <button type="submit" id="btn-save-product" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-cyan-500/20">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    <span>Save Product</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================================================================== -->
+<!-- 2. STOCK ADJUSTMENT MODAL -->
+<!-- ============================================================================== -->
+<div id="adj-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-glow w-full max-w-lg rounded-3xl border border-amber-500/40 p-6 shadow-2xl relative space-y-4 animate-in fade-in zoom-in-95">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+                <i data-lucide="sliders" class="w-5 h-5 text-amber-400"></i>
+                <h3 class="text-base font-bold text-white">Record Stock Adjustment</h3>
+            </div>
+            <button type="button" onclick="closeAdjModal()" class="text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <form id="adj-form" onsubmit="submitStockAdjustment(event)" class="space-y-4 text-xs">
+            <input type="hidden" id="adj-product-id">
+            <input type="hidden" id="adj-unit-cost">
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Product / SKU</label>
+                    <input type="text" id="adj-prod-name" readonly class="glass-input w-full px-3 py-2 rounded-xl text-white font-semibold">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Current Stock On Hand</label>
+                    <input type="text" id="adj-current-stock" readonly class="glass-input w-full px-3 py-2 rounded-xl font-orbitron font-bold text-cyan-300">
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Adjustment Reason *</label>
+                    <select id="adj-reason" class="glass-input w-full px-3 py-2 rounded-xl text-slate-200">
+                        <option value="breakage">Physical Breakage / Damage</option>
+                        <option value="spoilage">Spoilage / Expired Goods</option>
+                        <option value="theft">Theft / Unexplained Shrinkage</option>
+                        <option value="count_correction">Inventory Count Correction (+/-)</option>
+                        <option value="damaged_return">Customer Damaged Return</option>
+                        <option value="other">Other Operational Reason</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Qty to Adjust (+ or -) *</label>
+                    <input type="number" id="adj-qty" required step="1" oninput="calculateCostImpact()" placeholder="-2 or +5" class="glass-input w-full px-3 py-2 rounded-xl text-white font-mono font-bold">
+                    <span class="text-[10px] text-slate-400">Use negative for deduction, positive for found stock.</span>
+                </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-900 border border-white/5 flex items-center justify-between">
+                <span class="text-slate-400 font-mono">Estimated Financial Cost Impact:</span>
+                <span id="adj-cost-impact" class="font-orbitron font-bold text-amber-300 text-sm">৳ 0.00</span>
+            </div>
+
+            <div>
+                <label class="block font-semibold text-slate-300 mb-1">Audit Notes / Explanation</label>
+                <input type="text" id="adj-notes" placeholder="e.g. Broken during shelf reorganization or physical count variance" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-3 border-t border-white/10">
+                <button type="button" onclick="closeAdjModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs font-semibold">
+                    Cancel
+                </button>
+                <button type="submit" id="btn-save-adj" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-rose-500 hover:from-amber-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-amber-500/20">
+                    <i data-lucide="check" class="w-4 h-4"></i>
+                    <span>Apply Adjustment</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ============================================================================== -->
+<!-- 3. AUTO-DRAFT PURCHASE ORDER MODAL -->
+<!-- ============================================================================== -->
+<div id="po-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-glow w-full max-w-2xl rounded-3xl border border-cyan-500/40 p-6 shadow-2xl relative space-y-4 animate-in fade-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-5 h-5 text-cyan-400"></i>
+                <h3 class="text-base font-bold text-white">Replenishment Purchase Order Drafted</h3>
+            </div>
+            <button type="button" onclick="closePOModal()" class="text-slate-400 hover:text-white p-1">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900 border border-white/5">
+                <div class="text-[10px] text-slate-400 font-mono">PO NUMBER</div>
+                <div id="po-disp-number" class="font-mono font-bold text-cyan-300 mt-0.5">--</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-white/5">
+                <div class="text-[10px] text-slate-400 font-mono">PRIMARY SUPPLIER</div>
+                <div id="po-disp-supplier" class="font-bold text-white mt-0.5 truncate">--</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-white/5 col-span-2 sm:col-span-1">
+                <div class="text-[10px] text-slate-400 font-mono">TOTAL ORDER VALUE</div>
+                <div id="po-disp-total" class="font-orbitron font-bold text-emerald-400 mt-0.5">--</div>
+            </div>
+        </div>
+
+        <!-- PO Items Table -->
+        <div class="space-y-2">
+            <div class="text-[11px] font-mono uppercase tracking-wider text-slate-400 font-semibold">Replenishment Order Line Items:</div>
+            <div class="max-h-60 overflow-y-auto rounded-xl border border-white/10 bg-slate-900/60">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="border-b border-white/10 text-slate-400 font-mono text-[10px] uppercase">
+                            <th class="p-2.5">Product SKU</th>
+                            <th class="p-2.5 text-center">Current Stock</th>
+                            <th class="p-2.5 text-center">Reorder Qty</th>
+                            <th class="p-2.5 text-right">Unit Cost</th>
+                            <th class="p-2.5 text-right">Line Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="po-items-body" class="divide-y divide-white/5 font-mono">
+                        <!-- Populated dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-[11px] flex items-center gap-2">
+            <i data-lucide="info" class="w-4 h-4 shrink-0"></i>
+            <span>This purchase order has been generated as a formal draft in the system database. You can review items or mark them as received when stock arrives.</span>
+        </div>
+
+        <div class="flex items-center justify-between pt-3 border-t border-white/10">
+            <button type="button" onclick="closePOModal()" class="px-4 py-2 rounded-xl bg-slate-800 text-slate-300 text-xs">
+                Keep Draft in System
+            </button>
+            <button type="button" id="btn-receive-po" onclick="receiveActivePO()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 text-slate-950 font-bold text-xs flex items-center gap-1.5 shadow-lg shadow-emerald-500/20">
+                <i data-lucide="check-check" class="w-4 h-4"></i>
+                <span>Confirm & Receive Goods Now</span>
+            </button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+let currentShopId = {{ active_shop_id or 28 }};
+let allProducts = [];
+let activePOId = null;
+let searchTimeout = null;
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadProducts();
+    loadAgingReport();
+});
+
+function debounceProductSearch() {
+    clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => {
+        loadProducts();
+    }, 300);
+}
+
+function filterByStatus(status) {
+    document.getElementById('prod-stock-filter').value = status;
+    loadProducts();
+}
+
+function resetProductFilters() {
+    document.getElementById('prod-search').value = '';
+    document.getElementById('prod-category-filter').value = '';
+    document.getElementById('prod-stock-filter').value = 'all';
+    loadProducts();
+}
+
+async function loadProducts() {
+    const search = document.getElementById('prod-search').value.trim();
+    const category = document.getElementById('prod-category-filter').value;
+    const stockStatus = document.getElementById('prod-stock-filter').value;
+
+    const loader = document.getElementById('table-loading');
+    loader.classList.remove('hidden');
+
+    try {
+        let url = `/api/inventory/products?shop_id=${currentShopId}&limit=100`;
+        if (search) url += `&search=${encodeURIComponent(search)}`;
+        if (category) url += `&category=${encodeURIComponent(category)}`;
+        if (stockStatus) url += `&stock_status=${encodeURIComponent(stockStatus)}`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data.status === 'success') {
+            allProducts = data.products || [];
+            updateProductSummaryCards(data.summary);
+            populate{{ _('inventory.category') }}Dropdown(data.summary.categories);
+            renderProductsTable(allProducts);
+        } else {
+            showToast(data.detail || 'Failed to load products', 'error');
+        }
+    } catch (err) {
+        console.error('Error fetching inventory:', err);
+        showToast('Network error loading SKU catalog', 'error');
+    } finally {
+        loader.classList.add('hidden');
+    }
+}
+
+async function loadAgingReport() {
+    try {
+        const res = await fetch(`/api/inventory/aging-report?shop_id=${currentShopId}`);
+        const data = await res.json();
+
+        if (data.status === 'success') {
+            const rBuckets = data.receivables_aging.buckets;
+            document.getElementById('aging-rec-0-30').innerText = rBuckets['0_30_current'].formatted;
+            document.getElementById('aging-rec-31-60').innerText = rBuckets['31_60_days'].formatted;
+            document.getElementById('aging-rec-61-90').innerText = rBuckets['61_90_days'].formatted;
+            document.getElementById('aging-rec-90-plus').innerText = rBuckets['90_plus_doubtful'].formatted;
+
+            const sBuckets = data.inventory_aging.buckets;
+            document.getElementById('aging-stock-0-30').innerText = sBuckets['0_30_fast'].formatted;
+            document.getElementById('aging-stock-31-60').innerText = sBuckets['31_60_normal'].formatted;
+            document.getElementById('aging-stock-61-90').innerText = sBuckets['61_90_slow'].formatted;
+            document.getElementById('aging-stock-90-plus').innerText = sBuckets['90_plus_aging'].formatted;
+        }
+    } catch (err) {
+        console.error('Error fetching aging report:', err);
+    }
+}
+
+function updateProductSummaryCards(summary) {
+    if (!summary) return;
+    document.getElementById('metric-total-valuation').innerText = summary.total_valuation_formatted;
+    document.getElementById('metric-total-skus').innerText = `${summary.total_skus} SKUs`;
+    document.getElementById('metric-potential-sales').innerText = summary.total_potential_sales_formatted;
+    document.getElementById('metric-low-stock-count').innerText = `${summary.low_stock_count} Items`;
+
+    const pulse = document.getElementById('low-stock-pulse');
+    if (summary.low_stock_count > 0) {
+        pulse.classList.remove('hidden');
+    } else {
+        pulse.classList.add('hidden');
+    }
+}
+
+function populate{{ _('inventory.category') }}Dropdown(categories) {
+    const sel = document.getElementById('prod-category-filter');
+    const currVal = sel.value;
+    // preserve option 0
+    sel.innerHTML = '<option value="">All Categories</option>';
+    if (categories) {
+        categories.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat;
+            opt.innerText = cat;
+            if (cat === currVal) opt.selected = true;
+            sel.appendChild(opt);
+        });
+    }
+}
+
+function renderProductsTable(products) {
+    const tbody = document.getElementById('products-table-body');
+    const emptyState = document.getElementById('empty-state');
+    tbody.innerHTML = '';
+
+    if (!products || products.length === 0) {
+        emptyState.classList.remove('hidden');
+        return;
+    }
+    emptyState.classList.add('hidden');
+
+    products.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.className = 'hover:bg-white/5 transition-colors';
+
+        // Status badge
+        let badgeHtml = '';
+        if (p.status === 'CRITICAL_LOW') {
+            badgeHtml = '<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/30">CRITICAL LOW</span>';
+        } else if (p.status === 'LOW_STOCK') {
+            badgeHtml = '<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30">LOW STOCK</span>';
+        } else if (p.status === 'OUT_OF_STOCK') {
+            badgeHtml = '<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-red-600/20 text-red-400 border border-red-500/40">OUT OF STOCK</span>';
+        } else {
+            badgeHtml = '<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">OPTIMAL</span>';
+        }
+
+        const stockColor = p.current_stock <= (p.min_stock_alert / 2) ? 'text-rose-400 font-bold' : (p.current_stock <= p.min_stock_alert ? 'text-amber-300 font-bold' : 'text-slate-200');
+
+        tr.innerHTML = `
+            <td class="py-3 font-mono font-semibold text-cyan-400 text-xs">
+                ${p.sku}
+                ${p.barcode ? '<div class="text-[9px] text-slate-500 font-normal">BAR: ' + p.barcode + '</div>' : ''}
+            </td>
+            <td class="py-3">
+                <div class="font-medium text-white text-xs">${p.name}</div>
+                <div class="text-[10px] text-slate-400 font-mono">${p.aging_bucket}</div>
+            </td>
+            <td class="py-3 text-slate-300 font-mono text-xs">${p.category}</td>
+            <td class="py-3 text-center font-mono ${stockColor}">
+                ${p.current_stock} ${p.unit_of_measure}
+            </td>
+            <td class="py-3 text-center font-mono text-slate-400 text-xs">
+                ${p.min_stock_alert} ${p.unit_of_measure}
+            </td>
+            <td class="py-3 text-right font-mono text-slate-300 text-xs">
+                ${p.cost_price_formatted}
+            </td>
+            <td class="py-3 text-right font-mono text-cyan-300 text-xs">
+                ${p.selling_price_formatted}
+            </td>
+            <td class="py-3 text-center font-mono font-semibold text-xs ${p.gross_margin_percent < 20 ? 'text-amber-300' : 'text-emerald-400'}">
+                ${p.gross_margin_percent}%
+            </td>
+            <td class="py-3 text-right font-orbitron font-bold text-white text-xs">
+                ${p.valuation_formatted}
+            </td>
+            <td class="py-3 text-center">
+                ${badgeHtml}
+            </td>
+            <td class="py-3 text-right">
+                <button type="button" onclick="openAdjModal(${p.id}, '${escapeQuotes(p.name)}', ${p.current_stock}, '${p.unit_of_measure}', ${p.cost_price_minor})" class="px-2.5 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[11px] font-semibold transition-all">
+                    Adjust
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+
+    if (window.lucide) lucide.createIcons();
+}
+
+function escapeQuotes(str) {
+    return (str || '').replace(/'/g, "\\'");
+}
+
+// --- ADD PRODUCT MODAL ---
+function openAddProductModal() {
+    document.getElementById('add-product-form').reset();
+    document.getElementById('add-product-modal').classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeAddProductModal() {
+    document.getElementById('add-product-modal').classList.add('hidden');
+}
+
+async function submitAddProduct(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-save-product');
+    btn.disabled = true;
+
+    const payload = {
+        shop_id: currentShopId,
+        sku: document.getElementById('add-sku').value.trim(),
+        barcode: document.getElementById('add-barcode').value.trim() || null,
+        name: document.getElementById('add-prod-name').value.trim(),
+        category: document.getElementById('add-prod-category').value.trim(),
+        unit_of_measure: document.getElementById('add-prod-uom').value,
+        cost_price_minor: Math.round((parseFloat(document.getElementById('add-cost-price').value) || 0) * 100),
+        selling_price_minor: Math.round((parseFloat(document.getElementById('add-selling-price').value) || 0) * 100),
+        current_stock: parseInt(document.getElementById('add-initial-stock').value) || 0,
+        min_stock_alert: parseInt(document.getElementById('add-reorder-alert').value) || 10,
+    };
+
+    try {
+        const res = await fetch('/api/inventory/products', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (res.ok && data.status === 'success') {
+            showToast(data.message || 'Product created successfully', 'success');
+            closeAddProductModal();
+            loadProducts();
+            loadAgingReport();
+        } else {
+            showToast(data.detail || 'Failed to create product', 'error');
+        }
+    } catch (err) {
+        showToast('Network error creating product', 'error');
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+// --- STOCK ADJUSTMENT MODAL ---
+function openAdjModal(prodId, prodName, currentStock, uom, costMinor) {
+    document.getElementById('adj-product-id').value = prodId;
+    document.getElementById('adj-unit-cost').value = costMinor;
+    document.getElementById('adj-prod-name').value = prodName;
+    document.getElementById('adj-current-stock').value = `${currentStock} ${uom}`;
+    document.getElementById('adj-qty').value = '';
+    document.getElementById('adj-cost-impact').innerText = '৳ 0.00';
+    document.getElementById('adj-notes').value = '';
+    document.getElementById('adj-modal').classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closeAdjModal() {
+    document.getElementById('adj-modal').classList.add('hidden');
+}
+
+function calculateCostImpact() {
+    const qty = parseInt(document.getElementById('adj-qty').value) || 0;
+    const unitCost = parseInt(document.getElementById('adj-unit-cost').value) || 0;
+    const totalMinor = Math.abs(qty) * unitCost;
+    document.getElementById('adj-cost-impact').innerText = '৳ ' + (totalMinor / 100).toLocaleString('en-US', {minimumFractionDigits: 2});
+}
+
+async function submitStockAdjustment(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-save-adj');
+    btn.disabled = true;
+
+    const prodId = parseInt(document.getElementById('adj-product-id').value);
+    const qty = parseInt(document.getElementById('adj-qty').value);
+    const reason = document.getElementById('adj-reason').value;
+    const notes = document.getElementById('adj-notes').value.trim();
+
+    if (isNaN(qty) || qty === 0) {
+        showToast('Please specify a non-zero adjustment quantity', 'error');
+        btn.disabled = false;
+        return;
+    }
+
+    try {
+        const res = await fetch('/api/inventory/stock-adjustment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                shop_id: currentShopId,
+                product_id: prodId,
+                reason: reason,
+                quantity_adjusted: qty,
+                notes: notes
+            })
+        });
+        const data = await res.json();
+        if (res.ok && data.status === 'success') {
+            showToast(data.message || 'Stock adjusted successfully', 'success');
+            closeAdjModal();
+            loadProducts();
+            loadAgingReport();
+        } else {
+            showToast(data.detail || 'Failed to adjust stock', 'error');
+        }
+    } catch (err) {
+        showToast('Network error applying stock adjustment', 'error');
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+// --- AUTO-DRAFT PURCHASE ORDERS ---
+async function triggerAutoDraftPO() {
+    const btn = document.getElementById('btn-auto-draft');
+    btn.disabled = true;
+
+    try {
+        const res = await fetch('/api/inventory/reorder/auto-draft', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ shop_id: currentShopId })
+        });
+        const data = await res.json();
+
+        if (res.ok && data.status === 'success') {
+            if (!data.purchase_order) {
+                showToast(data.message || 'All stock levels are optimal!', 'info');
+            } else {
+                displayDraftPOModal(data.purchase_order);
+            }
+        } else {
+            showToast(data.detail || 'Error running replenishment engine', 'error');
+        }
+    } catch (err) {
+        showToast('Network error triggering auto-draft', 'error');
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+function displayDraftPOModal(po) {
+    activePOId = po.id;
+    document.getElementById('po-disp-number').innerText = po.order_number;
+    document.getElementById('po-disp-supplier').innerText = po.supplier_name;
+    document.getElementById('po-disp-total').innerText = po.total_amount_formatted;
+
+    const tbody = document.getElementById('po-items-body');
+    tbody.innerHTML = '';
+
+    if (po.items && po.items.length > 0) {
+        po.items.forEach(it => {
+            const tr = document.createElement('tr');
+            tr.className = 'hover:bg-white/5';
+            tr.innerHTML = `
+                <td class="p-2.5 text-white font-medium">${it.name} <span class="text-cyan-400">(${it.sku})</span></td>
+                <td class="p-2.5 text-center text-rose-400 font-bold">${it.current_stock}</td>
+                <td class="p-2.5 text-center text-emerald-400 font-bold">+${it.reorder_quantity}</td>
+                <td class="p-2.5 text-right text-slate-300">${it.unit_cost_formatted}</td>
+                <td class="p-2.5 text-right text-white font-bold">${it.line_total_formatted}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    document.getElementById('po-modal').classList.remove('hidden');
+    if (window.lucide) lucide.createIcons();
+}
+
+function closePOModal() {
+    document.getElementById('po-modal').classList.add('hidden');
+}
+
+async function receiveActivePO() {
+    if (!activePOId) return;
+    const btn = document.getElementById('btn-receive-po');
+    btn.disabled = true;
+
+    try {
+        const res = await fetch(`/api/inventory/purchase-orders/${activePOId}/receive?shop_id=${currentShopId}`, {
+            method: 'POST'
+        });
+        const data = await res.json();
+        if (res.ok && data.status === 'success') {
+            showToast(data.message || 'Goods received and catalog replenished!', 'success');
+            closePOModal();
+            loadProducts();
+            loadAgingReport();
+        } else {
+            showToast(data.detail || 'Failed to receive goods', 'error');
+        }
+    } catch (err) {
+        showToast('Network error receiving purchase order', 'error');
+    } finally {
+        btn.disabled = false;
+    }
+}
+</script>
 {% endblock %}

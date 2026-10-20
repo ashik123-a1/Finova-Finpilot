@@ -65,7 +65,7 @@ function getStoredToken() {
 }
 
 function getActiveShopId() {
-    return getCookie('sme_active_shop_id') || '1';
+    return getCookie('sme_active_shop_id') || document.getElementById('global-shop-switcher')?.value || '28';
 }
 
 function getCookie(name) {

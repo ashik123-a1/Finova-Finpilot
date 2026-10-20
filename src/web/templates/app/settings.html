@@ -1,7 +1,7 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Organization Settings & Local Database Telemetry{% endblock %}
-{% block page_subtitle %}Manage business entities, multi-shop branches, localization profiles, and SQLite engine{% endblock %}
+{% block page_title %}{{ _('settings.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('settings.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
@@ -9,32 +9,35 @@
     <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
         <div class="flex items-center justify-between pb-3 border-b border-white/10">
             <div>
-                <h3 class="text-sm font-bold text-white">Business Entity Profile</h3>
+                <h3 class="text-sm font-bold text-white">{{ _('settings.business_profile') }}</h3>
                 <p class="text-xs text-slate-400">Statutory registration and accounting configuration</p>
             </div>
-            <button type="button" onclick="showToast('Business profile updated!', 'success')" class="px-4 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-md">
-                Save Profile
+            <button type="button" onclick="saveBusinessProfileSettings()" class="px-4 py-1.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold text-xs transition-all shadow-md">
+                {{ _('settings.save_changes') }}
             </button>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
             <div>
                 <label class="block font-semibold text-slate-300 mb-1">Legal Business Name</label>
-                <input type="text" value="{{ business.name if business else 'Dhaka Premier Retailers Ltd.' }}" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                <input type="text" id="settings-biz-name" value="{{ business.name if business else 'Dhaka Premier Retailers Ltd.' }}" class="glass-input w-full px-3 py-2 rounded-xl text-white">
             </div>
 
             <div>
                 <label class="block font-semibold text-slate-300 mb-1">Tax Identifier (BIN / TIN / USCI)</label>
-                <input type="text" value="{{ business.tax_identifier if business else 'BIN-99281-002' }}" class="glass-input w-full px-3 py-2 rounded-xl font-mono text-cyan-400">
+                <input type="text" id="settings-biz-tax" value="{{ business.tax_identifier if business else 'BIN-99281-002' }}" class="glass-input w-full px-3 py-2 rounded-xl font-mono text-cyan-400">
             </div>
 
             <div>
-                <label class="block font-semibold text-slate-300 mb-1">Primary Operating Currency</label>
-                <select class="glass-input w-full px-3 py-2 rounded-xl text-white cursor-pointer">
-                    <option value="BDT" selected>BDT — Bangladeshi Taka (৳)</option>
-                    <option value="CNY">CNY — Chinese Yuan (¥)</option>
-                    <option value="USD">USD — US Dollar ($)</option>
+                <label class="block font-semibold text-slate-300 mb-1">{{ _('settings.currency_settings') }}</label>
+                <select id="settings-currency-select" class="glass-input w-full px-3 py-2 rounded-xl text-white cursor-pointer">
+                    <option value="BDT" {% if business and business.currency == 'BDT' %}selected{% endif %}>BDT — Bangladeshi Taka (৳)</option>
+                    <option value="CNY" {% if business and business.currency == 'CNY' %}selected{% endif %}>CNY — Chinese Yuan (¥)</option>
+                    <option value="USD" {% if business and business.currency == 'USD' %}selected{% endif %}>USD — US Dollar ($)</option>
+                    <option value="EUR" {% if business and business.currency == 'EUR' %}selected{% endif %}>EUR — Euro (€)</option>
+                    <option value="GBP" {% if business and business.currency == 'GBP' %}selected{% endif %}>GBP — British Pound (£)</option>
                 </select>
+                <span class="text-[10px] text-slate-500 mt-1 block">{{ _('settings.suggested_currency_note') }}</span>
             </div>
         </div>
     </div>
@@ -136,6 +139,43 @@
 
 {% block extra_scripts %}
 <script>
+async function saveBusinessProfileSettings() {
+    const newCurrency = document.getElementById('settings-currency-select').value;
+    const bizId = parseInt('{{ business.id if business else 19 }}');
+    const token = localStorage.getItem('sme_token') || '{{ current_user.token if current_user else "" }}';
+
+    try {
+        const resp = await fetch('/api/i18n/set-currency', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token ? `Bearer ${token}` : ''
+            },
+            body: JSON.stringify({
+                currency: newCurrency,
+                business_id: bizId
+            })
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            document.cookie = `sme_currency=${newCurrency}; path=/; max-age=31536000; SameSite=Lax`;
+            showToast(`Business accounting currency updated to ${data.currency} (${data.symbol}). Audit trail recorded!`, 'success');
+            setTimeout(() => { 
+                const url = new URL(window.location.href);
+                url.searchParams.set('currency', newCurrency);
+                window.location.href = url.toString();
+            }, 800);
+        } else {
+            const err = await resp.json().catch(() => ({}));
+            showToast(err.detail || 'Failed to update currency settings.', 'danger');
+        }
+    } catch (e) {
+        showToast('Error communicating with currency API.', 'danger');
+    }
+}
+window.saveBusinessProfileSettings = saveBusinessProfileSettings;
+
 function runDbIntegrityCheck() {
     showToast('Executing PRAGMA integrity_check and foreign_key_check...', 'info');
     setTimeout(() => {

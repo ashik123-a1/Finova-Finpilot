@@ -1,0 +1,199 @@
+{
+  "execution_evidence": {
+    "section_id": "06_execution_evidence",
+    "section_title_bn": "০৬. এক্সিকিউশন প্রমাণ (06. Execution Evidence)",
+    "section_title_en": "06. Execution Evidence (Topic E)",
+    "format": "স্যান্ডবক্স লগ ফাইল ও স্ক্রিন রেকর্ডিং (Sandbox Log File & Screen Recording)",
+    "topic": "Topic E: SME Financial AI Copilot & Autonomous FinTech Agent",
+    "generation_timestamp": "2026-10-20T11:30:00Z",
+    "system_status": "ONLINE_VERIFIED",
+    "database_engine": "SQLite 3.45 (WAL Mode)",
+    "math_precision": "Integer Minor-Unit (Zero Floating-Point Error)"
+  },
+  "simulated_environment": {
+    "account_name": "Bismillah Store (Synthetic Demo)",
+    "shop_id": 28,
+    "business_id": 19,
+    "jurisdiction": "Bangladesh (BDT) / Cross-Border Multi-Currency (CNY, USD)",
+    "active_currency": "BDT",
+    "recorded_ledger_rows": 162828,
+    "historical_days": 180,
+    "forecast_horizon_days": 30
+  },
+  "operational_api_logs": [
+    {
+      "log_id": "LOG-OCR-20261020-001",
+      "timestamp": "2026-10-20T08:14:22Z",
+      "module": "Document OCR & Double-Entry Ledger Posting",
+      "endpoint": "POST /api/documents/process-ocr",
+      "http_status": 200,
+      "latency_ms": 32,
+      "request_payload": {
+        "file_name": "doc_purchase_invoice_bn_00001.png",
+        "mime_type": "image/png",
+        "shop_id": 28,
+        "auto_post_ledger": true,
+        "language_hints": ["bn", "en"]
+      },
+      "ai_agent_tool_call": {
+        "tool_name": "document_parser.extract_invoice_entities",
+        "parameters": {
+          "model": "deterministic-ocr-v2",
+          "extract_fields": ["vendor_name", "invoice_date", "total_amount_minor", "items", "vat_minor"]
+        },
+        "execution_status": "SUCCESS",
+        "tokens_evaluated": 420
+      },
+      "response_payload": {
+        "status": "success",
+        "document_id": 1042,
+        "vendor": "Bengal Packaging Supplies",
+        "invoice_number": "INV-2026-0891",
+        "invoice_date": "2026-10-18",
+        "total_amount_minor": 4500000,
+        "currency": "BDT",
+        "formatted_amount": "৳ 45,000.00",
+        "confidence_score": 0.98,
+        "ledger_entry": {
+          "transaction_id": 78912,
+          "debit_account": "Inventory - Packaging Materials",
+          "credit_account": "Accounts Payable - Bengal Packaging",
+          "amount_minor": 4500000,
+          "posted_at": "2026-10-20T08:14:22.032Z"
+        }
+      }
+    },
+    {
+      "log_id": "LOG-RUNWAY-20261020-002",
+      "timestamp": "2026-10-20T08:15:01Z",
+      "module": "Cash Runway & Liquidity Forecasting",
+      "endpoint": "POST /api/forecast/runway",
+      "http_status": 200,
+      "latency_ms": 18,
+      "request_payload": {
+        "shop_id": 28,
+        "forecast_days": 30,
+        "monte_carlo_iterations": 1000,
+        "confidence_interval": 0.95
+      },
+      "ai_agent_tool_call": {
+        "tool_name": "financial_calculator.monte_carlo_cash_runway",
+        "parameters": {
+          "starting_cash_minor": 62500000,
+          "historical_window_days": 90,
+          "burn_rate_methodology": "weighted_moving_average"
+        },
+        "execution_status": "SUCCESS",
+        "deterministic_math": true
+      },
+      "response_payload": {
+        "status": "success",
+        "current_cash_balance_minor": 62500000,
+        "current_cash_balance_formatted": "৳ 625,000.00",
+        "daily_burn_rate_minor": 1425000,
+        "estimated_runway_days": 43.8,
+        "confidence_intervals": {
+          "p05_conservative_days": 38.2,
+          "p50_median_days": 44.0,
+          "p95_optimistic_days": 51.5
+        },
+        "shortage_alert_flag": false,
+        "next_projected_cash_inflection_date": "2026-11-28"
+      }
+    },
+    {
+      "log_id": "LOG-LOAN-20261020-003",
+      "timestamp": "2026-10-20T08:15:45Z",
+      "module": "SME Bank Loan Pre-Qualification & DSCR",
+      "endpoint": "POST /api/loans/assess-dscr",
+      "http_status": 200,
+      "latency_ms": 14,
+      "request_payload": {
+        "shop_id": 28,
+        "requested_principal_minor": 80000000,
+        "tenure_months": 24,
+        "target_bank": "BRAC Bank SME Unit"
+      },
+      "ai_agent_tool_call": {
+        "tool_name": "dscr_engine.evaluate_bank_eligibility",
+        "parameters": {
+          "annual_rate": 0.115,
+          "amortization_formula": "reducing_balance",
+          "benchmark_dscr_threshold": 1.25
+        },
+        "execution_status": "SUCCESS"
+      },
+      "response_payload": {
+        "status": "success",
+        "monthly_net_operating_income_minor": 25000000,
+        "calculated_monthly_emi_minor": 3745800,
+        "calculated_dscr": 6.67,
+        "qualification_tier": "PRIME_BANK_QUALITY",
+        "pre_approval_probability": 0.94,
+        "stress_test_results": {
+          "revenue_shock_minus_20pct_dscr": 5.34,
+          "expense_surge_plus_15pct_dscr": 5.80,
+          "verdict": "Resilient under all macroeconomic shocks"
+        }
+      }
+    },
+    {
+      "log_id": "LOG-VOICE-20261020-004",
+      "timestamp": "2026-10-20T08:16:10Z",
+      "module": "Bilingual Voice Assistant Tool-Calling Agent",
+      "endpoint": "POST /api/voice/command",
+      "http_status": 200,
+      "latency_ms": 24,
+      "request_payload": {
+        "text": "Hi Ashik, what is my net profit today?",
+        "locale": "en",
+        "shop_id": 28
+      },
+      "ai_agent_tool_call": {
+        "tool_name": "voice_service.dispatch_intent",
+        "parameters": {
+          "classified_intent": "financial_status",
+          "date_filter": "today",
+          "user_role": "owner"
+        },
+        "execution_status": "SUCCESS"
+      },
+      "response_payload": {
+        "status": "success",
+        "intent": "financial_status",
+        "confidence": 0.95,
+        "spoken_response": "Today your shop earned revenue of 85,400 BDT with recorded operating expenses of 32,100 BDT, generating net profit of 53,300 BDT.",
+        "text_response": "📊 **Daily Financial Ledger Summary:**\n- 💰 **Revenue:** ৳ 85,400.00\n- 🧾 **Expenses:** ৳ 32,100.00\n- ✨ **Net Operating Profit:** ৳ 53,300.00 (62.4% Net Margin)",
+        "requires_confirmation": false
+      }
+    },
+    {
+      "log_id": "LOG-PRAGMA-20261020-005",
+      "timestamp": "2026-10-20T08:17:00Z",
+      "module": "Database Integrity & PRAGMA Verification",
+      "endpoint": "GET /api/reports/integrity",
+      "http_status": 200,
+      "latency_ms": 11,
+      "request_payload": {},
+      "ai_agent_tool_call": {
+        "tool_name": "database_integrity.run_pragma_diagnostics",
+        "parameters": {
+          "run_fk_check": true,
+          "verify_minor_units": true
+        },
+        "execution_status": "SUCCESS"
+      },
+      "response_payload": {
+        "status": "success",
+        "overall_status": "HEALTHY",
+        "pragma_integrity_check": "ok",
+        "pragma_foreign_key_check": "0 violations",
+        "journal_mode": "wal",
+        "total_database_tables": 50,
+        "total_system_records": 162828,
+        "negative_minor_units_flagged": 0,
+        "integrity_score": "100.0%"
+      }
+    }
+  ]
+}

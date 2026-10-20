@@ -1,311 +1,638 @@
 {% extends "base.html" %}
-
-{% block title %}SME Finance Copilot — Autonomous Financial AI Platform{% endblock %}
-
+{% block title %}SME Finance Copilot — Autonomous Financial Copilot{% endblock %}
 {% block content %}
-<!-- Top Sticky Navigation -->
-<header class="sticky top-0 z-40 w-full border-b border-white/10 bg-[#030712]/80 backdrop-blur-xl">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <!-- Brand Logo -->
-        <a href="/landing" class="flex items-center gap-3 group">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-400 p-[1.5px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-all">
-                <div class="w-full h-full bg-[#080e1e] rounded-[10px] flex items-center justify-center">
-                    <i data-lucide="sparkles" class="w-5 h-5 text-cyan-400"></i>
-                </div>
-            </div>
-            <div>
-                <span class="font-orbitron font-extrabold text-base tracking-wider text-white">SME<span class="text-cyan-400">FINANCE</span></span>
-                <span class="block text-[10px] font-mono text-emerald-400 tracking-widest uppercase -mt-1">COPILOT AI</span>
-            </div>
-        </a>
-
-        <!-- Desktop Nav Links -->
-        <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-300">
-            <a href="#features" class="hover:text-cyan-400 transition-colors">Capabilities</a>
-            <a href="#sandbox" class="hover:text-cyan-400 transition-colors">Live Sandbox</a>
-            <a href="#models" class="hover:text-cyan-400 transition-colors">AI Models</a>
-            <a href="#security" class="hover:text-cyan-400 transition-colors">Security & Audit</a>
-            <a href="/docs" target="_blank" class="hover:text-cyan-400 transition-colors flex items-center gap-1 font-mono text-xs">
-                <span>API Docs</span>
-                <i data-lucide="external-link" class="w-3 h-3 text-slate-400"></i>
-            </a>
-        </nav>
-
-        <!-- Right Action Buttons & Language Switcher -->
-        <div class="flex items-center gap-3">
-            <!-- Language Selector -->
-            <div class="relative inline-block text-left">
-                <select onchange="window.location.href='?lang='+this.value" class="bg-slate-900 border border-slate-700 text-xs font-mono rounded-lg px-2 py-1.5 text-slate-300 focus:outline-none focus:border-cyan-400 cursor-pointer">
-                    <option value="en" {% if current_lang == 'en' %}selected{% endif %}>🇬🇧 EN</option>
-                    <option value="zh" {% if current_lang == 'zh' %}selected{% endif %}>🇨🇳 中文</option>
-                    <option value="bn" {% if current_lang == 'bn' %}selected{% endif %}>🇧🇩 বাংলা</option>
-                </select>
-            </div>
-
-            <!-- Login / App Launch -->
-            <a href="/login" class="px-3.5 py-1.5 rounded-xl border border-white/10 hover:border-cyan-500/40 hover:bg-slate-800/60 text-xs font-semibold text-slate-200 transition-all">
-                Sign In
-            </a>
-            <a href="/app/dashboard" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold text-xs tracking-wide shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all flex items-center gap-1.5">
-                <span>Open App</span>
-                <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
-            </a>
+<div class="relative overflow-hidden flex-1 flex flex-col justify-between">
+    <!-- Hero Section with Full Background Video Covering Entire Screen from Top (LandGuard AI Benchmark) -->
+    <div class="relative w-full min-h-screen flex flex-col justify-between overflow-hidden">
+        <!-- 1. Full Background Video Container (Zero Blur, High Clarity, Spanning Full Viewport from Top) -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
+            <video id="hero-bg-video"
+                   src="/static/videos/sme-finance-hero.mp4"
+                   autoplay
+                   loop
+                   muted
+                   playsinline
+                   preload="auto"
+                   class="w-full h-full object-cover object-center filter brightness-[0.92] contrast-[1.05]">
+                <source src="/static/videos/sme-finance-hero.mp4" type="video/mp4">
+                Your browser does not support HTML5 video.
+            </video>
+            <!-- Immediate inline video play trigger -->
+            <script>
+                (function() {
+                    var v = document.getElementById('hero-bg-video');
+                    if (v) {
+                        v.muted = true;
+                        v.defaultMuted = true;
+                        v.playsInline = true;
+                        var p = v.play();
+                        if (p && typeof p.then === 'function') {
+                            p.catch(function() {});
+                        }
+                    }
+                })();
+            </script>
+            <!-- Gentle Cinema Overlay (Transparent with subtle top and bottom cinema tint for text legibility) -->
+            <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/50 via-transparent to-[#030712]/85 pointer-events-none"></div>
+            <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at center, transparent 45%, rgba(3, 7, 18, 0.65) 100%);"></div>
         </div>
-    </div>
-</header>
-
-<!-- Hero Section -->
-<section class="relative pt-16 pb-24 overflow-hidden">
-    <!-- Ambient Background Lighting -->
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-cyan-500/15 via-emerald-500/10 to-indigo-500/10 blur-[130px] rounded-full pointer-events-none"></div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <!-- Status Pill -->
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/30 bg-cyan-950/40 text-cyan-300 text-xs font-mono mb-6 shadow-sm shadow-cyan-950">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span>AI as a Financial Participant • Production Ready</span>
-        </div>
-
-        <!-- Main Headline -->
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white max-w-4xl mx-auto leading-tight">
-            Autonomous <span class="bg-gradient-to-r from-cyan-400 via-emerald-300 to-indigo-400 bg-clip-text text-transparent">Financial Copilot</span> for Multi-Shop Retailers
-        </h1>
-
-        <!-- Subtitle -->
-        <p class="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Eliminate cash-flow blindspots. Convert raw invoices into auditable ledgers, forecast working-capital runways with 95% confidence intervals, and pre-qualify for institutional SME bank loans in real time.
-        </p>
-
-        <!-- CTA Action Buttons -->
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <a href="/app/dashboard" class="px-6 py-3.5 rounded-2xl bg-gradient-to-r from-cyan-500 via-emerald-500 to-emerald-400 text-slate-950 font-bold text-sm tracking-wide shadow-xl shadow-cyan-500/30 hover:shadow-cyan-500/50 hover:scale-[1.02] active:scale-[0.99] transition-all flex items-center gap-2">
-                <i data-lucide="layout-dashboard" class="w-4 h-4"></i>
-                <span>Launch Live App Portal</span>
-            </a>
-            <a href="/login" class="px-6 py-3.5 rounded-2xl border border-slate-700 hover:border-cyan-400 bg-slate-900/60 hover:bg-slate-800 text-slate-200 font-semibold text-sm transition-all flex items-center gap-2">
-                <i data-lucide="user-check" class="w-4 h-4 text-cyan-400"></i>
-                <span>1-Click Demo Personas</span>
-            </a>
-        </div>
-
-        <!-- Metric Badges Row -->
-        <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div class="glass-panel p-4 rounded-2xl text-center border border-white/5">
-                <div class="font-orbitron text-2xl font-bold text-cyan-400">21,978+</div>
-                <div class="text-xs text-slate-400 mt-1">Verified Sales Ledgers</div>
-            </div>
-            <div class="glass-panel p-4 rounded-2xl text-center border border-white/5">
-                <div class="font-orbitron text-2xl font-bold text-emerald-400">100%</div>
-                <div class="text-xs text-slate-400 mt-1">Minor-Unit Zero Precision Loss</div>
-            </div>
-            <div class="glass-panel p-4 rounded-2xl text-center border border-white/5">
-                <div class="font-orbitron text-2xl font-bold text-indigo-400">4 Active</div>
-                <div class="text-xs text-slate-400 mt-1">AI / ML Model Ensembles</div>
-            </div>
-            <div class="glass-panel p-4 rounded-2xl text-center border border-white/5">
-                <div class="font-orbitron text-2xl font-bold text-amber-400">100 Langs</div>
-                <div class="text-xs text-slate-400 mt-1">Multilingual Registry & Fallback</div>
-            </div>
-        </div>
-
-        <!-- Terminal / Live Data Preview Card -->
-        <div class="mt-12 max-w-5xl mx-auto glass-panel-glow rounded-3xl p-6 border border-cyan-500/30 text-left overflow-hidden relative">
-            <div class="flex items-center justify-between pb-4 border-b border-white/10">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
-                    <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
-                    <span class="ml-2 font-mono text-xs text-slate-400">sme_finance_copilot :: live_telemetry</span>
-                </div>
-                <div class="flex items-center gap-2 font-mono text-xs text-emerald-400">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span>ONLINE — SQLite WAL Mode</span>
-                </div>
+        <!-- Top Navigation Header with 2-Side Menu & Centered Brand Logo (Fully Transparent) -->
+        <header class="w-full max-w-[1400px] mx-auto px-4 sm:px-6 py-4 flex items-center justify-between border-b border-white/10 relative z-20 bg-transparent">
+            <!-- Left Side Menu (3 items, Left-Aligned with generous space from Logo) -->
+            <div class="hidden md:flex items-center justify-start gap-2.5 flex-1 whitespace-nowrap">
+                <a href="/how-it-works" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-cyan-300 hover:text-white glass-panel hover:bg-slate-800/80 transition-all border border-cyan-500/40 shadow-sm flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                    <i data-lucide="compass" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                    <span>{{ _('landing.nav_how_it_works') }}</span>
+                </a>
+                <a href="#features" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white glass-panel hover:bg-slate-800/80 transition-all border border-slate-700/60 shadow-sm flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                    <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                    <span>{{ _('landing.nav_capabilities') }}</span>
+                </a>
+                <a href="#models" class="px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-200 hover:text-white glass-panel hover:bg-slate-800/80 transition-all border border-slate-700/60 shadow-sm flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                    <i data-lucide="cpu" class="w-3.5 h-3.5 text-indigo-400 shrink-0"></i>
+                    <span>{{ _('landing.nav_models') }}</span>
+                </a>
             </div>
 
-            <!-- Terminal Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-5">
-                <div class="space-y-2">
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-400">Current Cash Position</div>
-                    <div class="font-orbitron text-2xl font-bold text-white">৳ 1,428,500<span class="text-xs font-mono text-cyan-400">.00</span></div>
-                    <div class="text-xs text-emerald-400 flex items-center gap-1">
-                        <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
-                        <span>+14.8% vs last 30-day average</span>
+            <!-- Center: FINOVA FINPILOT HIGH-TECH ANIMATED LOGO (Guaranteed Centered, Generous Margin & Buffer) -->
+            <div class="flex items-center justify-center shrink-0 px-6 lg:px-10">
+                <a href="/landing" class="ff-brand-core ff-brand-nav" title="FINOVA FINPILOT — SME FINANCE AI"><span class="sr-only">FINOVA FINPILOT SME FINANCE COPILOT</span>
+                    <div class="ff-main-row">
+                        <div class="ff-word ff-word-finova" data-text="FINOVΛ">
+                            FINOV<span class="ff-lambda">Λ</span>
+                        </div>
+                        <div class="ff-center-icon">
+                            <svg class="ff-svg" viewBox="0 0 100 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="ffGreenGradNav" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00E599"/>
+                                        <stop offset="60%" stop-color="#10B981"/>
+                                        <stop offset="100%" stop-color="#0D9488"/>
+                                    </linearGradient>
+                                    <linearGradient id="ffCyanGradNav" x1="0%" y1="100%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#0D9488"/>
+                                        <stop offset="50%" stop-color="#0284C7"/>
+                                        <stop offset="100%" stop-color="#22D3EE"/>
+                                    </linearGradient>
+                                    <filter id="ffGlowNav" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                                    </filter>
+                                </defs>
+                                <path class="ff-shape-f" d="M38 18 C52 18 64 22 72 26 C64 32 50 34 38 34 C30 34 24 38 22 45 L21 54 C18 42 22 24 38 18 Z" fill="url(#ffGreenGradNav)"/>
+                                <path class="ff-shape-p" d="M21 54 C26 44 34 38 48 38 C62 38 72 44 76 52 C78 57 78 68 70 76 C62 84 48 84 36 84 C30 84 26 78 26 70 L28 58 C24 64 22 74 24 82 C28 92 38 92 50 92 C68 92 84 82 86 64 C88 48 78 34 58 32 C42 30 30 38 21 54 Z" fill="url(#ffCyanGradNav)"/>
+                                <g class="ff-arrow-group">
+                                    <path class="ff-arrow-trail" d="M26 62 C34 54 48 44 68 32 L78 26" stroke="url(#ffGreenGradNav)" stroke-width="3.2" stroke-linecap="round"/>
+                                    <path class="ff-arrowhead" d="M72 23 L85 24 L80 37 Z" fill="#00E599" filter="url(#ffGlowNav)"/>
+                                </g>
+                                <g class="ff-bars">
+                                    <rect class="ff-bar ff-bar-1" x="46" y="60" width="4.5" height="15" rx="2" fill="#00E599"/>
+                                    <rect class="ff-bar ff-bar-2" x="54" y="52" width="4.5" height="23" rx="2" fill="#10B981"/>
+                                    <rect class="ff-bar ff-bar-3" x="62" y="44" width="4.5" height="31" rx="2" fill="#22D3EE" filter="url(#ffGlowNav)"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="ff-word ff-word-finpilot" data-text="FINPILOT">
+                            FINPILOT
+                        </div>
                     </div>
+                    <div class="ff-divider-deck">
+                        <div class="ff-line-wing ff-wing-left"></div>
+                        <div class="ff-center-emblem">
+                            <svg width="24" height="22" viewBox="0 0 24 22" fill="none">
+                                <polygon points="12,2 21,7 21,15 12,20 3,15 3,7" stroke="#22D3EE" stroke-width="1.8" fill="transparent"/>
+                                <path d="M12 6 L16 14 L12 12 L8 14 Z" fill="#00E599"/>
+                            </svg>
+                        </div>
+                        <div class="ff-line-wing ff-wing-right"></div>
+                    </div>
+                    <div class="ff-subtitle">
+                        AI WEALTH ARCHITECTURE &amp; FINANCIAL INTELLIGENCE
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Side Menu (Right-Aligned: API Docs, Language, Sign In, Get Started) -->
+            <div class="flex items-center justify-end gap-2 sm:gap-2.5 flex-1 whitespace-nowrap">
+                <!-- API Docs Pill (Moved to Right Side as Requested) -->
+                <a href="/docs" target="_blank" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-300 hover:text-white glass-panel hover:bg-slate-800/80 transition-all border border-emerald-500/40 shadow-sm flex items-center gap-1.5 whitespace-nowrap shrink-0" title="Swagger & OpenAPI Interactive Documentation">
+                    <i data-lucide="file-code-2" class="w-3.5 h-3.5 text-emerald-400 shrink-0"></i>
+                    <span>{{ _('landing.nav_docs') }}</span>
+                    <i data-lucide="external-link" class="w-3 h-3 text-slate-400"></i>
+                </a>
+
+                <!-- Language Switcher Pill -->
+                <div class="flex items-center bg-slate-900/80 rounded-lg p-0.5 border border-slate-700/60 font-mono text-[11px] shadow-sm whitespace-nowrap shrink-0">
+                    <a href="?lang=en" onclick="changeLandingLanguage('en'); return false;" class="px-2 py-1 rounded transition-all {{ 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30' if (current_lang or 'en') == 'en' else 'text-slate-400 hover:text-white' }}">EN</a>
+                    <a href="?lang=zh" onclick="changeLandingLanguage('zh'); return false;" class="px-2 py-1 rounded transition-all {{ 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30' if (current_lang or 'en') == 'zh' else 'text-slate-400 hover:text-white' }}">中文</a>
+                    <a href="?lang=bn" onclick="changeLandingLanguage('bn'); return false;" class="px-2 py-1 rounded transition-all {{ 'bg-cyan-500/20 text-cyan-300 font-bold border border-cyan-500/30' if (current_lang or 'en') == 'bn' else 'text-slate-400 hover:text-white' }}">বাংলা</a>
                 </div>
 
-                <div class="space-y-2">
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-400">30-Day Cash Runway</div>
-                    <div class="font-orbitron text-2xl font-bold text-emerald-300">114 Days</div>
-                    <div class="text-xs text-slate-400">ARIMA Forecast Lower Bound: ৳ 890,000</div>
-                </div>
+                <!-- Sign In -->
+                <a href="/login" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-slate-200 hover:text-white glass-panel hover:bg-slate-800/80 transition-all border border-slate-700/60 shadow-sm flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                    <i data-lucide="log-in" class="w-3.5 h-3.5 text-cyan-400 shrink-0"></i>
+                    <span>{{ _('landing.nav_signin') }}</span>
+                </a>
 
-                <div class="space-y-2">
-                    <div class="text-xs uppercase tracking-wider font-semibold text-slate-400">Institutional DSCR Status</div>
-                    <div class="font-orbitron text-2xl font-bold text-cyan-300">1.82x</div>
-                    <div class="text-xs text-emerald-400 font-medium">Eligible for BRAC & City Bank SME Loans</div>
+                <!-- Get Started -->
+                <a href="/register" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold text-navy-950 bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-300 hover:to-cyan-400 transition-all shadow-lg shadow-cyan-500/25 flex items-center gap-1.5 whitespace-nowrap shrink-0">
+                    <span>{{ _('landing.nav_get_started') }}</span>
+                    <i data-lucide="arrow-right" class="w-3.5 h-3.5 shrink-0"></i>
+                </a>
+            </div>
+        </header>
+        <!-- Hero Content Directly On Top of Full Background Video -->
+        <main class="relative z-10 w-full max-w-7xl mx-auto px-6 py-10 lg:py-16 flex flex-col justify-center items-center text-center flex-1 my-auto">
+            
+            <!-- Main Headline -->
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight max-w-5xl leading-[1.1] mb-8 sm:mb-10 drop-shadow-2xl">
+                <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-300">
+                    {{ _('landing.hero_title_prefix') }} {{ _('landing.hero_title_highlight') }} {{ _('landing.hero_title_suffix') }}
+                </span>
+            </h1>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+                <a href="/register" class="w-full sm:w-auto px-9 py-3.5 rounded-xl text-base font-semibold text-navy-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 hover:brightness-110 shadow-2xl shadow-cyan-500/40 transition-all flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                    <span>{{ _('landing.cta_get_started') }}</span>
+                </a>
+                <a href="/login" class="w-full sm:w-auto px-9 py-3.5 rounded-xl text-base font-semibold text-slate-200 hover:text-white glass-panel hover:bg-slate-800/80 transition-all border border-slate-700/60 shadow-sm flex items-center justify-center gap-2">
+                    <i data-lucide="log-in" class="w-5 h-5 text-cyan-400"></i>
+                    <span>{{ _('landing.cta_login') }}</span>
+                </a>
+            </div>
+            <!-- Metric Badges Row On Top of Video -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full max-w-4xl mt-2">
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800/80 backdrop-blur-md bg-slate-950/70 text-left">
+                    <div class="text-2xl font-bold font-mono text-cyan-400">{{ _('landing.metric_ledgers_num') }}</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase font-medium">{{ _('landing.metric_ledgers_label') }}</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800/80 backdrop-blur-md bg-slate-950/70 text-left">
+                    <div class="text-2xl font-bold font-mono text-emerald-400">{{ _('landing.metric_precision_num') }}</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase font-medium">{{ _('landing.metric_precision_label') }}</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800/80 backdrop-blur-md bg-slate-950/70 text-left">
+                    <div class="text-2xl font-bold font-mono text-indigo-400">{{ _('landing.metric_models_num') }}</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase font-medium">{{ _('landing.metric_models_label') }}</div>
+                </div>
+                <div class="glass-panel p-5 rounded-2xl border border-slate-800/80 backdrop-blur-md bg-slate-950/70 text-left">
+                    <div class="text-2xl font-bold font-mono text-sky-400">{{ _('landing.metric_langs_num') }}</div>
+                    <div class="text-xs text-slate-400 mt-1 uppercase font-medium">{{ _('landing.metric_langs_label') }}</div>
                 </div>
             </div>
-        </div>
+        </main>
     </div>
-</section>
-
+</div>
 <!-- Core Capabilities Grid -->
-<section id="features" class="py-20 border-t border-white/5 bg-slate-950/40 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="features" class="py-20 border-t border-white/5 bg-slate-950/40 relative overflow-hidden">
+    <!-- Ambient Telemetry Grid Wallpaper (Bright & Crisp) -->
+    <div class="absolute inset-0 z-0 opacity-45 pointer-events-none">
+        <img src="/static/images/telemetry_data_city.jpg" alt="Telemetry Data Background" class="w-full h-full object-cover object-center filter brightness-110 contrast-110">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/70 via-[#030712]/40 to-[#030712]/80"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-cyan-400 mb-2">Architectural Superiority</h2>
-            <p class="text-3xl font-extrabold text-white">Engineered for Accuracy, Speed & Bankability</p>
-            <p class="mt-3 text-slate-400 text-sm">
-                Unlike consumer expense apps, SME Finance Copilot acts as an autonomous financial participant enforcing GAAP/IFRS principles.
-            </p>
+            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-cyan-400 mb-2">{{ _('landing.arch_tag') }}</h2>
+            <p class="text-3xl font-extrabold text-white">{{ _('landing.arch_title') }}</p>
+            <p class="mt-3 text-slate-400 text-sm">{{ _('landing.arch_desc') }}</p>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <!-- Feature 1 -->
             <div class="glass-panel p-6 rounded-3xl border border-white/5 hover:border-cyan-500/30 transition-all group">
                 <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="trending-up" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">Automated Cash Flow Forecasting</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Combines chronological rolling-origin ARIMA with LightGBM regressors to project 7, 14, 30, and 90-day liquidity intervals with 95% confidence intervals.
-                </p>
+                <h3 class="text-lg font-bold text-white mb-2">{{ _('landing.feat1_title') }}</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.feat1_desc') }}</p>
             </div>
-
             <!-- Feature 2 -->
             <div class="glass-panel p-6 rounded-3xl border border-white/5 hover:border-emerald-500/30 transition-all group">
                 <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="file-check-2" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">Gated Document OCR Pipeline</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Extracts supplier invoices and cash receipts in English, Chinese (Fapiao), and Bengali (Mushak). Requires human review before posting to prevent financial distortion.
-                </p>
+                <h3 class="text-lg font-bold text-white mb-2">{{ _('landing.feat2_title') }}</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.feat2_desc') }}</p>
             </div>
-
             <!-- Feature 3 -->
             <div class="glass-panel p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-all group">
                 <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="shield-check" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">Cryptographic Tenant Isolation</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Client identity headers are rejected. Every shop transaction is cryptographically scoped via signed HMAC session tokens with immutable audit trail logging.
-                </p>
+                <h3 class="text-lg font-bold text-white mb-2">{{ _('landing.feat3_title') }}</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.feat3_desc') }}</p>
             </div>
-
             <!-- Feature 4 -->
             <div class="glass-panel p-6 rounded-3xl border border-white/5 hover:border-cyan-500/30 transition-all group">
                 <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="building-2" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">SME Loan & DSCR Evaluator</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Calculates Debt Service Coverage Ratio (DSCR), reducing vs flat-rate EMI schedules, and matches loan applications with statutory covenants in Bangladesh and China.
-                </p>
+                <h3 class="text-lg font-bold text-white mb-2">{{ _('landing.feat4_title') }}</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.feat4_desc') }}</p>
             </div>
-
             <!-- Feature 5 -->
             <div class="glass-panel p-6 rounded-3xl border border-white/5 hover:border-emerald-500/30 transition-all group">
                 <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="bot" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">Interactive Financial AI Copilot</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Conversational AI agent that diagnoses expense anomalies, checks tax thresholds, simulates hiring or inventory expansion, and drafts bank financing packets.
-                </p>
+                <h3 class="text-lg font-bold text-white mb-2">{{ _('landing.feat5_title') }}</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.feat5_desc') }}</p>
             </div>
-
             <!-- Feature 6 -->
             <div class="glass-panel p-6 rounded-3xl border border-white/5 hover:border-indigo-500/30 transition-all group">
                 <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-5 group-hover:scale-110 transition-transform">
                     <i data-lucide="globe" class="w-6 h-6"></i>
                 </div>
-                <h3 class="text-lg font-bold text-white mb-2">100-Language Localization</h3>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    English first, Simplified Chinese second, Bengali preserved. Supports RTL layout detection, currency decimal multipliers, and statutory tax rules.
-                </p>
+                <h3 class="text-lg font-bold text-white mb-2">{{ _('landing.feat6_title') }}</h3>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.feat6_desc') }}</p>
             </div>
         </div>
     </div>
 </section>
+<!-- How It Works Showcase Section (Distinct Global Market Gold Ambient Background + Framed Workspace Card) -->
+<section id="how-it-works-preview" class="py-28 border-t border-white/5 relative overflow-hidden">
+    <!-- 1. Edge-to-Edge Distinct Panoramic Background (Global Market Gold) -->
+    <div class="absolute inset-0 z-0 pointer-events-none opacity-70">
+        <img src="/static/images/global_market_gold.jpg" alt="Global Financial Markets & Growth Pipeline" class="w-full h-full object-cover object-center filter brightness-125 contrast-125">
+        <div class="absolute inset-0 bg-gradient-to-r from-[#030712]/80 via-[#030712]/20 to-[#030712]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/70 via-transparent to-[#030712]/80"></div>
+    </div>
 
-<!-- Interactive Live Sandbox -->
-<section id="sandbox" class="py-20 relative">
-    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="glass-panel-glow p-8 rounded-3xl border border-cyan-500/30">
-            <div class="text-center max-w-xl mx-auto mb-8">
-                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono mb-2">
-                    <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
-                    <span>Interactive Financial Simulator</span>
-                </div>
-                <h3 class="text-2xl font-bold text-white">Instant Debt Capacity & DSCR Calculator</h3>
-                <p class="text-xs text-slate-400 mt-1">Adjust monthly revenue and desired loan size to observe real-time bank suitability.</p>
+    <!-- 2. Centered Showcase Container with Internal Financial Workspace Picture -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="relative rounded-3xl overflow-hidden border border-cyan-500/50 shadow-2xl bg-slate-950/85 backdrop-blur-md group">
+            <!-- Background Image Framed Inside the Card (how_it_works_workspace.jpg) -->
+            <div class="absolute inset-0 z-0">
+                <img src="/static/images/how_it_works_workspace.jpg" alt="How SME Finance Copilot Works" class="w-full h-full object-cover object-right sm:object-center filter brightness-115 contrast-110 group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/80 to-transparent"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-[#030712]/60 via-transparent to-transparent"></div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <!-- Sliders -->
-                <div class="space-y-6">
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
-                            <span>Monthly Net Operating Income</span>
-                            <span id="slider-noi-label" class="text-cyan-400 font-mono">৳ 250,000</span>
-                        </div>
-                        <input type="range" id="slider-noi" min="50000" max="1000000" step="10000" value="250000" class="w-full accent-cyan-400 cursor-pointer" oninput="updateLandingSandbox()">
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
-                            <span>Requested Loan Principal</span>
-                            <span id="slider-principal-label" class="text-cyan-400 font-mono">৳ 800,000</span>
-                        </div>
-                        <input type="range" id="slider-principal" min="100000" max="5000000" step="50000" value="800000" class="w-full accent-cyan-400 cursor-pointer" oninput="updateLandingSandbox()">
-                    </div>
-
-                    <div>
-                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
-                            <span>Loan Tenure</span>
-                            <span id="slider-tenure-label" class="text-cyan-400 font-mono">24 Months</span>
-                        </div>
-                        <input type="range" id="slider-tenure" min="6" max="60" step="6" value="24" class="w-full accent-cyan-400 cursor-pointer" oninput="updateLandingSandbox()">
-                    </div>
+            <!-- Content on the Left -->
+            <div class="relative z-10 p-8 sm:p-12 lg:p-16 max-w-2xl space-y-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 text-xs font-mono">
+                    <i data-lucide="compass" class="w-3.5 h-3.5"></i>
+                    <span>Interactive 2nd Page Operator Guide</span>
                 </div>
-
-                <!-- Live Results Gauge -->
-                <div class="glass-panel p-6 rounded-2xl border border-white/10 text-center space-y-4">
-                    <div class="text-xs font-mono text-slate-400 uppercase tracking-widest">Estimated Monthly EMI</div>
-                    <div id="sandbox-emi" class="font-orbitron text-3xl font-extrabold text-white">৳ 37,458</div>
-                    
-                    <div class="pt-3 border-t border-white/10">
-                        <div class="text-xs font-mono text-slate-400 uppercase tracking-widest">Debt Service Coverage (DSCR)</div>
-                        <div id="sandbox-dscr" class="font-orbitron text-3xl font-extrabold text-emerald-400 mt-1">6.67x</div>
-                    </div>
-
-                    <div id="sandbox-verdict" class="py-2 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
-                        ✓ Prime Bank Quality — High Approval Probability
-                    </div>
-
-                    <a href="/app/loans" class="block w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold border border-cyan-500/30 transition-all">
-                        Compare Live SME Bank Products →
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white leading-tight">
+                    See How the Entire Financial AI Pipeline Works
+                </h2>
+                <p class="text-sm sm:text-base text-slate-300 leading-relaxed">
+                    Explore the complete 6-stage operational flow: Ingesting paper receipts, running multilingual OCR, updating integer ledgers, predicting cash runways, and generating bank loan packets.
+                </p>
+                <div class="pt-2">
+                    <a href="/how-it-works" class="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-xl bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 hover:brightness-110 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/30 transition-all">
+                        <span>{{ _('landing.btn_explore_guide') }}</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-<!-- AI Model Baselines & Animated Visual Assets -->
-<section id="models" class="py-20 border-t border-white/5 bg-slate-950/60 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-emerald-400 mb-2">Registered AI Baselines</h2>
-            <p class="text-3xl font-extrabold text-white">Proven Models, Zero Numerical Hallucinations</p>
-            <p class="mt-3 text-slate-400 text-sm">
-                Statistical and machine learning algorithms benchmarked against chronological test splits and historical SME actuals.
-            </p>
+<!-- Cash Flow Runway & AI Forecast Engine (Photo 1: hero_growth_neon.jpg) -->
+<section id="forecast-engine" class="py-20 border-t border-white/5 relative overflow-hidden">
+    <!-- Ambient Neon Grid Background -->
+    <div class="absolute inset-0 z-0 opacity-25 pointer-events-none">
+        <img src="/static/images/emerald_matrix_runway.jpg" alt="Neon Growth Mesh" class="w-full h-full object-cover object-center filter blur-[1px]">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712] via-transparent to-[#030712]"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-emerald-400 mb-2">Predictive Liquidity Engine</h2>
+            <p class="text-3xl font-extrabold text-white">{{ _('landing.feat_forecast_title') }}</p>
+            <p class="mt-3 text-slate-400 text-sm">{{ _('landing.feat_forecast_desc') }}</p>
         </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <div class="text-xs font-mono text-cyan-400">7-Day Horizon</div>
+                <div class="text-2xl font-bold font-mono text-white">৳ 128,450</div>
+                <div class="text-[11px] text-emerald-400 flex items-center gap-1">
+                    <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
+                    <span>+4.2% Cash Cushion</span>
+                </div>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <div class="text-xs font-mono text-cyan-400">14-Day Horizon</div>
+                <div class="text-2xl font-bold font-mono text-white">৳ 242,100</div>
+                <div class="text-[11px] text-emerald-400 flex items-center gap-1">
+                    <i data-lucide="check-circle" class="w-3.5 h-3.5"></i>
+                    <span>Optimal Supplier Liquidity</span>
+                </div>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <div class="text-xs font-mono text-cyan-400">30-Day Runway</div>
+                <div class="text-2xl font-bold font-mono text-white">৳ 518,900</div>
+                <div class="text-[11px] text-cyan-300">WAPE: 0.12 • High Stability</div>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <div class="text-xs font-mono text-cyan-400">90-Day Projected</div>
+                <div class="text-2xl font-bold font-mono text-white">৳ 1,480,000</div>
+                <div class="text-[11px] text-indigo-300">ARIMA Rolling Origin (95% CI)</div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Interactive Live Sandbox & Topic E Execution Evidence Center -->
+<section id="sandbox" class="py-24 relative overflow-hidden">
+    <!-- Edge-to-Edge High-Clarity Ambient Wallpaper (Bright & Vivid Candlesticks & Arrow) -->
+    <div class="absolute inset-0 z-0 opacity-75 pointer-events-none">
+        <img src="/static/images/bank_credit_index.jpg" alt="Bank Credit Index Ambient" class="w-full h-full object-cover object-center filter brightness-125 contrast-125">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/60 via-[#030712]/30 to-[#030712]/80"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#030712]/50 via-transparent to-[#030712]/50"></div>
+    </div>
+    
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="glass-panel-glow p-6 sm:p-10 rounded-3xl border border-cyan-500/30">
+            <!-- Header Directly Reflecting Topic E Execution Evidence Requirement -->
+            <div class="text-center max-w-3xl mx-auto mb-8">
+                <div class="inline-flex flex-wrap items-center justify-center gap-2.5 px-4 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-xs font-mono mb-3 shadow-sm">
+                    <i data-lucide="shield-alert" class="w-4 h-4 text-amber-400 shrink-0"></i>
+                    <span class="font-bold text-cyan-300 tracking-wide">{{ _('landing.evidence_badge') }}</span>
+                    <span class="text-slate-500 hidden sm:inline">•</span>
+                    <span class="px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-[10.5px] border border-amber-500/40 uppercase tracking-wider flex items-center gap-1 shadow-inner">
+                        <i data-lucide="lock" class="w-3 h-3 text-amber-400"></i>
+                        <span>{{ _('landing.evidence_warning') }}</span>
+                    </span>
+                </div>
+                <h3 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">{{ _('landing.evidence_title') }}</h3>
+                
+                <!-- Format Pill & One-Click Download / Video Trigger -->
+                <div class="flex flex-wrap items-center justify-center gap-3 mt-4 text-xs font-mono">
+                    <span class="px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-white/10 text-cyan-300 flex items-center gap-2 shadow-inner">
+                        <i data-lucide="file-code" class="w-4 h-4 text-cyan-400"></i>
+                        <span>{{ _('landing.evidence_format') }}</span>
+                    </span>
+                    <a href="/static/data/topic_e_sandbox_execution_logs.json" download="Topic_E_Sandbox_Execution_Logs.json"
+                       class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-teal-500/20 hover:from-cyan-500/30 hover:to-teal-500/30 border border-cyan-400/50 text-cyan-300 font-bold flex items-center gap-2 transition-all shadow-md group">
+                        <i data-lucide="download" class="w-4 h-4 group-hover:-translate-y-0.5 transition-transform"></i>
+                        <span>{{ _('landing.evidence_download_btn') }}</span>
+                    </a>
+                    <a href="/docs" target="_blank"
+                       class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 hover:from-emerald-500/30 hover:to-cyan-500/30 border border-emerald-400/50 text-emerald-300 font-bold flex items-center gap-2 transition-all shadow-md group"
+                       title="Open Live Interactive Swagger & OpenAPI Specification in a new tab">
+                        <i data-lucide="terminal" class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition-transform"></i>
+                        <span>{{ _('landing.nav_docs') }} (Swagger UI)</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
 
+            <!-- Tab Switcher Navigation -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-8 border-b border-white/10 pb-4">
+                <button type="button" onclick="switchSandboxTab('simulator')" id="sandbox-tab-btn-simulator"
+                        class="px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25">
+                    <i data-lucide="sliders" class="w-4 h-4"></i>
+                    <span>{{ _('landing.tab_loan_sim') }}</span>
+                </button>
+                <button type="button" onclick="switchSandboxTab('payloads')" id="sandbox-tab-btn-payloads"
+                        class="px-4 py-2 rounded-xl text-xs font-mono font-medium text-slate-400 hover:text-white bg-slate-900/80 border border-white/5 hover:border-cyan-500/40 transition-all flex items-center gap-2">
+                    <i data-lucide="activity" class="w-4 h-4 text-emerald-400"></i>
+                    <span>{{ _('landing.tab_api_payloads') }}</span>
+                    <span class="px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">5 API LOGS</span>
+                </button>
+                <button type="button" onclick="switchSandboxTab('agent')" id="sandbox-tab-btn-agent"
+                        class="px-4 py-2 rounded-xl text-xs font-mono font-medium text-slate-400 hover:text-white bg-slate-900/80 border border-white/5 hover:border-purple-500/40 transition-all flex items-center gap-2">
+                    <i data-lucide="bot" class="w-4 h-4 text-purple-400"></i>
+                    <span>{{ _('landing.tab_agent_trace') }}</span>
+                </button>
+            </div>
+
+            <!-- TAB 1: Interactive Loan & DSCR Simulator -->
+            <div id="sandbox-tab-simulator" class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- Sliders -->
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                            <span>{{ _('landing.sim_monthly_noi') }}</span>
+                            <span id="slider-noi-label" class="text-cyan-400 font-mono">৳ 250,000</span>
+                        </div>
+                        <input type="range" id="slider-noi" min="50000" max="1000000" step="10000" value="250000" class="w-full accent-cyan-400 cursor-pointer" oninput="updateLandingSandbox()">
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                            <span>{{ _('landing.sim_requested_principal') }}</span>
+                            <span id="slider-principal-label" class="text-cyan-400 font-mono">৳ 800,000</span>
+                        </div>
+                        <input type="range" id="slider-principal" min="100000" max="5000000" step="50000" value="800000" class="w-full accent-cyan-400 cursor-pointer" oninput="updateLandingSandbox()">
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                            <span>{{ _('landing.sim_loan_tenure') }}</span>
+                            <span id="slider-tenure-label" class="text-cyan-400 font-mono">24 {{ _('landing.sim_tenure_months') }}</span>
+                        </div>
+                        <input type="range" id="slider-tenure" min="6" max="60" step="6" value="24" class="w-full accent-cyan-400 cursor-pointer" oninput="updateLandingSandbox()">
+                    </div>
+                </div>
+                <!-- Live Results Gauge -->
+                <div class="glass-panel p-6 rounded-2xl border border-white/10 text-center space-y-4">
+                    <div class="text-xs font-mono text-slate-400 uppercase tracking-widest">{{ _('landing.sim_estimated_emi') }}</div>
+                    <div id="sandbox-emi" class="font-orbitron text-3xl font-extrabold text-white">৳ 37,458</div>
+                    
+                    <div class="pt-3 border-t border-white/10">
+                        <div class="text-xs font-mono text-slate-400 uppercase tracking-widest">{{ _('landing.sim_dscr_label') }}</div>
+                        <div id="sandbox-dscr" class="font-orbitron text-3xl font-extrabold text-emerald-400 mt-1">6.67x</div>
+                    </div>
+                    <div id="sandbox-verdict" class="py-2 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold">
+                        {{ _('landing.sim_prime_verdict') }}
+                    </div>
+                    <a href="/app/loans" class="block w-full py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold border border-cyan-500/30 transition-all">
+                        {{ _('landing.sim_compare_btn') }}
+                    </a>
+                </div>
+            </div>
+
+            <!-- TAB 2: Live Operational API Payloads (Topic E Sandbox Logs) -->
+            <div id="sandbox-tab-payloads" class="hidden space-y-6">
+                <!-- Scenario Selector Pills -->
+                <div class="flex flex-wrap items-center justify-center gap-2 text-xs font-mono">
+                    <button type="button" onclick="selectApiScenario('ocr')" id="scenario-btn-ocr" class="scenario-btn px-3 py-1.5 rounded-lg bg-cyan-600 text-white font-bold transition-all">
+                        {{ _('landing.api_scenario_ocr') }}
+                    </button>
+                    <button type="button" onclick="selectApiScenario('runway')" id="scenario-btn-runway" class="scenario-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition-all">
+                        {{ _('landing.api_scenario_runway') }}
+                    </button>
+                    <button type="button" onclick="selectApiScenario('loan')" id="scenario-btn-loan" class="scenario-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition-all">
+                        {{ _('landing.api_scenario_loan') }}
+                    </button>
+                    <button type="button" onclick="selectApiScenario('voice')" id="scenario-btn-voice" class="scenario-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition-all">
+                        {{ _('landing.api_scenario_voice') }}
+                    </button>
+                    <button type="button" onclick="selectApiScenario('pragma')" id="scenario-btn-pragma" class="scenario-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition-all">
+                        {{ _('landing.api_scenario_pragma') }}
+                    </button>
+                </div>
+
+                <!-- Live Payload Terminal -->
+                <div class="glass-panel p-5 rounded-2xl border border-cyan-500/30 bg-slate-950/85 font-mono text-xs space-y-4">
+                    <div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <span id="terminal-method" class="px-2 py-0.5 rounded font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">POST</span>
+                            <span id="terminal-endpoint" class="text-cyan-300 font-semibold text-sm">/api/documents/process-ocr</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span id="terminal-latency" class="text-slate-400 text-[11px]">32ms Latency</span>
+                            <span class="px-2 py-0.5 rounded bg-emerald-950/80 border border-emerald-800 text-emerald-400 text-[10px]">200 OK • ZERO FLOAT LOSS</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <!-- Request Payload -->
+                        <div class="space-y-1.5">
+                            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-cyan-400"></i>
+                                <span>Request Payload (Topic E Sandbox)</span>
+                            </div>
+                            <pre id="terminal-request" class="p-3.5 rounded-xl bg-slate-900/90 border border-white/5 text-slate-300 overflow-x-auto text-[11px] leading-relaxed max-h-64"></pre>
+                        </div>
+                        <!-- Response Payload -->
+                        <div class="space-y-1.5">
+                            <div class="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                                <i data-lucide="arrow-down-left" class="w-3.5 h-3.5 text-emerald-400"></i>
+                                <span>Operational Response (Integer Minor Units)</span>
+                            </div>
+                            <pre id="terminal-response" class="p-3.5 rounded-xl bg-slate-900/90 border border-white/5 text-emerald-300 overflow-x-auto text-[11px] leading-relaxed max-h-64"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: AI Agent Tool-Calling Trace -->
+            <div id="sandbox-tab-agent" class="hidden space-y-6">
+                <div class="glass-panel p-6 rounded-2xl border border-purple-500/30 bg-slate-950/80 space-y-5">
+                    <div class="flex items-center justify-between pb-3 border-b border-white/10 font-mono text-xs">
+                        <div class="flex items-center gap-2 text-purple-300 font-bold">
+                            <i data-lucide="cpu" class="w-4 h-4 text-purple-400"></i>
+                            <span>Autonomous Agent Tool-Calling Architecture (Topic E Verified)</span>
+                        </div>
+                        <span class="px-2 py-0.5 rounded bg-purple-950/80 border border-purple-800 text-purple-300 text-[10px]">DETERMINISTIC EXECUTION</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 font-mono text-xs">
+                        <!-- Step 1 -->
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+                            <div class="text-cyan-400 font-bold">01. INGEST & DISPATCH</div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">
+                                Voice or invoice OCR input is parsed into bounded business participant intents without LLM hallucinations.
+                            </p>
+                            <div class="text-[10px] text-slate-500">Router: <code class="text-cyan-300">VoiceService._classify_intent</code></div>
+                        </div>
+                        <!-- Step 2 -->
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+                            <div class="text-emerald-400 font-bold">02. TOOL CALLING EXECUTION</div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">
+                                Invokes registered deterministic calculation tools: integer minor-unit arithmetic, ARIMA/Monte Carlo, or DSCR matrices.
+                            </p>
+                            <div class="text-[10px] text-slate-500">Tool: <code class="text-emerald-300">financial_calculator.py</code></div>
+                        </div>
+                        <!-- Step 3 -->
+                        <div class="p-4 rounded-xl bg-slate-900/80 border border-white/5 space-y-2">
+                            <div class="text-purple-400 font-bold">03. REGULATORY GUARDRAIL</div>
+                            <p class="text-[11px] text-slate-400 leading-relaxed">
+                                Consequential actions (e.g. loan approvals, disbursements) require authorized human sign-off; self-approvals blocked.
+                            </p>
+                            <div class="text-[10px] text-slate-500">Safety: <code class="text-purple-300">RBAC / Human-in-the-Loop</code></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Customers & CRM Overdue Dues Chase Section -->
+<section id="crm-receivables" class="py-20 border-t border-white/5 bg-[#02050f] relative overflow-hidden">
+    <!-- Ambient Cash Receivables Currency Texture (Bright & Crisp) -->
+    <div class="absolute inset-0 z-0 opacity-45 pointer-events-none">
+        <img src="/static/images/cash_receivables_currency.jpg" alt="Cash Receivables Texture" class="w-full h-full object-cover object-center filter brightness-110 contrast-115">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/70 via-[#030712]/40 to-[#030712]/80"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-amber-400 mb-2">Automated Cash Acceleration</h2>
+            <p class="text-3xl font-extrabold text-white">{{ _('landing.feat_crm_title') }}</p>
+            <p class="mt-3 text-slate-400 text-sm">{{ _('landing.feat_crm_desc') }}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+                    <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+                <h4 class="text-sm font-bold text-white">4-Tier RFM Segmentation</h4>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                    Classifies retail accounts into Champions, Loyal Customers, At Risk, and Hibernating to target follow-ups effectively.
+                </p>
+            </div>
+            <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+                    <i data-lucide="message-square" class="w-5 h-5"></i>
+                </div>
+                <h4 class="text-sm font-bold text-white">WhatsApp & SMS Chase</h4>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                    1-click individualized payment reminder drafts sent via actual messaging channels with consent management.
+                </p>
+            </div>
+            <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <i data-lucide="percent" class="w-5 h-5"></i>
+                </div>
+                <h4 class="text-sm font-bold text-white">Margin-Guarded Discounts</h4>
+                <p class="text-slate-400 text-xs leading-relaxed">
+                    Personalized offers are mathematically bounded by minimum margin guardrails, strictly preventing sales below cost.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Inventory Valuation & Stock Aging Section -->
+<section id="inventory-supply" class="py-20 border-t border-white/5 relative overflow-hidden">
+    <!-- Ambient Gold Coins Treasury Texture (Bright & Radiant) -->
+    <div class="absolute inset-0 z-0 opacity-50 pointer-events-none">
+        <img src="/static/images/gold_coins_treasury.jpg" alt="Gold Coins Treasury Texture" class="w-full h-full object-cover object-center filter brightness-115 contrast-115">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/70 via-[#030712]/35 to-[#030712]/80"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-indigo-400 mb-2">Supply Chain Liquidity</h2>
+            <p class="text-3xl font-extrabold text-white">{{ _('landing.feat_inv_title') }}</p>
+            <p class="mt-3 text-slate-400 text-sm">{{ _('landing.feat_inv_desc') }}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <span class="text-xs font-mono text-emerald-400 block font-bold">0-30 Days (Fresh)</span>
+                <span class="text-lg font-bold text-white">Active Fast-Turnover</span>
+                <p class="text-[11px] text-slate-400">Peak gross margins and rapid working capital conversion velocity.</p>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <span class="text-xs font-mono text-cyan-400 block font-bold">31-60 Days (Normal)</span>
+                <span class="text-lg font-bold text-white">Standard Stock</span>
+                <p class="text-[11px] text-slate-400">Regular supplier reorder cycles monitored by automated minimum buffers.</p>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <span class="text-xs font-mono text-amber-400 block font-bold">61-90 Days (Aging)</span>
+                <span class="text-lg font-bold text-white">Slow-Moving SKUs</span>
+                <p class="text-[11px] text-slate-400">Targeted discount campaigns automatically drafted to clear capital.</p>
+            </div>
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-2">
+                <span class="text-xs font-mono text-rose-400 block font-bold">90+ Days (Dead Stock)</span>
+                <span class="text-lg font-bold text-white">Liquidation Priority</span>
+                <p class="text-[11px] text-slate-400">Immediate write-down prevention alerts and supplier return workflows.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- AI Model Baselines & Animated Visual Assets -->
+<section id="models" class="py-20 border-t border-white/5 bg-slate-950/60 relative overflow-hidden">
+    <!-- Ambient Neon Magenta ML Forecast Texture (Bright & Vivid) -->
+    <div class="absolute inset-0 z-0 opacity-45 pointer-events-none">
+        <img src="/static/images/neon_magenta_forecast.jpg" alt="Neon ML Forecast Texture" class="w-full h-full object-cover object-center filter brightness-115 contrast-115">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/75 via-[#030712]/40 to-[#030712]/85"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-emerald-400 mb-2">{{ _('landing.models_tag') }}</h2>
+            <p class="text-3xl font-extrabold text-white">{{ _('landing.models_title') }}</p>
+            <p class="mt-3 text-slate-400 text-sm">{{ _('landing.models_desc') }}</p>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div class="glass-panel p-5 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
@@ -313,58 +640,45 @@
                 </div>
                 <h4 class="text-sm font-bold text-white">ARIMA(1,1,1)</h4>
                 <div class="text-xs text-emerald-400 font-mono font-bold">MASE: 0.42</div>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Captures 7, 14, 30, and 90-day cash trends with 95% confidence intervals and 58% beat over random-walk.
-                </p>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.model1_desc') }}</p>
             </div>
-
             <div class="glass-panel p-5 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
                     <i data-lucide="cpu" class="w-5 h-5"></i>
                 </div>
                 <h4 class="text-sm font-bold text-white">LightGBM GBDT</h4>
                 <div class="text-xs text-emerald-400 font-mono font-bold">WAPE: 0.12 • R²: 0.91</div>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Working capital regression model that learns non-linear retail sales surges and supplier payment patterns.
-                </p>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.model2_desc') }}</p>
             </div>
-
             <div class="glass-panel p-5 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
                     <i data-lucide="file-text" class="w-5 h-5"></i>
                 </div>
-                <h4 class="text-sm font-bold text-white">Multilingual Classifier</h4>
+                <h4 class="text-sm font-bold text-white">{{ _('landing.model3_title') }}</h4>
                 <div class="text-xs text-indigo-300 font-mono font-bold">Accuracy: 98.6%</div>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    TF-IDF + Logistic Regression categorizing English invoices, Chinese Fapiao (发票), and Bengali Mushak 6.3.
-                </p>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.model3_desc') }}</p>
             </div>
-
             <div class="glass-panel p-5 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
                     <i data-lucide="shield" class="w-5 h-5"></i>
                 </div>
-                <h4 class="text-sm font-bold text-white">Deterministic DSCR</h4>
+                <h4 class="text-sm font-bold text-white">{{ _('landing.model4_title') }}</h4>
                 <div class="text-xs text-amber-300 font-mono font-bold">12/12 Stress Vectors</div>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Mathematical guardrail calculating exact reducing-balance EMI and debt-to-income without LLM float errors.
-                </p>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.model4_desc') }}</p>
             </div>
         </div>
-
         <!-- Animated SVG Preloader Showcase -->
         <div class="mt-12 glass-panel p-6 rounded-3xl border border-white/10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div class="flex items-center gap-5">
                 <img src="/static/images/preloader_badge.svg" alt="Preloader Badge" class="w-16 h-16 drop-shadow-[0_0_15px_rgba(34,211,238,0.4)]">
                 <div>
                     <h4 class="text-sm font-bold text-white flex items-center gap-2">
-                        <span>Autonomous Visual Preloaders</span>
+                        <span>{{ _('landing.preloader_title') }}</span>
                         <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300">SVG Animated</span>
                     </h4>
-                    <p class="text-xs text-slate-400 mt-1">Custom animated telemetry assets rendered in pure responsive scalable vectors.</p>
+                    <p class="text-xs text-slate-400 mt-1">{{ _('landing.preloader_desc') }}</p>
                 </div>
             </div>
-
             <div class="flex items-center gap-4">
                 <img src="/static/images/preloader_scanner.svg" alt="Preloader Scanner" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity">
                 <img src="/static/images/preloader.svg" alt="Preloader Flow" class="h-12 w-auto opacity-80 hover:opacity-100 transition-opacity">
@@ -372,103 +686,475 @@
         </div>
     </div>
 </section>
-
 <!-- Security, Privacy & Audit -->
-<section id="security" class="py-20 border-t border-white/5 relative">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="security" class="py-20 border-t border-white/5 relative overflow-hidden">
+    <!-- Ambient Balance Scale Audit Texture (Bright & Crisp) -->
+    <div class="absolute inset-0 z-0 opacity-45 pointer-events-none">
+        <img src="/static/images/balance_scale_audit.jpg" alt="Balance Scale Audit Texture" class="w-full h-full object-cover object-center filter brightness-110 contrast-110">
+        <div class="absolute inset-0 bg-gradient-to-b from-[#030712]/70 via-[#030712]/40 to-[#030712]/80"></div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-cyan-400 mb-2">Phase 2.1 Verified</h2>
-            <p class="text-3xl font-extrabold text-white">Bank-Grade Tenant Isolation & Audit Trail</p>
-            <p class="mt-3 text-slate-400 text-sm">
-                Every financial transaction is scoped at the database level with HMAC token authentication and immutable logging.
-            </p>
+            <h2 class="text-xs font-bold font-mono tracking-widest uppercase text-cyan-400 mb-2">{{ _('landing.security_tag') }}</h2>
+            <p class="text-3xl font-extrabold text-white">{{ _('landing.security_title') }}</p>
+            <p class="mt-3 text-slate-400 text-sm">{{ _('landing.security_desc') }}</p>
         </div>
-
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400">
                     <i data-lucide="lock" class="w-5 h-5"></i>
                 </div>
-                <h4 class="text-sm font-bold text-white">Signed Token Scoping</h4>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Client identity headers like <code class="text-cyan-400">X-User-ID</code> are strictly ignored. Only cryptographically verified tokens establish tenant access.
-                </p>
+                <h4 class="text-sm font-bold text-white">{{ _('landing.sec1_title') }}</h4>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.sec1_desc') }}</p>
             </div>
-
             <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400">
                     <i data-lucide="file-check" class="w-5 h-5"></i>
                 </div>
-                <h4 class="text-sm font-bold text-white">Human Review Gating</h4>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    OCR invoice extractions never silently pollute general ledgers. Authorized staff approval is mandatory before financial posting.
-                </p>
+                <h4 class="text-sm font-bold text-white">{{ _('landing.sec2_title') }}</h4>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.sec2_desc') }}</p>
             </div>
-
             <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-3">
                 <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
                     <i data-lucide="database" class="w-5 h-5"></i>
                 </div>
-                <h4 class="text-sm font-bold text-white">Local-First SQLite Engine</h4>
-                <p class="text-slate-400 text-xs leading-relaxed">
-                    Zero cloud latency or third-party leakage. Runs in WAL mode with active foreign key enforcement and integer minor-unit money arithmetic.
-                </p>
+                <h4 class="text-sm font-bold text-white">{{ _('landing.sec3_title') }}</h4>
+                <p class="text-slate-400 text-xs leading-relaxed">{{ _('landing.sec3_desc') }}</p>
             </div>
         </div>
     </div>
 </section>
-
-<!-- Footer -->
-<footer class="border-t border-white/10 bg-[#02050e] py-12 text-slate-400 text-xs">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-        <div class="flex items-center gap-3">
-            <span class="font-orbitron font-bold text-white text-sm">SME<span class="text-cyan-400">FINANCE</span> COPILOT</span>
-            <span class="text-slate-600">|</span>
-            <span>Version 0.1.0 • Antigravity Competition Build</span>
+<!-- Master 5-Column Enterprise Application Footer -->
+<footer class="border-t border-white/10 bg-[#02050e] pt-16 pb-12 text-slate-400 text-xs relative z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+            <!-- Col 1: Brand & Autonomous Telemetry -->
+            <div class="space-y-4 lg:col-span-1">
+                <a href="/landing" class="ff-brand-core ff-brand-nav !p-0 !items-start" title="FINOVA FINPILOT">
+                    <div class="ff-main-row">
+                        <div class="ff-word ff-word-finova" data-text="FINOVΛ">
+                            FINOV<span class="ff-lambda">Λ</span>
+                        </div>
+                        <div class="ff-center-icon">
+                            <svg class="ff-svg" viewBox="0 0 100 95" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="ffGreenGradFoot" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00E599"/>
+                                        <stop offset="60%" stop-color="#10B981"/>
+                                        <stop offset="100%" stop-color="#0D9488"/>
+                                    </linearGradient>
+                                    <linearGradient id="ffCyanGradFoot" x1="0%" y1="100%" x2="100%" y2="0%">
+                                        <stop offset="0%" stop-color="#0D9488"/>
+                                        <stop offset="50%" stop-color="#0284C7"/>
+                                        <stop offset="100%" stop-color="#22D3EE"/>
+                                    </linearGradient>
+                                    <filter id="ffGlowFoot" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="2.5" result="blur"/>
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                                    </filter>
+                                </defs>
+                                <path class="ff-shape-f" d="M38 18 C52 18 64 22 72 26 C64 32 50 34 38 34 C30 34 24 38 22 45 L21 54 C18 42 22 24 38 18 Z" fill="url(#ffGreenGradFoot)"/>
+                                <path class="ff-shape-p" d="M21 54 C26 44 34 38 48 38 C62 38 72 44 76 52 C78 57 78 68 70 76 C62 84 48 84 36 84 C30 84 26 78 26 70 L28 58 C24 64 22 74 24 82 C28 92 38 92 50 92 C68 92 84 82 86 64 C88 48 78 34 58 32 C42 30 30 38 21 54 Z" fill="url(#ffCyanGradFoot)"/>
+                                <g class="ff-arrow-group">
+                                    <path class="ff-arrow-trail" d="M26 62 C34 54 48 44 68 32 L78 26" stroke="url(#ffGreenGradFoot)" stroke-width="3.2" stroke-linecap="round"/>
+                                    <path class="ff-arrowhead" d="M72 23 L85 24 L80 37 Z" fill="#00E599" filter="url(#ffGlowFoot)"/>
+                                </g>
+                                <g class="ff-bars">
+                                    <rect class="ff-bar ff-bar-1" x="46" y="60" width="4.5" height="15" rx="2" fill="#00E599"/>
+                                    <rect class="ff-bar ff-bar-2" x="54" y="52" width="4.5" height="23" rx="2" fill="#10B981"/>
+                                    <rect class="ff-bar ff-bar-3" x="62" y="44" width="4.5" height="31" rx="2" fill="#22D3EE" filter="url(#ffGlowFoot)"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <div class="ff-word ff-word-finpilot" data-text="FINPILOT">
+                            FINPILOT
+                        </div>
+                    </div>
+                    <div class="ff-divider-deck !w-full">
+                        <div class="ff-line-wing ff-wing-left"></div>
+                        <div class="ff-center-emblem">
+                            <svg width="24" height="22" viewBox="0 0 24 22" fill="none">
+                                <polygon points="12,2 21,7 21,15 12,20 3,15 3,7" stroke="#22D3EE" stroke-width="1.8" fill="transparent"/>
+                                <path d="M12 6 L16 14 L12 12 L8 14 Z" fill="#00E599"/>
+                            </svg>
+                        </div>
+                        <div class="ff-line-wing ff-wing-right"></div>
+                    </div>
+                    <div class="ff-subtitle !text-left">
+                        AI WEALTH ARCHITECTURE &amp; FINANCIAL INTELLIGENCE
+                    </div>
+                </a>
+                <p class="text-[11px] text-slate-400 leading-relaxed">
+                    {{ _('landing.footer_built_for') }}
+                </p>
+                <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-[10px] font-mono">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Zero-Loss SQLite WAL Engine</span>
+                </div>
+            </div>
+            <!-- Col 2: Platform Capabilities -->
+            <div class="space-y-3">
+                <div class="text-white font-bold uppercase tracking-wider text-[11px] font-mono">{{ _('landing.footer_platform') }}</div>
+                <ul class="space-y-2 text-[11.5px]">
+                    <li><a href="#features" class="hover:text-cyan-400 transition-colors">Cash Runway Forecast</a></li>
+                    <li><a href="#features" class="hover:text-cyan-400 transition-colors">Gated Multilingual OCR</a></li>
+                    <li><a href="#sandbox" class="hover:text-cyan-400 transition-colors">SME Loan & DSCR Evaluator</a></li>
+                    <li><a href="#crm-receivables" class="hover:text-cyan-400 transition-colors">CRM Receivables Recovery</a></li>
+                    <li><a href="#inventory-supply" class="hover:text-cyan-400 transition-colors">Inventory Aging & POs</a></li>
+                    <li><a href="/app/copilot" class="hover:text-cyan-400 transition-colors">Autonomous Voice AI</a></li>
+                </ul>
+            </div>
+            <!-- Col 3: Core Application Portals -->
+            <div class="space-y-3">
+                <div class="text-white font-bold uppercase tracking-wider text-[11px] font-mono">{{ _('landing.footer_apps') }}</div>
+                <ul class="space-y-2 text-[11.5px]">
+                    <li><a href="/app/dashboard" class="hover:text-cyan-400 transition-colors">{{ _('navigation.dashboard') }}</a></li>
+                    <li><a href="/app/finance" class="hover:text-cyan-400 transition-colors">{{ _('navigation.finance') }}</a></li>
+                    <li><a href="/app/forecast" class="hover:text-cyan-400 transition-colors">{{ _('navigation.forecast') }}</a></li>
+                    <li><a href="/app/documents" class="hover:text-cyan-400 transition-colors">{{ _('navigation.documents') }}</a></li>
+                    <li><a href="/app/loans" class="hover:text-cyan-400 transition-colors">{{ _('navigation.loans') }}</a></li>
+                    <li><a href="/app/customers" class="hover:text-cyan-400 transition-colors">{{ _('navigation.customers') }}</a></li>
+                    <li><a href="/app/inventory" class="hover:text-cyan-400 transition-colors">{{ _('navigation.inventory') }}</a></li>
+                    <li><a href="/app/admin" class="hover:text-rose-400 transition-colors">{{ _('navigation.admin') }}</a></li>
+                </ul>
+            </div>
+            <!-- Col 4: Compliance & Financial Math -->
+            <div class="space-y-3">
+                <div class="text-white font-bold uppercase tracking-wider text-[11px] font-mono">{{ _('landing.footer_compliance') }}</div>
+                <ul class="space-y-2 text-[11.5px]">
+                    <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i><span>{{ _('compliance.gaap_principles') }}</span></li>
+                    <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i><span>{{ _('compliance.integer_math') }}</span></li>
+                    <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i><span>{{ _('compliance.hmac_tokens') }}</span></li>
+                    <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i><span>{{ _('compliance.audit_triggers') }}</span></li>
+                    <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i><span>{{ _('compliance.tenant_isolation') }}</span></li>
+                    <li class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-cyan-400"></i><span>{{ _('compliance.zero_float_error') }}</span></li>
+                </ul>
+            </div>
+            <!-- Col 5: Developer & Regional Coverage -->
+            <div class="space-y-3">
+                <div class="text-white font-bold uppercase tracking-wider text-[11px] font-mono">{{ _('landing.footer_developers') }}</div>
+                <ul class="space-y-2 text-[11.5px]">
+                    <li><a href="/docs" target="_blank" class="hover:text-cyan-400 transition-colors flex items-center gap-1 font-mono"><span>{{ _('compliance.swagger_docs') }}</span><i data-lucide="external-link" class="w-3 h-3 text-slate-500"></i></a></li>
+                    <li><a href="/health" target="_blank" class="hover:text-cyan-400 transition-colors flex items-center gap-1 font-mono"><span>{{ _('compliance.health_api') }}</span><i data-lucide="external-link" class="w-3 h-3 text-slate-500"></i></a></li>
+                    <li><a href="/login" class="hover:text-cyan-400 transition-colors">{{ _('login.demo_profiles') }}</a></li>
+                    <li><span class="text-slate-300">{{ _('compliance.bangladesh_market') }}</span></li>
+                    <li><span class="text-slate-300">{{ _('compliance.china_market') }}</span></li>
+                    <li><span class="text-slate-300">{{ _('compliance.global_market') }}</span></li>
+                </ul>
+            </div>
         </div>
-
-        <div class="flex items-center gap-6">
-            <a href="/docs" target="_blank" class="hover:text-cyan-400 transition-colors">FastAPI Docs</a>
-            <a href="/health" target="_blank" class="hover:text-cyan-400 transition-colors">Health Telemetry</a>
-            <a href="/login" class="hover:text-cyan-400 transition-colors">Persona Demo</a>
-            <a href="/app/dashboard" class="text-cyan-400 hover:underline">App Portal</a>
+        <!-- Bottom Sub-Footer Bar -->
+        <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+            <div class="flex items-center gap-3">
+                <span>&copy; 2026 SME Finance Copilot. {{ _('landing.footer_rights') }}</span>
+                <span>•</span>
+                <span class="font-mono text-cyan-400">Version 1.0.0 • Enterprise Edition</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="/landing" class="hover:text-slate-300 transition-colors">{{ _('how_it_works.return_home') }}</a>
+                <a href="/how-it-works" class="hover:text-slate-300 transition-colors">{{ _('how_it_works.capabilities') }}</a>
+                <a href="/login" class="hover:text-slate-300 transition-colors">{{ _('login.title') }}</a>
+                <a href="/app/dashboard" class="text-cyan-400 hover:underline">{{ _('how_it_works.app_portal') }}</a>
+            </div>
         </div>
     </div>
 </footer>
-
 <script>
+window.CURRENT_LOCALE = "{{ current_lang or 'en' }}";
+window.CURRENT_CURRENCY = "{{ current_currency or (business.currency if business else 'BDT') }}";
+window.TRANSLATIONS = {{ translations_json | safe if translations_json else '{}' }};
+window.t = function(key, fallback) {
+    if (!key) return fallback || '';
+    const parts = key.split('.');
+    let curr = window.TRANSLATIONS;
+    for (const p of parts) {
+        if (curr && typeof curr === 'object' && p in curr) {
+            curr = curr[p];
+        } else {
+            return fallback || key;
+        }
+    }
+    return typeof curr === 'string' ? curr : (fallback || key);
+};
+async function changeLandingLanguage(newLang) {
+    document.cookie = `sme_lang=${newLang}; path=/; max-age=31536000; SameSite=Lax`;
+    try {
+        const token = localStorage.getItem('sme_token') || '{{ current_user.token if current_user else "" }}';
+        await fetch('/api/i18n/set-language', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token ? `Bearer ${token}` : ''
+            },
+            body: JSON.stringify({ locale: newLang })
+        });
+    } catch (e) {
+        console.warn('Could not persist language via API:', e);
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', newLang);
+    window.location.href = url.toString();
+}
+window.changeLandingLanguage = changeLandingLanguage;
+
+const SANDBOX_SCENARIOS = {
+    ocr: {
+        method: 'POST',
+        endpoint: '/api/documents/process-ocr',
+        latency: '32ms Latency',
+        status: '200 OK • ZERO FLOAT LOSS',
+        request: {
+            "file_name": "doc_purchase_invoice_bn_00001.png",
+            "shop_id": 28,
+            "auto_post_ledger": true,
+            "language_hints": ["bn", "en"]
+        },
+        response: {
+            "status": "success",
+            "document_id": 1042,
+            "vendor": "Bengal Packaging Supplies",
+            "invoice_number": "INV-2026-0891",
+            "total_amount_minor": 4500000,
+            "formatted_amount": "৳ 45,000.00",
+            "confidence_score": 0.98,
+            "ledger_entry": {
+                "debit": "Inventory - Packaging Materials",
+                "credit": "Accounts Payable",
+                "amount_minor": 4500000
+            }
+        }
+    },
+    runway: {
+        method: 'POST',
+        endpoint: '/api/forecast/runway',
+        latency: '18ms Latency',
+        status: '200 OK • 95% CONFIDENCE INTERVAL',
+        request: {
+            "shop_id": 28,
+            "forecast_days": 30,
+            "monte_carlo_iterations": 1000,
+            "confidence_interval": 0.95
+        },
+        response: {
+            "status": "success",
+            "current_cash_balance_minor": 62500000,
+            "current_cash_formatted": "৳ 625,000.00",
+            "estimated_runway_days": 43.8,
+            "confidence_intervals": {
+                "p05_conservative_days": 38.2,
+                "p50_median_days": 44.0,
+                "p95_optimistic_days": 51.5
+            },
+            "shortage_alert_flag": false
+        }
+    },
+    loan: {
+        method: 'POST',
+        endpoint: '/api/loans/assess-dscr',
+        latency: '14ms Latency',
+        status: '200 OK • PRIME BANK QUALITY',
+        request: {
+            "shop_id": 28,
+            "requested_principal_minor": 80000000,
+            "tenure_months": 24,
+            "target_bank": "BRAC Bank SME Unit"
+        },
+        response: {
+            "status": "success",
+            "monthly_noi_minor": 25000000,
+            "calculated_emi_minor": 3745800,
+            "calculated_dscr": 6.67,
+            "qualification_tier": "PRIME_BANK_QUALITY",
+            "pre_approval_probability": 0.94
+        }
+    },
+    voice: {
+        method: 'POST',
+        endpoint: '/api/voice/command',
+        latency: '24ms Latency',
+        status: '200 OK • AGENT TOOL-CALL DISPATCHED',
+        request: {
+            "text": "Hi Ashik, what is my net profit today?",
+            "locale": "en",
+            "shop_id": 28
+        },
+        response: {
+            "status": "success",
+            "intent": "financial_status",
+            "tool_called": "financial_calculator.daily_profit",
+            "spoken_response": "Today your shop earned revenue of 85,400 BDT with net profit of 53,300 BDT.",
+            "net_margin": "62.4%"
+        }
+    },
+    pragma: {
+        method: 'GET',
+        endpoint: '/api/reports/integrity',
+        latency: '11ms Latency',
+        status: '200 OK • SQLITE WAL VERIFIED',
+        request: {},
+        response: {
+            "status": "success",
+            "overall_status": "HEALTHY",
+            "pragma_integrity_check": "ok",
+            "pragma_foreign_key_check": "0 violations",
+            "journal_mode": "wal",
+            "total_tables": 50,
+            "total_system_records": 162828,
+            "negative_minor_units_flagged": 0
+        }
+    }
+};
+
+function switchSandboxTab(tabName) {
+    const tabs = ['simulator', 'payloads', 'agent'];
+    tabs.forEach(t => {
+        const el = document.getElementById(`sandbox-tab-${t}`);
+        const btn = document.getElementById(`sandbox-tab-btn-${t}`);
+        if (el) el.classList.toggle('hidden', t !== tabName);
+        if (btn) {
+            if (t === tabName) {
+                btn.className = 'px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all flex items-center gap-2 bg-cyan-500 text-slate-950 shadow-lg shadow-cyan-500/25';
+            } else {
+                btn.className = 'px-4 py-2 rounded-xl text-xs font-mono font-medium text-slate-400 hover:text-white bg-slate-900/80 border border-white/5 hover:border-cyan-500/40 transition-all flex items-center gap-2';
+            }
+        }
+    });
+    if (tabName === 'payloads') {
+        selectApiScenario('ocr');
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+window.switchSandboxTab = switchSandboxTab;
+
+function selectApiScenario(scenarioKey) {
+    const s = SANDBOX_SCENARIOS[scenarioKey];
+    if (!s) return;
+    document.querySelectorAll('.scenario-btn').forEach(btn => {
+        btn.className = 'scenario-btn px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white transition-all';
+    });
+    const activeBtn = document.getElementById(`scenario-btn-${scenarioKey}`);
+    if (activeBtn) activeBtn.className = 'scenario-btn px-3 py-1.5 rounded-lg bg-cyan-600 text-white font-bold transition-all';
+
+    const mEl = document.getElementById('terminal-method');
+    const epEl = document.getElementById('terminal-endpoint');
+    const latEl = document.getElementById('terminal-latency');
+    const reqEl = document.getElementById('terminal-request');
+    const resEl = document.getElementById('terminal-response');
+
+    if (mEl) mEl.innerText = s.method;
+    if (epEl) epEl.innerText = s.endpoint;
+    if (latEl) latEl.innerText = s.latency;
+    if (reqEl) reqEl.innerText = JSON.stringify(s.request, null, 2);
+    if (resEl) resEl.innerText = JSON.stringify(s.response, null, 2);
+}
+window.selectApiScenario = selectApiScenario;
+
 function updateLandingSandbox() {
     const noi = parseFloat(document.getElementById('slider-noi').value);
     const principal = parseFloat(document.getElementById('slider-principal').value);
     const tenure = parseInt(document.getElementById('slider-tenure').value);
     const annualRate = 0.115; // 11.5% BRAC SME base
-
-    document.getElementById('slider-noi-label').innerText = '৳ ' + noi.toLocaleString();
-    document.getElementById('slider-principal-label').innerText = '৳ ' + principal.toLocaleString();
-    document.getElementById('slider-tenure-label').innerText = tenure + ' Months';
-
+    const curr = window.CURRENT_CURRENCY || 'BDT';
+    const symMap = { 'BDT': '৳', 'CNY': '¥', 'USD': '$', 'EUR': '€', 'GBP': '£' };
+    const sym = symMap[curr] || curr;
+    const monthsText = window.t('landing.sim_tenure_months', 'Months');
+    document.getElementById('slider-noi-label').innerText = sym + ' ' + noi.toLocaleString();
+    document.getElementById('slider-principal-label').innerText = sym + ' ' + principal.toLocaleString();
+    document.getElementById('slider-tenure-label').innerText = tenure + ' ' + monthsText;
     // Reducing balance EMI calculation
     const monthlyRate = annualRate / 12;
     const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / (Math.pow(1 + monthlyRate, tenure) - 1);
     const dscr = noi / emi;
-
-    document.getElementById('sandbox-emi').innerText = '৳ ' + Math.round(emi).toLocaleString();
+    document.getElementById('sandbox-emi').innerText = sym + ' ' + Math.round(emi).toLocaleString();
     document.getElementById('sandbox-dscr').innerText = dscr.toFixed(2) + 'x';
-
     const verdictEl = document.getElementById('sandbox-verdict');
     if (dscr >= 1.5) {
         verdictEl.className = 'py-2 px-4 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold';
-        verdictEl.innerText = '✓ Prime Bank Quality — High Approval Probability';
+        verdictEl.innerText = window.t('landing.sim_prime_verdict', '✓ Prime Bank Quality — High Approval Probability');
         document.getElementById('sandbox-dscr').className = 'font-orbitron text-3xl font-extrabold text-emerald-400 mt-1';
     } else if (dscr >= 1.2) {
         verdictEl.className = 'py-2 px-4 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-bold';
-        verdictEl.innerText = '⚠ Conditional Eligibility — Working Capital Collateral Required';
+        verdictEl.innerText = window.t('landing.sim_tight_verdict', '⚠ Moderate Risk — Collateral or Working Capital Boost Recommended');
         document.getElementById('sandbox-dscr').className = 'font-orbitron text-3xl font-extrabold text-amber-400 mt-1';
     } else {
         verdictEl.className = 'py-2 px-4 rounded-xl bg-rose-500/20 border border-rose-500/40 text-rose-300 text-xs font-bold';
-        verdictEl.innerText = '✕ High Debt Risk — EMI Exceeds Operating Cash Buffer';
+        verdictEl.innerText = window.t('landing.sim_risk_verdict', '✕ High Debt Risk — EMI Exceeds Operating Cash Buffer');
         document.getElementById('sandbox-dscr').className = 'font-orbitron text-3xl font-extrabold text-rose-400 mt-1';
     }
 }
+// Background Hero Video Play/Pause & Accessibility Handler
+function toggleHeroVideo() {
+    const video = document.getElementById('hero-bg-video');
+    const icon = document.getElementById('hero-video-toggle-icon');
+    const label = document.getElementById('hero-video-toggle-label');
+    if (!video) return;
+    if (video.paused) {
+        video.play().then(() => {
+            if (icon) icon.setAttribute('data-lucide', 'pause');
+            if (label) label.textContent = window.t('landing.video_active', 'Video Active');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }).catch(err => {
+            console.warn('Hero video play prevented:', err);
+        });
+    } else {
+        video.pause();
+        if (icon) icon.setAttribute('data-lucide', 'play');
+        if (label) label.textContent = window.t('landing.video_paused', 'Video Paused');
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+}
+window.toggleHeroVideo = toggleHeroVideo;
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Initialize Sandbox calculation
+    if (typeof updateLandingSandbox === 'function') {
+        updateLandingSandbox();
+    }
+    // 2. Background Video Event Synchronization & Robust Autoplay
+    const video = document.getElementById('hero-bg-video');
+    const icon = document.getElementById('hero-video-toggle-icon');
+    const label = document.getElementById('hero-video-toggle-label');
+    if (video) {
+        video.muted = true;
+        video.defaultMuted = true;
+        const startAutoplay = () => {
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    if (icon) icon.setAttribute('data-lucide', 'pause');
+                    if (label) label.textContent = window.t('landing.video_active', 'Video Active');
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+                }).catch(err => {
+                    console.log('Autoplay deferred, awaiting user touch/click:', err);
+                });
+            }
+        };
+        video.addEventListener('play', () => {
+            if (icon) icon.setAttribute('data-lucide', 'pause');
+            if (label) label.textContent = window.t('landing.video_active', 'Video Active');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+        video.addEventListener('pause', () => {
+            if (icon) icon.setAttribute('data-lucide', 'play');
+            if (label) label.textContent = window.t('landing.video_paused', 'Video Paused');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+        // Trigger playback immediately
+        startAutoplay();
+        video.addEventListener('canplay', startAutoplay, { once: true });
+        video.addEventListener('loadeddata', startAutoplay, { once: true });
+        // First interaction fallback in case browser policy is strictly demanding user gesture
+        const onFirstInteraction = () => {
+            if (video.paused) {
+                startAutoplay();
+            }
+            window.removeEventListener('click', onFirstInteraction);
+            window.removeEventListener('touchstart', onFirstInteraction);
+            window.removeEventListener('scroll', onFirstInteraction);
+        };
+        window.addEventListener('click', onFirstInteraction, { passive: true, once: true });
+        window.addEventListener('touchstart', onFirstInteraction, { passive: true, once: true });
+        window.addEventListener('scroll', onFirstInteraction, { passive: true, once: true });
+    }
+});
 </script>
 {% endblock %}

@@ -5,8 +5,9 @@ Enforces multi-tenant isolation by binding chunks strictly to Business #19 (Bism
 
 from __future__ import annotations
 
+import json
 from src.database.connection import SessionLocal
-from src.database.models import Business, Shop, Document
+from src.database.models import Business, Shop, Document, DocumentClassification, DocumentExtraction
 from src.ai.rag_service import RagService
 
 
@@ -35,6 +36,20 @@ def seed_demo_rag_documents():
                     "Payment Terms: 30 days net credit (৩০ দিনের বাকির সুবিধা). Mushak Challan No: CH-2026-9812. Line item status: Verified."
                 ),
                 "metadata": {"type": "tax_invoice", "vat_rate": "15%", "seller": "Bengal Packaging Industries"},
+                "classification": {"type": "purchase_invoice", "confidence": 0.98},
+                "extraction": {
+                    "invoice_number": "CH-2026-9812",
+                    "date": "2026-08-15",
+                    "supplier_name": "Bengal Packaging Industries Ltd",
+                    "customer_name": "Bismillah Store",
+                    "payee": "Bengal Packaging Industries Ltd",
+                    "subtotal_minor": 2250000,
+                    "tax_minor": 337500,
+                    "discount_minor": 0,
+                    "total_amount_minor": 2587500,
+                    "paid_amount_minor": 2587500,
+                    "payment_method": "credit",
+                },
             },
             {
                 "title": "DESCO Commercial Electricity Utility Bill / ডেসকো বাণিজ্যিক বিদ্যুৎ বিল - Shop 28",
@@ -46,6 +61,20 @@ def seed_demo_rag_documents():
                     "Total Net Bill: 16,915.50 BDT. Due Date: 2026-10-25. Status: Auto-debit scheduled."
                 ),
                 "metadata": {"type": "utility_bill", "utility": "electricity", "provider": "DESCO"},
+                "classification": {"type": "expense_receipt", "confidence": 0.96},
+                "extraction": {
+                    "invoice_number": "BILL-8819-2041-09",
+                    "date": "2026-09-30",
+                    "supplier_name": "DESCO Electricity Supply",
+                    "customer_name": "Bismillah Store",
+                    "payee": "DESCO Electricity Supply",
+                    "subtotal_minor": 1611000,
+                    "tax_minor": 80550,
+                    "discount_minor": 0,
+                    "total_amount_minor": 1691550,
+                    "paid_amount_minor": 1691550,
+                    "payment_method": "auto_debit",
+                },
             },
             {
                 "title": "Supplier Procurement Agreement - Pran Agro Foods Ltd / প্রাণ এগ্রো ফুডস সরবরাহকারী চুক্তি",
@@ -59,6 +88,20 @@ def seed_demo_rag_documents():
                     "Damaged or expired packaging accepted within 7 days of delivery inspection."
                 ),
                 "metadata": {"type": "supplier_agreement", "supplier": "Pran Agro Foods", "credit_limit": "500000"},
+                "classification": {"type": "purchase_invoice", "confidence": 0.95},
+                "extraction": {
+                    "invoice_number": "AGR-PRAN-2026",
+                    "date": "2026-01-01",
+                    "supplier_name": "Pran Agro Foods Ltd",
+                    "customer_name": "Bismillah Store",
+                    "payee": "Pran Agro Foods Ltd",
+                    "subtotal_minor": 50000000,
+                    "tax_minor": 0,
+                    "discount_minor": 0,
+                    "total_amount_minor": 50000000,
+                    "paid_amount_minor": 0,
+                    "payment_method": "credit",
+                },
             },
             {
                 "title": "BRAC Bank SME Shonchoy Loan Facility Sanction Letter / ব্র্যাক ব্যাংক এসএমই ঋণ মঞ্জুরিপত্র",
@@ -71,6 +114,20 @@ def seed_demo_rag_documents():
                     "Collateral: Hypothecation of inventory and book debts."
                 ),
                 "metadata": {"type": "loan_sanction", "lender": "BRAC Bank", "facility_minor": 80000000},
+                "classification": {"type": "payment_receipt", "confidence": 0.99},
+                "extraction": {
+                    "invoice_number": "SME-LN-800K-2026",
+                    "date": "2026-06-15",
+                    "supplier_name": "BRAC Bank SME Banking",
+                    "customer_name": "Bismillah Store",
+                    "payee": "BRAC Bank SME Banking",
+                    "subtotal_minor": 80000000,
+                    "tax_minor": 0,
+                    "discount_minor": 0,
+                    "total_amount_minor": 80000000,
+                    "paid_amount_minor": 80000000,
+                    "payment_method": "bank_transfer",
+                },
             },
         ]
 
@@ -97,6 +154,33 @@ def seed_demo_rag_documents():
                 session.add(doc)
                 session.flush()
 
+            # Ensure classification exists
+            if not doc.classification and "classification" in doc_info:
+                cls_data = doc_info["classification"]
+                cls_rec = DocumentClassification(
+                    document_id=doc.id,
+                    predicted_doc_type=cls_data["type"],
+                    confidence_score=cls_data["confidence"],
+                    classifier_model_version="rule_tfidf_v1",
+                    raw_predictions_json="{}",
+                )
+                session.add(cls_rec)
+
+            # Ensure extraction exists
+            if not doc.extraction and "extraction" in doc_info:
+                ext_data = doc_info["extraction"]
+                ext_rec = DocumentExtraction(
+                    document_id=doc.id,
+                    raw_ocr_text=doc_info["content"],
+                    raw_ocr_blocks_json="[]",
+                    structured_data_json=json.dumps(ext_data),
+                    normalized_data_json=json.dumps(ext_data),
+                    field_confidences_json=json.dumps({"total_amount_minor": 0.95, "supplier_name": 0.95}),
+                    validation_errors_json="[]",
+                    extraction_model_version="rapidocr_pipeline_v1",
+                )
+                session.add(ext_rec)
+
             # Ingest chunks
             chunks_saved = RagService.ingest_document(
                 session=session,
@@ -109,6 +193,7 @@ def seed_demo_rag_documents():
             )
             total_chunks += chunks_saved
 
+        session.commit()
         print(f"Successfully seeded {len(sample_docs)} documents with {total_chunks} vector chunks!")
 
 

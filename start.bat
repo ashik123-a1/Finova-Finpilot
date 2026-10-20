@@ -27,15 +27,16 @@ if %errorlevel% neq 0 (
 )
 
 :: 3. Server Configuration
-set HOST=127.0.0.1
+set HOST=0.0.0.0
 set PORT=8050
 set APP_MODULE=src.api.app:app
 
 echo [INFO] Python version:
 python --version
-echo [INFO] Target Server : http://%HOST%:%PORT%
-echo [INFO] Login Portal  : http://%HOST%:%PORT%/login
-echo [INFO] Documentation : http://%HOST%:%PORT%/docs
+echo [INFO] Local PC Access  : http://localhost:%PORT%/landing
+echo [INFO] Same Wi-Fi Access: http://192.168.0.113:%PORT%/landing
+echo [INFO] Global Internet  : Run "share_online.bat" for instant public HTTPS link!
+echo [INFO] API Swagger Docs : http://localhost:%PORT%/docs
 echo.
 echo [DEMO PERSONAS]
 echo  - Store Owner  : demo_owner  / demo12345 or 1-Click quick login
@@ -44,7 +45,7 @@ echo  - Cashier      : demo_cashier    / password123
 echo  - Bank Auditor : demo_auditor    / password123
 echo.
 echo [INFO] Launching browser in 2 seconds...
-start "" cmd /c "timeout /t 2 /nobreak >nul & start http://%HOST%:%PORT%/login"
+start "" cmd /c "timeout /t 2 /nobreak >nul & start http://localhost:%PORT%/landing"
 
 echo ==============================================================================
 echo  Server is running! Press CTRL+C in this terminal window to stop the server.

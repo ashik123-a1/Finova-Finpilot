@@ -176,12 +176,13 @@ class StructuredDocumentExtractor:
     INVOICE_NO_PATTERNS = [
         r"(?i)\b(INV-[A-Za-z0-9\-_]+)\b",
         r"(?i)(?:发票号码|发票号|চালানপত্র\s*নম্বর)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
+        r"(?i)\b(?:deed[ \t]*(?:no|num|number|#)|deedno|দলিল[ \t]*(?:নং|নম্বর))[ \t#:.-]*([A-Za-z0-9\-_/]+)",
         r"(?i)\b(?:invoice|inv|bill|bil|memo|challan|রসিদ|চালান|发票代码|رقم\s*الفاتورة|factura|बिल\s*नं)(?:[ \t]*(?:no|num|number|নং|号|নম্বর))?[ \t#:.-]+([A-Za-z0-9\-_/]+)",
         r"(?i)\b(?:no|num|নং|号|নম্বর)[ \t#:.-]+([A-Za-z0-9\-_/]+)",
     ]
 
     TOTAL_PATTERNS = [
-        r"(?i)(?:\b(?:grand[ \t]*total|net[ \t]*total|total[ \t]*amount|total|total[ \t]*a[ \t]*pagar)\b|(?:সর্বমোট|মোট(?:\s*(?:প্রদেয়|মূল্য))?|মোট\s*টাকা|价税合计|合计|金额总计|المبلغ[ \t]*الإجمالي|المجموع[ \t]*الكلي|कुल[ \t]*राशि|कुल[ \t]*योग))[ \t:৳TKtk$¥€£﷼KD]*(?:টাকা\s*[:\-]*)?[ \t:৳TKtk$¥€£﷼KD]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
+        r"(?i)\b(?:total[ \t]*consideration|totalconsideration|grand[ \t]*total|net[ \t]*total|total[ \t]*amount|total[ \t]*payable|total[ \t]*net[ \t]*bill|total[ \t]*bill|total[ \t]*a[ \t]*pagar|\btotal\b|consideration|সর্বমোট|মোট(?:\s*(?:প্রদেয়|মূল্য|টাকা))?|পণমূল্য|টাকার\s*পরিমাণ|মূল্য|价税合计|合计|金额总计|المبلغ[ \t]*الإجمالي|المجموع[ \t]*الكلي|कुल[ \t]*राशि|कुल[ \t]*योग)[ \t:/\-=]*(?:টাকা|BDT|Tk|TK|৳|USD|CNY|RMB|\$|¥|€|£)?[ \t:/\-=]*([0-9][0-9,\s]*(?:\.[0-9\s]{1,3})?)",
     ]
 
     SUBTOTAL_PATTERNS = [
@@ -373,6 +374,39 @@ class StructuredDocumentExtractor:
         if items and not subtotal_minor:
             subtotal_minor = sum(it["line_total_minor"] for it in items)
 
+        # Resilient currency amount fallback if total was not captured by explicit patterns
+        if not total_minor or total_minor == 0:
+            candidates: List[int] = []
+            cur_matches = re.findall(
+                r"(?i)(?:BDT|TK|Tk|৳|\$|¥|EUR|€)[ \t:/\-=]*([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2}))",
+                full_text
+            )
+            for cm in cur_matches:
+                m_val = cls.parse_minor_amount(cm)
+                if m_val and m_val > 0:
+                    candidates.append(m_val)
+
+            cur_suffix = re.findall(
+                r"(?i)([0-9]{1,3}(?:,[0-9]{3})*(?:\.[0-9]{1,2})?|[0-9]+(?:\.[0-9]{1,2}))[ \t:/\-=]*(?:BDT|TK|Tk|৳|\$|¥|EUR|€)",
+                full_text
+            )
+            for cs in cur_suffix:
+                m_val = cls.parse_minor_amount(cs)
+                if m_val and m_val > 0:
+                    candidates.append(m_val)
+
+            if not candidates:
+                comma_nums = re.findall(r"\b([0-9]{1,3}(?:,[0-9]{3})+\.[0-9]{2})\b", full_text)
+                for cn in comma_nums:
+                    m_val = cls.parse_minor_amount(cn)
+                    if m_val and m_val > 0:
+                        candidates.append(m_val)
+
+            if candidates:
+                total_minor = max(candidates)
+                if not subtotal_minor:
+                    subtotal_minor = total_minor
+
         if not total_minor:
             if subtotal_minor:
                 total_minor = subtotal_minor + tax_minor - discount_minor
@@ -383,6 +417,32 @@ class StructuredDocumentExtractor:
         if not subtotal_minor:
             subtotal_minor = total_minor
 
+        # Extract party / vendor / counterparty name
+        vendor_name = None
+        VENDOR_PATTERNS = [
+            r"(?i)(?:seller|supplier|vendor|issuer|merchant|store|দোকান|সরবরাহকারী|বিক্রেতা)(?:[ \t]*/[ \t]*(?:vendor|supplier|issuer|seller))?[ \t]*:[ \t]*([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+            r"(?i)(?:buyer|customer|consumer|borrower|গ্রহীতা|ক্রেতা|গ্রাহক)(?:[ \t]*/[ \t]*(?:customer|buyer|recipient|name))?[ \t]*(?:name)?[ \t]*:[ \t]*([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+            r"(?i)(?:payee|billing[ \t]*company|billing[ \t]*entity)(?:[ \t]*/[ \t]*(?:payee|billing[ \t]*company|billing[ \t]*entity))?[ \t]*:[ \t]*([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+            r"(?i)(?:financing[ \t]*bank|bank|lender|payer)(?:[ \t]*/[ \t]*(?:payer|bank))?[ \t]*:[ \t]*([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+            r"(?i)\bname[ \t]*:[ \t]*([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+            r"(?i)(?:seller|supplier|vendor|issuer|merchant|store|দোকান|সরবরাহকারী|বিক্রেতা)[ \t:/\-=]+([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+            r"(?i)(?:buyer|customer|consumer|borrower|গ্রহীতা|ক্রেতা|গ্রাহক)[ \t:/\-=]+(?:name[ \t:/\-=]+)?([A-Za-z0-9\s\.\u0980-\u09FF]{3,45})",
+        ]
+        for pat in VENDOR_PATTERNS:
+            vm = re.search(pat, full_text)
+            if vm:
+                cand = vm.group(1).splitlines()[0].strip()
+                cand = re.sub(r"[|:;,\-_/]+$", "", cand).strip()
+                if len(cand) >= 3 and not cand.lower().startswith("plot") and not cand.lower().startswith("district"):
+                    vendor_name = cand
+                    break
+
+        if not vendor_name:
+            vendor_name = "General Commercial Trade"
+
+        extracted["supplier_name"] = vendor_name
+        extracted["customer_name"] = vendor_name
+        extracted["payee"] = vendor_name
         extracted["subtotal_minor"] = subtotal_minor
         extracted["discount_minor"] = discount_minor
         extracted["tax_minor"] = tax_minor

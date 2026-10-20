@@ -41,5 +41,20 @@ build/
 *.swp
 *.swo
 
-# Local scratch directory
+# Local scratch, tools, and temporary live links
 scratch/
+tools/
+LIVE_ONLINE_LINK.txt
+
+# Local backups and exports (strictly excluded from git for security)
+var/
+var/backups/*
+!var/backups/.gitkeep
+var/exports/*
+!var/exports/.gitkeep
+
+# Temporary media workspaces & raw footage
+ashik/video/
+public/
+
+

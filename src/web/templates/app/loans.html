@@ -1,37 +1,78 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}SME Loan Underwriting & DSCR Suitability{% endblock %}
-{% block page_subtitle %}Institutional credit evaluation, debt capacity modeling, and bank product matching{% endblock %}
+{% block page_title %}{{ _('loans.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('loans.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
+    <!-- Top System Banner: Statutory Regulatory Compliance & Synthetic Disclaimer -->
+    <div class="p-4 rounded-2xl bg-slate-900/90 border border-cyan-500/30 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg shadow-cyan-950/20">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 shrink-0">
+                <i data-lucide="shield-check" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h4 class="text-xs font-bold text-white uppercase tracking-wider">Autonomous Institutional Credit Engine</h4>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                        GAAP / IFRS Aligned
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                        Simulated Demo Mode
+                    </span>
+                </div>
+                <p class="text-xs text-slate-400 mt-0.5">
+                    Pre-screened against statutory Bangladesh Bank SME lending covenants & China SME risk frameworks.
+                </p>
+            </div>
+        </div>
+        <div class="flex items-center gap-2 self-end sm:self-auto">
+            <span class="text-xs font-mono text-slate-400">Shop ID:</span>
+            <span id="active-shop-badge" class="px-2.5 py-1 rounded-lg bg-slate-800 text-cyan-400 font-mono text-xs font-bold border border-white/10">
+                #{{ active_shop_id }}
+            </span>
+        </div>
+    </div>
+
     <!-- Loan Underwriting Calculator & Live Verdict -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Interactive Inputs Panel (2 Cols) -->
-        <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-5">
+        <div class="glass-panel p-6 rounded-3xl border border-white/10 lg:col-span-2 space-y-5 relative">
             <div class="flex items-center justify-between pb-3 border-b border-white/10">
                 <div>
-                    <h3 class="text-sm font-bold text-white">Debt Capacity Underwriting Calculator</h3>
-                    <p class="text-xs text-slate-400">Tested against statutory Bangladesh Bank & China SME lending covenants</p>
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i data-lucide="calculator" class="w-4 h-4 text-cyan-400"></i>
+                        {{ _('loans.title') }}
+                    </h3>
+                    <p class="text-xs text-slate-400">All input fields update calculations and bank product suitability in real time</p>
                 </div>
-                <span class="text-xs font-mono px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">
-                    GAAP / IFRS Aligned
-                </span>
+                <div class="flex items-center gap-2">
+                    <span id="calc-sync-status" class="text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Live Reactive Engine
+                    </span>
+                </div>
             </div>
 
+            <!-- Primary Loan Terms Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Requested Loan Principal (BDT)</label>
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">
+                        {{ _('loans.loan_amount') }} (<span class="currency-label">BDT</span>)
+                    </label>
                     <div class="relative">
-                        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-cyan-400 font-bold font-mono">৳</span>
-                        <input type="number" id="loan-principal" value="800000" min="50000" step="50000" class="glass-input w-full pl-8 pr-4 py-2.5 rounded-xl font-orbitron font-bold text-sm text-white" oninput="calculateLoanEvaluation()">
+                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400 font-bold font-mono">৳</span>
+                        <input type="number" id="loan-principal" value="800000" min="10000" step="25000" class="glass-input w-full pl-8 pr-4 py-2.5 rounded-xl font-orbitron font-bold text-sm text-white focus:border-cyan-400 transition-colors" oninput="handleInputChange()">
                     </div>
+                    <span id="err-principal" class="text-[10px] text-rose-400 hidden mt-1">Please enter a valid positive principal amount.</span>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Loan Tenure (Months)</label>
-                    <select id="loan-tenure" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer" onchange="calculateLoanEvaluation()">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">{{ _('loans.tenure_months') }}</label>
+                    <select id="loan-tenure" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer focus:border-cyan-400 transition-colors" onchange="handleInputChange()">
+                        <option value="6">6 Months (Half Year)</option>
                         <option value="12">12 Months (1 Year)</option>
+                        <option value="18">18 Months (1.5 Years)</option>
                         <option value="24" selected>24 Months (2 Years)</option>
                         <option value="36">36 Months (3 Years)</option>
                         <option value="48">48 Months (4 Years)</option>
@@ -40,14 +81,18 @@
                 </div>
 
                 <div>
-                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">Expected Annual Interest Rate (%)</label>
-                    <input type="number" id="loan-rate" value="11.5" min="5" max="25" step="0.25" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-mono font-bold text-white" oninput="calculateLoanEvaluation()">
+                    <label class="block text-xs font-semibold text-slate-300 mb-1.5">{{ _('loans.interest_rate') }}</label>
+                    <div class="relative">
+                        <input type="number" id="loan-rate" value="11.5" min="0" max="30" step="0.25" class="glass-input w-full pl-3.5 pr-8 py-2.5 rounded-xl text-xs font-mono font-bold text-white focus:border-cyan-400 transition-colors" oninput="handleInputChange()">
+                        <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-xs">%</span>
+                    </div>
+                    <span id="err-rate" class="text-[10px] text-rose-400 hidden mt-1">Interest rate must be between 0% and 30%.</span>
                 </div>
 
                 <div>
                     <label class="block text-xs font-semibold text-slate-300 mb-1.5">Primary Loan Purpose</label>
-                    <select id="loan-purpose" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer">
-                        <option value="working_capital">Working Capital & Inventory Expansion</option>
+                    <select id="loan-purpose" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-xs font-medium cursor-pointer focus:border-cyan-400 transition-colors" onchange="handleInputChange()">
+                        <option value="working_capital" selected>Working Capital & Inventory Expansion</option>
                         <option value="equipment">Retail POS Hardware & Store Renovation</option>
                         <option value="branch">Opening New Retail Branch</option>
                         <option value="refinance">Debt Consolidation & Restructuring</option>
@@ -55,19 +100,58 @@
                 </div>
             </div>
 
-            <!-- Mathematical Breakdown -->
-            <div class="grid grid-cols-3 gap-3 pt-2 text-center">
+            <!-- Financial Capacity Overrides / Modeled Scenario Grid -->
+            <div class="p-4 rounded-2xl bg-slate-900/60 border border-white/5 space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-slate-300 flex items-center gap-1.5">
+                        <i data-lucide="line-chart" class="w-3.5 h-3.5 text-indigo-400"></i>
+                        Underwriting Cash Flow Baseline (From POS / Ledger)
+                    </span>
+                    <button type="button" onclick="resetToLedgerBaselines()" class="text-[10px] font-mono text-cyan-400 hover:underline">
+                        Reset Defaults
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">
+                            Monthly Net Operating Income (NOI)
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-xs">৳</span>
+                            <input type="number" id="loan-noi" value="250000" min="0" step="10000" class="glass-input w-full pl-7 pr-3 py-2 rounded-xl text-xs font-mono font-bold text-white" oninput="handleInputChange()">
+                        </div>
+                        <span class="text-[10px] text-slate-500 mt-0.5 block">Historical gross profit minus operating overhead</span>
+                    </div>
+                    <div>
+                        <label class="block text-[11px] font-semibold text-slate-400 mb-1">
+                            Existing Monthly Debt Service
+                        </label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 font-mono text-xs">৳</span>
+                            <input type="number" id="loan-existing-debt" value="0" min="0" step="5000" class="glass-input w-full pl-7 pr-3 py-2 rounded-xl text-xs font-mono font-bold text-white" oninput="handleInputChange()">
+                        </div>
+                        <span class="text-[10px] text-slate-500 mt-0.5 block">Existing monthly EMI commitments from other lenders</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deterministic Mathematical Breakdown -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1 text-center">
                 <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
                     <div class="text-[10px] font-mono text-slate-400 uppercase">Monthly EMI</div>
-                    <div id="res-emi" class="font-orbitron text-lg font-bold text-white mt-0.5">৳ 37,458</div>
+                    <div id="res-emi" class="font-orbitron text-base sm:text-lg font-bold text-white mt-0.5">৳ 37,472</div>
                 </div>
                 <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
                     <div class="text-[10px] font-mono text-slate-400 uppercase">Total Interest</div>
-                    <div id="res-interest" class="font-orbitron text-lg font-bold text-rose-300 mt-0.5">৳ 99,000</div>
+                    <div id="res-interest" class="font-orbitron text-base sm:text-lg font-bold text-rose-300 mt-0.5">৳ 99,334</div>
                 </div>
                 <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
                     <div class="text-[10px] font-mono text-slate-400 uppercase">Total Repayment</div>
-                    <div id="res-total" class="font-orbitron text-lg font-bold text-cyan-300 mt-0.5">৳ 899,000</div>
+                    <div id="res-total" class="font-orbitron text-base sm:text-lg font-bold text-cyan-300 mt-0.5">৳ 899,334</div>
+                </div>
+                <div class="p-3 rounded-2xl bg-slate-900 border border-white/5">
+                    <div class="text-[10px] font-mono text-slate-400 uppercase">Total Debt Service</div>
+                    <div id="res-total-debt-service" class="font-orbitron text-base sm:text-lg font-bold text-indigo-300 mt-0.5">৳ 37,472</div>
                 </div>
             </div>
         </div>
@@ -76,101 +160,263 @@
         <div class="glass-panel-glow p-6 rounded-3xl border border-cyan-500/30 flex flex-col justify-between space-y-4">
             <div>
                 <div class="flex items-center justify-between mb-3">
-                    <span class="text-xs font-mono uppercase text-slate-400">Suitability Verdict</span>
-                    <span id="loan-verdict-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold">
+                    <span class="text-xs font-mono uppercase text-slate-400 tracking-wider">Suitability Verdict</span>
+                    <span id="loan-verdict-badge" class="px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold transition-all">
                         PRIME APPROVAL
                     </span>
                 </div>
 
-                <div class="text-center py-4">
-                    <div class="text-xs font-mono text-slate-400 uppercase">Projected Shop DSCR</div>
-                    <div id="res-dscr" class="font-orbitron text-4xl font-extrabold text-emerald-400 my-1">6.67x</div>
-                    <div class="text-xs text-slate-400">Institutional Threshold: &gt; 1.25x</div>
+                <div class="text-center py-4 bg-slate-950/40 rounded-2xl border border-white/5">
+                    <div class="text-[10px] font-mono text-slate-400 uppercase tracking-wider">Projected Shop DSCR</div>
+                    <div id="res-dscr" class="font-orbitron text-4xl font-extrabold text-emerald-400 my-1 transition-all">6.67x</div>
+                    <div class="text-[11px] text-slate-400">Institutional Benchmark: &ge; 1.25x</div>
                 </div>
 
-                <div class="space-y-2 text-xs border-t border-white/10 pt-3">
-                    <div class="flex justify-between">
+                <div class="space-y-2.5 text-xs border-t border-white/10 pt-4 mt-3">
+                    <div class="flex justify-between items-center">
                         <span class="text-slate-400">Net Operating Income:</span>
-                        <span class="text-white font-mono font-semibold">৳ 250,000 / mo</span>
+                        <span id="res-noi-display" class="text-white font-mono font-semibold">৳ 250,000 / mo</span>
                     </div>
-                    <div class="flex justify-between">
+                    <div class="flex justify-between items-center">
                         <span class="text-slate-400">Debt-to-Income (DTI):</span>
                         <span id="res-dti" class="text-emerald-400 font-mono font-semibold">15.0% (&lt; 40% cap)</span>
                     </div>
-                    <div class="flex justify-between">
-                        <span class="text-slate-400">Microfinance Cap Breach:</span>
-                        <span class="text-emerald-400 font-mono font-semibold">No (Within Limits)</span>
+                    <div class="flex justify-between items-center">
+                        <span class="text-slate-400">Regulatory Covenant:</span>
+                        <span id="res-covenant-status" class="text-emerald-400 font-mono font-semibold">Compliant</span>
+                    </div>
+                    <div class="pt-2 text-[11px] text-slate-400 italic" id="res-verdict-rationale">
+                        DSCR of 6.67x strongly exceeds healthy threshold (&ge; 1.25x). Proposed debt service is well within prudent cash flow capacity.
                     </div>
                 </div>
             </div>
 
-            <button type="button" onclick="generateBankDossier()" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-xs font-bold transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2">
-                <i data-lucide="file-text" class="w-4 h-4"></i>
-                <span>Generate Bank Loan Packet</span>
-            </button>
+            <div class="space-y-2 pt-2">
+                <button type="button" id="btn-generate-packet" onclick="generateBankDossier()" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-xs font-bold transition-all shadow-lg shadow-cyan-500/25 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.98]">
+                    <i data-lucide="file-text" class="w-4 h-4"></i>
+                    <span id="btn-packet-text">Generate Bank Loan Packet</span>
+                </button>
+                <p class="text-[10px] text-center text-slate-500">
+                    Creates an audit-logged dossier with downloadable ReportLab PDF & bank match scorecard.
+                </p>
+            </div>
         </div>
     </div>
 
     <!-- Live Commercial SME Bank Loan Products Comparison Matrix -->
     <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
             <div>
-                <h3 class="text-sm font-bold text-white">Commercial SME Bank Products Comparison</h3>
-                <p class="text-xs text-slate-400">Pre-screened against Bangladesh Bank SME guidelines and interest caps</p>
+                <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                    <i data-lucide="building-2" class="w-4 h-4 text-cyan-400"></i>
+                    Commercial SME Bank Products Comparison Matrix
+                </h3>
+                <p class="text-xs text-slate-400">
+                    Live eligibility scoring against Bangladesh Bank caps and demo partner bank credit policies
+                </p>
             </div>
-            <span class="text-xs font-mono text-slate-400">Updated: Q4 2026</span>
+            <div class="flex items-center gap-2">
+                <span id="matched-count-badge" class="px-2.5 py-0.5 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+                    Loading matches...
+                </span>
+            </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Product 1 -->
-            <div class="p-5 rounded-2xl bg-slate-900/80 border border-cyan-500/30 space-y-3 relative overflow-hidden">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <span class="text-[10px] font-mono text-cyan-400 uppercase block">BRAC Bank Ltd.</span>
-                        <h4 class="text-sm font-bold text-white">Anonya SME Prothom</h4>
-                    </div>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MATCHED</span>
+        <!-- Dynamic Product Cards Grid -->
+        <div id="bank-products-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Loading Skeletons -->
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 animate-pulse space-y-3">
+                <div class="h-4 bg-slate-800 rounded w-1/3"></div>
+                <div class="h-6 bg-slate-800 rounded w-2/3"></div>
+                <div class="h-16 bg-slate-800/60 rounded"></div>
+            </div>
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 animate-pulse space-y-3">
+                <div class="h-4 bg-slate-800 rounded w-1/3"></div>
+                <div class="h-6 bg-slate-800 rounded w-2/3"></div>
+                <div class="h-16 bg-slate-800/60 rounded"></div>
+            </div>
+            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 animate-pulse space-y-3">
+                <div class="h-4 bg-slate-800 rounded w-1/3"></div>
+                <div class="h-6 bg-slate-800 rounded w-2/3"></div>
+                <div class="h-16 bg-slate-800/60 rounded"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Underwriting Dossiers History -->
+    <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
+        <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                <i data-lucide="history" class="w-4 h-4 text-cyan-400"></i>
+                Saved Underwriting Dossiers & Applications
+            </h3>
+            <span class="text-xs font-mono text-slate-400">Demonstration Audit Log</span>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs">
+                <thead>
+                    <tr class="border-b border-white/10 text-slate-400 font-mono">
+                        <th class="pb-2">Application Ref</th>
+                        <th class="pb-2">Principal</th>
+                        <th class="pb-2">Tenure</th>
+                        <th class="pb-2">Assessment Status</th>
+                        <th class="pb-2">Date Created</th>
+                        <th class="pb-2 text-right">Dossier PDF</th>
+                    </tr>
+                </thead>
+                <tbody id="applications-table-body" class="divide-y divide-white/5 text-slate-300">
+                    <tr>
+                        <td colspan="6" class="py-4 text-center text-slate-500">
+                            No applications generated yet in this session.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================================== -->
+<!-- Institutional Underwriting Dossier Modal -->
+<!-- ============================================================================== -->
+<div id="loan-packet-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md hidden transition-opacity duration-200">
+    <div class="relative w-full max-w-4xl max-h-[90vh] bg-slate-900 border border-cyan-500/40 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+        <!-- Modal Header -->
+        <div class="px-6 py-4 border-b border-white/10 bg-slate-950/60 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <i data-lucide="file-check" class="w-5 h-5"></i>
                 </div>
-                <div class="space-y-1.5 text-xs text-slate-300">
-                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold">11.5% p.a.</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">৳ 2,500,000</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">DSCR Required:</span><span class="font-mono text-cyan-300">1.25x</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Collateral:</span><span class="text-emerald-400 font-semibold">Unsecured up to 15L</span></div>
+                <div>
+                    <h3 class="text-sm font-bold text-white">Institutional SME Underwriting Dossier</h3>
+                    <p class="text-xs font-mono text-cyan-400" id="modal-app-ref">REF: PENDING</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">
+                    PRE-ASSESSED
+                </span>
+                <button type="button" onclick="closeLoanPacketModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-white/5 transition-colors">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-6 space-y-6">
+            <!-- Prominent Demo Simulation Notice Box -->
+            <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-start gap-3 text-amber-300">
+                <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-400 shrink-0 mt-0.5"></i>
+                <div class="text-xs leading-relaxed">
+                    <span class="font-bold uppercase tracking-wider block mb-0.5">Demo Simulation Notice</span>
+                    This financial packet is an automated pre-underwriting assessment synthesized for evaluation. No live bank application has been submitted, no credit facility has been committed, and statutory approval remains subject to formal bank underwriting and field physical audit.
                 </div>
             </div>
 
-            <!-- Product 2 -->
-            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 space-y-3">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <span class="text-[10px] font-mono text-indigo-400 uppercase block">The City Bank</span>
-                        <h4 class="text-sm font-bold text-white">City Tara SME Credit</h4>
+            <!-- 1. Enterprise Profile & Facility Terms Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-2xl bg-slate-950/40 border border-white/5 space-y-2">
+                    <h4 class="text-xs font-bold text-cyan-400 uppercase font-mono">1. Enterprise Identity</h4>
+                    <div class="space-y-1.5 text-xs text-slate-300">
+                        <div class="flex justify-between"><span class="text-slate-500">Business Name:</span><span id="modal-biz-name" class="font-bold text-white">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Active Shop / Branch:</span><span id="modal-shop-name" class="text-white">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Tax / License ID:</span><span id="modal-tax-id" class="font-mono text-cyan-300">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Primary Purpose:</span><span id="modal-purpose-label" class="text-white font-medium">-</span></div>
                     </div>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MATCHED</span>
                 </div>
-                <div class="space-y-1.5 text-xs text-slate-300">
-                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold">10.5% p.a.</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">৳ 5,000,000</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">DSCR Required:</span><span class="font-mono text-cyan-300">1.30x</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Disbursement:</span><span class="text-white">48 Hours Rapid</span></div>
+
+                <div class="p-4 rounded-2xl bg-slate-950/40 border border-white/5 space-y-2">
+                    <h4 class="text-xs font-bold text-cyan-400 uppercase font-mono">2. Facility Terms</h4>
+                    <div class="space-y-1.5 text-xs text-slate-300">
+                        <div class="flex justify-between"><span class="text-slate-500">Requested Principal:</span><span id="modal-principal" class="font-mono font-bold text-white">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Tenure:</span><span id="modal-tenure" class="font-mono text-white">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Annual Interest Rate:</span><span id="modal-rate" class="font-mono text-emerald-400">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Monthly Installment (EMI):</span><span id="modal-emi" class="font-mono font-bold text-cyan-300">-</span></div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Product 3 -->
-            <div class="p-5 rounded-2xl bg-slate-900/80 border border-white/10 space-y-3">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <span class="text-[10px] font-mono text-emerald-400 uppercase block">Eastern Bank Ltd.</span>
-                        <h4 class="text-sm font-bold text-white">EBL Shurjo Overdraft</h4>
+            <!-- 2. Financial Standing & DSCR Underwriting Matrix -->
+            <div class="p-4 rounded-2xl bg-slate-950/40 border border-white/5 space-y-3">
+                <h4 class="text-xs font-bold text-cyan-400 uppercase font-mono">3. Debt Capacity & DSCR Underwriting Matrix</h4>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center">
+                    <div class="p-3 rounded-xl bg-slate-900 border border-white/5">
+                        <div class="text-[10px] font-mono text-slate-400 uppercase">Monthly NOI</div>
+                        <div id="modal-noi" class="font-orbitron text-sm font-bold text-white mt-0.5">-</div>
                     </div>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">MATCHED</span>
+                    <div class="p-3 rounded-xl bg-slate-900 border border-white/5">
+                        <div class="text-[10px] font-mono text-slate-400 uppercase">Total Debt Service</div>
+                        <div id="modal-debt-service" class="font-orbitron text-sm font-bold text-indigo-300 mt-0.5">-</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900 border border-white/5">
+                        <div class="text-[10px] font-mono text-slate-400 uppercase">Projected DSCR</div>
+                        <div id="modal-dscr" class="font-orbitron text-sm font-bold text-emerald-400 mt-0.5">-</div>
+                    </div>
+                    <div class="p-3 rounded-xl bg-slate-900 border border-white/5">
+                        <div class="text-[10px] font-mono text-slate-400 uppercase">Debt-to-Income</div>
+                        <div id="modal-dti" class="font-orbitron text-sm font-bold text-cyan-300 mt-0.5">-</div>
+                    </div>
                 </div>
-                <div class="space-y-1.5 text-xs text-slate-300">
-                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold">11.0% p.a.</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">৳ 3,000,000</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">DSCR Required:</span><span class="font-mono text-cyan-300">1.20x</span></div>
-                    <div class="flex justify-between"><span class="text-slate-500">Structure:</span><span class="text-white">Revolving Working Capital</span></div>
+            </div>
+
+            <!-- 3. Stress Testing Sensitivity Matrix -->
+            <div class="p-4 rounded-2xl bg-slate-950/40 border border-white/5 space-y-3">
+                <h4 class="text-xs font-bold text-cyan-400 uppercase font-mono">4. Stress Testing Sensitivity Analysis</h4>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="border-b border-white/10 text-slate-400 font-mono">
+                                <th class="pb-1.5">Scenario</th>
+                                <th class="pb-1.5">Rate</th>
+                                <th class="pb-1.5">Projected EMI</th>
+                                <th class="pb-1.5">Stressed DSCR</th>
+                                <th class="pb-1.5">Verdict</th>
+                            </tr>
+                        </thead>
+                        <tbody id="modal-stress-tbody" class="divide-y divide-white/5 text-slate-300">
+                            <!-- Populated dynamically -->
+                        </tbody>
+                    </table>
                 </div>
+            </div>
+
+            <!-- 4. Recommended Bank Match & Statutory Checklist -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 rounded-2xl bg-slate-950/40 border border-white/5 space-y-2">
+                    <h4 class="text-xs font-bold text-cyan-400 uppercase font-mono">5. Top Recommended Bank Facility</h4>
+                    <div class="space-y-1.5 text-xs text-slate-300" id="modal-bank-match-box">
+                        <div class="flex justify-between"><span class="text-slate-500">Partner Bank:</span><span id="modal-rec-bank" class="text-white font-bold">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Product Name:</span><span id="modal-rec-product" class="text-cyan-300">-</span></div>
+                        <div class="flex justify-between"><span class="text-slate-500">Base Interest Rate:</span><span id="modal-rec-rate" class="font-mono text-emerald-400">-</span></div>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-2xl bg-slate-950/40 border border-white/5 space-y-2">
+                    <h4 class="text-xs font-bold text-cyan-400 uppercase font-mono">6. Statutory Document Checklist</h4>
+                    <ul class="space-y-1.5 text-xs text-slate-300" id="modal-doc-checklist">
+                        <li class="flex items-center gap-2"><i data-lucide="check-square" class="w-3.5 h-3.5 text-emerald-400"></i> Municipal Trade License (2025-2026)</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-square" class="w-3.5 h-3.5 text-emerald-400"></i> 12-Month Audited E-Banking Statements</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-square" class="w-3.5 h-3.5 text-emerald-400"></i> Smart NID & Biometric Verification</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check-square" class="w-3.5 h-3.5 text-emerald-400"></i> e-TIN Certificate & Tax Return Receipt</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="px-6 py-4 border-t border-white/10 bg-slate-950/80 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <span class="text-[11px] font-mono text-slate-400">
+                Deterministic Output &bull; ReportLab 5.0.1 Engine
+            </span>
+            <div class="flex items-center gap-2 w-full sm:w-auto">
+                <button type="button" onclick="window.print()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer">
+                    <i data-lucide="printer" class="w-3.5 h-3.5"></i>
+                    Print Dossier
+                </button>
+                <a id="modal-download-link" href="#" target="_blank" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-md shadow-cyan-500/20 cursor-pointer">
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                    Download Official PDF
+                </a>
             </div>
         </div>
     </div>
@@ -178,54 +424,412 @@
 
 {% block extra_scripts %}
 <script>
+let debounceTimer = null;
+let currentProducts = [];
+
 document.addEventListener("DOMContentLoaded", function() {
     calculateLoanEvaluation();
+    fetchUnderwritingData();
+    loadSavedApplications();
 });
 
+function handleInputChange() {
+    // 1. Instant client-side mathematical evaluation
+    calculateLoanEvaluation();
+
+    // 2. Debounced API synchronization for live bank product matrix
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        fetchUnderwritingData();
+    }, 250);
+}
+
 function calculateLoanEvaluation() {
-    const principal = parseFloat(document.getElementById('loan-principal').value) || 0;
-    const tenure = parseInt(document.getElementById('loan-tenure').value) || 24;
-    const annualRate = (parseFloat(document.getElementById('loan-rate').value) || 11.5) / 100;
-    const shopMonthlyNoi = 250000; // Historical net operating income
+    const principalInput = document.getElementById('loan-principal');
+    const rateInput = document.getElementById('loan-rate');
+    const tenureInput = document.getElementById('loan-tenure');
+    const noiInput = document.getElementById('loan-noi');
+    const debtInput = document.getElementById('loan-existing-debt');
 
-    if (principal <= 0) return;
+    const principal = parseFloat(principalInput.value) || 0;
+    const tenure = parseInt(tenureInput.value) || 24;
+    const annualRatePct = parseFloat(rateInput.value);
+    const shopMonthlyNoi = parseFloat(noiInput.value) || 0;
+    const existingDebt = parseFloat(debtInput.value) || 0;
 
+    // Validation styling
+    const errPrincipal = document.getElementById('err-principal');
+    const errRate = document.getElementById('err-rate');
+
+    let isValid = true;
+    if (principal <= 0) {
+        if (errPrincipal) errPrincipal.classList.remove('hidden');
+        isValid = false;
+    } else {
+        if (errPrincipal) errPrincipal.classList.add('hidden');
+    }
+
+    if (isNaN(annualRatePct) || annualRatePct < 0 || annualRatePct > 30) {
+        if (errRate) errRate.classList.remove('hidden');
+        isValid = false;
+    } else {
+        if (errRate) errRate.classList.add('hidden');
+    }
+
+    if (!isValid || principal <= 0) {
+        return;
+    }
+
+    const annualRate = (annualRatePct || 0) / 100;
     const monthlyRate = annualRate / 12;
-    const emi = (principal * monthlyRate * Math.pow(1 + monthlyRate, tenure)) / (Math.pow(1 + monthlyRate, tenure) - 1);
-    const totalRepay = emi * tenure;
-    const totalInterest = totalRepay - principal;
-    const dscr = shopMonthlyNoi / emi;
-    const dti = (emi / shopMonthlyNoi) * 100;
 
+    let emi = 0;
+    if (monthlyRate > 0) {
+        const factor = Math.pow(1 + monthlyRate, tenure);
+        emi = (principal * monthlyRate * factor) / (factor - 1);
+    } else {
+        emi = principal / tenure;
+    }
+
+    const totalRepay = emi * tenure;
+    const totalInterest = Math.max(0, totalRepay - principal);
+    const totalDebtService = existingDebt + emi;
+
+    let dscr = 0;
+    let dti = 0;
+
+    if (shopMonthlyNoi > 0 && totalDebtService > 0) {
+        dscr = shopMonthlyNoi / totalDebtService;
+        dti = (totalDebtService / shopMonthlyNoi) * 100;
+    } else if (shopMonthlyNoi <= 0) {
+        dscr = 0.0;
+        dti = 999.0;
+    }
+
+    // Update DOM elements
     document.getElementById('res-emi').innerText = '৳ ' + Math.round(emi).toLocaleString();
     document.getElementById('res-interest').innerText = '৳ ' + Math.round(totalInterest).toLocaleString();
     document.getElementById('res-total').innerText = '৳ ' + Math.round(totalRepay).toLocaleString();
-    document.getElementById('res-dscr').innerText = dscr.toFixed(2) + 'x';
-    document.getElementById('res-dti').innerText = dti.toFixed(1) + '% (< 40% cap)';
+    document.getElementById('res-total-debt-service').innerText = '৳ ' + Math.round(totalDebtService).toLocaleString();
+    document.getElementById('res-dscr').innerText = dscr > 99 ? '99.00x' : dscr.toFixed(2) + 'x';
+    document.getElementById('res-noi-display').innerText = '৳ ' + Math.round(shopMonthlyNoi).toLocaleString() + ' / mo';
+    document.getElementById('res-dti').innerText = dti > 100 ? '> 100% (High)' : dti.toFixed(1) + '% (< 40% cap)';
 
     const badge = document.getElementById('loan-verdict-badge');
     const dscrNum = document.getElementById('res-dscr');
+    const covenantStatus = document.getElementById('res-covenant-status');
+    const verdictRationale = document.getElementById('res-verdict-rationale');
 
-    if (dscr >= 1.5) {
-        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold';
+    if (shopMonthlyNoi <= 0) {
+        badge.className = 'px-2.5 py-1 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 font-bold';
+        badge.innerText = 'INSUFFICIENT NOI';
+        dscrNum.className = 'font-orbitron text-4xl font-extrabold text-rose-400 my-1';
+        covenantStatus.innerText = 'Breach (Deficit)';
+        covenantStatus.className = 'text-rose-400 font-mono font-semibold';
+        verdictRationale.innerText = 'Operating income is currently negative or zero. Covenants require positive net cash flow.';
+    } else if (dscr >= 1.50 && dti <= 40.0) {
+        badge.className = 'px-2.5 py-1 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 font-bold';
         badge.innerText = 'PRIME APPROVAL';
         dscrNum.className = 'font-orbitron text-4xl font-extrabold text-emerald-400 my-1';
-    } else if (dscr >= 1.2) {
-        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold';
+        covenantStatus.innerText = 'Compliant';
+        covenantStatus.className = 'text-emerald-400 font-mono font-semibold';
+        verdictRationale.innerText = 'DSCR of ' + dscr.toFixed(2) + 'x strongly exceeds healthy threshold (>= 1.25x). Proposed debt service is well within prudent capacity.';
+    } else if (dscr >= 1.20) {
+        badge.className = 'px-2.5 py-1 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 font-bold';
         badge.innerText = 'CONDITIONAL APPROVAL';
         dscrNum.className = 'font-orbitron text-4xl font-extrabold text-amber-400 my-1';
+        covenantStatus.innerText = 'Tight Buffer';
+        covenantStatus.className = 'text-amber-400 font-mono font-semibold';
+        verdictRationale.innerText = 'DSCR of ' + dscr.toFixed(2) + 'x meets baseline coverage but provides narrow buffer. Collateral or longer tenure advised.';
     } else {
-        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 font-bold';
+        badge.className = 'px-2.5 py-1 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/40 font-bold';
         badge.innerText = 'HIGH DEBT RISK';
         dscrNum.className = 'font-orbitron text-4xl font-extrabold text-rose-400 my-1';
+        covenantStatus.innerText = 'Covenant Breach';
+        covenantStatus.className = 'text-rose-400 font-mono font-semibold';
+        verdictRationale.innerText = 'Projected DSCR of ' + dscr.toFixed(2) + 'x is below regulatory minimum of 1.25x. Facility poses high risk of default under current cash flow.';
+    }
+
+    // Refresh client-side bank match tags if products are loaded
+    if (currentProducts.length > 0) {
+        renderBankProducts(currentProducts, principal, tenure, annualRatePct, dscr);
     }
 }
 
-function generateBankDossier() {
-    showToast('Compiling GAAP bank financial underwriting dossier...', 'info');
-    setTimeout(() => {
-        showToast('Bank underwriting packet ready for download!', 'success');
-    }, 1000);
+async function fetchUnderwritingData() {
+    const principal = Math.round(parseFloat(document.getElementById('loan-principal').value) * 100) || 80000000;
+    const tenure = parseInt(document.getElementById('loan-tenure').value) || 24;
+    const rate = parseFloat(document.getElementById('loan-rate').value) || 11.5;
+    const purpose = document.getElementById('loan-purpose').value || 'working_capital';
+    const noi = Math.round(parseFloat(document.getElementById('loan-noi').value) * 100) || 25000000;
+    const debt = Math.round(parseFloat(document.getElementById('loan-existing-debt').value) * 100) || 0;
+
+    const url = `/api/finance/loan-underwriting-data?principal_minor=${principal}&tenure_months=${tenure}&annual_interest_rate_pct=${rate}&loan_purpose=${purpose}&monthly_noi_minor=${noi}&existing_monthly_debt_minor=${debt}`;
+
+    try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error('API fetch error');
+        const data = await res.json();
+        currentProducts = data.products || [];
+        renderBankProducts(currentProducts, principal / 100, tenure, rate, data.calculated_terms.projected_dscr);
+    } catch (e) {
+        console.warn('Could not sync with underwriting API:', e);
+    }
+}
+
+function renderBankProducts(products, principal, tenure, rate, currentDscr) {
+    const container = document.getElementById('bank-products-container');
+    const matchedCountBadge = document.getElementById('matched-count-badge');
+    if (!container) return;
+
+    let matchedCount = 0;
+    let html = '';
+
+    products.forEach(p => {
+        let isMatched = (p.match_status === 'MATCHED');
+        if (isMatched) matchedCount++;
+
+        html += `
+        <div class="p-5 rounded-2xl bg-slate-900/80 border ${isMatched ? 'border-cyan-500/40 shadow-lg shadow-cyan-950/30' : 'border-white/10 opacity-80'} space-y-3 relative overflow-hidden flex flex-col justify-between transition-all">
+            <div>
+                <div class="flex justify-between items-start gap-2">
+                    <div>
+                        <span class="text-[10px] font-mono text-cyan-400 uppercase block">${p.bank_name}</span>
+                        <h4 class="text-sm font-bold text-white mt-0.5">${p.product_name}</h4>
+                    </div>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono ${p.match_badge_class} shrink-0 font-bold">
+                        ${p.match_status}
+                    </span>
+                </div>
+                <div class="space-y-1.5 text-xs text-slate-300 mt-3">
+                    <div class="flex justify-between"><span class="text-slate-500">Interest Rate:</span><span class="font-mono font-semibold text-emerald-400">${p.annual_interest_rate_pct.toFixed(2)}% p.a.</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Max Facility:</span><span class="font-mono">${p.max_amount_formatted}</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Tenure Range:</span><span class="font-mono text-slate-300">${p.min_tenure_months} - ${p.max_tenure_months} Mo</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Min DSCR Req:</span><span class="font-mono text-cyan-300">${p.min_dscr.toFixed(2)}x</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Collateral:</span><span class="text-slate-300 truncate max-w-[150px]" title="${p.collateral}">${p.collateral}</span></div>
+                    <div class="flex justify-between"><span class="text-slate-500">Disbursement:</span><span class="text-slate-300">${p.disbursement}</span></div>
+                </div>
+                <div class="text-[10px] text-slate-400 italic mt-2 border-t border-white/5 pt-1.5">
+                    ${p.match_reason}
+                </div>
+            </div>
+            <div class="pt-2">
+                <button type="button" onclick="applyProductTerms(${p.annual_interest_rate_pct}, ${p.min_tenure_months}, ${p.max_tenure_months}, ${p.id})" class="w-full py-2 rounded-xl bg-slate-800 hover:bg-cyan-500/20 hover:text-cyan-300 hover:border-cyan-500/40 text-slate-300 text-xs font-semibold border border-white/10 transition-colors flex items-center justify-center gap-1.5 cursor-pointer">
+                    <i data-lucide="check" class="w-3.5 h-3.5"></i>
+                    Select & Apply Rate
+                </button>
+            </div>
+        </div>
+        `;
+    });
+
+    container.innerHTML = html;
+    if (matchedCountBadge) {
+        matchedCountBadge.innerText = `${matchedCount} of ${products.length} Products Matched`;
+        matchedCountBadge.className = matchedCount > 0 
+            ? 'px-2.5 py-0.5 rounded-full text-xs font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/30'
+            : 'px-2.5 py-0.5 rounded-full text-xs font-mono bg-rose-500/10 text-rose-400 border border-rose-500/30';
+    }
+    if (window.lucide) {
+        lucide.createIcons();
+    }
+}
+
+function applyProductTerms(rate, minTenure, maxTenure, productId) {
+    document.getElementById('loan-rate').value = rate.toFixed(2);
+    const tenureSelect = document.getElementById('loan-tenure');
+    const currentTenure = parseInt(tenureSelect.value) || 24;
+
+    if (currentTenure < minTenure) {
+        tenureSelect.value = minTenure;
+    } else if (currentTenure > maxTenure) {
+        tenureSelect.value = maxTenure;
+    }
+
+    handleInputChange();
+    if (typeof showToast === 'function') {
+        showToast(`Applied ${rate}% p.a. bank facility terms!`, 'info');
+    }
+}
+
+function resetToLedgerBaselines() {
+    document.getElementById('loan-noi').value = 250000;
+    document.getElementById('loan-existing-debt').value = 0;
+    handleInputChange();
+}
+
+async function generateBankDossier() {
+    const btn = document.getElementById('btn-generate-packet');
+    const btnText = document.getElementById('btn-packet-text');
+
+    const principal = Math.round(parseFloat(document.getElementById('loan-principal').value) * 100) || 80000000;
+    const tenure = parseInt(document.getElementById('loan-tenure').value) || 24;
+    const rate = parseFloat(document.getElementById('loan-rate').value) || 11.5;
+    const purpose = document.getElementById('loan-purpose').value || 'working_capital';
+    const noi = Math.round(parseFloat(document.getElementById('loan-noi').value) * 100) || 25000000;
+    const debt = Math.round(parseFloat(document.getElementById('loan-existing-debt').value) * 100) || 0;
+
+    // Loading state
+    btn.disabled = true;
+    btn.classList.add('opacity-75');
+    btnText.innerHTML = '<span class="inline-block animate-spin mr-1.5">&#9696;</span> Compiling Underwriting Dossier...';
+
+    if (typeof showToast === 'function') {
+        showToast('Autonomous credit evaluation & ReportLab PDF compilation initiated...', 'info');
+    }
+
+    try {
+        const payload = {
+            shop_id: {{ active_shop_id }},
+            requested_amount_minor: principal,
+            tenure_months: tenure,
+            annual_interest_rate_pct: rate,
+            loan_purpose: purpose,
+            existing_monthly_debt_minor: debt,
+            monthly_noi_minor: noi,
+        };
+
+        const res = await fetch('/api/finance/loan-packet/generate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+
+        if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.detail || 'Failed to generate loan packet');
+        }
+
+        const packet = await res.json();
+
+        // Populate Modal Fields
+        document.getElementById('modal-app-ref').innerText = 'REF: ' + packet.application_number;
+        document.getElementById('modal-biz-name').innerText = packet.business_name || 'Demo Enterprise';
+        document.getElementById('modal-shop-name').innerText = packet.shop_name || 'Main Shop';
+        document.getElementById('modal-tax-id').innerText = packet.tax_id || 'BIN-99281-002';
+        document.getElementById('modal-purpose-label').innerText = packet.loan_purpose_label || 'Working Capital';
+
+        document.getElementById('modal-principal').innerText = packet.loan_terms.principal_formatted;
+        document.getElementById('modal-tenure').innerText = packet.loan_terms.tenure_months + ' Months';
+        document.getElementById('modal-rate').innerText = packet.loan_terms.annual_interest_rate_pct.toFixed(2) + '% p.a.';
+        document.getElementById('modal-emi').innerText = packet.loan_terms.monthly_emi_formatted;
+
+        document.getElementById('modal-noi').innerText = packet.dscr_analysis.net_operating_income_formatted;
+        document.getElementById('modal-debt-service').innerText = packet.dscr_analysis.total_debt_service_formatted;
+        document.getElementById('modal-dscr').innerText = packet.dscr_analysis.projected_dscr_formatted;
+        document.getElementById('modal-dti').innerText = packet.dscr_analysis.dti_formatted;
+
+        // Populate stress tests
+        const stressTbody = document.getElementById('modal-stress-tbody');
+        if (stressTbody && packet.stress_tests) {
+            let sHtml = '';
+            packet.stress_tests.forEach(st => {
+                sHtml += `
+                    <tr>
+                        <td class="py-1.5 font-medium text-white">${st.scenario}</td>
+                        <td class="py-1.5 font-mono text-slate-300">${st.rate}</td>
+                        <td class="py-1.5 font-mono text-cyan-300">${st.monthly_emi_formatted}</td>
+                        <td class="py-1.5 font-mono font-bold ${st.projected_dscr.includes('x') && parseFloat(st.projected_dscr) >= 1.25 ? 'text-emerald-400' : 'text-amber-400'}">${st.projected_dscr}</td>
+                        <td class="py-1.5 font-mono font-semibold">${st.verdict}</td>
+                    </tr>
+                `;
+            });
+            stressTbody.innerHTML = sHtml;
+        }
+
+        // Recommended Bank Facility
+        if (packet.recommended_product) {
+            document.getElementById('modal-rec-bank').innerText = packet.recommended_product.bank_name;
+            document.getElementById('modal-rec-product').innerText = packet.recommended_product.product_name;
+            document.getElementById('modal-rec-rate').innerText = packet.recommended_product.annual_interest_rate_pct.toFixed(2) + '% p.a.';
+        }
+
+        // Download Link
+        const dlLink = document.getElementById('modal-download-link');
+        dlLink.href = packet.download_url;
+
+        // Open Modal
+        const modal = document.getElementById('loan-packet-modal');
+        modal.classList.remove('hidden');
+
+        if (typeof showToast === 'function') {
+            showToast('Bank underwriting packet ready for download & review!', 'success');
+        }
+
+        // Refresh recent applications list
+        loadSavedApplications();
+
+    } catch (e) {
+        console.error('Packet generation failed:', e);
+        if (typeof showToast === 'function') {
+            showToast(e.message || 'Error compiling underwriting packet', 'error');
+        }
+    } finally {
+        btn.disabled = false;
+        btn.classList.remove('opacity-75');
+        btnText.innerText = 'Generate Bank Loan Packet';
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    }
+}
+
+function closeLoanPacketModal() {
+    const modal = document.getElementById('loan-packet-modal');
+    modal.classList.add('hidden');
+}
+
+async function loadSavedApplications() {
+    const tbody = document.getElementById('applications-table-body');
+    if (!tbody) return;
+
+    try {
+        const res = await fetch('/api/finance/loan-applications?shop_id={{ active_shop_id }}');
+        if (!res.ok) return;
+        const apps = await res.json();
+
+        if (apps.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="py-4 text-center text-slate-500">
+                        No previous applications generated yet for this shop.
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        let html = '';
+        apps.forEach(a => {
+            const dateStr = a.created_at ? new Date(a.created_at).toLocaleDateString() : 'Recent';
+            html += `
+                <tr class="hover:bg-white/5 transition-colors">
+                    <td class="py-2.5 font-mono text-cyan-400 font-medium">${a.application_number}</td>
+                    <td class="py-2.5 font-mono text-white font-bold">${a.requested_amount_formatted}</td>
+                    <td class="py-2.5 font-mono text-slate-300">${a.tenure_months} Mo</td>
+                    <td class="py-2.5">
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
+                            ${a.status.toUpperCase()}
+                        </span>
+                    </td>
+                    <td class="py-2.5 font-mono text-slate-400">${dateStr}</td>
+                    <td class="py-2.5 text-right">
+                        <a href="${a.download_url}" target="_blank" class="px-3 py-1 rounded-lg bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 text-[11px] font-mono inline-flex items-center gap-1 transition-colors">
+                            <i data-lucide="download" class="w-3 h-3"></i> PDF
+                        </a>
+                    </td>
+                </tr>
+            `;
+        });
+        tbody.innerHTML = html;
+        if (window.lucide) {
+            lucide.createIcons();
+        }
+    } catch (e) {
+        console.warn('Failed to load saved applications:', e);
+    }
 }
 </script>
 {% endblock %}

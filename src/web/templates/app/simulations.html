@@ -1,7 +1,7 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Business Decision Intelligence & Scenario Simulations{% endblock %}
-{% block page_subtitle %}Deterministic what-if modeling for Break-Even, Pricing Sensitivity, and Capital Investment ROI{% endblock %}
+{% block page_title %}{{ _('simulations.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('simulations.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
@@ -14,7 +14,7 @@
             2. Pricing & Discount Sensitivity
         </button>
         <button type="button" onclick="switchSimTab('roi')" id="tab-btn-roi" class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-300 hover:text-white transition-all">
-            3. Capital Investment ROI & Payback
+            3. {{ _('simulations.roi_analysis') }} & Payback
         </button>
     </div>
 
@@ -124,7 +124,7 @@
         </div>
     </div>
 
-    <!-- 3. Capital Investment ROI & Payback Section -->
+    <!-- 3. {{ _('simulations.roi_analysis') }} & Payback Section -->
     <div id="sim-section-roi" class="hidden grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="glass-panel p-6 rounded-3xl border border-white/5 lg:col-span-2 space-y-4">
             <h3 class="text-sm font-bold text-white flex items-center gap-2">

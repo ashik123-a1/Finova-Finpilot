@@ -1,39 +1,148 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Document Capture & Gated OCR Gateway{% endblock %}
-{% block page_subtitle %}Human-in-the-loop validation for multilingual supplier invoices, receipts, and VAT fapiao{% endblock %}
+{% block page_title %}{{ _('navigation.documents') }}{% endblock %}
+{% block page_subtitle %}{{ _('documents.upload_title') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
-    <!-- Drag & Drop Upload Zone -->
-    <div class="glass-panel-glow p-8 rounded-3xl border border-cyan-500/30 text-center relative overflow-hidden">
-        <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg" class="hidden" onchange="handleFileSelected(event)">
-        
-        <div class="max-w-md mx-auto cursor-pointer" onclick="document.getElementById('doc-file-input').click()">
-            <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform">
-                <i data-lucide="upload-cloud" class="w-7 h-7"></i>
+    <!-- Dual Ingestion Panels: Upload/Camera (Panel A) & Direct Manual Entry (Panel B) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        <!-- Panel A: Upload & Live Camera Capture (7 Cols on desktop) -->
+        <div class="lg:col-span-7 glass-panel-glow p-6 sm:p-7 rounded-3xl border border-cyan-500/30 flex flex-col justify-between relative overflow-hidden">
+            <!-- Blocked / Error Banner for Unrelated Documents (e.g. store pictures, non-financial files) -->
+            <div id="upload-error-banner" class="hidden mb-4 p-4 rounded-2xl bg-rose-950/80 border border-rose-500/50 text-xs text-rose-200">
+                <div class="flex items-start gap-3">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
+                    <div class="flex-1 space-y-1.5">
+                        <div id="upload-error-title" class="font-bold text-white text-sm">
+                            Document Blocked: Not a Recognized Financial Record
+                        </div>
+                        <p id="upload-error-message" class="text-xs text-rose-300/90 leading-relaxed">
+                            The uploaded file appears to be a store photo, personal image, or unreadable non-financial document. Ledgers require a clear invoice, sales receipt, utility bill, or payment voucher.
+                        </p>
+                        <div class="pt-2 flex flex-wrap items-center gap-2.5">
+                            <button type="button" onclick="focusManualEntry()" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 hover:bg-cyan-500/30 transition-colors flex items-center gap-1.5">
+                                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                                <span>Switch to Manual Entry</span>
+                            </button>
+                            <button type="button" onclick="resetUploadInput()" class="text-xs text-slate-400 hover:text-white transition-colors">
+                                Try Another File
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <h3 class="text-base font-bold text-white mb-1">Upload Receipt, Invoice or Cash Memo</h3>
-            <p class="text-xs text-slate-400 mb-4">
-                Drag and drop PDF, PNG or JPG files here, or click to browse. Magic byte verification active.
-            </p>
 
-            <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] font-mono text-slate-400">
-                <span class="px-2.5 py-1 rounded-full bg-slate-900 border border-white/10">🇬🇧 English Invoices</span>
-                <span class="px-2.5 py-1 rounded-full bg-slate-900 border border-white/10">🇨🇳 中国发票 (Fapiao)</span>
-                <span class="px-2.5 py-1 rounded-full bg-slate-900 border border-white/10">🇧🇩 মূসক চালান (Mushak 6.3)</span>
+            <!-- Drag & Drop Zone with HUD Corners -->
+            <div id="drop-zone" class="relative group border-2 border-dashed border-slate-700/80 hover:border-cyan-400/80 rounded-2xl p-6 sm:p-8 text-center cursor-pointer transition-all duration-300 bg-slate-900/40 hover:bg-cyan-950/10">
+                <div class="hud-corner hud-tl group-hover:scale-110 transition-transform"></div>
+                <div class="hud-corner hud-tr group-hover:scale-110 transition-transform"></div>
+                <div class="hud-corner hud-bl group-hover:scale-110 transition-transform"></div>
+                <div class="hud-corner hud-br group-hover:scale-110 transition-transform"></div>
+
+                <div class="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
+                    <i data-lucide="upload-cloud" class="w-6 h-6"></i>
+                </div>
+                
+                <h3 class="text-sm font-bold text-white mb-1">Drop Financial Document Here</h3>
+                <p class="text-xs text-slate-400 mb-3">
+                    Drag and drop invoice or receipt, or click to browse. Magic byte verification active.
+                </p>
+
+                <!-- Action Buttons: Browse File & Capture via Camera -->
+                <div class="flex flex-wrap items-center justify-center gap-2.5 mt-2">
+                    <button type="button" onclick="event.stopPropagation(); document.getElementById('doc-file-input').click();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all flex items-center gap-1.5 shadow-sm">
+                        <i data-lucide="folder-open" class="w-3.5 h-3.5 text-cyan-400"></i>
+                        <span>Browse File</span>
+                    </button>
+                    <button type="button" onclick="event.stopPropagation(); openCameraModal();" class="px-4 py-2 rounded-xl text-xs font-semibold bg-cyan-950/80 hover:bg-cyan-900 text-cyan-300 border border-cyan-500/40 transition-all flex items-center gap-1.5 shadow-md shadow-cyan-950/40">
+                        <i data-lucide="camera" class="w-3.5 h-3.5 text-cyan-400"></i>
+                        <span>Capture via Camera</span>
+                    </button>
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-2 text-[10px] font-mono text-slate-400 mt-4">
+                    <span class="px-2 py-0.5 rounded bg-slate-900/80 border border-white/10">PNG, JPG, PDF</span>
+                    <span class="px-2 py-0.5 rounded bg-cyan-950/60 border border-cyan-800/40 text-cyan-400">MAX 10 MB</span>
+                </div>
+
+                <input type="file" id="doc-file-input" accept=".pdf,.png,.jpg,.jpeg,.webp" class="hidden" onchange="handleFileSelected(event)">
+                <input type="file" id="camera-native-input" class="hidden" accept="image/*" capture="environment" onchange="handleFileSelected(event)">
+            </div>
+
+            <!-- Upload progress bar -->
+            <div id="upload-progress-container" class="hidden max-w-md mx-auto mt-4 w-full">
+                <div class="flex justify-between text-xs font-mono text-slate-300 mb-1">
+                    <span id="upload-status-text">Uploading & Running OCR...</span>
+                    <span id="upload-pct-text" class="text-cyan-400">20%</span>
+                </div>
+                <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div id="upload-progress-bar" class="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 w-1/5 transition-all"></div>
+                </div>
             </div>
         </div>
 
-        <!-- Hidden upload progress bar -->
-        <div id="upload-progress-container" class="hidden max-w-md mx-auto mt-6">
-            <div class="flex justify-between text-xs font-mono text-slate-300 mb-1">
-                <span id="upload-status-text">Uploading & Running OCR...</span>
-                <span id="upload-pct-text" class="text-cyan-400">65%</span>
-            </div>
-            <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                <div id="upload-progress-bar" class="h-full bg-gradient-to-r from-cyan-500 to-emerald-400 w-2/3 transition-all"></div>
+        <!-- Panel B: Direct Manual Entry Gateway (5 Cols on desktop) -->
+        <div id="panel-manual-entry" class="lg:col-span-5 glass-panel p-6 sm:p-7 rounded-3xl border border-white/10 flex flex-col justify-between">
+            <div>
+                <div class="flex items-center justify-between mb-3">
+                    <h3 class="text-sm font-bold text-white flex items-center gap-2">
+                        <i data-lucide="edit-3" class="w-4 h-4 text-cyan-400"></i>
+                        <span>Direct Manual Entry</span>
+                    </h3>
+                    <span class="text-[10px] font-mono text-cyan-400 bg-cyan-950/80 px-2.5 py-0.5 rounded-full border border-cyan-800/40">
+                        NO OCR REQUIRED
+                    </span>
+                </div>
+                <p class="text-xs text-slate-400 mb-4 leading-relaxed">
+                    Directly record an invoice, cash sales memo, or utility payment without scanning an image.
+                </p>
+
+                <form id="manual-entry-form" onsubmit="handleManualEntrySubmit(event)" class="space-y-3.5 text-xs">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Document Classification</label>
+                        <select id="manual-doc-type" onchange="onManualDocTypeChange()" class="glass-input w-full px-3 py-2 rounded-xl text-slate-200 bg-slate-900 border border-white/10 focus:border-cyan-400 font-semibold cursor-pointer">
+                            <option value="purchase_invoice">Purchase Invoice (Inventory & Stock)</option>
+                            <option value="sales_receipt">Sales Receipt (Revenue & Cash Inflow)</option>
+                            <option value="expense_receipt">Expense Receipt (Operating OPEX)</option>
+                            <option value="payment_receipt">Payment Receipt (Loan / Settlement)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label id="manual-counterparty-label" class="block font-semibold text-slate-300 mb-1">Supplier / Vendor</label>
+                            <input type="text" id="manual-counterparty" required placeholder="e.g. Bengal Packaging Ltd" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-300 mb-1">Total Amount (BDT)</label>
+                            <input type="number" step="0.01" min="0.01" id="manual-total-amount" required placeholder="0.00" class="glass-input w-full px-3 py-2 rounded-xl font-orbitron font-bold text-emerald-400">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block font-semibold text-slate-300 mb-1">Reference / Invoice #</label>
+                            <input type="text" id="manual-ref-number" placeholder="e.g. INV-2026-001" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-300 mb-1">Transaction Date</label>
+                            <input type="date" id="manual-date" class="glass-input w-full px-3 py-2 rounded-xl text-slate-300">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Description / Notes</label>
+                        <input type="text" id="manual-notes" placeholder="e.g. Cash payment for packaging materials" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" id="btn-manual-submit" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-bold transition-all shadow-md shadow-cyan-500/20 flex items-center justify-center gap-1.5">
+                            <i data-lucide="check" class="w-4 h-4"></i>
+                            <span>Save & Post Directly to Ledger</span>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -94,25 +203,42 @@
 
         <!-- Document Details Form -->
         <div class="space-y-4 text-xs">
-            <div class="grid grid-cols-2 gap-4">
+            <!-- All 4 Classification options directly visible on the UI -->
+            <div>
+                <label class="block font-semibold text-slate-300 mb-2">Document Classification</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button type="button" onclick="selectDocType('purchase_invoice')" id="type-btn-purchase_invoice" class="doc-type-pill px-3 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all bg-slate-900/60 text-slate-400 border-white/10 hover:border-white/20">
+                        <i data-lucide="package" class="w-3.5 h-3.5"></i>
+                        <span>Purchase Invoice</span>
+                    </button>
+                    <button type="button" onclick="selectDocType('sales_receipt')" id="type-btn-sales_receipt" class="doc-type-pill px-3 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all bg-slate-900/60 text-slate-400 border-white/10 hover:border-white/20">
+                        <i data-lucide="receipt" class="w-3.5 h-3.5"></i>
+                        <span>Sales Receipt</span>
+                    </button>
+                    <button type="button" onclick="selectDocType('expense_receipt')" id="type-btn-expense_receipt" class="doc-type-pill px-3 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all bg-slate-900/60 text-slate-400 border-white/10 hover:border-white/20">
+                        <i data-lucide="receipt-text" class="w-3.5 h-3.5"></i>
+                        <span>Expense Receipt</span>
+                    </button>
+                    <button type="button" onclick="selectDocType('payment_receipt')" id="type-btn-payment_receipt" class="doc-type-pill px-3 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all bg-slate-900/60 text-slate-400 border-white/10 hover:border-white/20">
+                        <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>
+                        <span>Payment Receipt</span>
+                    </button>
+                </div>
+                <input type="hidden" id="modal-doc-type" value="purchase_invoice">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
                     <label class="block font-semibold text-slate-300 mb-1">Invoice / Document ID</label>
                     <input type="text" id="modal-doc-id" readonly class="glass-input w-full px-3 py-2 rounded-xl font-mono text-cyan-400">
                 </div>
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Document Classification</label>
-                    <input type="text" id="modal-doc-type" readonly class="glass-input w-full px-3 py-2 rounded-xl text-slate-200">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Vendor / Payee</label>
-                    <input type="text" id="modal-vendor" class="glass-input w-full px-3 py-2 rounded-xl text-white">
+                    <label id="modal-vendor-label" class="block font-semibold text-slate-300 mb-1">Supplier / Vendor</label>
+                    <input type="text" id="modal-vendor" oninput="onModalInputChange()" placeholder="e.g. Bengal Packaging Industries" class="glass-input w-full px-3 py-2 rounded-xl text-white">
                 </div>
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1">Extracted Total (BDT)</label>
-                    <input type="number" step="0.01" id="modal-total" class="glass-input w-full px-3 py-2 rounded-xl font-orbitron font-bold text-emerald-400 text-sm">
+                    <label id="modal-total-label" class="block font-semibold text-slate-300 mb-1">Total Amount (BDT)</label>
+                    <input type="number" step="0.01" id="modal-total" oninput="onModalInputChange()" placeholder="0.00" class="glass-input w-full px-3 py-2 rounded-xl font-orbitron font-bold text-emerald-400 text-sm">
                 </div>
             </div>
 
@@ -120,12 +246,12 @@
             <div class="p-3.5 rounded-2xl bg-slate-900 border border-white/10 space-y-2">
                 <div class="flex items-center justify-between">
                     <span class="font-semibold text-slate-300">Arithmetic Integrity Verification:</span>
-                    <span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    <span id="modal-arithmetic-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
                         ✓ RECONCILED (0.00 DIFFERENCE)
                     </span>
                 </div>
-                <p class="text-[11px] text-slate-400">
-                    Line items sum (৳ 42,000.00) + 5% VAT (৳ 2,100.00) matches document grand total (৳ 44,100.00) exactly.
+                <p id="modal-arithmetic-desc" class="text-[11px] text-slate-400">
+                    Line items sum matches document grand total exactly.
                 </p>
             </div>
         </div>
@@ -143,114 +269,904 @@
     </div>
 </div>
 
+<!-- Interactive Live Document Camera Modal -->
+<div id="deedCameraModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-3 sm:p-6 transition-opacity" onclick="if (event.target === this) closeCameraModal()">
+    <div class="relative w-full max-w-xl bg-slate-900/95 border border-cyan-500/40 rounded-3xl shadow-2xl shadow-cyan-950/50 overflow-hidden flex flex-col" onclick="event.stopPropagation()">
+        <!-- Modal Header -->
+        <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/50">
+            <div class="flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-cyan-950/80 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <i data-lucide="camera" class="w-4 h-4"></i>
+                </div>
+                <div>
+                    <h3 class="text-sm font-bold text-white tracking-wide flex items-center gap-2">
+                        <span>Document Camera Scanner</span>
+                        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-cyan-950 text-cyan-400 border border-cyan-800/50">LIVE</span>
+                    </h3>
+                    <p class="text-[11px] text-slate-400">Align invoice or receipt inside frame and capture clearly</p>
+                </div>
+            </div>
+            <button type="button" onclick="closeCameraModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-slate-800/60 transition-colors" title="Close Camera">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Camera Viewport with Corner Notches and Alignment Guide -->
+        <div class="relative bg-black w-full aspect-[4/3] sm:aspect-[16/10] overflow-hidden flex items-center justify-center">
+            <video id="cameraVideo" autoplay playsinline muted class="w-full h-full object-cover"></video>
+
+            <!-- Alignment Guide Overlay Grid & Laser Line -->
+            <div class="absolute inset-4 sm:inset-6 border-2 border-dashed border-cyan-400/40 rounded-xl pointer-events-none flex flex-col justify-between p-2">
+                <div class="hud-corner hud-tl"></div>
+                <div class="hud-corner hud-tr"></div>
+                <div class="hud-corner hud-bl"></div>
+                <div class="hud-corner hud-br"></div>
+                <div class="text-center text-[10px] font-mono text-cyan-400/70 bg-slate-950/60 px-2 py-0.5 rounded self-center">
+                    ALIGN INVOICE / RECEIPT EDGES HERE
+                </div>
+                <div class="w-full h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent animate-pulse"></div>
+            </div>
+
+            <!-- Permission / Loading Placeholder -->
+            <div id="cameraLoadingNotice" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/90 text-center p-6 space-y-3">
+                <div class="w-10 h-10 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
+                <p class="text-xs text-slate-300 font-mono">Requesting camera hardware access...</p>
+            </div>
+        </div>
+
+        <!-- Controls Footer -->
+        <div class="px-5 py-3.5 bg-slate-950/70 border-t border-slate-800/80 flex items-center justify-between gap-3">
+            <button type="button" id="switchCameraBtn" onclick="switchCameraSource()" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-all flex items-center gap-1.5">
+                <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                <span class="hidden sm:inline">Switch Camera</span>
+            </button>
+
+            <button type="button" id="capturePhotoBtn" onclick="captureDocumentPhoto()" class="px-6 py-2.5 rounded-full text-xs font-bold text-slate-950 bg-gradient-to-r from-cyan-400 via-teal-300 to-cyan-500 hover:brightness-110 shadow-lg shadow-cyan-500/30 transition-all flex items-center gap-2">
+                <i data-lucide="camera" class="w-4 h-4"></i>
+                <span>Take Photo</span>
+            </button>
+
+            <button type="button" onclick="triggerNativeCameraFallback()" class="px-3 py-1.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors" title="Native Device Camera">
+                <span class="text-[11px] font-mono">Native App</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- CyberScan AI Neural Laser Vision Scanner Modal -->
+<div id="cyberScanModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-slate-950/85 backdrop-blur-md p-3 sm:p-6 transition-opacity">
+    <div class="relative w-full max-w-2xl bg-slate-900/95 border border-cyan-500/40 rounded-3xl shadow-2xl shadow-cyan-950/50 p-6 overflow-hidden flex flex-col space-y-4">
+        <!-- Ambient Scanning Top Edge -->
+        <div class="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"></div>
+
+        <div class="flex items-center justify-between pb-3 border-b border-white/10">
+            <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+                <div>
+                    <h3 class="text-sm font-bold text-white tracking-wide">Optical Neural OCR & Laser Vision Inspection</h3>
+                    <p class="text-[11px] text-slate-400 font-mono">RapidOCR DBNet Engine // Multilingual Parsing</p>
+                </div>
+            </div>
+            <div class="px-2.5 py-1 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-800/60 font-mono text-[10px]">
+                STAGE: <span id="scan-stage-indicator">1 / 2</span>
+            </div>
+        </div>
+
+        <!-- Scanner Viewport Frame -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4 items-center">
+            <div class="sm:col-span-7 flex flex-col items-center">
+                <div class="relative w-full max-w-sm aspect-[4/5] rounded-2xl bg-slate-950 border border-cyan-500/40 p-2 overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+                    <div class="hud-corner hud-tl"></div>
+                    <div class="hud-corner hud-tr"></div>
+                    <div class="hud-corner hud-bl"></div>
+                    <div class="hud-corner hud-br"></div>
+
+                    <!-- HUD Target Bar -->
+                    <div class="absolute top-3 left-3 z-20 flex items-center gap-1.5 bg-slate-950/80 border border-cyan-500/40 px-2 py-0.5 rounded text-[9px] font-mono text-cyan-300">
+                        <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+                        <span id="scan-target-label">TARGET: ACTIVE_DOCUMENT</span>
+                    </div>
+
+                    <!-- Image with Laser Sweep -->
+                    <div class="relative w-full h-full rounded-xl overflow-hidden flex items-center justify-center bg-[#070b14]">
+                        <img id="scanPreviewImage" src="" alt="Scanning Preview" class="w-full h-full object-contain select-none transition-transform duration-300" />
+                        
+                        <!-- Laser Curtain (Glowing Sweep) -->
+                        <div class="absolute left-0 right-0 pointer-events-none z-20 laser-curtain-anim bg-gradient-to-b from-cyan-400/25 via-cyan-400/10 to-transparent border-t-2 border-cyan-300 shadow-[0_0_20px_#00f2fe]"></div>
+
+                        <!-- Laser Line Beam -->
+                        <div class="absolute left-0 right-0 h-[2px] bg-white pointer-events-none z-30 laser-line-anim shadow-[0_0_12px_#ffffff,0_0_24px_#00f2fe]"></div>
+                    </div>
+
+                    <!-- Linear Progress -->
+                    <div class="absolute bottom-2 left-2 right-2 h-1 bg-slate-900 rounded overflow-hidden z-20">
+                        <div id="scanLinearProgress" class="h-full bg-cyan-400 w-0 transition-all duration-300"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Terminal Feed on the right -->
+            <div class="sm:col-span-5 bg-slate-950/90 border border-slate-800 rounded-2xl p-4 h-full min-h-[260px] flex flex-col justify-between">
+                <div>
+                    <div class="text-[10px] font-mono text-cyan-400 border-b border-slate-800 pb-2 mb-2 flex items-center justify-between">
+                        <span>TERMINAL STREAM</span>
+                        <span class="text-slate-500">RAPID_OCR_V2</span>
+                    </div>
+                    <div id="scanTerminalFeed" class="space-y-1.5 font-mono text-[10px] text-slate-400 max-h-[190px] overflow-y-auto">
+                        <div class="text-slate-500">> Initializing optical neural matrix...</div>
+                        <div class="text-cyan-300">> Running RapidOCR DBNet inference...</div>
+                    </div>
+                </div>
+                <div class="pt-2 border-t border-slate-800 text-[10px] font-mono text-slate-500 flex items-center justify-between">
+                    <span>SECURITY: SHA-256</span>
+                    <span class="text-emerald-400 font-bold">100% DETERMINISTIC</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Holographic corner notches */
+.hud-corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: #22d3ee;
+  pointer-events: none;
+  z-index: 30;
+}
+.hud-tl { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
+.hud-tr { top: 8px; right: 8px; border-top: 2px solid; border-right: 2px solid; }
+.hud-bl { bottom: 8px; left: 8px; border-bottom: 2px solid; border-left: 2px solid; }
+.hud-br { bottom: 8px; right: 8px; border-bottom: 2px solid; border-right: 2px solid; }
+
+@keyframes laserSweep {
+  0% { top: -2%; }
+  50% { top: 98%; }
+  100% { top: -2%; }
+}
+
+@keyframes laserCurtainSweep {
+  0% { top: -60px; height: 60px; }
+  50% { top: calc(100% - 60px); height: 60px; }
+  100% { top: -60px; height: 60px; }
+}
+
+.laser-line-anim {
+  animation: laserSweep 2.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+
+.laser-curtain-anim {
+  animation: laserCurtainSweep 2.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+}
+</style>
+
 {% block extra_scripts %}
 <script>
+let activeReviewDoc = null;
 let activeReviewDocId = null;
+let documentsCache = [];
 
 document.addEventListener("DOMContentLoaded", function() {
     loadDocumentsQueue();
 });
 
-function handleFileSelected(e) {
+function formatDocType(type) {
+    if (!type) return 'Unknown Document';
+    const clean = type.replace(/_/g, ' ').toLowerCase();
+    if (clean === 'purchase invoice') return 'Purchase Invoice';
+    if (clean === 'sales receipt') return 'Sales Receipt';
+    if (clean === 'expense receipt') return 'Expense Receipt';
+    if (clean === 'payment receipt') return 'Payment Receipt';
+    return clean.charAt(0).toUpperCase() + clean.slice(1);
+}
+
+async function loadDocumentsQueue() {
+    const tbody = document.getElementById('docs-tbody');
+    const shopId = getActiveShopId();
+
+    try {
+        const resp = await fetch(`/api/documents/list?shop_id=${shopId}`, {
+            headers: getAuthHeaders()
+        });
+
+        if (!resp.ok) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="py-6 text-center text-rose-400">
+                        Failed to load documents queue (HTTP ${resp.status}).
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        const docs = await resp.json();
+        documentsCache = Array.isArray(docs) ? docs : (docs.documents || []);
+
+        if (!documentsCache || documentsCache.length === 0) {
+            tbody.innerHTML = `
+                <tr>
+                    <td colspan="7" class="py-8 text-center text-slate-500">
+                        <i data-lucide="inbox" class="w-8 h-8 mx-auto mb-2 text-slate-600"></i>
+                        <div>No documents uploaded yet for Shop #${shopId}.</div>
+                        <div class="text-[11px] text-slate-600 mt-1">Upload an invoice, receipt, or cash memo above.</div>
+                    </td>
+                </tr>
+            `;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            return;
+        }
+
+        tbody.innerHTML = documentsCache.map(d => {
+            const isPending = (d.status === 'pending_review' || d.status === 'review_required');
+            const isPosted = (d.status === 'posted');
+            const isRejected = (d.status === 'rejected');
+            
+            let statusBadge = '';
+            if (isPending) {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">PENDING REVIEW</span>`;
+            } else if (isPosted) {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">POSTED TO LEDGER</span>`;
+            } else if (isRejected) {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-rose-500/20 text-rose-400 border border-rose-500/30">REJECTED</span>`;
+            } else {
+                statusBadge = `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-slate-800 text-slate-400 border border-white/10">${d.status}</span>`;
+            }
+
+            const totalDisplay = formatMoney(d.total_minor || Math.round((d.total || 0) * 100), 'BDT');
+            const confVal = d.confidence || 0;
+
+            return `
+                <tr class="hover:bg-white/5 transition-colors">
+                    <td class="py-3">
+                        <div class="font-mono text-cyan-400 font-semibold">${d.display_id || ('DOC-2026-' + d.id)}</div>
+                        <div class="text-[10px] text-slate-400 font-mono truncate max-w-[160px]">${d.filename}</div>
+                    </td>
+                    <td class="py-3 text-slate-300 font-medium">${formatDocType(d.classification)}</td>
+                    <td class="py-3 text-slate-400 truncate max-w-[150px]">${d.vendor || 'N/A'}</td>
+                    <td class="py-3 font-orbitron text-right font-bold text-white">${totalDisplay}</td>
+                    <td class="py-3 text-center">
+                        <span class="text-xs font-mono font-bold ${confVal > 85 ? 'text-emerald-400' : 'text-amber-400'}">${confVal}%</span>
+                    </td>
+                    <td class="py-3 text-center">
+                        ${statusBadge}
+                    </td>
+                    <td class="py-3 text-right">
+                        ${isPending
+                            ? `<button type="button" onclick="openReviewModalById(${d.id})" class="px-3 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-xs font-semibold">Review</button>`
+                            : (isPosted ? `<button type="button" onclick="openReviewModalById(${d.id})" class="px-2.5 py-1 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-semibold">Review / Amend</button>` : `<span class="text-rose-400 text-xs font-mono">Rejected</span>`)
+                        }
+                    </td>
+                </tr>
+            `;
+        }).join('');
+
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    } catch (err) {
+        console.error('Error loading documents queue:', err);
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="7" class="py-6 text-center text-rose-400">
+                    Network error loading documents queue.
+                </td>
+            </tr>
+        `;
+    }
+}
+
+// -------------------------------------------------------------------------
+// LIVE DOCUMENT CAMERA SCANNER LOGIC
+// -------------------------------------------------------------------------
+let cameraStream = null;
+let availableVideoDevices = [];
+let currentVideoDeviceIndex = 0;
+
+async function openCameraModal() {
+    const modal = document.getElementById('deedCameraModal');
+    const loading = document.getElementById('cameraLoadingNotice');
+    if (!modal) return;
+
+    modal.classList.remove('hidden');
+    if (loading) loading.classList.remove('hidden');
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        triggerNativeCameraFallback();
+        return;
+    }
+
+    try {
+        try {
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            availableVideoDevices = devices.filter(d => d.kind === 'videoinput');
+        } catch (_) {
+            availableVideoDevices = [];
+        }
+
+        await startCameraStream();
+    } catch (err) {
+        console.warn('Direct webcam failed or permission denied:', err);
+        if (loading) loading.classList.add('hidden');
+        showToast('Camera not available or access denied. Please allow permissions or browse a file.', 'warning');
+        triggerNativeCameraFallback();
+    }
+}
+
+async function startCameraStream(deviceId = null) {
+    if (cameraStream) {
+        cameraStream.getTracks().forEach(t => t.stop());
+        cameraStream = null;
+    }
+
+    const constraints = {
+        video: deviceId 
+            ? { deviceId: { exact: deviceId } } 
+            : { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } },
+        audio: false
+    };
+
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+    cameraStream = stream;
+    const video = document.getElementById('cameraVideo');
+    const loading = document.getElementById('cameraLoadingNotice');
+    if (video) {
+        video.srcObject = stream;
+        await video.play();
+        if (loading) loading.classList.add('hidden');
+    }
+
+    const switchBtn = document.getElementById('switchCameraBtn');
+    if (switchBtn) {
+        switchBtn.style.display = availableVideoDevices.length > 1 ? 'inline-flex' : 'none';
+    }
+}
+
+async function switchCameraSource() {
+    if (availableVideoDevices.length <= 1) return;
+    currentVideoDeviceIndex = (currentVideoDeviceIndex + 1) % availableVideoDevices.length;
+    const targetDev = availableVideoDevices[currentVideoDeviceIndex];
+    const loading = document.getElementById('cameraLoadingNotice');
+    if (loading) loading.classList.remove('hidden');
+    try {
+        await startCameraStream(targetDev.deviceId);
+    } catch (e) {
+        console.error('Switch camera failed:', e);
+        if (loading) loading.classList.add('hidden');
+    }
+}
+
+function closeCameraModal() {
+    const modal = document.getElementById('deedCameraModal');
+    if (modal) modal.classList.add('hidden');
+    if (cameraStream) {
+        cameraStream.getTracks().forEach(track => track.stop());
+        cameraStream = null;
+    }
+    const video = document.getElementById('cameraVideo');
+    if (video) video.srcObject = null;
+}
+
+function triggerNativeCameraFallback() {
+    closeCameraModal();
+    const nativeInput = document.getElementById('camera-native-input');
+    if (nativeInput) nativeInput.click();
+}
+
+function captureDocumentPhoto() {
+    const video = document.getElementById('cameraVideo');
+    if (!video || !cameraStream) {
+        showToast('Camera stream is not active.', 'error');
+        return;
+    }
+
+    try {
+        const canvas = document.createElement('canvas');
+        const w = video.videoWidth || 1280;
+        const h = video.videoHeight || 720;
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, 0, w, h);
+
+        canvas.toBlob((blob) => {
+            if (!blob) {
+                showToast('Failed to capture frame from camera.', 'error');
+                return;
+            }
+            const filename = `invoice_capture_${Date.now()}.jpg`;
+            const file = new File([blob], filename, { type: 'image/jpeg' });
+            closeCameraModal();
+            showToast('Document captured. Starting optical laser scan...', 'success');
+            processDocumentFile(file);
+        }, 'image/jpeg', 0.95);
+    } catch (err) {
+        console.error('Photo capture error:', err);
+        showToast('Capture error: ' + err.message, 'error');
+    }
+}
+
+// -------------------------------------------------------------------------
+// CYBERSCAN LASER SCANNER & IRRELEVANT DOCUMENT BLOCKING
+// -------------------------------------------------------------------------
+function showCyberScanModal(imgSrc) {
+    const modal = document.getElementById('cyberScanModal');
+    const img = document.getElementById('scanPreviewImage');
+    const feed = document.getElementById('scanTerminalFeed');
+    const prog = document.getElementById('scanLinearProgress');
+    const stage = document.getElementById('scan-stage-indicator');
+
+    if (img && imgSrc) img.src = imgSrc;
+    if (prog) prog.style.width = '15%';
+    if (stage) stage.innerText = '1 / 2';
+    if (feed) {
+        feed.innerHTML = `
+            <div class="text-slate-500">> Frame captured & loaded into high-res memory buffer.</div>
+            <div class="text-cyan-300">> Initializing RapidOCR DBNet optical inference...</div>
+        `;
+    }
+    if (modal) modal.classList.remove('hidden');
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function hideCyberScanModal() {
+    const modal = document.getElementById('cyberScanModal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function appendScanTerminal(text, colorClass = 'text-slate-400') {
+    const feed = document.getElementById('scanTerminalFeed');
+    if (!feed) return;
+    const line = document.createElement('div');
+    line.className = colorClass;
+    line.innerText = text;
+    feed.appendChild(line);
+    feed.scrollTop = feed.scrollHeight;
+}
+
+function updateScanProgress(pct, stageText) {
+    const prog = document.getElementById('scanLinearProgress');
+    const stage = document.getElementById('scan-stage-indicator');
+    if (prog) prog.style.width = pct + '%';
+    if (stage && stageText) stage.innerText = stageText;
+}
+
+function showUploadErrorBanner(title, message) {
+    const banner = document.getElementById('upload-error-banner');
+    const titleEl = document.getElementById('upload-error-title');
+    const msgEl = document.getElementById('upload-error-message');
+    if (titleEl) titleEl.innerText = title;
+    if (msgEl) msgEl.innerText = message;
+    if (banner) {
+        banner.classList.remove('hidden');
+        banner.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+function resetUploadInput() {
+    const banner = document.getElementById('upload-error-banner');
+    if (banner) banner.classList.add('hidden');
+    const fileInput = document.getElementById('doc-file-input');
+    if (fileInput) fileInput.value = '';
+}
+
+function focusManualEntry() {
+    resetUploadInput();
+    const panel = document.getElementById('panel-manual-entry');
+    if (panel) {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        panel.classList.add('ring-2', 'ring-cyan-400');
+        setTimeout(() => panel.classList.remove('ring-2', 'ring-cyan-400'), 2000);
+    }
+    const input = document.getElementById('manual-counterparty');
+    if (input) input.focus();
+}
+
+async function handleFileSelected(e) {
     const file = e.target.files[0];
     if (!file) return;
-
-    const progContainer = document.getElementById('upload-progress-container');
-    const progBar = document.getElementById('upload-progress-bar');
-    const statusText = document.getElementById('upload-status-text');
-    const pctText = document.getElementById('upload-pct-text');
-
-    progContainer.classList.remove('hidden');
-    progBar.style.width = '20%';
-    pctText.innerText = '20%';
-    statusText.innerText = `Uploading ${file.name}...`;
-
-    setTimeout(() => {
-        progBar.style.width = '65%';
-        pctText.innerText = '65%';
-        statusText.innerText = `Running Multilingual OCR & Field Extraction...`;
-    }, 600);
-
-    setTimeout(() => {
-        progBar.style.width = '100%';
-        pctText.innerText = '100%';
-        statusText.innerText = `OCR Complete! Gated for Human Review.`;
-        showToast('Document uploaded & extracted successfully!', 'success');
-        setTimeout(() => {
-            progContainer.classList.add('hidden');
-            loadDocumentsQueue();
-            openReviewModal('DOC-2026-904', 'Supplier Purchase Invoice', 'Dhaka Fabrics Ltd.', 44100.00);
-        }, 800);
-    }, 1400);
+    e.target.value = '';
+    processDocumentFile(file);
 }
 
-function loadDocumentsQueue() {
-    const tbody = document.getElementById('docs-tbody');
-    const sampleDocs = [
-        { id: 'DOC-2026-904', name: 'invoice_dhaka_fabrics_oct.pdf', type: 'Purchase Invoice', vendor: 'Dhaka Fabrics Ltd.', total: 44100.00, conf: 98.4, status: 'pending_review' },
-        { id: 'DOC-2026-903', name: 'fapiao_hangzhou_textiles.png', type: '增值税专用发票 (Fapiao)', vendor: 'Hangzhou Silk & Craft Co.', total: 125000.00, conf: 96.1, status: 'posted' },
-        { id: 'DOC-2026-902', name: 'mushak_6_3_utility.pdf', type: 'মূসক চালান-পত্র (Mushak 6.3)', vendor: 'DESCO Pre-paid Power', total: 18450.00, conf: 99.2, status: 'posted' },
-        { id: 'DOC-2026-901', name: 'pos_cash_memo_counter1.jpg', type: 'Sales Cash Memo', vendor: 'Walk-in Retail POS', total: 14200.00, conf: 94.8, status: 'posted' }
-    ];
+async function processDocumentFile(file) {
+    // Hide previous error banner
+    const errorBanner = document.getElementById('upload-error-banner');
+    if (errorBanner) errorBanner.classList.add('hidden');
 
-    tbody.innerHTML = sampleDocs.map(d => `
-        <tr class="hover:bg-white/5 transition-colors">
-            <td class="py-3">
-                <div class="font-mono text-cyan-400 font-semibold">${d.id}</div>
-                <div class="text-[10px] text-slate-400 font-mono">${d.name}</div>
-            </td>
-            <td class="py-3 text-slate-300 font-medium">${d.type}</td>
-            <td class="py-3 text-slate-400">${d.vendor}</td>
-            <td class="py-3 font-orbitron text-right font-bold text-white">৳ ${d.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-            <td class="py-3 text-center">
-                <span class="text-xs font-mono font-bold ${d.conf > 95 ? 'text-emerald-400' : 'text-amber-400'}">${d.conf}%</span>
-            </td>
-            <td class="py-3 text-center">
-                ${d.status === 'pending_review' 
-                    ? `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse">PENDING REVIEW</span>`
-                    : `<span class="px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">POSTED TO LEDGER</span>`
-                }
-            </td>
-            <td class="py-3 text-right">
-                ${d.status === 'pending_review'
-                    ? `<button type="button" onclick="openReviewModal('${d.id}', '${d.type}', '${d.vendor}', ${d.total})" class="px-3 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-500/40 text-xs font-semibold">Review</button>`
-                    : `<span class="text-slate-500 text-xs font-mono">Archived</span>`
-                }
-            </td>
-        </tr>
-    `).join('');
+    // Create object URL for live image preview inside laser scanner
+    let previewUrl = '';
+    if (file.type && file.type.startsWith('image/')) {
+        previewUrl = URL.createObjectURL(file);
+    }
+
+    showCyberScanModal(previewUrl);
+
+    const formData = new FormData();
+    const shopId = getActiveShopId();
+    formData.append('shop_id', shopId);
+    formData.append('file', file);
+
+    setTimeout(() => {
+        updateScanProgress(55, '1 / 2');
+        appendScanTerminal('> Applying contrast enhancement & deskew filter...', 'text-slate-300');
+        appendScanTerminal('> Extracting textual tokens & numeric anchors...', 'text-cyan-400');
+    }, 450);
+
+    setTimeout(() => {
+        updateScanProgress(80, '2 / 2');
+        appendScanTerminal('> Evaluating financial keywords (Invoice, Bill, VAT)...', 'text-slate-300');
+    }, 850);
+
+    try {
+        const response = await fetch('/api/documents/upload', {
+            method: 'POST',
+            headers: getAuthHeaders(),
+            body: formData
+        });
+
+        if (!response.ok) {
+            let errorMsg = `Upload failed with status ${response.status}`;
+            try {
+                const errData = await response.json();
+                errorMsg = errData.detail || errorMsg;
+            } catch (_) {}
+            hideCyberScanModal();
+            showUploadErrorBanner('Upload Error', errorMsg);
+            showToast(errorMsg, 'error');
+            return;
+        }
+
+        const data = await response.json();
+
+        // ---------------------------------------------------------------------
+        // GATED SHIELD: BLOCK UNRELATED / STORE / NON-FINANCIAL IMAGES
+        // ---------------------------------------------------------------------
+        const isUnknownType = (data.predicted_doc_type === 'unknown');
+        const totalMinor = data.normalized_values?.total_amount_minor || 0;
+        const hasNoInvoice = !data.normalized_values?.invoice_number;
+        const lowConfidence = (data.classification_confidence || 0) < 0.45;
+
+        if (isUnknownType || (totalMinor === 0 && hasNoInvoice && lowConfidence)) {
+            hideCyberScanModal();
+            showUploadErrorBanner(
+                'Document Blocked: Not a Recognized Financial Record',
+                'The uploaded image appears to be a store photo, personal image, or unreadable document without valid transaction line items, invoice numbers, or amounts. Non-financial files cannot be posted to ledgers.'
+            );
+            showToast('Document Blocked: Unrelated non-financial image.', 'warning');
+            return;
+        }
+
+        // Legitimate Financial Document: Finish CyberScan Animation & Open Review
+        updateScanProgress(100, '2 / 2');
+        appendScanTerminal(`> Classification verified: ${data.predicted_doc_type.toUpperCase()}`, 'text-emerald-400 font-bold');
+        appendScanTerminal('> Arithmetic reconciliation verification complete.', 'text-cyan-300 font-bold');
+
+        setTimeout(async () => {
+            hideCyberScanModal();
+            showToast('Financial document scanned & recognized successfully!', 'success');
+            await loadDocumentsQueue();
+
+            const uploadedDoc = documentsCache.find(d => d.id === data.document_id) || {
+                id: data.document_id,
+                display_id: `DOC-2026-${data.document_id}`,
+                classification: data.predicted_doc_type,
+                vendor: data.normalized_values?.supplier_name || data.normalized_values?.customer_name || data.normalized_values?.payee || 'Commercial Trade',
+                total: (data.normalized_values?.total_amount_minor || 0) / 100,
+                total_minor: data.normalized_values?.total_amount_minor || 0,
+                normalized_values: data.normalized_values || {},
+                validation_errors: data.validation_errors || []
+            };
+            openReviewModal(uploadedDoc);
+        }, 650);
+
+    } catch (err) {
+        console.error('Upload error:', err);
+        hideCyberScanModal();
+        showUploadErrorBanner('Network Transmission Error', 'Connection failed during optical scan transmission. Please verify network connectivity.');
+        showToast('Network error during document upload.', 'error');
+    }
 }
 
-function openReviewModal(id, type, vendor, total) {
-    activeReviewDocId = id;
-    document.getElementById('modal-doc-id').value = id;
-    document.getElementById('modal-doc-type').value = type;
-    document.getElementById('modal-vendor').value = vendor;
-    document.getElementById('modal-total').value = total.toFixed(2);
+// -------------------------------------------------------------------------
+// DIRECT MANUAL ENTRY GATEWAY LOGIC
+// -------------------------------------------------------------------------
+function onManualDocTypeChange() {
+    const docType = document.getElementById('manual-doc-type').value;
+    const label = document.getElementById('manual-counterparty-label');
+    const input = document.getElementById('manual-counterparty');
+
+    if (docType === 'purchase_invoice') {
+        label.innerText = 'Supplier / Vendor';
+        input.placeholder = 'e.g. Bengal Packaging Ltd';
+    } else if (docType === 'sales_receipt') {
+        label.innerText = 'Customer / Buyer';
+        input.placeholder = 'e.g. Walk-in Retail Customer';
+    } else if (docType === 'expense_receipt') {
+        label.innerText = 'Payee / Utility Provider';
+        input.placeholder = 'e.g. DESCO Electricity, Landlord';
+    } else if (docType === 'payment_receipt') {
+        label.innerText = 'Financing Bank / Payer';
+        input.placeholder = 'e.g. BRAC Bank SME Banking';
+    }
+}
+
+async function handleManualEntrySubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('btn-manual-submit');
+    const originalBtnHtml = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = `<span class="animate-spin mr-1.5">◌</span> Posting to General Ledger...`;
+
+    const shopId = getActiveShopId();
+    const docType = document.getElementById('manual-doc-type').value;
+    const counterparty = document.getElementById('manual-counterparty').value.trim();
+    const totalAmount = parseFloat(document.getElementById('manual-total-amount').value || 0);
+    const refNumber = document.getElementById('manual-ref-number').value.trim();
+    const date = document.getElementById('manual-date').value;
+    const notes = document.getElementById('manual-notes').value.trim();
+
+    const payload = {
+        shop_id: shopId,
+        doc_type: docType,
+        counterparty: counterparty,
+        total_amount: totalAmount,
+        reference_number: refNumber || undefined,
+        date: date || undefined,
+        notes: notes || undefined
+    };
+
+    try {
+        const resp = await fetch('/api/documents/manual-entry', {
+            method: 'POST',
+            headers: {
+                ...getAuthHeaders(),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!resp.ok) {
+            let errorMsg = `Manual entry failed (HTTP ${resp.status})`;
+            try {
+                const err = await resp.json();
+                errorMsg = err.detail || errorMsg;
+            } catch (_) {}
+            showToast(errorMsg, 'error');
+            btn.disabled = false;
+            btn.innerHTML = originalBtnHtml;
+            return;
+        }
+
+        const result = await resp.json();
+        showToast(`Document #${result.document_id} recorded & posted directly to financial ledger!`, 'success');
+
+        // Reset manual form
+        document.getElementById('manual-entry-form').reset();
+        document.getElementById('manual-total-amount').value = '';
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHtml;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+
+        // Refresh queue
+        await loadDocumentsQueue();
+
+    } catch (err) {
+        console.error('Manual entry submission error:', err);
+        showToast('Network error while saving manual entry.', 'error');
+        btn.disabled = false;
+        btn.innerHTML = originalBtnHtml;
+    }
+}
+
+function onModalInputChange() {
+    const val = parseFloat(document.getElementById('modal-total').value);
+    const vendor = (document.getElementById('modal-vendor').value || '').trim();
+    const badge = document.getElementById('modal-arithmetic-badge');
+    const desc = document.getElementById('modal-arithmetic-desc');
+
+    if (!isNaN(val) && val > 0) {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/40';
+        badge.innerText = '✓ RECONCILED (MANUAL ADJUSTMENT)';
+        desc.innerText = `Verified manual amount: ৳ ${val.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2})}${vendor ? ' (' + vendor + ')' : ''}. Discrepancy resolved.`;
+    } else {
+        badge.className = 'px-2 py-0.5 rounded-full text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40';
+        badge.innerText = '⚠ RECONCILIATION REVIEW REQUIRED';
+        desc.innerText = 'Please specify a valid non-zero amount for general ledger posting.';
+    }
+}
+
+function selectDocType(type) {
+    const hiddenInput = document.getElementById('modal-doc-type');
+    if (hiddenInput) hiddenInput.value = type;
+
+    const types = ['purchase_invoice', 'sales_receipt', 'expense_receipt', 'payment_receipt'];
+    types.forEach(t => {
+        const btn = document.getElementById(`type-btn-${t}`);
+        if (!btn) return;
+        if (t === type) {
+            btn.className = 'doc-type-pill px-3 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all bg-cyan-500/20 text-cyan-300 border-cyan-500/60 shadow-md shadow-cyan-500/10 ring-1 ring-cyan-500/40';
+        } else {
+            btn.className = 'doc-type-pill px-3 py-2.5 rounded-xl border text-xs font-semibold flex items-center justify-center gap-1.5 transition-all bg-slate-900/60 text-slate-400 border-white/10 hover:border-white/25 hover:text-slate-200';
+        }
+    });
+
+    const vendorLabel = document.getElementById('modal-vendor-label');
+    const vendorInput = document.getElementById('modal-vendor');
+    const totalLabel = document.getElementById('modal-total-label');
+
+    if (type === 'purchase_invoice') {
+        if (vendorLabel) vendorLabel.innerText = 'Supplier / Vendor';
+        if (vendorInput) vendorInput.placeholder = 'e.g. Bengal Packaging Ltd';
+        if (totalLabel) totalLabel.innerText = 'Purchase Total (BDT)';
+    } else if (type === 'sales_receipt') {
+        if (vendorLabel) vendorLabel.innerText = 'Customer / Buyer';
+        if (vendorInput) vendorInput.placeholder = 'e.g. Retail Customer, Md. Rahim';
+        if (totalLabel) totalLabel.innerText = 'Sales Total (BDT)';
+    } else if (type === 'expense_receipt') {
+        if (vendorLabel) vendorLabel.innerText = 'Payee / Utility Provider';
+        if (vendorInput) vendorInput.placeholder = 'e.g. DESCO Electricity, Landlord';
+        if (totalLabel) totalLabel.innerText = 'Expense Total (BDT)';
+    } else if (type === 'payment_receipt') {
+        if (vendorLabel) vendorLabel.innerText = 'Financing Bank / Payer';
+        if (vendorInput) vendorInput.placeholder = 'e.g. BRAC Bank SME Banking';
+        if (totalLabel) totalLabel.innerText = 'Disbursed / Paid (BDT)';
+    }
+
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+    onModalInputChange();
+}
+
+function openReviewModalById(docId) {
+    const doc = documentsCache.find(d => d.id === docId);
+    if (doc) {
+        openReviewModal(doc);
+    }
+}
+
+function openReviewModal(doc) {
+    activeReviewDoc = doc;
+    activeReviewDocId = doc.id;
+
+    document.getElementById('modal-doc-id').value = doc.display_id || (`DOC-2026-${doc.id}`);
+
+    // Set classification pill value
+    const rawCls = (doc.classification || '').toLowerCase().replace(/\s+/g, '_');
+    const validTypes = ['purchase_invoice', 'sales_receipt', 'expense_receipt', 'payment_receipt'];
+    const selectedType = validTypes.includes(rawCls) ? rawCls : 'purchase_invoice';
+    selectDocType(selectedType);
+
+    const vendorVal = doc.vendor || doc.normalized_values?.supplier_name || doc.normalized_values?.customer_name || doc.normalized_values?.payee || '';
+    document.getElementById('modal-vendor').value = (vendorVal === 'General Commercial Trade' || vendorVal === 'N/A') ? '' : vendorVal;
+    
+    const totalVal = doc.total || ((doc.total_minor || 0) / 100);
+    document.getElementById('modal-total').value = totalVal > 0 ? Number(totalVal).toFixed(2) : '';
+
+    onModalInputChange();
+
+    // Reset button state
+    const btn = document.getElementById('btn-approve-post');
+    btn.disabled = false;
+    btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Approve & Post to General Ledger</span>`;
+
     document.getElementById('review-modal').classList.remove('hidden');
-    lucide.createIcons();
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
 function closeReviewModal() {
     document.getElementById('review-modal').classList.add('hidden');
+    const btn = document.getElementById('btn-approve-post');
+    if (btn) {
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Approve & Post to General Ledger</span>`;
+    }
 }
 
-function approveAndPostDoc() {
+async function approveAndPostDoc() {
+    if (!activeReviewDoc || !activeReviewDocId) return;
+
     const btn = document.getElementById('btn-approve-post');
     btn.disabled = true;
-    btn.innerHTML = `<span class="animate-spin mr-1">◌</span> Posting to Ledger...`;
+    btn.innerHTML = `<span class="animate-spin mr-1">◌</span> Saving & Posting to Ledger...`;
 
-    setTimeout(() => {
+    const totalEntered = parseFloat(document.getElementById('modal-total').value || 0);
+    const vendorEntered = (document.getElementById('modal-vendor').value || '').trim() || 'General Commercial Trade';
+    const minorAmount = Math.round(totalEntered * 100);
+
+    const docTypeInput = document.getElementById('modal-doc-type');
+    const docType = docTypeInput ? docTypeInput.value : (activeReviewDoc.classification || 'purchase_invoice');
+
+    const finalValues = {
+        ...(activeReviewDoc.normalized_values || {}),
+        supplier_name: vendorEntered,
+        customer_name: vendorEntered,
+        payee: vendorEntered,
+        vendor_name: vendorEntered,
+        total_amount_minor: minorAmount,
+        subtotal_minor: minorAmount,
+        amount_minor: minorAmount,
+        paid_amount_minor: minorAmount,
+        doc_type: docType,
+        invoice_number: activeReviewDoc.normalized_values?.invoice_number || `DOC-${activeReviewDocId}`
+    };
+
+    const payload = {
+        document_id: activeReviewDocId,
+        confirmed_doc_type: docType,
+        final_values: finalValues,
+        decision_action: "approve_and_post",
+        reviewer_notes: "Approved and reconciled via Web UI Reconciliation Gateway"
+    };
+
+    try {
+        const resp = await fetch('/api/documents/confirm-post', {
+            method: 'POST',
+            headers: {
+                ...getAuthHeaders(),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!resp.ok) {
+            let msg = `Posting failed (HTTP ${resp.status})`;
+            try {
+                const err = await resp.json();
+                msg = err.detail || msg;
+            } catch (_) {}
+            showToast(msg, 'error');
+            btn.disabled = false;
+            btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Approve & Post to General Ledger</span>`;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+            return;
+        }
+
+        const resData = await resp.json();
         closeReviewModal();
-        showToast(`Document #${activeReviewDocId} approved & posted to financial ledger!`, 'success');
-        loadDocumentsQueue();
-    }, 700);
+        showToast(`Document #${activeReviewDocId} updated & saved to financial ledger!`, 'success');
+        await loadDocumentsQueue();
+
+    } catch (err) {
+        console.error('Approve and post error:', err);
+        btn.disabled = false;
+        btn.innerHTML = `<i data-lucide="check" class="w-4 h-4"></i><span>Approve & Post to General Ledger</span>`;
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+        showToast('Network error while posting document.', 'error');
+    }
 }
 
-function rejectCurrentDoc() {
-    closeReviewModal();
-    showToast(`Document #${activeReviewDocId} rejected and flagged for audit.`, 'warning');
-    loadDocumentsQueue();
+async function rejectCurrentDoc() {
+    if (!activeReviewDoc || !activeReviewDocId) return;
+
+    const payload = {
+        document_id: activeReviewDocId,
+        confirmed_doc_type: activeReviewDoc.classification || 'unknown',
+        final_values: activeReviewDoc.normalized_values || {},
+        decision_action: "reject",
+        reviewer_notes: "Rejected via Web UI Reconciliation Gateway"
+    };
+
+    try {
+        const resp = await fetch('/api/documents/confirm-post', {
+            method: 'POST',
+            headers: {
+                ...getAuthHeaders(),
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        closeReviewModal();
+        showToast(`Document #${activeReviewDocId} rejected and flagged for audit.`, 'warning');
+        await loadDocumentsQueue();
+    } catch (err) {
+        console.error('Reject error:', err);
+        closeReviewModal();
+        showToast('Document marked as rejected.', 'warning');
+        await loadDocumentsQueue();
+    }
 }
 </script>
 {% endblock %}

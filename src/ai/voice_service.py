@@ -129,10 +129,31 @@ class VoiceService:
         return "general_query"
 
     @classmethod
+    def _get_currency_spoken_and_symbol(cls, currency: str, locale: str) -> tuple[str, str]:
+        """Returns (symbol, spoken_name) for a currency in the target language."""
+        curr = (currency or "BDT").upper().strip()
+        loc = (locale or "en").lower().split("-")[0].strip()
+        info = {
+            "BDT": {"symbol": "৳", "en": "BDT", "bn": "টাকা", "zh": "孟加拉塔卡"},
+            "CNY": {"symbol": "¥", "en": "Chinese Yuan", "bn": "ইউয়ান", "zh": "元"},
+            "USD": {"symbol": "$", "en": "dollars", "bn": "ডলার", "zh": "美元"},
+            "EUR": {"symbol": "€", "en": "Euros", "bn": "ইউরো", "zh": "欧元"},
+            "GBP": {"symbol": "£", "en": "Pounds", "bn": "পাউন্ড", "zh": "英镑"},
+        }
+        item = info.get(curr, {"symbol": curr, "en": curr, "bn": curr, "zh": curr})
+        symbol = item.get("symbol", curr)
+        spoken = item.get(loc, item.get("en", curr))
+        return symbol, spoken
+
+    @classmethod
     def _handle_financial_status(
         cls, session: Session, query: str, business_id: int, shop_id: Optional[int], locale: str
     ) -> Dict[str, Any]:
         """Calculates deterministic ledger actuals for the shop."""
+        biz = session.get(Business, business_id) if business_id else None
+        curr = biz.currency if biz and biz.currency else "BDT"
+        symbol, spoken_curr = cls._get_currency_spoken_and_symbol(curr, locale)
+
         # Query total revenue & expenses
         sales_q = session.query(func.coalesce(func.sum(Sale.total_amount_minor), 0)).filter(
             Sale.business_id == business_id
@@ -156,30 +177,30 @@ class VoiceService:
         if locale.startswith("bn"):
             text_resp = (
                 f"📊 **ভেরিফাইড হিসাব বিবরণী:**\n"
-                f"- মোট বিক্রয় (Sales): ৳ {sales_major:,.2f}\n"
-                f"- মোট পরিচালন ব্যয় (Expenses): ৳ {exp_major:,.2f}\n"
-                f"- নেট প্রফিট (Net Profit): ৳ {profit_major:,.2f}\n\n"
+                f"- মোট বিক্রয় (Sales): {symbol} {sales_major:,.2f}\n"
+                f"- মোট পরিচালন ব্যয় (Expenses): {symbol} {exp_major:,.2f}\n"
+                f"- নেট প্রফিট (Net Profit): {symbol} {profit_major:,.2f}\n\n"
                 f"*দোকান #{shop_id or 28} এর ভেরিফাইড লেজার থেকে সরাসরি নির্ণীত।*"
             )
-            spoken_resp = f"আপনার দোকানে মোট বিক্রয় {sales_major:,.0f} টাকা এবং নেট প্রফিট {profit_major:,.0f} টাকা।"
+            spoken_resp = f"আপনার দোকানে মোট বিক্রয় {sales_major:,.0f} {spoken_curr} এবং নেট প্রফিট {profit_major:,.0f} {spoken_curr}।"
         elif locale.startswith("zh"):
             text_resp = (
                 f"📊 **经核实的财务报表：**\n"
-                f"- 总销售收入 (Sales)：¥ {sales_major:,.2f}\n"
-                f"- 总运营费用 (Expenses)：¥ {exp_major:,.2f}\n"
-                f"- 净利润 (Net Profit)：¥ {profit_major:,.2f}\n\n"
+                f"- 总销售收入 (Sales)：{symbol} {sales_major:,.2f}\n"
+                f"- 总运营费用 (Expenses)：{symbol} {exp_major:,.2f}\n"
+                f"- 净利润 (Net Profit)：{symbol} {profit_major:,.2f}\n\n"
                 f"*数据直接来自店铺 #{shop_id or 28} 的不可篡改账本。*"
             )
-            spoken_resp = f"您的店铺总收入为 {sales_major:,.0f} 元，净利润为 {profit_major:,.0f} 元。"
+            spoken_resp = f"您的店铺总收入为 {sales_major:,.0f} {spoken_curr}，净利润为 {profit_major:,.0f} {spoken_curr}。"
         else:
             text_resp = (
                 f"📊 **Verified Financial Ledger Status:**\n"
-                f"- Total Revenue (Sales): ৳ {sales_major:,.2f}\n"
-                f"- Operating Expenses: ৳ {exp_major:,.2f}\n"
-                f"- Net Operating Profit: ৳ {profit_major:,.2f}\n\n"
+                f"- Total Revenue (Sales): {symbol} {sales_major:,.2f}\n"
+                f"- Operating Expenses: {symbol} {exp_major:,.2f}\n"
+                f"- Net Operating Profit: {symbol} {profit_major:,.2f}\n\n"
                 f"*Deterministically derived from Shop #{shop_id or 28}'s double-entry ledgers.*"
             )
-            spoken_resp = f"Your total revenue is {sales_major:,.0f} BDT with a net profit of {profit_major:,.0f} BDT."
+            spoken_resp = f"Your total revenue is {sales_major:,.0f} {spoken_curr} with a net profit of {profit_major:,.0f} {spoken_curr}."
 
         return {
             "status": "success",
@@ -200,14 +221,18 @@ class VoiceService:
         cls, session: Session, business_id: int, shop_id: Optional[int], locale: str
     ) -> Dict[str, Any]:
         """Provides cash runway and shortage risk assessment."""
+        biz = session.get(Business, business_id) if business_id else None
+        curr = biz.currency if biz and biz.currency else "BDT"
+        symbol, spoken_curr = cls._get_currency_spoken_and_symbol(curr, locale)
+
         # Baseline cash position
-        cash_minor = 94820000  # 948,200.00 BDT in minor units
+        cash_minor = 94820000  # in minor units
         runway_days = 114
 
         if locale.startswith("bn"):
             text_resp = (
                 f"📈 **ক্যাশ-ফ্লো এবং রানওয়ে পূর্বাভাস:**\n"
-                f"- বর্তমান নগদ অবস্থান (Cash): ৳ 948,200\n"
+                f"- বর্তমান নগদ অবস্থান (Cash): {symbol} 948,200\n"
                 f"- ক্যাশ রানওয়ে (30D Runway): **১১৪ দিন** (স্বাস্থ্যকর)\n"
                 f"- আগামী সপ্তাহে ক্যাশ শর্টেজের কোনো ঝুঁকি নেই। লিকুইডিটি বাফার নিরাপদ।"
             )
@@ -215,7 +240,7 @@ class VoiceService:
         elif locale.startswith("zh"):
             text_resp = (
                 f"📈 **现金流与资金跑道预测：**\n"
-                f"- 当前现金头寸 (Cash)：¥ 948,200\n"
+                f"- 当前现金头寸 (Cash)：{symbol} 948,200\n"
                 f"- 现金储备跑道 (Runway)：**114 天** (健康)\n"
                 f"- 下周无现金短缺风险，日常流动资金充裕。"
             )
@@ -223,7 +248,7 @@ class VoiceService:
         else:
             text_resp = (
                 f"📈 **Cash-Flow & Runway Forecast:**\n"
-                f"- Current Cash Position: ৳ 948,200.00\n"
+                f"- Current Cash Position: {symbol} 948,200.00\n"
                 f"- Projected Cash Runway: **114 Days** (Optimal Health)\n"
                 f"- Shortage Assessment: Zero cash shortage projected for the upcoming week. Working capital remains stable."
             )
@@ -330,6 +355,10 @@ class VoiceService:
         cls, session: Session, business_id: int, shop_id: Optional[int], locale: str
     ) -> Dict[str, Any]:
         """Lists outstanding receivables requiring follow-up."""
+        biz = session.get(Business, business_id) if business_id else None
+        curr = biz.currency if biz and biz.currency else "BDT"
+        symbol, spoken_curr = cls._get_currency_spoken_and_symbol(curr, locale)
+
         customers = (
             session.query(Customer)
             .filter(Customer.business_id == business_id, Customer.balance_minor > 0)
@@ -346,7 +375,7 @@ class VoiceService:
         ]
 
         if locale.startswith("bn"):
-            lines = [f"- **{c['name']}**: বকেয়া ৳ {c['due']:,.2f}" for c in sample_customers]
+            lines = [f"- **{c['name']}**: বকেয়া {symbol} {c['due']:,.2f}" for c in sample_customers]
             text_resp = (
                 f"👥 **বকেয়া কাস্টমার ইনভয়েস (Receivables):**\n"
                 + "\n".join(lines)
@@ -354,7 +383,7 @@ class VoiceService:
             )
             spoken_resp = f"আপনার {len(sample_customers)} জন গ্রাহকের কাছে বকেয়া পাওনা রয়েছে। বিনম্র রিমাইন্ডার ড্রাফট প্রস্তুত।"
         elif locale.startswith("zh"):
-            lines = [f"- **{c['name']}**：逾期应收账款 ¥ {c['due']:,.2f}" for c in sample_customers]
+            lines = [f"- **{c['name']}**：逾期应收账款 {symbol} {c['due']:,.2f}" for c in sample_customers]
             text_resp = (
                 f"👥 **逾期客户账款清单 (Receivables)：**\n"
                 + "\n".join(lines)
@@ -362,7 +391,7 @@ class VoiceService:
             )
             spoken_resp = f"发现 {len(sample_customers)} 位客户存在逾期欠款，可直接发送提醒。"
         else:
-            lines = [f"- **{c['name']}**: Outstanding Balance ৳ {c['due']:,.2f}" for c in sample_customers]
+            lines = [f"- **{c['name']}**: Outstanding Balance {symbol} {c['due']:,.2f}" for c in sample_customers]
             text_resp = (
                 f"👥 **Overdue Customer Accounts Receivable:**\n"
                 + "\n".join(lines)

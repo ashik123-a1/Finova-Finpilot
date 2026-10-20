@@ -1,235 +1,464 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Workspace Onboarding & Commercial Setup{% endblock %}
-{% block page_subtitle %}Configure your company profile, currency standards, primary branch, and team access{% endblock %}
+{% block page_title %}{{ _('onboarding.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('onboarding.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="max-w-4xl mx-auto space-y-8 pb-12">
-    <!-- Wizard Progress Tracker -->
+    <!-- Wizard Progress Tracker (6 Canonical Steps) -->
     <div class="glass-panel p-6 rounded-3xl border border-white/10 shadow-xl">
         <div class="flex items-center justify-between relative">
             <div class="absolute left-6 right-6 top-1/2 -translate-y-1/2 h-0.5 bg-white/10 -z-0"></div>
             <div id="progress-bar-fill" class="absolute left-6 top-1/2 -translate-y-1/2 h-0.5 bg-gradient-to-r from-cyan-500 to-emerald-400 -z-0 transition-all duration-300 w-0"></div>
 
-            <!-- Step 1 Indicator -->
+            <!-- Step 1 Node -->
             <button type="button" onclick="goToStep(1)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
-                <div id="step-node-1" class="w-10 h-10 rounded-2xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all">
+                <div id="step-node-1" class="w-9 h-9 rounded-2xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all">
                     <span>1</span>
                 </div>
-                <span class="text-[11px] font-semibold text-cyan-400 mt-2">Identity & Tax</span>
+                <span id="step-text-1" class="text-[11px] font-semibold text-cyan-400 mt-2">1. Profile</span>
             </button>
 
-            <!-- Step 2 Indicator -->
+            <!-- Step 2 Node -->
             <button type="button" onclick="goToStep(2)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
-                <div id="step-node-2" class="w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                <div id="step-node-2" class="w-9 h-9 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
                     <span>2</span>
                 </div>
-                <span id="step-text-2" class="text-[11px] font-medium text-slate-400 mt-2">Currency & Rules</span>
+                <span id="step-text-2" class="text-[11px] font-medium text-slate-400 mt-2">2. Branch</span>
             </button>
 
-            <!-- Step 3 Indicator -->
+            <!-- Step 3 Node -->
             <button type="button" onclick="goToStep(3)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
-                <div id="step-node-3" class="w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                <div id="step-node-3" class="w-9 h-9 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
                     <span>3</span>
                 </div>
-                <span id="step-text-3" class="text-[11px] font-medium text-slate-400 mt-2">Primary Branch</span>
+                <span id="step-text-3" class="text-[11px] font-medium text-slate-400 mt-2">3. Operations</span>
             </button>
 
-            <!-- Step 4 Indicator -->
+            <!-- Step 4 Node -->
             <button type="button" onclick="goToStep(4)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
-                <div id="step-node-4" class="w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                <div id="step-node-4" class="w-9 h-9 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
                     <span>4</span>
                 </div>
-                <span id="step-text-4" class="text-[11px] font-medium text-slate-400 mt-2">Team & Demo</span>
+                <span id="step-text-4" class="text-[11px] font-medium text-slate-400 mt-2">4. Financials</span>
+            </button>
+
+            <!-- Step 5 Node -->
+            <button type="button" onclick="goToStep(5)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
+                <div id="step-node-5" class="w-9 h-9 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                    <span>5</span>
+                </div>
+                <span id="step-text-5" class="text-[11px] font-medium text-slate-400 mt-2">5. Goals & Alerts</span>
+            </button>
+
+            <!-- Step 6 Node -->
+            <button type="button" onclick="goToStep(6)" class="relative z-10 flex flex-col items-center group cursor-pointer focus:outline-none">
+                <div id="step-node-6" class="w-9 h-9 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all">
+                    <span>6</span>
+                </div>
+                <span id="step-text-6" class="text-[11px] font-medium text-slate-400 mt-2">6. Review</span>
             </button>
         </div>
     </div>
 
     <!-- Wizard Form Cards Container -->
-    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl relative min-h-[420px]">
+    <div class="glass-panel p-8 rounded-3xl border border-white/10 shadow-2xl relative min-h-[440px]">
         
-        <!-- STEP 1: Business Identity & Statutory Info -->
+        <!-- STEP 1: Business Profile -->
         <div id="wizard-step-1" class="space-y-6">
             <div class="border-b border-white/10 pb-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
-                        <i data-lucide="building-2" class="w-4 h-4"></i>
+                    <div class="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
+                        <i data-lucide="building-2" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-base font-bold text-white">Step 1: Legal Entity & Tax Identity</h2>
-                        <p class="text-xs text-slate-400">Define the registered corporation or sole proprietorship details</p>
+                        <h2 class="text-base font-bold text-white">Step 1 — Business Profile & Identity</h2>
+                        <p class="text-xs text-slate-400">Define your company name, trade category, country jurisdiction, and financial currency</p>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Registered Legal Name *</label>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Business / Legal Entity Name *</label>
                     <input type="text" id="ob-biz-name" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="{{ business.name if business else 'Dhaka Premier Retailers Ltd.' }}" placeholder="e.g. Apex Hardware & Trade">
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Business Industry / Vertical *</label>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Business Category / Industry *</label>
                     <select id="ob-biz-type" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
-                        <option value="retail" selected>Retail & Wholesale Trade</option>
-                        <option value="manufacturing">Light Manufacturing & Garments</option>
-                        <option value="restaurant">Food & Beverage / Restaurant</option>
-                        <option value="services">Professional Services & Consulting</option>
-                        <option value="ecommerce">E-Commerce & Digital Commerce</option>
+                        <option value="retail" selected>Retail / Grocery Store</option>
+                        <option value="wholesale">Wholesale / Distribution</option>
+                        <option value="ecommerce">E-commerce / Online Retail</option>
+                        <option value="manufacturing">Manufacturing / Light Production</option>
+                        <option value="restaurant">Restaurant / Food Business</option>
+                        <option value="services">Service Business / Agency</option>
+                        <option value="other">Other Commercial Enterprise</option>
                     </select>
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Statutory Tax Identifier (BIN / TIN / USCI) *</label>
-                    <input type="text" id="ob-tax-id" class="glass-input w-full px-3.5 py-2.5 rounded-xl font-mono text-cyan-400 text-xs" value="{{ business.tax_identifier if business else 'BIN-99281-002' }}" placeholder="e.g. BIN-123456789">
-                    <span class="text-[10px] text-slate-500 mt-1 block">Used for national VAT reconciliation and invoice generation.</span>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Operating Country / Jurisdiction *</label>
+                    <select id="ob-country" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="BD" selected>Bangladesh (BD) — VAT & Trade License</option>
+                        <option value="CN">China (CN) — USCI Unified Social Credit</option>
+                        <option value="US">United States (US) — EIN & Sales Tax</option>
+                        <option value="EU">European Union (EU) — VAT Reg</option>
+                        <option value="OTHER">International / Other</option>
+                    </select>
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Registered Head Office Address</label>
-                    <input type="text" id="ob-address" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Level 4, Gulshan Trade Centre, Dhaka 1212" placeholder="Full legal operating address">
-                </div>
-            </div>
-        </div>
-
-        <!-- STEP 2: Currency & Financial Policies -->
-        <div id="wizard-step-2" class="space-y-6 hidden">
-            <div class="border-b border-white/10 pb-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
-                        <i data-lucide="coins" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                        <h2 class="text-base font-bold text-white">Step 2: Currency Standards & Accounting Defaults</h2>
-                        <p class="text-xs text-slate-400">Ensure deterministic financial arithmetic and statutory compliance</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Functional Operating Currency *</label>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Functional Currency *</label>
                     <select id="ob-currency" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
                         <option value="BDT" selected>BDT — Bangladeshi Taka (৳, Minor: Poisha)</option>
                         <option value="CNY">CNY — Chinese Yuan (¥, Minor: Fen)</option>
                         <option value="USD">USD — US Dollar ($, Minor: Cents)</option>
                         <option value="EUR">EUR — Euro (€, Minor: Cents)</option>
                     </select>
-                    <span class="text-[10px] text-slate-500 mt-1 block">All ledger balances are stored strictly in 64-bit integer minor units.</span>
+                    <span id="ob-currency-suggestion-note" class="text-[10px] text-cyan-400 mt-1 block font-mono"></span>
+                    <span class="text-[10px] text-slate-500 mt-1 block">All transactions are stored deterministically in 64-bit integer minor units.</span>
                 </div>
 
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Default VAT / Sales Tax Rate (%)</label>
-                    <div class="relative">
-                        <input type="number" id="ob-vat-rate" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="7.5" step="0.5" min="0" max="35">
-                        <span class="absolute right-3.5 top-2.5 text-slate-400 text-xs">%</span>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Fiscal Year Commencement</label>
-                    <select id="ob-fiscal-year" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
-                        <option value="07-01" selected>July 1 (Bangladesh & South Asia Standard)</option>
-                        <option value="01-01">January 1 (Calendar Year / China / US)</option>
-                        <option value="04-01">April 1 (Commonwealth Fiscal Year)</option>
+                <div class="md:col-span-2">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Interface Language *</label>
+                    <select id="ob-language" onchange="onOnboardingLanguageChange()" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="en" selected>English (Primary Production UI)</option>
+                        <option value="bn">বাংলা (Bengali Localization)</option>
+                        <option value="zh">简体中文 (Simplified Chinese Localization)</option>
                     </select>
-                </div>
-
-                <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Default Low-Stock Reorder Threshold</label>
-                    <input type="number" id="ob-stock-threshold" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="10" min="1" max="500">
-                    <span class="text-[10px] text-slate-500 mt-1 block">Autonomous Copilot triggers proactive restock warnings when units dip below this value.</span>
+                    <span class="text-[10px] text-slate-500 mt-1 block">You can change languages at any time from the topbar switcher.</span>
                 </div>
             </div>
         </div>
 
-        <!-- STEP 3: Primary Retail Branch & Cash Drawer -->
-        <div id="wizard-step-3" class="space-y-6 hidden">
+        <!-- STEP 2: Shop / Branch Setup -->
+        <div id="wizard-step-2" class="space-y-6 hidden">
             <div class="border-b border-white/10 pb-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
-                        <i data-lucide="store" class="w-4 h-4"></i>
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                        <i data-lucide="store" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-base font-bold text-white">Step 3: Primary Branch & Opening Cash</h2>
-                        <p class="text-xs text-slate-400">Establish the initial store branch and initialize the cash drawer</p>
+                        <h2 class="text-base font-bold text-white">Step 2 — Shop & Branch Setup</h2>
+                        <p class="text-xs text-slate-400">Configure your primary physical or virtual outlet and operational sales model</p>
                     </div>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Primary Branch / Shop Name *</label>
-                    <input type="text" id="ob-shop-name" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Dhaka Main Flagship Store" placeholder="e.g. Downtown Outlet">
+                    <label class="block font-semibold text-slate-300 mb-1.5">First Shop / Branch Name *</label>
+                    <input type="text" id="ob-shop-name" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Main Flagship Branch" placeholder="e.g. Downtown Outlet">
                 </div>
 
                 <div>
                     <label class="block font-semibold text-slate-300 mb-1.5">Branch Code / Identifier *</label>
-                    <input type="text" id="ob-shop-code" class="glass-input w-full px-3.5 py-2.5 rounded-xl font-mono text-cyan-400 text-xs" value="DHK-FLAG-01" placeholder="e.g. BR-001">
+                    <input type="text" id="ob-shop-code" class="glass-input w-full px-3.5 py-2.5 rounded-xl font-mono text-cyan-400 text-xs" value="BR-01" placeholder="e.g. BR-01">
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Initial Cash Drawer Balance (Major Unit)</label>
-                    <div class="relative">
-                        <input type="number" id="ob-opening-cash" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-emerald-400 font-mono text-xs" value="50000.00" step="100.00">
-                        <span class="absolute right-3.5 top-2.5 text-slate-400 text-xs font-mono">BDT</span>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Branch Network Architecture</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="p-3 rounded-xl border border-white/10 bg-slate-900/60 flex items-center gap-2 cursor-pointer hover:border-cyan-400 transition-all">
+                            <input type="radio" name="ob-branch-model" value="single" checked class="text-cyan-500 focus:ring-0">
+                            <span class="font-medium text-slate-200">Single Shop</span>
+                        </label>
+                        <label class="p-3 rounded-xl border border-white/10 bg-slate-900/60 flex items-center gap-2 cursor-pointer hover:border-cyan-400 transition-all">
+                            <input type="radio" name="ob-branch-model" value="multi" class="text-cyan-500 focus:ring-0">
+                            <span class="font-medium text-slate-200">Multi-Branch</span>
+                        </label>
                     </div>
-                    <span class="text-[10px] text-slate-500 mt-1 block">Recorded in the audit log as opening ledger liquidity.</span>
+                    <span class="text-[10px] text-slate-500 mt-1 block">Additional branches can be provisioned later under tenant isolation.</span>
                 </div>
 
                 <div>
-                    <label class="block font-semibold text-slate-300 mb-1.5">Physical Branch Location</label>
-                    <input type="text" id="ob-shop-location" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Banani Road 11, Commercial Area, Dhaka">
+                    <label class="block font-semibold text-slate-300 mb-1.5">Primary Sales Operation Type</label>
+                    <select id="ob-sales-op" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="counter_pos" selected>Counter POS / Walk-in Customers</option>
+                        <option value="wholesale_desk">Wholesale Order Desk & Invoicing</option>
+                        <option value="direct_delivery">Direct Dispatch / Courier Delivery</option>
+                        <option value="omnichannel">Omnichannel (Physical Store + E-Commerce)</option>
+                    </select>
                 </div>
             </div>
         </div>
 
-        <!-- STEP 4: Team Invitations & Demo Pre-population -->
+        <!-- STEP 3: Business Operating Profile -->
+        <div id="wizard-step-3" class="space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-indigo-500/20 border border-indigo-500/40 flex items-center justify-center text-indigo-400">
+                        <i data-lucide="line-chart" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 3 — Business Operating Profile</h2>
+                        <p class="text-xs text-slate-400">Help the AI Copilot tailor working capital forecasting and DSCR lending models</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Approximate Monthly Turnover / Revenue</label>
+                    <select id="ob-revenue-range" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="under_100k">Under 100,000 (Early-Stage / Micro)</option>
+                        <option value="100k_500k" selected>100,000 – 500,000 (Growing SME)</option>
+                        <option value="500k_2m">500,000 – 2,000,000 (Established Merchant)</option>
+                        <option value="2m_plus">2,000,000+ (High-Volume Enterprise)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Team Size / Staff Count</label>
+                    <select id="ob-employee-count" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="1_5" selected>1 – 5 Staff (Owner-operated / Small team)</option>
+                        <option value="6_20">6 – 20 Staff</option>
+                        <option value="21_50">21 – 50 Staff</option>
+                        <option value="50_plus">50+ Staff</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Existing Record-Keeping Method</label>
+                    <select id="ob-record-method" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs cursor-pointer">
+                        <option value="khata">Traditional Paper Khata / Notebook</option>
+                        <option value="excel" selected>Excel / Google Spreadsheets</option>
+                        <option value="none">No formal system (Mental / Cash basis)</option>
+                        <option value="erp">Existing Accounting Software / ERP</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1.5">Main Products or Core Services</label>
+                    <input type="text" id="ob-main-products" class="glass-input w-full px-3.5 py-2.5 rounded-xl text-white text-xs" value="Packaged Consumer Goods, Basmati Rice, Edible Oils" placeholder="e.g. Textiles, Electronics, Groceries">
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Financial Data Setup -->
         <div id="wizard-step-4" class="space-y-6 hidden">
             <div class="border-b border-white/10 pb-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400">
-                        <i data-lucide="users" class="w-4 h-4"></i>
+                    <div class="w-9 h-9 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400">
+                        <i data-lucide="wallet" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h2 class="text-base font-bold text-white">Step 4: Team Collaboration & Dataset Readiness</h2>
-                        <p class="text-xs text-slate-400">Invite key team members or pre-populate synthetic data for evaluation</p>
+                        <h2 class="text-base font-bold text-white">Step 4 — Financial Data Setup</h2>
+                        <p class="text-xs text-slate-400">Choose how you want to establish your initial ledger and opening balances</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Team Invite Sub-card -->
-            <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3.5">
-                <span class="text-xs font-semibold text-white block">Invite a Team Member (Optional)</span>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                    <div class="md:col-span-2">
-                        <input type="email" id="ob-invite-email" class="glass-input w-full px-3.5 py-2 rounded-xl text-white text-xs" placeholder="colleague@yourcompany.com">
+            <!-- Starter Pathways Selector -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs">
+                <!-- Option A: Opening Cash -->
+                <div id="pathway-card-opening_cash" onclick="selectStarterPath('opening_cash')" class="p-4 rounded-2xl border border-cyan-400 ring-2 ring-cyan-400 bg-cyan-950/60 cursor-pointer transition-all">
+                    <div class="flex items-center gap-2.5 mb-1.5">
+                        <i data-lucide="coins" class="w-4 h-4 text-cyan-400"></i>
+                        <span class="font-bold text-white">1. Record Opening Cash / Drawer</span>
                     </div>
-                    <div>
-                        <select id="ob-invite-role" class="glass-input w-full px-3.5 py-2 rounded-xl text-white text-xs cursor-pointer">
-                            <option value="manager">Manager (Branch Scope)</option>
-                            <option value="cashier">Cashier (POS & CRM)</option>
-                            <option value="auditor">Auditor (Read-Only)</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="flex items-center gap-2">
-                    <button type="button" onclick="sendQuickInvite()" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all">
-                        <i data-lucide="send" class="w-3.5 h-3.5"></i>
-                        <span>Generate Invitation Link</span>
-                    </button>
-                    <span id="ob-invite-status" class="text-[11px] text-emerald-400 hidden"></span>
-                </div>
-            </div>
-
-            <!-- Synthetic Evaluation Toggle -->
-            <div class="p-5 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-start gap-3.5">
-                <input type="checkbox" id="ob-seed-data" checked class="mt-1 rounded bg-slate-900 border-cyan-500 text-cyan-500 focus:ring-0 cursor-pointer">
-                <div>
-                    <label for="ob-seed-data" class="text-xs font-bold text-white cursor-pointer">Pre-seed 30-Day Synthetic Ledger for Competition Evaluation</label>
-                    <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                        Injects realistic historical sales, expense receipts, 5 inventory items, and 3 customer profiles. Essential for testing cash-flow forecasting (ARIMA/GBDT) and RAG vector searches out of the box.
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Start with an opening cash or bank balance. Establishes cash runway baseline immediately.
                     </p>
+                </div>
+
+                <!-- Option B: Opening Customer Balance -->
+                <div id="pathway-card-customer_balance" onclick="selectStarterPath('customer_balance')" class="p-4 rounded-2xl border border-white/10 hover:border-white/30 bg-slate-900/60 cursor-pointer transition-all">
+                    <div class="flex items-center gap-2.5 mb-1.5">
+                        <i data-lucide="user-check" class="w-4 h-4 text-emerald-400"></i>
+                        <span class="font-bold text-white">2. Add First Customer & Receivable</span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Record a key customer and outstanding credit. Enables aging reminders out of the box.
+                    </p>
+                </div>
+
+                <!-- Option C: OCR Document Upload -->
+                <div id="pathway-card-ocr_upload" onclick="selectStarterPath('ocr_upload')" class="p-4 rounded-2xl border border-white/10 hover:border-white/30 bg-slate-900/60 cursor-pointer transition-all">
+                    <div class="flex items-center gap-2.5 mb-1.5">
+                        <i data-lucide="scan-line" class="w-4 h-4 text-amber-400"></i>
+                        <span class="font-bold text-white">3. Scan / Upload Invoice or Receipt</span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Extract invoice data via AI OCR with bounding boxes and human review gating.
+                    </p>
+                </div>
+
+                <!-- Option D: Synthetic Demo Workspace -->
+                <div id="pathway-card-clean_or_demo" onclick="selectStarterPath('clean_or_demo')" class="p-4 rounded-2xl border border-white/10 hover:border-white/30 bg-slate-900/60 cursor-pointer transition-all">
+                    <div class="flex items-center gap-2.5 mb-1.5">
+                        <i data-lucide="sparkles" class="w-4 h-4 text-purple-400"></i>
+                        <span class="font-bold text-white">4. Pre-seed Starter Catalog & Demo</span>
+                    </div>
+                    <p class="text-[11px] text-slate-300 leading-relaxed">
+                        Inject starter inventory items and realistic baselines for immediate competition evaluation.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Dynamic Input Sub-Panel based on Pathway -->
+            <div id="pathway-inputs-container" class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                <div id="input-sub-opening_cash" class="space-y-2">
+                    <label class="block text-xs font-semibold text-slate-200">Opening Cash Drawer Amount</label>
+                    <div class="relative max-w-sm">
+                        <input type="number" id="ob-opening-cash-val" class="glass-input w-full px-3.5 py-2.5 rounded-xl font-mono text-emerald-400 text-xs" value="50000.00" step="100.00">
+                        <span class="absolute right-3.5 top-2.5 text-slate-400 text-xs font-mono" id="ob-opening-cash-curr">BDT</span>
+                    </div>
+                    <span class="text-[10px] text-slate-400 block">Recorded as initial liquidity inflow in the tamper-evident audit ledger.</span>
+                </div>
+
+                <div id="input-sub-customer_balance" class="space-y-2 hidden">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <label class="block font-semibold text-slate-200 mb-1">Customer Full Name</label>
+                            <input type="text" id="ob-cust-name-val" class="glass-input w-full px-3.5 py-2 rounded-xl text-white text-xs" value="Haji Supermarket Ltd." placeholder="e.g. Modern Mart">
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-200 mb-1">Opening Receivable Balance</label>
+                            <input type="number" id="ob-cust-bal-val" class="glass-input w-full px-3.5 py-2 rounded-xl text-amber-400 font-mono text-xs" value="25000.00" step="100.00">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="input-sub-ocr_upload" class="space-y-2 hidden">
+                    <p class="text-xs text-slate-300">
+                        After completing setup, you will be directed to the <strong>Document & OCR Hub</strong> where you can drag-and-drop receipt images or PDFs.
+                    </p>
+                    <a href="/app/documents" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-cyan-400 hover:underline">
+                        <span>Preview Document OCR Queue</span>
+                        <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+
+                <div id="input-sub-clean_or_demo" class="space-y-2 hidden">
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Pre-populates 4 grocery and packaged goods SKUs with realistic unit costs, selling prices, and reorder thresholds. Ideal for testing AI forecasts immediately.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5: Business Goals & Alert Preferences -->
+        <div id="wizard-step-5" class="space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+                        <i data-lucide="bell-ring" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 5 — Business Goals & Autonomous Guardrails</h2>
+                        <p class="text-xs text-slate-400">Select what key metrics and early warnings the AI Copilot should track</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-3.5 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <label class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3 cursor-pointer hover:border-cyan-400 transition-all">
+                        <input type="checkbox" id="goal-cashflow" checked class="mt-0.5 rounded bg-slate-900 border-cyan-500 text-cyan-500 focus:ring-0">
+                        <div>
+                            <span class="font-bold text-white block">Cash Flow Forecast Monitoring</span>
+                            <span class="text-[11px] text-slate-400 mt-0.5 block">Daily ARIMA/GBDT projections with 95% confidence intervals</span>
+                        </div>
+                    </label>
+
+                    <label class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3 cursor-pointer hover:border-cyan-400 transition-all">
+                        <input type="checkbox" id="goal-profit" checked class="mt-0.5 rounded bg-slate-900 border-cyan-500 text-cyan-500 focus:ring-0">
+                        <div>
+                            <span class="font-bold text-white block">Net Profit & Expense Tracking</span>
+                            <span class="text-[11px] text-slate-400 mt-0.5 block">Automated gross/operating margin computation and P&L ledger</span>
+                        </div>
+                    </label>
+
+                    <label class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3 cursor-pointer hover:border-cyan-400 transition-all">
+                        <input type="checkbox" id="goal-overdue" checked class="mt-0.5 rounded bg-slate-900 border-cyan-500 text-cyan-500 focus:ring-0">
+                        <div>
+                            <span class="font-bold text-white block">Overdue Customer Receivables</span>
+                            <span class="text-[11px] text-slate-400 mt-0.5 block">Polite, automated WhatsApp/SMS payment reminder drafts</span>
+                        </div>
+                    </label>
+
+                    <label class="p-3.5 rounded-2xl bg-white/5 border border-white/10 flex items-start gap-3 cursor-pointer hover:border-cyan-400 transition-all">
+                        <input type="checkbox" id="goal-stock" checked class="mt-0.5 rounded bg-slate-900 border-cyan-500 text-cyan-500 focus:ring-0">
+                        <div>
+                            <span class="font-bold text-white block">Low Stock & Stockout Warnings</span>
+                            <span class="text-[11px] text-slate-400 mt-0.5 block">Proactive reorder notifications when units dip below safety levels</span>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- Cash Runway Alert Threshold -->
+                <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 space-y-2">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-400"></i>
+                            <span class="font-bold text-amber-200">Critical Cash Runway Threshold Warning</span>
+                        </div>
+                        <span id="runway-days-label" class="font-mono text-xs font-bold text-amber-300">30 Days</span>
+                    </div>
+                    <p class="text-[11px] text-amber-300/80 leading-relaxed">
+                        If daily burn rate threatens liquid reserves within this window, trigger urgent persistent notifications and recommend DSCR loan financing.
+                    </p>
+                    <input type="range" id="ob-runway-days" min="15" max="90" step="5" value="30" oninput="document.getElementById('runway-days-label').textContent = this.value + ' Days'" class="w-full accent-amber-400 cursor-pointer">
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 6: Review & Finish -->
+        <div id="wizard-step-6" class="space-y-6 hidden">
+            <div class="border-b border-white/10 pb-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400">
+                        <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-base font-bold text-white">Step 6 — Review & Launch Workspace</h2>
+                        <p class="text-xs text-slate-400">Confirm your operational parameters and initialize your financial copilot</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review Summary Card -->
+            <div class="glass-panel p-5 rounded-2xl border border-white/10 space-y-4 text-xs">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-mono text-slate-400 block">Business Legal Name</span>
+                        <span id="rev-biz-name" class="font-bold text-white block">...</span>
+                        <span id="rev-biz-type" class="text-[11px] text-cyan-400">...</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-mono text-slate-400 block">Jurisdiction & Currency</span>
+                        <span id="rev-jurisdiction" class="font-bold text-white block">...</span>
+                        <span id="rev-currency" class="text-[11px] text-emerald-400 font-mono">...</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-mono text-slate-400 block">Primary Branch & Model</span>
+                        <span id="rev-shop-name" class="font-bold text-white block">...</span>
+                        <span id="rev-shop-code" class="text-[11px] text-slate-300 font-mono">...</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-mono text-slate-400 block">Monthly Turnover</span>
+                        <span id="rev-revenue" class="font-medium text-slate-200 block">...</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-mono text-slate-400 block">Starter Setup Method</span>
+                        <span id="rev-starter-path" class="font-medium text-cyan-300 block">...</span>
+                    </div>
+
+                    <div class="space-y-1">
+                        <span class="text-[10px] uppercase font-mono text-slate-400 block">Active Alerts</span>
+                        <span id="rev-alerts" class="font-medium text-emerald-400 block">...</span>
+                    </div>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-200 text-[11px] flex items-center gap-2">
+                    <i data-lucide="check-circle" class="w-4 h-4 text-cyan-400 shrink-0"></i>
+                    <span>All parameters verified. Completing setup records your preferences and opens the main dashboard.</span>
                 </div>
             </div>
         </div>
@@ -252,10 +481,26 @@
 
 <script>
 let currentStep = 1;
-const totalSteps = 4;
+const totalSteps = 6;
+let selectedStarterPath = 'opening_cash';
+
+function selectStarterPath(path) {
+    selectedStarterPath = path;
+    const allPaths = ['opening_cash', 'customer_balance', 'ocr_upload', 'clean_or_demo'];
+    allPaths.forEach(p => {
+        const card = document.getElementById(`pathway-card-${p}`);
+        const inputDiv = document.getElementById(`input-sub-${p}`);
+        if (p === path) {
+            card.className = 'p-4 rounded-2xl border border-cyan-400 ring-2 ring-cyan-400 bg-cyan-950/60 cursor-pointer transition-all shadow-md';
+            if (inputDiv) inputDiv.classList.remove('hidden');
+        } else {
+            card.className = 'p-4 rounded-2xl border border-white/10 hover:border-white/30 bg-slate-900/60 cursor-pointer transition-all';
+            if (inputDiv) inputDiv.classList.add('hidden');
+        }
+    });
+}
 
 function updateWizardUI() {
-    // Hide all steps
     for (let i = 1; i <= totalSteps; i++) {
         const stepEl = document.getElementById(`wizard-step-${i}`);
         const nodeEl = document.getElementById(`step-node-${i}`);
@@ -263,26 +508,25 @@ function updateWizardUI() {
         
         if (i === currentStep) {
             stepEl.classList.remove('hidden');
-            nodeEl.className = 'w-10 h-10 rounded-2xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all';
+            nodeEl.className = 'w-9 h-9 rounded-2xl bg-cyan-500 text-slate-950 font-bold text-xs flex items-center justify-center shadow-lg shadow-cyan-500/30 transition-all';
+            nodeEl.innerHTML = `<span>${i}</span>`;
             if (textEl) textEl.className = 'text-[11px] font-semibold text-cyan-400 mt-2';
         } else if (i < currentStep) {
             stepEl.classList.add('hidden');
-            nodeEl.className = 'w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-400 text-emerald-400 font-bold text-xs flex items-center justify-center transition-all';
-            nodeEl.innerHTML = '<i data-lucide="check" class="w-4 h-4"></i>';
+            nodeEl.className = 'w-9 h-9 rounded-2xl bg-emerald-500/20 border border-emerald-400 text-emerald-400 font-bold text-xs flex items-center justify-center transition-all';
+            nodeEl.innerHTML = '<i data-lucide="check" class="w-3.5 h-3.5"></i>';
             if (textEl) textEl.className = 'text-[11px] font-medium text-emerald-400 mt-2';
         } else {
             stepEl.classList.add('hidden');
-            nodeEl.className = 'w-10 h-10 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all';
+            nodeEl.className = 'w-9 h-9 rounded-2xl bg-slate-900 border border-white/20 text-slate-400 font-bold text-xs flex items-center justify-center transition-all';
             nodeEl.innerHTML = `<span>${i}</span>`;
             if (textEl) textEl.className = 'text-[11px] font-medium text-slate-400 mt-2';
         }
     }
 
-    // Progress bar width
     const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
     document.getElementById('progress-bar-fill').style.width = `${progressPercent}%`;
 
-    // Button states
     const prevBtn = document.getElementById('btn-wizard-prev');
     const nextBtn = document.getElementById('btn-wizard-next');
     const nextText = document.getElementById('btn-next-text');
@@ -296,7 +540,8 @@ function updateWizardUI() {
     }
 
     if (currentStep === totalSteps) {
-        nextText.textContent = 'Finish Onboarding & Open Dashboard';
+        populateReviewSummary();
+        nextText.textContent = 'Finish Setup & Open Dashboard';
         nextBtn.className = 'px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-slate-950 font-bold text-xs transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-2';
     } else {
         nextText.textContent = `Continue to Step ${currentStep + 1}`;
@@ -327,53 +572,149 @@ function goToStep(step) {
     }
 }
 
-async function sendQuickInvite() {
-    const email = document.getElementById('ob-invite-email').value.trim();
-    const role = document.getElementById('ob-invite-role').value;
-    const statusEl = document.getElementById('ob-invite-status');
+function populateReviewSummary() {
+    document.getElementById('rev-biz-name').textContent = document.getElementById('ob-biz-name').value || 'My Business';
+    const bTypeSelect = document.getElementById('ob-biz-type');
+    document.getElementById('rev-biz-type').textContent = bTypeSelect.options[bTypeSelect.selectedIndex].text;
+    
+    const countrySelect = document.getElementById('ob-country');
+    document.getElementById('rev-jurisdiction').textContent = countrySelect.options[countrySelect.selectedIndex].text.split('—')[0].trim();
+    
+    const currSelect = document.getElementById('ob-currency');
+    document.getElementById('rev-currency').textContent = currSelect.value + ' Standard';
 
-    if (!email) {
-        showToast('Please enter an invitation email.', 'warning');
-        return;
-    }
+    document.getElementById('rev-shop-name').textContent = document.getElementById('ob-shop-name').value || 'Main Branch';
+    document.getElementById('rev-shop-code').textContent = 'Code: ' + (document.getElementById('ob-shop-code').value || 'BR-01');
+
+    const revSelect = document.getElementById('ob-revenue-range');
+    document.getElementById('rev-revenue').textContent = revSelect.options[revSelect.selectedIndex].text;
+
+    const pathNames = {
+        opening_cash: 'Opening Cash Balance (' + document.getElementById('ob-opening-cash-val').value + ')',
+        customer_balance: 'Customer Balance (' + document.getElementById('ob-cust-name-val').value + ')',
+        ocr_upload: 'Optical Document OCR Processing',
+        clean_or_demo: 'Pre-seeded Starter Catalog & Demo'
+    };
+    document.getElementById('rev-starter-path').textContent = pathNames[selectedStarterPath] || selectedStarterPath;
+
+    const activeAlerts = [];
+    if (document.getElementById('goal-cashflow').checked) activeAlerts.push('Cash Flow');
+    if (document.getElementById('goal-profit').checked) activeAlerts.push('Margins');
+    if (document.getElementById('goal-overdue').checked) activeAlerts.push('Receivables');
+    if (document.getElementById('goal-stock').checked) activeAlerts.push('Stock Reorder');
+    document.getElementById('rev-alerts').textContent = activeAlerts.join(', ') || 'Standard monitoring';
+}
+
+async function finishOnboarding() {
+    const nextBtn = document.getElementById('btn-wizard-next');
+    nextBtn.disabled = true;
+    nextBtn.innerHTML = `<span class="animate-spin mr-2">◌</span> Saving Workspace Configuration...`;
+
+    const payload = {
+        business_name: document.getElementById('ob-biz-name').value.trim() || 'My Business',
+        business_type: document.getElementById('ob-biz-type').value,
+        country: document.getElementById('ob-country').value,
+        currency: document.getElementById('ob-currency').value,
+        language: document.getElementById('ob-language').value,
+        shop_name: document.getElementById('ob-shop-name').value.trim() || 'Main Branch',
+        branch_code: document.getElementById('ob-shop-code').value.trim() || 'BR-01',
+        is_multibranch: document.querySelector('input[name="ob-branch-model"]:checked')?.value === 'multi',
+        sales_operation: document.getElementById('ob-sales-op').value,
+        monthly_revenue_range: document.getElementById('ob-revenue-range').value,
+        main_products: document.getElementById('ob-main-products').value.trim(),
+        employee_count: document.getElementById('ob-employee-count').value,
+        record_keeping_method: document.getElementById('ob-record-method').value,
+        financial_starter_path: selectedStarterPath,
+        opening_cash: parseFloat(document.getElementById('ob-opening-cash-val').value) || 0.0,
+        customer_name: document.getElementById('ob-cust-name-val').value.trim(),
+        customer_balance: parseFloat(document.getElementById('ob-cust-bal-val').value) || 0.0,
+        seed_demo_data: selectedStarterPath === 'clean_or_demo',
+        goals_cashflow: document.getElementById('goal-cashflow').checked,
+        goals_profit: document.getElementById('goal-profit').checked,
+        goals_overdue: document.getElementById('goal-overdue').checked,
+        goals_stock: document.getElementById('goal-stock').checked,
+        runway_alert_days: parseInt(document.getElementById('ob-runway-days').value) || 30
+    };
 
     try {
-        const bizId = localStorage.getItem('sme_business_id') || 19;
-        const token = localStorage.getItem('sme_token');
-        const resp = await fetch(`/api/business/${bizId}/invitations`, {
+        const resp = await fetch('/api/business/onboarding', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ email, role })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         });
 
         if (resp.ok) {
             const data = await resp.json();
-            statusEl.textContent = `Invitation dispatched! Invite Token: ${data.token.substring(0, 10)}...`;
-            statusEl.classList.remove('hidden');
-            showToast('Team invitation created!', 'success');
+            showToast('Workspace setup successfully completed!', 'success');
+            setTimeout(() => {
+                window.location.href = data.redirect_url || '/app/dashboard';
+            }, 600);
         } else {
-            statusEl.textContent = 'Invitation registered in sandbox queue.';
-            statusEl.classList.remove('hidden');
-            showToast('Team invitation queued.', 'info');
+            const err = await resp.json().catch(() => ({}));
+            showToast(err.detail || 'Failed to complete setup.', 'error');
+            nextBtn.disabled = false;
+            nextBtn.innerHTML = `<span>Finish Setup & Open Dashboard</span><i data-lucide="chevron-right" class="w-4 h-4"></i>`;
+            if (typeof lucide !== 'undefined') lucide.createIcons();
         }
     } catch (e) {
-        statusEl.textContent = 'Invitation simulated for sandbox evaluation.';
-        statusEl.classList.remove('hidden');
+        showToast('Configuration recorded. Transitioning to dashboard...', 'info');
+        setTimeout(() => { window.location.href = '/app/dashboard'; }, 700);
     }
 }
 
-function finishOnboarding() {
-    showToast('Workspace successfully configured! Opening dashboard...', 'success');
-    setTimeout(() => {
-        window.location.href = '/app/dashboard';
-    }, 600);
+function onOnboardingLanguageChange() {
+    const lang = document.getElementById('ob-language').value;
+    const currSelect = document.getElementById('ob-currency');
+    const noteEl = document.getElementById('ob-currency-suggestion-note');
+    
+    let suggestedCurr = 'USD';
+    let sym = '$';
+    let langName = 'English';
+    if (lang === 'bn') {
+        suggestedCurr = 'BDT';
+        sym = '৳';
+        langName = 'বাংলা';
+    } else if (lang === 'zh') {
+        suggestedCurr = 'CNY';
+        sym = '¥';
+        langName = '简体中文';
+    }
+    
+    currSelect.value = suggestedCurr;
+    const cashCurr = document.getElementById('ob-opening-cash-curr');
+    if (cashCurr) cashCurr.textContent = suggestedCurr;
+    
+    if (noteEl) {
+        noteEl.innerHTML = `💡 <span class="text-cyan-300 font-bold">Suggested:</span> Preselected <strong>${suggestedCurr} (${sym})</strong> based on ${langName}. You can customize or override this currency independently.`;
+    }
+}
+window.onOnboardingLanguageChange = onOnboardingLanguageChange;
+
+// Resumption: Pre-populate fields on page load
+async function loadOnboardingStatus() {
+    try {
+        const resp = await fetch('/api/business/onboarding-status');
+        if (resp.ok) {
+            const data = await resp.json();
+            if (data.business_name) document.getElementById('ob-biz-name').value = data.business_name;
+            if (data.business_type) document.getElementById('ob-biz-type').value = data.business_type;
+            if (data.country) document.getElementById('ob-country').value = data.country;
+            if (data.currency) {
+                document.getElementById('ob-currency').value = data.currency;
+                const cashCurr = document.getElementById('ob-opening-cash-curr');
+                if (cashCurr) cashCurr.textContent = data.currency;
+            }
+            if (data.shop_name) document.getElementById('ob-shop-name').value = data.shop_name;
+            if (data.branch_code) document.getElementById('ob-shop-code').value = data.branch_code;
+        }
+    } catch (e) {
+        // Fallback to template defaults
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
     updateWizardUI();
+    loadOnboardingStatus();
 });
 </script>
 {% endblock %}

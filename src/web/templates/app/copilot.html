@@ -1,7 +1,7 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Autonomous Financial AI Copilot{% endblock %}
-{% block page_subtitle %}Multilingual voice-driven financial assistant with deterministic calculations and confirmation safeguards{% endblock %}
+{% block page_title %}{{ _('copilot.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('copilot.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="h-[calc(100vh-140px)] flex flex-col glass-panel-glow rounded-3xl border border-cyan-500/30 overflow-hidden relative shadow-2xl">
@@ -15,7 +15,7 @@
             </div>
             <div>
                 <div class="flex items-center gap-2">
-                    <span class="text-sm font-bold text-white">SME Copilot Financial Agent</span>
+                    <span class="text-sm font-bold text-white">{{ _('copilot.title') }}</span>
                     <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                     <span class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
                         Shop #{{ active_shop_id }} Active
@@ -27,15 +27,30 @@
             </div>
         </div>
 
-        <!-- Controls: Language Selector, TTS Mute Toggle, Reset -->
+        <!-- Controls: Language Selector, TTS Mute Toggle, Audio Player Bar, Reset -->
         <div class="flex items-center gap-2.5">
+            <!-- Active Audio Player Controller Bar (Play, Pause, Resume, Stop) -->
+            <div id="audio-playback-controls" class="hidden flex items-center gap-2 bg-emerald-950/50 border border-emerald-500/40 rounded-xl px-2.5 py-1 text-xs">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span id="audio-play-status" class="text-[10px] font-mono text-emerald-300 font-bold">Speaking...</span>
+                <button type="button" id="btn-audio-pause" onclick="pauseSpeech()" class="p-1 rounded hover:bg-white/10 text-slate-300 hover:text-white" title="Pause Audio">
+                    <i data-lucide="pause" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" id="btn-audio-resume" onclick="resumeSpeech()" class="p-1 rounded hover:bg-white/10 text-emerald-300 hover:text-white hidden" title="Resume Audio">
+                    <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" id="btn-audio-stop" onclick="stopSpeech()" class="p-1 rounded hover:bg-rose-950/40 text-rose-400 hover:text-rose-300" title="Stop Audio">
+                    <i data-lucide="square" class="w-3.5 h-3.5"></i>
+                </button>
+            </div>
+
             <!-- Voice AI Language Picker -->
             <div class="flex items-center gap-1.5 bg-slate-900/90 border border-white/10 rounded-xl px-2.5 py-1 text-xs">
                 <i data-lucide="globe" class="w-3.5 h-3.5 text-cyan-400"></i>
                 <select id="voice-lang-select" onchange="onVoiceLanguageChange()" class="bg-transparent text-slate-200 text-xs font-mono focus:outline-none cursor-pointer">
-                    <option value="en-US" selected>EN — English (US)</option>
-                    <option value="bn-BD">BN — বাংলা (Bengali)</option>
-                    <option value="zh-CN">ZH — 中文 (Simplified)</option>
+                    <option value="en-US" {% if current_lang == 'en' %}selected{% endif %}>🇬🇧 EN — English</option>
+                    <option value="bn-BD" {% if current_lang == 'bn' %}selected{% endif %}>🇧🇩 BN — বাংলা</option>
+                    <option value="zh-CN" {% if current_lang == 'zh' %}selected{% endif %}>🇨🇳 ZH — 简体中文</option>
                 </select>
             </div>
 
@@ -48,14 +63,14 @@
             <!-- Reset Chat -->
             <button type="button" onclick="clearCopilotChat()" class="p-2 rounded-xl bg-slate-900 border border-white/10 hover:border-cyan-400 text-slate-400 hover:text-white transition-all text-xs flex items-center gap-1.5" title="Reset Session">
                 <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
-                <span class="hidden sm:inline text-[11px]">Reset</span>
+                <span class="hidden sm:inline text-[11px]">{{ _('common.reset') }}</span>
             </button>
         </div>
     </div>
 
     <!-- Suggested Quick Prompts Row -->
     <div class="px-6 py-2.5 border-b border-white/5 bg-slate-900/40 overflow-x-auto flex items-center gap-2 shrink-0 text-xs">
-        <span class="text-slate-500 font-mono text-[10px] uppercase shrink-0">Try Prompts:</span>
+        <span class="text-slate-500 font-mono text-[10px] uppercase shrink-0">{{ _('copilot.suggested_prompts') }}:</span>
         <button type="button" onclick="askCopilotPrompt('Diagnose our 30-day cash-flow runway and identify liquidity bottlenecks.')" class="px-2.5 py-1 rounded-full bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 text-slate-300 hover:text-cyan-300 transition-all shrink-0 text-[11px]">
             📊 30-Day Runway
         </button>
@@ -360,21 +375,117 @@ function toggleTts() {
     }
 }
 
+let currentUtterance = null;
+let isAudioSpeaking = false;
+let isAudioPaused = false;
+
+function getMatchingVoice(langCode) {
+    if (!window.speechSynthesis) return null;
+    const voices = window.speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return null;
+    const prefix = langCode.split('-')[0].toLowerCase();
+    let match = voices.find(v => v.lang.replace('_', '-').toLowerCase() === langCode.toLowerCase());
+    if (match) return match;
+    match = voices.find(v => v.lang.toLowerCase().startsWith(prefix));
+    return match || null;
+}
+
 function speakText(text, langCode) {
     if (!window.speechSynthesis) return;
-    window.speechSynthesis.cancel(); // Stop prior audio
+    stopSpeech(); // Cancel any current speech
     
-    // Clean markdown asterisks
-    const cleanText = text.replace(/\*\*(.*?)\*\*/g, '$1').replace(/[#*_`]/g, '');
+    // Clean markdown formatting
+    const cleanText = text
+        .replace(/\*\*(.*?)\*\*/g, '$1')
+        .replace(/[#*_`]/g, '')
+        .replace(/\[Doc #[^\]]+\]/g, '')
+        .trim();
+
+    if (!cleanText) return;
+    
+    const selectedLang = langCode || (document.getElementById('voice-lang-select') ? document.getElementById('voice-lang-select').value : (window.CURRENT_LOCALE === 'bn' ? 'bn-BD' : window.CURRENT_LOCALE === 'zh' ? 'zh-CN' : 'en-US'));
     const utterance = new SpeechSynthesisUtterance(cleanText);
-    
-    const selectedLang = langCode || (document.getElementById('voice-lang-select') ? document.getElementById('voice-lang-select').value : 'en-US');
     utterance.lang = selectedLang;
     utterance.rate = 1.0;
     utterance.pitch = 1.0;
-    
+
+    const matchedVoice = getMatchingVoice(selectedLang);
+    if (matchedVoice) {
+        utterance.voice = matchedVoice;
+    } else {
+        const langName = selectedLang.startsWith('bn') ? 'Bengali' : selectedLang.startsWith('zh') ? 'Chinese' : 'English';
+        console.warn(`[Voice AI] Notice: No native ${langName} voice found in browser voices list. Using system default.`);
+    }
+
+    const playerBar = document.getElementById('audio-playback-controls');
+    const playStatus = document.getElementById('audio-play-status');
+    const pauseBtn = document.getElementById('btn-audio-pause');
+    const resumeBtn = document.getElementById('btn-audio-resume');
+
+    utterance.onstart = function() {
+        isAudioSpeaking = true;
+        isAudioPaused = false;
+        if (playerBar) playerBar.classList.remove('hidden');
+        if (playStatus) playStatus.textContent = 'Speaking...';
+        if (pauseBtn) pauseBtn.classList.remove('hidden');
+        if (resumeBtn) resumeBtn.classList.add('hidden');
+    };
+
+    utterance.onpause = function() {
+        isAudioPaused = true;
+        if (playStatus) playStatus.textContent = 'Paused';
+        if (pauseBtn) pauseBtn.classList.add('hidden');
+        if (resumeBtn) resumeBtn.classList.remove('hidden');
+    };
+
+    utterance.onresume = function() {
+        isAudioPaused = false;
+        if (playStatus) playStatus.textContent = 'Speaking...';
+        if (pauseBtn) pauseBtn.classList.remove('hidden');
+        if (resumeBtn) resumeBtn.classList.add('hidden');
+    };
+
+    utterance.onend = function() {
+        isAudioSpeaking = false;
+        isAudioPaused = false;
+        if (playerBar) playerBar.classList.add('hidden');
+    };
+
+    utterance.onerror = function() {
+        isAudioSpeaking = false;
+        isAudioPaused = false;
+        if (playerBar) playerBar.classList.add('hidden');
+    };
+
+    currentUtterance = utterance;
     window.speechSynthesis.speak(utterance);
 }
+
+function pauseSpeech() {
+    if (window.speechSynthesis && isAudioSpeaking && !isAudioPaused) {
+        window.speechSynthesis.pause();
+    }
+}
+
+function resumeSpeech() {
+    if (window.speechSynthesis && isAudioPaused) {
+        window.speechSynthesis.resume();
+    }
+}
+
+function stopSpeech() {
+    if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+    }
+    isAudioSpeaking = false;
+    isAudioPaused = false;
+    const playerBar = document.getElementById('audio-playback-controls');
+    if (playerBar) playerBar.classList.add('hidden');
+}
+
+window.pauseSpeech = pauseSpeech;
+window.resumeSpeech = resumeSpeech;
+window.stopSpeech = stopSpeech;
 
 function dispatchVoiceQuery() {
     const text = document.getElementById('voice-transcript-text').value.trim();
@@ -436,25 +547,27 @@ async function handleCopilotSend(e, isVoiceQuery = false) {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 
     const bizId = parseInt('{{ business.id if business else 19 }}');
-    const token = localStorage.getItem('sme_token') || '{{ token }}';
+    const token = localStorage.getItem('sme_token') || '{{ current_user.token if current_user and current_user.token else "" }}';
+    const authHeaders = { 'Content-Type': 'application/json' };
+    if (token) {
+        authHeaders['Authorization'] = `Bearer ${token}`;
+    }
 
     try {
         // Decide whether to call Voice AI Engine or standard Copilot RAG API
         let resp, data;
         
-        // Try Voice AI processing endpoint if voice query, multilingual, or contains transactional/decision action intent
+        // Try Voice AI processing endpoint if explicitly a voice query or transactional action intent
         const hasBengali = /[\u0980-\u09FF]/.test(msg);
         const hasChinese = /[\u4E00-\u9FFF]/.test(msg);
         const isActionIntent = /record\s+an?\s+expense|post\s+an?\s+expense|add\s+expense|approve.*loan|what\s+if/i.test(msg);
-        const isVoiceOrAction = isVoiceQuery || hasBengali || hasChinese || isActionIntent;
+        const isVoiceOrAction = isVoiceQuery || isActionIntent;
 
         if (isVoiceOrAction) {
             resp = await fetch('/api/models/voice/process', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
+                credentials: 'same-origin',
+                headers: authHeaders,
                 body: JSON.stringify({
                     transcript: msg,
                     text: msg,
@@ -480,18 +593,16 @@ async function handleCopilotSend(e, isVoiceQuery = false) {
             }
         }
 
-        // Fallback or standard Copilot RAG Query
+        // Standard Copilot RAG Query (supports EN, BN, ZH)
         resp = await fetch('/api/models/copilot/query', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
+            credentials: 'same-origin',
+            headers: authHeaders,
             body: JSON.stringify({
                 query: msg,
                 business_id: bizId,
                 shop_id: parseInt('{{ active_shop_id or 28 }}'),
-                preferred_locale: currentLang.split('-')[0]
+                preferred_locale: hasBengali ? 'bn' : hasChinese ? 'zh' : currentLang.split('-')[0]
             })
         });
 

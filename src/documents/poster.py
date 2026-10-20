@@ -14,6 +14,8 @@ from sqlalchemy.orm import Session
 from src.core.exceptions import CopilotException, InconsistentFinancialRecordError
 from src.database.models import (
     Document,
+    DocumentClassification,
+    DocumentExtraction,
     DocumentReview,
     Sale,
     Purchase,
@@ -46,12 +48,119 @@ class DocumentPostingService:
         if not doc:
             raise CopilotException(f"Document {confirmation.document_id} not found.")
 
-        # Idempotency guard: Prevent duplicate ledger entries
+        # Idempotency guard or manual amendment for posted documents
         if doc.status == "posted":
+            prev_vals = {}
+            if doc.review and doc.review.corrected_values_json:
+                try:
+                    prev_vals = json.loads(doc.review.corrected_values_json)
+                except Exception:
+                    pass
+            elif doc.extraction and doc.extraction.normalized_data_json:
+                try:
+                    prev_vals = json.loads(doc.extraction.normalized_data_json)
+                except Exception:
+                    pass
+
+            incoming_minor = confirmation.final_values.get("total_amount_minor", 0)
+            prev_minor = prev_vals.get("total_amount_minor", 0)
+            incoming_vendor = (
+                confirmation.final_values.get("supplier_name")
+                or confirmation.final_values.get("customer_name")
+                or confirmation.final_values.get("payee")
+                or ""
+            )
+            prev_vendor = (
+                prev_vals.get("supplier_name")
+                or prev_vals.get("customer_name")
+                or prev_vals.get("payee")
+                or ""
+            )
+
+            if incoming_minor == prev_minor and incoming_vendor == prev_vendor:
+                return {
+                    "status": "already_posted",
+                    "message": "Document has already been posted to financial ledger.",
+                    "document_id": doc.id,
+                }
+
+            # Otherwise, update the existing posted records with manual corrections!
+            if not doc.review:
+                review = DocumentReview(
+                    document_id=doc.id,
+                    reviewer_user_id=user_id,
+                    status="approved",
+                    original_values_json=json.dumps(prev_vals),
+                    corrected_values_json=json.dumps(confirmation.final_values),
+                    decision_notes=confirmation.reviewer_notes or "Amended manual review",
+                    reviewed_at=utc_now(),
+                )
+                session.add(review)
+            else:
+                doc.review.corrected_values_json = json.dumps(confirmation.final_values)
+                doc.review.decision_notes = confirmation.reviewer_notes or "Amended manual review"
+                doc.review.reviewed_at = utc_now()
+
+            if doc.extraction:
+                doc.extraction.normalized_data_json = json.dumps(confirmation.final_values)
+                doc.extraction.structured_data_json = json.dumps(confirmation.final_values)
+                doc.extraction.validation_errors_json = "[]"
+
+            if confirmation.confirmed_doc_type and doc.classification:
+                c_val = (
+                    confirmation.confirmed_doc_type.value
+                    if hasattr(confirmation.confirmed_doc_type, "value")
+                    else str(confirmation.confirmed_doc_type)
+                )
+                doc.classification.predicted_doc_type = c_val
+
+            purch = session.query(Purchase).filter_by(document_id=doc.id).first()
+            if purch:
+                purch.total_amount_minor = incoming_minor
+                purch.subtotal_minor = incoming_minor
+                purch.paid_amount_minor = incoming_minor
+                if purch.supplier and incoming_vendor:
+                    purch.supplier.name = incoming_vendor
+                for it in purch.items:
+                    it.line_total_minor = incoming_minor
+                    it.unit_cost_minor = incoming_minor
+
+            sale = session.query(Sale).filter_by(document_id=doc.id).first()
+            if sale:
+                sale.total_amount_minor = incoming_minor
+                sale.subtotal_minor = incoming_minor
+                sale.paid_amount_minor = incoming_minor
+                if sale.customer and incoming_vendor:
+                    sale.customer.name = incoming_vendor
+                for it in sale.items:
+                    it.line_total_minor = incoming_minor
+                    it.unit_price_minor = incoming_minor
+
+            exp = session.query(Expense).filter_by(document_id=doc.id).first()
+            if exp:
+                exp.amount_minor = incoming_minor
+                if incoming_vendor:
+                    exp.payee = incoming_vendor
+
+            pmt = session.query(Payment).filter_by(document_id=doc.id).first()
+            if pmt:
+                pmt.amount_minor = incoming_minor
+
+            AuditRepository(session).log_action(
+                action="amend_document",
+                entity_type="document",
+                entity_id=doc.id,
+                business_id=doc.business_id,
+                shop_id=doc.shop_id,
+                user_id=user_id,
+                new_values=json.dumps(confirmation.final_values),
+            )
+            session.flush()
             return {
-                "status": "already_posted",
-                "message": "Document has already been posted to financial ledger.",
+                "status": "posted",
+                "message": f"Successfully updated and reconciled document #{doc.id} in financial ledger.",
                 "document_id": doc.id,
+                "created_record": {"document_id": doc.id, "amount_minor": incoming_minor},
             }
 
         # Save review audit decision
@@ -65,6 +174,44 @@ class DocumentPostingService:
             reviewed_at=utc_now(),
         )
         session.add(review)
+
+        # Synchronize extraction record with human-confirmed values
+        if doc.extraction:
+            doc.extraction.normalized_data_json = json.dumps(confirmation.final_values)
+            doc.extraction.structured_data_json = json.dumps(confirmation.final_values)
+            if confirmation.decision_action == "approve_and_post":
+                doc.extraction.validation_errors_json = "[]"
+        else:
+            doc.extraction = DocumentExtraction(
+                document_id=doc.id,
+                raw_ocr_text="",
+                raw_ocr_blocks_json="[]",
+                structured_data_json=json.dumps(confirmation.final_values),
+                normalized_data_json=json.dumps(confirmation.final_values),
+                field_confidences_json=json.dumps({"total_amount_minor": 1.0, "supplier_name": 1.0}),
+                validation_errors_json="[]",
+                extraction_model_version="manual_review_v1",
+            )
+            session.add(doc.extraction)
+
+        if confirmation.confirmed_doc_type:
+            c_val = (
+                confirmation.confirmed_doc_type.value
+                if hasattr(confirmation.confirmed_doc_type, "value")
+                else str(confirmation.confirmed_doc_type)
+            )
+            if doc.classification:
+                doc.classification.predicted_doc_type = c_val
+                doc.classification.confidence_score = 1.0
+            else:
+                doc.classification = DocumentClassification(
+                    document_id=doc.id,
+                    predicted_doc_type=c_val,
+                    confidence_score=1.0,
+                    classifier_model_version="manual_review_v1",
+                    raw_predictions_json="{}",
+                )
+                session.add(doc.classification)
 
         if confirmation.decision_action != "approve_and_post":
             doc.status = "rejected"

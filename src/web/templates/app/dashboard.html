@@ -1,7 +1,7 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Executive Financial Dashboard{% endblock %}
-{% block page_subtitle %}Real-time KPI metrics, cash runway telemetry, and multi-store performance{% endblock %}
+{% block page_title %}{{ _('dashboard.title') }}{% endblock %}
+{% block page_subtitle %}{{ _('dashboard.subtitle') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
@@ -13,25 +13,25 @@
             </div>
             <div>
                 <div class="text-xs font-bold text-white flex items-center gap-2 flex-wrap">
-                    <span>AI Financial Participant Active</span>
+                    <span>{{ _('dashboard.ai_participant_active') }}</span>
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
                     <span id="data-environment-badge" class="px-2 py-0.5 rounded-full text-[10px] font-mono {% if is_synthetic %}bg-amber-500/20 text-amber-300 border border-amber-500/30{% else %}bg-emerald-500/20 text-emerald-300 border border-emerald-500/30{% endif %}">
-                        {% if is_synthetic %}SYNTHETIC BENCHMARK DATA{% else %}VERIFIED AUDITED DATA{% endif %}
+                        {% if is_synthetic %}{{ _('dashboard.synthetic_data') }}{% else %}{{ _('dashboard.audited_data') }}{% endif %}
                     </span>
                 </div>
                 <div class="text-[11px] text-slate-300">
-                    Active Shop: <strong id="active-shop-label" class="text-cyan-300">{{ active_shop_name }} (Shop #{{ active_shop_id }})</strong> • <span id="sync-telemetry-text">Ledger entries synchronized with 0% precision loss.</span>
+                    {{ _('dashboard.active_shop') }}: <strong id="active-shop-label" class="text-cyan-300">{{ active_shop_name }} (Shop #{{ active_shop_id }})</strong> • <span id="sync-telemetry-text">{{ _('dashboard.ledger_sync') }}</span>
                 </div>
             </div>
         </div>
         <div class="flex items-center gap-2 shrink-0">
             <a href="/app/forecast" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold border border-cyan-500/30 transition-all flex items-center gap-1.5">
                 <i data-lucide="trending-up" class="w-3.5 h-3.5"></i>
-                <span>Forecast Runway</span>
+                <span>{{ _('dashboard.forecast_runway') }}</span>
             </a>
             <a href="/app/documents" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 text-xs font-bold transition-all flex items-center gap-1.5">
                 <i data-lucide="upload" class="w-3.5 h-3.5"></i>
-                <span>Upload Invoice</span>
+                <span>{{ _('dashboard.upload_invoice') }}</span>
             </a>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between text-slate-400 mb-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">30-Day Revenue</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider">{{ _('dashboard.revenue_30d') }}</span>
                     <i data-lucide="arrow-up-right" class="w-4 h-4 text-emerald-400"></i>
                 </div>
                 <div id="kpi-revenue" class="font-orbitron text-2xl font-bold text-white min-h-[32px] flex items-center">
@@ -58,7 +58,7 @@
         <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between text-slate-400 mb-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">Net Operating Profit</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider">{{ _('dashboard.net_profit') }}</span>
                     <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i>
                 </div>
                 <div id="kpi-profit" class="font-orbitron text-2xl font-bold text-emerald-400 min-h-[32px] flex items-center">
@@ -74,7 +74,7 @@
         <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between text-slate-400 mb-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">Cash & Liquidity</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider">{{ _('dashboard.cash_liquidity') }}</span>
                     <i data-lucide="wallet" class="w-4 h-4 text-indigo-400"></i>
                 </div>
                 <div id="kpi-cash" class="font-orbitron text-2xl font-bold text-white min-h-[32px] flex items-center">
@@ -90,7 +90,7 @@
         <div class="glass-panel p-5 rounded-2xl border border-white/5 relative overflow-hidden flex flex-col justify-between">
             <div>
                 <div class="flex items-center justify-between text-slate-400 mb-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">Cash Runway & DSCR</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider">{{ _('dashboard.cash_runway_dscr') }}</span>
                     <i data-lucide="shield-check" class="w-4 h-4 text-amber-400"></i>
                 </div>
                 <div class="flex items-baseline gap-2 min-h-[32px]">
@@ -113,17 +113,17 @@
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                 <div>
                     <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                        <span>Revenue vs Operating Expenses (30 Days)</span>
-                        <span id="chart-currency-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-cyan-300 border border-white/10">BDT</span>
+                        <span>{{ _('dashboard.revenue_vs_expenses') }}</span>
+                        <span id="chart-currency-badge" class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 text-cyan-300 border border-white/10">{{ current_currency or (business.currency if business else 'BDT') }}</span>
                     </h3>
-                    <p id="chart-subtext" class="text-xs text-slate-400">Daily actuals synchronized from POS sales and verified ledger entries</p>
+                    <p id="chart-subtext" class="text-xs text-slate-400">{{ _('dashboard.chart_subtext') }}</p>
                 </div>
                 <div class="flex items-center gap-3 text-xs font-mono">
                     <span class="flex items-center gap-1.5 text-cyan-400">
-                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> Revenue
+                        <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 inline-block"></span> {{ _('dashboard.revenue_label') }}
                     </span>
                     <span class="flex items-center gap-1.5 text-rose-400">
-                        <span class="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block"></span> Expenses
+                        <span class="w-2.5 h-2.5 rounded-full bg-rose-400 inline-block"></span> {{ _('dashboard.expenses_label') }}
                     </span>
                 </div>
             </div>
@@ -133,23 +133,23 @@
                 <!-- Loading State -->
                 <div id="chart-loading" class="absolute inset-0 bg-slate-950/60 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 rounded-2xl">
                     <div class="w-7 h-7 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-                    <span class="text-xs text-slate-300 font-mono">Querying shop ledger records...</span>
+                    <span class="text-xs text-slate-300 font-mono">{{ _('dashboard.querying_records') }}</span>
                 </div>
 
                 <!-- Empty State -->
                 <div id="chart-empty" class="hidden absolute inset-0 bg-slate-950/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 p-6 text-center rounded-2xl">
                     <i data-lucide="bar-chart-2" class="w-8 h-8 text-slate-500"></i>
-                    <p class="text-xs font-semibold text-slate-300">No transactions recorded for this 30-day window.</p>
-                    <p class="text-[11px] text-slate-500 max-w-sm">Post new sales or upload invoices to visualize your daily revenue and expense streams.</p>
+                    <p class="text-xs font-semibold text-slate-300">{{ _('dashboard.no_transactions_chart') }}</p>
+                    <p class="text-[11px] text-slate-500 max-w-sm">{{ _('dashboard.no_transactions_sub') }}</p>
                 </div>
 
                 <!-- Error State -->
                 <div id="chart-error" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-2 p-6 text-center rounded-2xl border border-rose-500/20">
                     <i data-lucide="alert-circle" class="w-8 h-8 text-rose-400"></i>
-                    <p id="chart-error-msg" class="text-xs font-semibold text-rose-300">Failed to load financial stream.</p>
+                    <p id="chart-error-msg" class="text-xs font-semibold text-rose-300">{{ _('dashboard.failed_load') }}</p>
                     <button type="button" onclick="loadDashboardData()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs text-cyan-300 border border-cyan-500/30 transition-all flex items-center gap-1.5">
                         <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
-                        <span>Retry</span>
+                        <span>{{ _('dashboard.retry') }}</span>
                     </button>
                 </div>
 
@@ -163,30 +163,30 @@
                 <div class="flex items-center justify-between mb-3">
                     <div class="flex items-center gap-2">
                         <i data-lucide="bot" class="w-4 h-4 text-cyan-400"></i>
-                        <span class="text-xs font-mono uppercase text-cyan-400 font-bold">Autonomous Advisor</span>
+                        <span class="text-xs font-mono uppercase text-cyan-400 font-bold">{{ _('dashboard.autonomous_advisor') }}</span>
                     </div>
-                    <span id="advisor-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">Live Audit</span>
+                    <span id="advisor-badge" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono">{{ _('dashboard.live_audit') }}</span>
                 </div>
-                <h4 id="advisor-title" class="text-sm font-bold text-white mb-2">Analyzing financial trajectory...</h4>
+                <h4 id="advisor-title" class="text-sm font-bold text-white mb-2">{{ _('dashboard.analyzing_trajectory') }}</h4>
                 <p id="advisor-text" class="text-xs text-slate-300 leading-relaxed">
-                    Evaluating trailing 30-day cash burn, gross margins, and debt service capacity for <strong>Shop #{{ active_shop_id }}</strong>...
+                    {{ _('dashboard.evaluating_cash_burn') }}
                 </p>
                 
                 <div class="mt-4 p-3 rounded-xl bg-slate-900/80 border border-white/10 space-y-1.5 text-xs">
                     <div class="flex justify-between text-slate-400">
-                        <span>Recommended Action:</span>
-                        <span id="advisor-action" class="text-cyan-300 font-semibold font-mono">Synthesizing...</span>
+                        <span>{{ _('dashboard.recommended_action') }}:</span>
+                        <span id="advisor-action" class="text-cyan-300 font-semibold font-mono">...</span>
                     </div>
                     <div class="flex justify-between text-slate-400">
-                        <span>Liquidity Outlook:</span>
-                        <span id="advisor-outlook" class="text-emerald-400 font-semibold font-mono">Calculating...</span>
+                        <span>{{ _('dashboard.liquidity_outlook') }}:</span>
+                        <span id="advisor-outlook" class="text-emerald-400 font-semibold font-mono">...</span>
                     </div>
                 </div>
             </div>
 
             <a href="/app/copilot" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 border border-cyan-500/40 text-cyan-300 hover:text-white text-xs font-semibold flex items-center justify-center gap-2 transition-all">
                 <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
-                <span>Open Deep Copilot Consultation</span>
+                <span>{{ _('dashboard.open_copilot') }}</span>
             </a>
         </div>
     </div>
@@ -195,11 +195,11 @@
     <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div>
-                <h3 class="text-sm font-bold text-white">Live Transactions Stream</h3>
-                <p class="text-xs text-slate-400">Directly querying verified SQLite ledger records for <strong class="text-cyan-300">Shop #{{ active_shop_id }}</strong></p>
+                <h3 class="text-sm font-bold text-white">{{ _('dashboard.live_transactions') }}</h3>
+                <p class="text-xs text-slate-400">{{ _('dashboard.direct_query') }} <strong class="text-cyan-300">Shop #{{ active_shop_id }}</strong></p>
             </div>
             <a href="/app/finance" class="text-xs font-mono text-cyan-400 hover:underline flex items-center gap-1">
-                <span>View Full P&L & Ledgers</span>
+                <span>{{ _('dashboard.view_full_ledgers') }}</span>
                 <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
             </a>
         </div>
@@ -208,17 +208,17 @@
             <table class="w-full text-left text-xs">
                 <thead>
                     <tr class="border-b border-white/10 text-slate-400 font-mono uppercase tracking-wider text-[11px]">
-                        <th class="pb-3 font-semibold">Invoice / ID</th>
-                        <th class="pb-3 font-semibold">Customer / Type</th>
-                        <th class="pb-3 font-semibold">Payment Mode</th>
-                        <th class="pb-3 font-semibold text-right" id="recent-sales-col-currency">Amount (BDT)</th>
-                        <th class="pb-3 font-semibold text-center">Status</th>
+                        <th class="pb-3 font-semibold">{{ _('dashboard.invoice_id') }}</th>
+                        <th class="pb-3 font-semibold">{{ _('dashboard.customer_type') }}</th>
+                        <th class="pb-3 font-semibold">{{ _('dashboard.payment_mode') }}</th>
+                        <th class="pb-3 font-semibold text-right" id="recent-sales-col-currency">{{ _('dashboard.amount') }} ({{ current_currency or (business.currency if business else 'BDT') }})</th>
+                        <th class="pb-3 font-semibold text-center">{{ _('dashboard.status') }}</th>
                     </tr>
                 </thead>
                 <tbody id="dashboard-sales-tbody" class="divide-y divide-white/5">
                     <tr>
                         <td colspan="5" class="py-6 text-center text-slate-500">
-                            <span class="animate-pulse">Loading live ledger transactions...</span>
+                            <span class="animate-pulse">{{ _('dashboard.loading_transactions') }}</span>
                         </td>
                     </tr>
                 </tbody>
@@ -229,7 +229,8 @@
 
 {% block extra_scripts %}
 <script>
-const activeShopId = {{ active_shop_id }};
+var activeShopId = window.activeShopId || {{ active_shop_id }};
+window.activeShopId = activeShopId;
 let dashboardChartInstance = null;
 
 document.addEventListener("DOMContentLoaded", function() {
@@ -272,18 +273,20 @@ async function loadDashboardData() {
         if (chartError) {
             chartError.classList.remove('hidden');
             const msgEl = document.getElementById('chart-error-msg');
-            if (msgEl) msgEl.innerText = `Failed to load dashboard data: ${err.message}`;
+            if (msgEl) msgEl.innerText = `${window.t('dashboard.failed_load', 'Failed to load financial stream.')}: ${err.message}`;
         }
         renderKpiErrorState(err.message);
     }
 }
 
 function updateKpiCards(data) {
-    const cur = data.currency || 'BDT';
-    const sym = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' }[cur] || cur;
+    const cur = window.CURRENT_CURRENCY || data.currency || 'BDT';
+    const symMap = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' };
+    const sym = symMap[cur] || cur;
     const t30 = data.trailing_30d || {};
     const runway = data.runway || {};
     const dscr = data.dscr || {};
+    const localeCode = window.CURRENT_LOCALE === 'zh' ? 'zh-CN' : (window.CURRENT_LOCALE === 'bn' ? 'bn-BD' : 'en-US');
 
     // 1. Revenue Card
     const revEl = document.getElementById('kpi-revenue');
@@ -291,7 +294,7 @@ function updateKpiCards(data) {
     if (revEl) {
         const revMinor = (t30.sales_minor !== undefined ? t30.sales_minor : (data.revenue ? data.revenue.total_minor : 0));
         const revMajor = revMinor / 100;
-        const parts = revMajor.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
+        const parts = revMajor.toLocaleString(localeCode, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
         revEl.innerHTML = `${sym} ${parts[0]}<span class="text-xs font-mono text-cyan-400">.${parts[1]}</span>`;
     }
     if (revTrendEl) {
@@ -299,8 +302,9 @@ function updateKpiCards(data) {
         const isPos = growth >= 0;
         const colorClass = isPos ? 'text-emerald-400' : 'text-rose-400';
         const iconName = isPos ? 'trending-up' : 'trending-down';
+        const vsText = window.t('dashboard.vs_previous_30d', 'vs previous 30 days');
         revTrendEl.className = `text-[11px] ${colorClass} flex items-center gap-1 mt-2`;
-        revTrendEl.innerHTML = `<i data-lucide="${iconName}" class="w-3 h-3"></i><span>${isPos ? '+' : ''}${growth.toFixed(1)}% vs previous 30 days</span>`;
+        revTrendEl.innerHTML = `<i data-lucide="${iconName}" class="w-3 h-3"></i><span>${isPos ? '+' : ''}${growth.toFixed(1)}% ${vsText}</span>`;
     }
 
     // 2. Net Operating Profit Card
@@ -311,15 +315,16 @@ function updateKpiCards(data) {
         const profMajor = profMinor / 100;
         const isPos = profMajor >= 0;
         const textClass = isPos ? 'text-emerald-400' : 'text-rose-400';
-        const parts = Math.abs(profMajor).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
+        const parts = Math.abs(profMajor).toLocaleString(localeCode, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
         profEl.className = `font-orbitron text-2xl font-bold ${textClass}`;
         profEl.innerHTML = `${isPos ? '' : '-'}${sym} ${parts[0]}<span class="text-xs font-mono opacity-80">.${parts[1]}</span>`;
     }
     if (profMarginEl) {
         const margin = Number(t30.net_margin_pct !== undefined ? t30.net_margin_pct : (data.profitability ? data.profitability.net_margin_pct : 0));
-        const statusText = margin >= 15 ? '(Healthy)' : (margin >= 0 ? '(Moderate)' : '(Deficit)');
+        const statusText = margin >= 15 ? window.t('dashboard.margin_healthy', '(Healthy)') : (margin >= 0 ? window.t('dashboard.margin_moderate', '(Moderate)') : window.t('dashboard.margin_deficit', '(Deficit)'));
+        const netMarginLabel = window.t('dashboard.net_margin', 'Net Margin');
         profMarginEl.className = `text-[11px] ${margin >= 0 ? 'text-cyan-400' : 'text-rose-400'} flex items-center gap-1 mt-2`;
-        profMarginEl.innerHTML = `<i data-lucide="${margin >= 0 ? 'check' : 'alert-circle'}" class="w-3 h-3"></i><span>${margin.toFixed(1)}% Net Margin ${statusText}</span>`;
+        profMarginEl.innerHTML = `<i data-lucide="${margin >= 0 ? 'check' : 'alert-circle'}" class="w-3 h-3"></i><span>${margin.toFixed(1)}% ${netMarginLabel} ${statusText}</span>`;
     }
 
     // 3. Cash & Liquidity Card
@@ -328,20 +333,21 @@ function updateKpiCards(data) {
     if (cashEl) {
         const cashMinor = (data.liquidity ? data.liquidity.cash_balance_minor : 0);
         const cashMajor = cashMinor / 100;
-        const parts = cashMajor.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
+        const parts = cashMajor.toLocaleString(localeCode, { minimumFractionDigits: 2, maximumFractionDigits: 2 }).split('.');
         cashEl.innerHTML = `${sym} ${parts[0]}<span class="text-xs font-mono text-cyan-400">.${parts[1]}</span>`;
     }
     if (cashSubEl) {
-        cashSubEl.innerHTML = `<i data-lucide="clock" class="w-3 h-3"></i><span>Reconciled from verified ledgers</span>`;
+        cashSubEl.innerHTML = `<i data-lucide="clock" class="w-3 h-3"></i><span>${window.t('dashboard.reconciled_ledgers', 'Reconciled from verified ledgers')}</span>`;
     }
 
     // 4. Runway & DSCR Card
     const runwayEl = document.getElementById('kpi-runway');
     const dscrEl = document.getElementById('kpi-dscr');
     const loanStatusEl = document.getElementById('kpi-loan-status');
+    const daysWord = window.t('dashboard.days', 'Days');
     if (runwayEl) {
         const days = runway.days !== undefined ? runway.days : 0;
-        const daysText = days >= 999 ? '999+ Days' : `${days} Days`;
+        const daysText = days >= 999 ? `999+ ${daysWord}` : `${days} ${daysWord}`;
         let colorClass = 'text-amber-300';
         if (days >= 60) colorClass = 'text-emerald-300';
         else if (days < 30) colorClass = 'text-rose-400';
@@ -354,8 +360,8 @@ function updateKpiCards(data) {
     }
     if (loanStatusEl) {
         const status = dscr.status || 'eligible';
-        const label = dscr.label || (status === 'eligible' ? 'Bank Loan Pre-Qualified' : 'Conditional / Collateral Needed');
         const isEligible = status === 'eligible';
+        const label = isEligible ? window.t('dashboard.loan_prequalified', 'Bank Loan Pre-Qualified') : window.t('dashboard.loan_conditional', 'Conditional / Collateral Needed');
         loanStatusEl.className = `text-[11px] ${isEligible ? 'text-emerald-400' : 'text-amber-400'} flex items-center gap-1 mt-2`;
         loanStatusEl.innerHTML = `<i data-lucide="${isEligible ? 'check-circle' : 'alert-triangle'}" class="w-3 h-3"></i><span>${label}</span>`;
     }
@@ -365,7 +371,7 @@ function updateKpiCards(data) {
     if (currBadge) currBadge.innerText = cur;
 
     const colCur = document.getElementById('recent-sales-col-currency');
-    if (colCur) colCur.innerText = `Amount (${cur})`;
+    if (colCur) colCur.innerText = `${window.t('dashboard.amount', 'Amount')} (${cur})`;
 
     if (window.lucide) lucide.createIcons();
 }
@@ -375,33 +381,34 @@ function updateAutonomousAdvisor(data) {
     const growth = Number(t30.sales_growth_pct || 0);
     const dscr = Number((data.dscr && data.dscr.ratio) || t30.dscr_ratio || 0);
     const runwayDays = Number((data.runway && data.runway.days) || t30.runway_days || 0);
+    const daysWord = window.t('dashboard.days', 'Days');
 
     const titleEl = document.getElementById('advisor-title');
     const textEl = document.getElementById('advisor-text');
     const actionEl = document.getElementById('advisor-action');
     const outlookEl = document.getElementById('advisor-outlook');
 
-    let title = "Stable Operational Trajectory";
-    let action = "Sustain Inventory Levels";
-    let outlook = `${runwayDays} Days Runway`;
+    let title = window.t('advisor.stable_trajectory', "Stable Operational Trajectory");
+    let action = window.t('advisor.sustain_inventory', "Sustain Inventory Levels");
+    let outlook = `${runwayDays} ${window.t('dashboard.days_runway', 'Days Runway')}`;
 
     if (growth >= 10) {
-        title = "Growth Momentum Detected";
-        action = dscr >= 1.25 ? "Bulk Purchasing & Trade Credit" : "Selective Supplier Reinvestment";
+        title = window.t('advisor.growth_momentum', "Growth Momentum Detected");
+        action = dscr >= 1.25 ? window.t('advisor.bulk_purchasing', "Bulk Purchasing & Trade Credit") : window.t('advisor.selective_reinvestment', "Selective Supplier Reinvestment");
     } else if (growth < -5) {
-        title = "Revenue Contraction Flagged";
-        action = "OpEx Optimization & Receivables Chase";
+        title = window.t('advisor.revenue_contraction', "Revenue Contraction Flagged");
+        action = window.t('advisor.opex_optimization', "OpEx Optimization & Receivables Chase");
     } else {
-        title = "Steady Cash Velocity";
-        action = dscr >= 1.25 ? "Working Capital Expansion" : "Preserve Operating Reserves";
+        title = window.t('advisor.steady_velocity', "Steady Cash Velocity");
+        action = dscr >= 1.25 ? window.t('advisor.working_capital_expansion', "Working Capital Expansion") : window.t('advisor.preserve_reserves', "Preserve Operating Reserves");
     }
 
     if (runwayDays >= 60) {
-        outlook = `${runwayDays} Days (Healthy Cushion)`;
+        outlook = `${runwayDays} ${daysWord} (${window.t('advisor.healthy_cushion', 'Healthy Cushion')})`;
     } else if (runwayDays >= 30) {
-        outlook = `${runwayDays} Days (Moderate Buffer)`;
+        outlook = `${runwayDays} ${daysWord} (${window.t('advisor.moderate_buffer', 'Moderate Buffer')})`;
     } else {
-        outlook = `${runwayDays} Days (Urgent Attention)`;
+        outlook = `${runwayDays} ${daysWord} (${window.t('advisor.urgent_attention', 'Urgent Attention Needed')})`;
     }
 
     if (titleEl) titleEl.innerText = title;
@@ -409,7 +416,10 @@ function updateAutonomousAdvisor(data) {
     if (outlookEl) outlookEl.innerText = outlook;
 
     if (textEl) {
-        textEl.innerHTML = `Sales in <strong>Shop #${data.shop_id}</strong> ${growth >= 0 ? 'grew by' : 'contracted by'} <strong>${Math.abs(growth).toFixed(1)}%</strong> over trailing 30 days. Current liquidity provides <strong>${runwayDays} days</strong> of runway with a verified DSCR of <strong>${dscr.toFixed(2)}x</strong> (Statutory covenant: >1.25x).`;
+        const growthSummary = growth >= 0 
+            ? window.t('advisor.sales_summary_positive', 'Sales grew by {growth}% over trailing 30 days.').replace('{growth}', growth.toFixed(1))
+            : window.t('advisor.sales_summary_negative', 'Sales contracted by {growth}% over trailing 30 days.').replace('{growth}', Math.abs(growth).toFixed(1));
+        textEl.innerHTML = `${growthSummary} ${window.t('dashboard.active_shop', 'Shop')} <strong>#${data.shop_id}</strong>: ${runwayDays} ${daysWord} ${window.t('dashboard.days_runway', 'Runway')} • DSCR <strong>${dscr.toFixed(2)}x</strong>.`;
     }
 }
 
@@ -426,8 +436,11 @@ function renderDailyChart(streamData) {
     if (chartEmpty) chartEmpty.classList.add('hidden');
 
     const ctx = document.getElementById('revenueExpenseChart').getContext('2d');
-    const cur = streamData.currency || 'BDT';
-    const sym = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' }[cur] || cur;
+    const cur = window.CURRENT_CURRENCY || streamData.currency || 'BDT';
+    const symMap = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' };
+    const sym = symMap[cur] || cur;
+    const revLabel = window.t('dashboard.revenue_label', 'Revenue');
+    const expLabel = window.t('dashboard.expenses_label', 'Expenses');
 
     if (dashboardChartInstance) {
         dashboardChartInstance.destroy();
@@ -439,7 +452,7 @@ function renderDailyChart(streamData) {
             labels: streamData.labels || [],
             datasets: [
                 {
-                    label: `Revenue (${cur})`,
+                    label: `${revLabel} (${cur})`,
                     data: streamData.revenue_major || [],
                     borderColor: '#22d3ee',
                     backgroundColor: 'rgba(34, 211, 238, 0.08)',
@@ -450,7 +463,7 @@ function renderDailyChart(streamData) {
                     pointHoverRadius: 5
                 },
                 {
-                    label: `Expenses (${cur})`,
+                    label: `${expLabel} (${cur})`,
                     data: streamData.expenses_major || [],
                     borderColor: '#f43f5e',
                     backgroundColor: 'rgba(244, 63, 94, 0.04)',
@@ -503,16 +516,22 @@ function renderKpiErrorState(errorMsg) {
     const profEl = document.getElementById('kpi-profit');
     const cashEl = document.getElementById('kpi-cash');
     const runwayEl = document.getElementById('kpi-runway');
+    const errText = window.t('common.error', 'Error');
 
-    if (revEl) revEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error loading</span>`;
-    if (profEl) profEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error loading</span>`;
-    if (cashEl) cashEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error loading</span>`;
-    if (runwayEl) runwayEl.innerHTML = `<span class="text-xs font-mono text-rose-400">Error</span>`;
+    if (revEl) revEl.innerHTML = `<span class="text-xs font-mono text-rose-400">${errText}</span>`;
+    if (profEl) profEl.innerHTML = `<span class="text-xs font-mono text-rose-400">${errText}</span>`;
+    if (cashEl) cashEl.innerHTML = `<span class="text-xs font-mono text-rose-400">${errText}</span>`;
+    if (runwayEl) runwayEl.innerHTML = `<span class="text-xs font-mono text-rose-400">${errText}</span>`;
 }
 
 async function loadDashboardRecentSales() {
     const tbody = document.getElementById('dashboard-sales-tbody');
     if (!tbody) return;
+
+    const cur = window.CURRENT_CURRENCY || 'BDT';
+    const symMap = { 'BDT': '৳', 'USD': '$', 'CNY': '¥', 'EUR': '€', 'GBP': '£' };
+    const sym = symMap[cur] || cur;
+    const localeCode = window.CURRENT_LOCALE === 'zh' ? 'zh-CN' : (window.CURRENT_LOCALE === 'bn' ? 'bn-BD' : 'en-US');
 
     try {
         const resp = await fetch(`/api/finance/sales?shop_id=${activeShopId}&limit=6`);
@@ -522,25 +541,26 @@ async function loadDashboardRecentSales() {
         const data = await resp.json();
         const items = data.items || data.sales || [];
         if (items.length === 0) {
-            tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500 font-mono">No transactions recorded for this shop.</td></tr>`;
+            tbody.innerHTML = `<tr><td colspan="5" class="py-6 text-center text-slate-500 font-mono">${window.t('dashboard.no_transactions_table', 'No transactions recorded for this shop.')}</td></tr>`;
             return;
         }
         tbody.innerHTML = items.map(s => {
             const inv = s.invoice_number || `INV-${s.id}`;
-            const cust = s.customer_name || 'Walk-in Retail Customer';
+            const cust = s.customer_name || window.t('dashboard.walkin_customer', 'Walk-in Retail Customer');
             const mode = (s.payment_method || 'cash').toUpperCase();
-            const amtMajor = ((s.total_amount_minor || 0) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            const statusBadge = (s.payment_status || 'paid').toUpperCase();
-            const badgeClass = statusBadge === 'PAID' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30';
+            const amtMajor = ((s.total_amount_minor || 0) / 100).toLocaleString(localeCode, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            const rawStatus = (s.payment_status || 'paid').toLowerCase();
+            const statusLabel = rawStatus === 'paid' ? window.t('dashboard.paid', 'PAID') : (rawStatus === 'due' ? window.t('dashboard.due', 'DUE') : window.t('dashboard.partial', 'PARTIAL'));
+            const badgeClass = rawStatus === 'paid' ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' : 'bg-amber-500/20 text-amber-400 border-amber-500/30';
             return `
                 <tr class="hover:bg-white/5 transition-colors">
                     <td class="py-3 font-mono text-cyan-400 font-semibold">${inv}</td>
                     <td class="py-3 text-slate-300">${cust}</td>
                     <td class="py-3 font-mono text-slate-400 uppercase">${mode}</td>
-                    <td class="py-3 font-orbitron text-right font-bold text-white">${amtMajor}</td>
+                    <td class="py-3 font-orbitron text-right font-bold text-white">${sym} ${amtMajor}</td>
                     <td class="py-3 text-center">
                         <span class="px-2 py-0.5 rounded-full text-[10px] font-mono border ${badgeClass}">
-                            ${statusBadge}
+                            ${statusLabel}
                         </span>
                     </td>
                 </tr>
@@ -553,8 +573,8 @@ async function loadDashboardRecentSales() {
             <tr>
                 <td colspan="5" class="py-6 text-center text-slate-500">
                     <div class="flex flex-col items-center justify-center gap-2">
-                        <span class="text-xs text-rose-400">Failed to load recent sales: ${e.message}</span>
-                        <button type="button" onclick="loadDashboardRecentSales()" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] text-cyan-300 hover:bg-slate-700">Retry</button>
+                        <span class="text-xs text-rose-400">${window.t('dashboard.failed_load', 'Failed to load recent sales')}: ${e.message}</span>
+                        <button type="button" onclick="loadDashboardRecentSales()" class="px-2.5 py-1 rounded bg-slate-800 text-[11px] text-cyan-300 hover:bg-slate-700">${window.t('dashboard.retry', 'Retry')}</button>
                     </div>
                 </td>
             </tr>

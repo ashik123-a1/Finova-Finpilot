@@ -72,6 +72,12 @@ class DocumentClassifier:
             "bill of supply": 2.5,
             "challan": 2.0,
             "purchase order ref": 2.5,
+            "deed of sale": 4.0,
+            "deed": 3.0,
+            "sale deed": 3.5,
+            "consideration": 3.0,
+            "agreement": 3.0,
+            "procurement agreement": 3.5,
             # Bengali
             "চালান": 3.5,
             "ক্রয় চালান": 3.5,
@@ -80,6 +86,9 @@ class DocumentClassifier:
             "ক্রয়": 2.0,
             "সরবরাহকারী": 2.5,
             "ভেন্ডর বিল": 3.0,
+            "দলিল": 3.5,
+            "চুক্তি": 3.0,
+            "বিক্রয় দলিল": 4.0,
             # Chinese
             "增值税专用发票": 3.5,
             "采购发票": 3.5,
@@ -114,6 +123,8 @@ class DocumentClassifier:
             "rent receipt": 3.5,
             "utility bill": 3.5,
             "electricity bill": 3.0,
+            "desco": 3.5,
+            "utility": 3.0,
             "salary slip": 3.0,
             "office supplies": 2.0,
             # Bengali
@@ -158,6 +169,10 @@ class DocumentClassifier:
             "received with thanks": 3.0,
             "bank deposit slip": 3.5,
             "acknowledgment receipt": 2.5,
+            "loan sanction": 4.0,
+            "sanction letter": 4.0,
+            "credit facility": 3.5,
+            "loan": 3.0,
             # Bengali
             "টাকা প্রাপ্তি রসিদ": 3.5,
             "টাকা জমার রসিদ": 3.5,

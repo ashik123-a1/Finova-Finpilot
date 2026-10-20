@@ -3,18 +3,27 @@ Business and Shop Management API Routes.
 Provides multi-tenant shop listing, business profile retrieval, and shop metadata with isolation.
 """
 
-from __future__ import annotations
-
+import json
 import secrets
 from datetime import datetime, timezone, timedelta
 from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, status, Response
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from src.database.connection import get_db
-from src.database.models import User, Business, Shop, BusinessMembership, WorkspaceInvitation, AuditLog
+from src.database.models import (
+    User,
+    Business,
+    Shop,
+    BusinessMembership,
+    WorkspaceInvitation,
+    AuditLog,
+    Payment,
+    Customer,
+    Product,
+)
 from src.api.dependencies import get_current_user, verify_shop_access_dependency
 from src.core.exceptions import ShopAccessDeniedError
 
@@ -114,6 +123,328 @@ def list_user_businesses(
         )
 
     return results
+
+
+# ==============================================================================
+# Multi-Step Business Onboarding Wizard API (Phase 3)
+# ==============================================================================
+
+class OnboardingStatusResponse(BaseModel):
+    has_business: bool
+    business_id: Optional[int] = None
+    business_name: Optional[str] = None
+    business_type: Optional[str] = "retail"
+    country: Optional[str] = "BD"
+    currency: Optional[str] = "BDT"
+    language: Optional[str] = "en"
+    shop_id: Optional[int] = None
+    shop_name: Optional[str] = None
+    branch_code: Optional[str] = "BR-01"
+    is_multibranch: bool = False
+    sales_operation: str = "counter_pos"
+    monthly_revenue_range: str = "100k_500k"
+    main_products: str = ""
+    employee_count: str = "1_5"
+    record_keeping_method: str = "excel"
+    financial_starter_path: str = "opening_cash"
+    opening_cash: float = 50000.0
+    goals_cashflow: bool = True
+    goals_profit: bool = True
+    goals_overdue: bool = True
+    goals_stock: bool = True
+    goals_summary: bool = True
+    runway_alert_days: int = 30
+
+
+class OnboardingCompleteRequest(BaseModel):
+    business_name: str
+    business_type: str = "retail"
+    country: str = "BD"
+    currency: str = "BDT"
+    language: str = "en"
+    shop_name: str = "Main Branch"
+    branch_code: Optional[str] = "BR-01"
+    is_multibranch: bool = False
+    sales_operation: str = "counter_pos"
+    monthly_revenue_range: Optional[str] = "100k_500k"
+    main_products: Optional[str] = None
+    employee_count: Optional[str] = "1_5"
+    record_keeping_method: Optional[str] = "excel"
+    financial_starter_path: str = "opening_cash"
+    opening_cash: Optional[float] = 0.0
+    customer_name: Optional[str] = None
+    customer_balance: Optional[float] = 0.0
+    seed_demo_data: bool = False
+    goals_cashflow: bool = True
+    goals_profit: bool = True
+    goals_overdue: bool = True
+    goals_stock: bool = True
+    goals_summary: bool = True
+    runway_alert_days: int = 30
+
+
+@router.get("/onboarding-status", response_model=OnboardingStatusResponse)
+def get_onboarding_status(
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Returns current workspace onboarding progress and entity details for the user.
+    Allows resuming the setup wizard without duplicating workspaces or branches.
+    """
+    membership = (
+        db.query(BusinessMembership)
+        .filter_by(user_id=user.id, is_active=True)
+        .order_by(BusinessMembership.id.asc())
+        .first()
+    )
+    if not membership:
+        return OnboardingStatusResponse(
+            has_business=False,
+            business_name="My New Business",
+            business_type="retail",
+            currency="BDT",
+            country="BD",
+            language="en",
+            shop_name="Main Branch",
+            branch_code="BR-01",
+        )
+
+    biz = db.get(Business, membership.business_id)
+    shop = db.get(Shop, membership.shop_id) if membership.shop_id else None
+    if not shop and biz:
+        shop = db.query(Shop).filter_by(business_id=biz.id).first()
+
+    return OnboardingStatusResponse(
+        has_business=True,
+        business_id=biz.id if biz else None,
+        business_name=biz.name if biz else "My Business",
+        business_type=biz.business_type if biz else "retail",
+        country=shop.city if shop and shop.city else "BD",
+        currency=biz.currency if biz else "BDT",
+        language="en",
+        shop_id=shop.id if shop else None,
+        shop_name=shop.name if shop else "Main Branch",
+        branch_code=shop.branch_code if shop and shop.branch_code else "BR-01",
+        is_multibranch=False,
+        sales_operation="counter_pos",
+        monthly_revenue_range="100k_500k",
+        main_products="",
+        employee_count="1_5",
+        record_keeping_method="excel",
+        financial_starter_path="opening_cash",
+        opening_cash=50000.0,
+        goals_cashflow=True,
+        goals_profit=True,
+        goals_overdue=True,
+        goals_stock=True,
+        goals_summary=True,
+        runway_alert_days=30,
+    )
+
+
+@router.post("/onboarding")
+def complete_onboarding(
+    req: OnboardingCompleteRequest,
+    response: Response,
+    user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Completes or updates the multi-step business onboarding setup.
+    Guarantees idempotency: updates existing workspace and shop without creating duplicates on resume.
+    Initializes opening cash balances, initial customers, or starter inventory if selected.
+    """
+    membership = (
+        db.query(BusinessMembership)
+        .filter_by(user_id=user.id, is_active=True)
+        .order_by(BusinessMembership.id.asc())
+        .first()
+    )
+
+    clean_biz_name = req.business_name.strip()
+    clean_biz_type = req.business_type.lower().strip()
+    clean_curr = req.currency.upper().strip()
+    clean_shop_name = req.shop_name.strip()
+    clean_branch_code = (req.branch_code or "BR-01").strip()
+    clean_country = req.country.strip()
+
+    if membership:
+        biz = db.get(Business, membership.business_id)
+        if not biz:
+            biz = Business(name=clean_biz_name, business_type=clean_biz_type, currency=clean_curr, is_synthetic=False)
+            db.add(biz)
+            db.flush()
+            membership.business_id = biz.id
+
+        biz.name = clean_biz_name
+        biz.business_type = clean_biz_type
+        biz.currency = clean_curr
+
+        shop = db.get(Shop, membership.shop_id) if membership.shop_id else None
+        if not shop:
+            shop = db.query(Shop).filter_by(business_id=biz.id).first()
+        if not shop:
+            shop = Shop(
+                business_id=biz.id,
+                name=clean_shop_name,
+                branch_code=clean_branch_code,
+                city=clean_country,
+                is_active=True,
+                is_synthetic=False,
+            )
+            db.add(shop)
+            db.flush()
+            membership.shop_id = shop.id
+        else:
+            shop.name = clean_shop_name
+            shop.branch_code = clean_branch_code
+            shop.city = clean_country
+    else:
+        biz = Business(
+            name=clean_biz_name,
+            business_type=clean_biz_type,
+            currency=clean_curr,
+            is_synthetic=False,
+        )
+        db.add(biz)
+        db.flush()
+
+        shop = Shop(
+            business_id=biz.id,
+            name=clean_shop_name,
+            branch_code=clean_branch_code,
+            city=clean_country,
+            is_active=True,
+            is_synthetic=False,
+        )
+        db.add(shop)
+        db.flush()
+
+        membership = BusinessMembership(
+            user_id=user.id,
+            business_id=biz.id,
+            shop_id=shop.id,
+            role_code="owner",
+            is_active=True,
+        )
+        db.add(membership)
+        db.flush()
+
+    # Starter financial entries based on selected pathway
+    if req.financial_starter_path == "opening_cash" and (req.opening_cash or 0) > 0:
+        opening_minor = int(round(req.opening_cash * 100))
+        existing_payment = db.query(Payment).filter_by(
+            shop_id=shop.id,
+            reference_type="opening_balance"
+        ).first()
+        if not existing_payment:
+            payment = Payment(
+                business_id=biz.id,
+                shop_id=shop.id,
+                payment_type="customer_inflow",
+                reference_type="opening_balance",
+                amount_minor=opening_minor,
+                payment_method="cash",
+                notes="Initial cash drawer liquidity established during workspace onboarding.",
+                created_by=user.id,
+                is_synthetic=False,
+            )
+            db.add(payment)
+
+    elif req.financial_starter_path == "customer_balance" and req.customer_name:
+        cust_name = req.customer_name.strip()
+        balance_minor = int(round((req.customer_balance or 0.0) * 100))
+        existing_cust = db.query(Customer).filter_by(shop_id=shop.id, name=cust_name).first()
+        if not existing_cust:
+            cust = Customer(
+                business_id=biz.id,
+                shop_id=shop.id,
+                name=cust_name,
+                balance_minor=balance_minor,
+                segment="regular",
+                is_synthetic=False,
+            )
+            db.add(cust)
+
+    if req.seed_demo_data or req.financial_starter_path == "clean_or_demo":
+        existing_prod = db.query(Product).filter_by(shop_id=shop.id).first()
+        if not existing_prod:
+            sample_items = [
+                ("SKU-BASMATI-5KG", "Premium Basmati Rice 5kg", "Grains & Rice", 48000, 62000, 45),
+                ("SKU-OIL-SOYA-2L", "Fortified Soybean Cooking Oil 2L", "Edible Oils", 31000, 38000, 60),
+                ("SKU-FLOUR-ATTA-2K", "Whole Wheat Atta Flour 2kg", "Flour & Bakery", 11500, 14500, 80),
+                ("SKU-LENTIL-MASUR-1K", "Red Masur Lentils 1kg", "Pulses & Legumes", 12500, 15500, 50),
+            ]
+            for sku, name, cat, cost_min, sell_min, stock in sample_items:
+                p = Product(
+                    business_id=biz.id,
+                    shop_id=shop.id,
+                    sku=sku,
+                    name=name,
+                    category=cat,
+                    cost_price_minor=cost_min,
+                    selling_price_minor=sell_min,
+                    current_stock=stock,
+                    min_stock_alert=10,
+                    is_active=True,
+                    is_synthetic=False,
+                )
+                db.add(p)
+
+    # Dispatch welcome notification
+    from src.api.routes.notifications import create_persistent_notification
+    create_persistent_notification(
+        db=db,
+        user_id=user.id,
+        business_id=biz.id,
+        shop_id=shop.id,
+        title="Workspace Onboarding Completed",
+        message=f"Welcome to SME Finance Copilot! {biz.name} ({shop.name}) is fully configured with {biz.currency} currency standards.",
+        notification_type="system",
+        severity="success",
+        action_url="/app/dashboard",
+        dedup_key=f"onboarding_welcome_{user.id}_{biz.id}"
+    )
+
+    # Record Audit Log
+    audit = AuditLog(
+        business_id=biz.id,
+        shop_id=shop.id,
+        user_id=user.id,
+        action="ONBOARDING_COMPLETED",
+        entity_type="business",
+        entity_id=biz.id,
+        new_values_json=json.dumps({
+            "business_name": biz.name,
+            "currency": biz.currency,
+            "language": req.language or "en",
+            "shop_name": shop.name,
+            "branch_code": shop.branch_code,
+            "starter_path": req.financial_starter_path,
+        }),
+    )
+    db.add(audit)
+
+    # Persist preferred language to user profile and cookie
+    clean_lang = (req.language or "en").lower().split("-")[0].strip()
+    if clean_lang in ["en", "bn", "zh"]:
+        user.preferred_language = clean_lang
+        response.set_cookie(key="sme_lang", value=clean_lang, max_age=31536000, path="/", samesite="lax")
+
+    db.commit()
+
+    # Set active cookies
+    response.set_cookie(key="sme_active_business_id", value=str(biz.id), max_age=86400, path="/", httponly=False, samesite="lax")
+    response.set_cookie(key="sme_active_shop_id", value=str(shop.id), max_age=86400, path="/", httponly=False, samesite="lax")
+
+    return {
+        "status": "success",
+        "message": "Workspace onboarding completed successfully.",
+        "business_id": biz.id,
+        "shop_id": shop.id,
+        "redirect_url": "/app/dashboard",
+    }
 
 
 @router.get("/{business_id}/shops", response_model=List[ShopResponse])

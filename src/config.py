@@ -56,6 +56,9 @@ class Settings:
         self.MODEL_REGISTRY_PATH: Path = (
             BASE_DIR / os.getenv("MODEL_REGISTRY_PATH", "storage/model_registry")
         )
+        self.VAR_DIR: Path = BASE_DIR / os.getenv("VAR_DIR", "var")
+        self.BACKUPS_DIR: Path = BASE_DIR / os.getenv("BACKUPS_DIR", "var/backups")
+        self.EXPORTS_DIR: Path = BASE_DIR / os.getenv("EXPORTS_DIR", "var/exports")
 
         # Language & Localization Priority (English First, China Second)
         self.DEFAULT_LOCALE: str = os.getenv("DEFAULT_LOCALE", "en")
@@ -84,6 +87,9 @@ class Settings:
         self.DOCUMENTS_STORAGE_PATH.mkdir(parents=True, exist_ok=True)
         self.SYNTHETIC_DATA_PATH.mkdir(parents=True, exist_ok=True)
         self.MODEL_REGISTRY_PATH.mkdir(parents=True, exist_ok=True)
+        self.VAR_DIR.mkdir(parents=True, exist_ok=True)
+        self.BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
+        self.EXPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 settings = Settings()

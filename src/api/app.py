@@ -14,6 +14,7 @@ from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.gzip import GZipMiddleware
 from sqlalchemy import text
 
 from src.config import settings
@@ -38,6 +39,12 @@ from src.api.routes import (
     models,
     i18n,
     audit,
+    notifications,
+    admin,
+    crm,
+    inventory,
+    voice,
+    reports,
 )
 from src.web.router import router as web_router, templates, get_web_context
 
@@ -74,6 +81,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Enable HTTP GZip Compression for fast network transmission over tunnels and mobile connections
+app.add_middleware(GZipMiddleware, minimum_size=500)
 
 
 # ==============================================================================
@@ -183,9 +193,18 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
 # Static Files & Web Router Registration
 # ==============================================================================
 
+class CachedStaticFiles(StaticFiles):
+    """Static file responder with HTTP browser cache headers for instant repeat page loads."""
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+        if response.status_code == 200:
+            response.headers["Cache-Control"] = "public, max-age=604800, stale-while-revalidate=86400"
+        return response
+
+
 STATIC_DIR = Path(__file__).resolve().parent.parent / "web" / "static"
 if STATIC_DIR.exists():
-    app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+    app.mount("/static", CachedStaticFiles(directory=str(STATIC_DIR)), name="static")
 
 # Web UI HTML Router
 app.include_router(web_router)
@@ -203,6 +222,12 @@ app.include_router(datasets.router, prefix="/api")
 app.include_router(models.router, prefix="/api")
 app.include_router(i18n.router, prefix="/api")
 app.include_router(audit.router, prefix="/api")
+app.include_router(notifications.router, prefix="/api")
+app.include_router(admin.router, prefix="/api")
+app.include_router(crm.router, prefix="/api")
+app.include_router(inventory.router, prefix="/api")
+app.include_router(voice.router, prefix="/api")
+app.include_router(reports.router, prefix="/api")
 
 
 # ==============================================================================
@@ -217,8 +242,9 @@ def root(request: Request):
     """
     accept = request.headers.get("accept", "")
     if "text/html" in accept and not accept.startswith("*/*"):
-        ctx = get_web_context(request)
-        return templates.TemplateResponse("landing.html", ctx)
+        from src.web.router import render_template
+        ctx = get_web_context(request, is_landing=True)
+        return render_template("landing.html", ctx)
     return {
         "app": settings.APP_NAME,
         "version": "0.1.0",

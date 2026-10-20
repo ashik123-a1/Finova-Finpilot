@@ -1,41 +1,41 @@
 {% extends "app/layout.html" %}
 
-{% block page_title %}Financial Ledgers & P&L Statements{% endblock %}
-{% block page_subtitle %}Statutory double-entry sales and expense records with minor-unit precision{% endblock %}
+{% block page_title %}{{ _('navigation.finance') }}{% endblock %}
+{% block page_subtitle %}{{ _('dashboard.financial_summary') }}{% endblock %}
 
 {% block page_content %}
 <div class="space-y-6">
     <!-- P&L Summary Cards -->
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
         <div class="glass-panel p-4 rounded-2xl border border-white/5">
-            <div class="text-[10px] font-mono uppercase text-slate-400">Total Revenue</div>
+            <div class="text-[10px] font-mono uppercase text-slate-400">{{ _('financial.revenue') }}</div>
             <div id="pl-revenue" class="font-orbitron text-lg font-bold text-white mt-1">৳ 2,140,000</div>
-            <div class="text-[10px] text-emerald-400 mt-1">Gross Inflows</div>
+            <div class="text-[10px] text-emerald-400 mt-1">{{ _('finance.gross_inflows') }}</div>
         </div>
         <div class="glass-panel p-4 rounded-2xl border border-white/5">
-            <div class="text-[10px] font-mono uppercase text-slate-400">COGS (Direct)</div>
+            <div class="text-[10px] font-mono uppercase text-slate-400">{{ _('financial.cogs') }}</div>
             <div id="pl-cogs" class="font-orbitron text-lg font-bold text-rose-400 mt-1">৳ 1,284,000</div>
-            <div class="text-[10px] text-slate-400 mt-1">Cost of Goods</div>
+            <div class="text-[10px] text-slate-400 mt-1">{{ _('finance.cost_of_goods') }}</div>
         </div>
         <div class="glass-panel p-4 rounded-2xl border border-white/5">
-            <div class="text-[10px] font-mono uppercase text-slate-400">Gross Profit</div>
+            <div class="text-[10px] font-mono uppercase text-slate-400">{{ _('financial.gross_profit') }}</div>
             <div id="pl-gross-profit" class="font-orbitron text-lg font-bold text-cyan-400 mt-1">৳ 856,000</div>
-            <div class="text-[10px] text-cyan-300 mt-1">40.0% Margin</div>
+            <div class="text-[10px] text-cyan-300 mt-1">40.0% {{ _('finance.margin') }}</div>
         </div>
         <div class="glass-panel p-4 rounded-2xl border border-white/5">
-            <div class="text-[10px] font-mono uppercase text-slate-400">Operating Expenses</div>
+            <div class="text-[10px] font-mono uppercase text-slate-400">{{ _('finance.operating_expenses') }}</div>
             <div id="pl-expenses" class="font-orbitron text-lg font-bold text-rose-300 mt-1">৳ 380,000</div>
-            <div class="text-[10px] text-slate-400 mt-1">Rent, Utilities, Staff</div>
+            <div class="text-[10px] text-slate-400 mt-1">{{ _('finance.operating_desc') }}</div>
         </div>
         <div class="glass-panel p-4 rounded-2xl border border-white/5">
-            <div class="text-[10px] font-mono uppercase text-slate-400">Net Operating Profit</div>
+            <div class="text-[10px] font-mono uppercase text-slate-400">{{ _('financial.net_profit') }}</div>
             <div id="pl-net-profit" class="font-orbitron text-lg font-bold text-emerald-400 mt-1">৳ 476,000</div>
-            <div class="text-[10px] text-emerald-300 mt-1">22.2% Net Margin</div>
+            <div class="text-[10px] text-emerald-300 mt-1">22.2% {{ _('finance.net_margin') }}</div>
         </div>
         <div class="glass-panel p-4 rounded-2xl border border-white/5">
-            <div class="text-[10px] font-mono uppercase text-slate-400">Tax / VAT Provision</div>
+            <div class="text-[10px] font-mono uppercase text-slate-400">{{ _('finance.vat_provision') }}</div>
             <div id="pl-vat" class="font-orbitron text-lg font-bold text-amber-400 mt-1">৳ 64,200</div>
-            <div class="text-[10px] text-amber-300 mt-1">NBR 5% Retail VAT</div>
+            <div class="text-[10px] text-amber-300 mt-1">{{ _('finance.nbr_vat_desc') }}</div>
         </div>
     </div>
 
@@ -44,27 +44,27 @@
         <!-- Tabs -->
         <div class="flex items-center gap-2 p-1 bg-slate-900 rounded-xl border border-white/10 w-full md:w-auto">
             <button type="button" id="tab-sales-btn" onclick="switchLedgerTab('sales')" class="px-4 py-1.5 rounded-lg text-xs font-bold transition-all bg-cyan-500 text-slate-950 shadow-md">
-                Sales Ledger
+                {{ _('finance.sales_ledger') }}
             </button>
             <button type="button" id="tab-expenses-btn" onclick="switchLedgerTab('expenses')" class="px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-300 hover:text-white transition-all">
-                Expense Ledger
+                {{ _('finance.expense_ledger') }}
             </button>
         </div>
 
         <!-- Date Range Filter & Search -->
         <div class="flex flex-wrap items-center gap-2.5 w-full md:w-auto justify-end">
             <input type="date" id="filter-start-date" class="bg-slate-900 border border-white/10 text-xs text-slate-300 rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-cyan-400">
-            <span class="text-xs text-slate-500">to</span>
+            <span class="text-xs text-slate-500">{{ _('finance.to') }}</span>
             <input type="date" id="filter-end-date" class="bg-slate-900 border border-white/10 text-xs text-slate-300 rounded-xl px-2.5 py-1.5 focus:outline-none focus:border-cyan-400">
             
             <button type="button" onclick="applyLedgerFilter()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 text-xs font-semibold flex items-center gap-1.5 transition-all">
                 <i data-lucide="filter" class="w-3.5 h-3.5"></i>
-                <span>Apply Filter</span>
+                <span>{{ _('finance.apply_filter') }}</span>
             </button>
 
             <button type="button" onclick="exportLedgerCSV()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-white/10 text-xs font-semibold flex items-center gap-1.5 transition-all" title="Export CSV">
                 <i data-lucide="download" class="w-3.5 h-3.5"></i>
-                <span>Export CSV</span>
+                <span>{{ _('finance.export_csv') }}</span>
             </button>
         </div>
     </div>
@@ -72,9 +72,9 @@
     <!-- Data Table Container -->
     <div class="glass-panel p-6 rounded-3xl border border-white/5 space-y-4">
         <div class="flex items-center justify-between">
-            <h3 id="ledger-title" class="text-sm font-bold text-white">Verified Sales Records</h3>
+            <h3 id="ledger-title" class="text-sm font-bold text-white">{{ _('finance.verified_sales_records') }}</h3>
             <span id="ledger-count-badge" class="text-xs font-mono px-2 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/30">
-                Displaying Page 1
+                {{ _('finance.displaying_page') }} 1
             </span>
         </div>
 
@@ -88,7 +88,7 @@
                 <tbody id="ledger-tbody" class="divide-y divide-white/5">
                     <tr>
                         <td colspan="6" class="py-6 text-center text-slate-500">
-                            <span class="animate-spin mr-2">◌</span> Loading verified ledger entries...
+                            <span class="animate-spin mr-2">◌</span> {{ _('finance.loading_ledger') }}
                         </td>
                     </tr>
                 </tbody>
