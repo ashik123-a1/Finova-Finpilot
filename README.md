@@ -751,10 +751,6 @@ Finova-Finpilot/                                   # Competition submission root
 All formal deliverables have been compiled into the [`submission/`](submission/) directory:
 * 📄 **Technical Documentation PDF:** [`submission/technical_documentation.pdf`](submission/technical_documentation.pdf)
 * 🛡️ **Security Self-Assessment PDF:** [`submission/security_self_assessment.pdf`](submission/security_self_assessment.pdf)
-* 📊 **Presentation Pitch Deck PDF:** [`submission/presentation.pdf`](submission/presentation.pdf)
-* 📽️ **Presentation Pitch Deck PPTX:** [`submission/presentation.pptx`](submission/presentation.pptx)
-* 🎤 **Timed 5-Minute Speaker Script:** [`submission/presentation_script.md`](submission/presentation_script.md)
-* 🎬 **10-Minute Live Demo Script:** [`submission/demo_script.md`](submission/demo_script.md)
 * 📸 **Genuine Execution Evidence:** [`submission/execution_evidence/`](submission/execution_evidence/)
 
 ---
