@@ -1,7 +1,7 @@
-# FinTechathon 2026: SME Finance Copilot — Repository Directory Architecture
+# FinTechathon 2026: Finova Finpilot (SME Finance Copilot) — Repository Directory Architecture
 
 ```text
-sme-finance-copilot/                               # Competition submission root directory
+Finova-Finpilot/                                   # Competition submission root directory
 ├── README.md                                      # Executive overview, architecture, test badges & quickstart
 ├── .gitignore                                     # Excludes secrets (.env), SQLite binaries, WAL files & private caches
 ├── .env.example                                   # Secure environment variable configuration template

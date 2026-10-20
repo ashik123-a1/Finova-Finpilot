@@ -452,9 +452,9 @@ The SME Finance Copilot application has undergone a comprehensive multi-tier ver
 * **Execution Steps:** POST `/api/models/copilot/query`.
 * **Expected Result:** Formatted response containing:
   1. Current Financial Position (`$1,525,400.00` rev, `$4,868,176.68` exp, `-$3,342,776.68` loss).
-  2. Evidence-Backed Findings (Fixed overheads: Rent 41.8%, Salary 32.0%).
+  2. Evidence-Backed Findings (Audited categories with 100% denominator, facility overlap $2,947,404.49, 82 duplicates $603,000.00, uncollected receivables $89,382.50, inventory at cost $2,448,570.00).
   3. Prioritized 3-Phase Action Plan (Liquidity, Restructuring, Margin).
-  4. Quantified Recovery Scenarios (5% cut = `$243,408.83`; 10% sales = `$152,540.00`; combined = `$639,357.66`).
+  4. Quantified Recovery Scenarios (5% expense cut = `$243,408.83`; 10% sales = `$152,540.00` top-line revenue; combined turnaround gross = `$395,948.83`; estimated net deficit reduction = `$266,060.61`).
   5. Recommended Next Steps.
 * **Actual Result:** Exactly matches the required 5-section response; zero false citations.
 * **Status:** PASS

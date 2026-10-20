@@ -47,26 +47,35 @@ Extracts verified ledger actuals for the user's authorized shop:
 * **Reporting Period:** `2026-04-21` to `2026-10-20` (182 recorded days)
 * **Currency:** Configured business currency (`USD` or `BDT`)
 
-### Stage 2: Evidence-Backed Findings (Root Cause Analysis)
-Identifies where capital is trapped and where spending is concentrated:
-* **Fixed Overhead Breakdown:**
-  1. Rent: `$2,036,584.89` (41.8% of total expenses)
-  2. Salary: `$1,556,184.53` (32.0% of total expenses)
-  3. Rent & Utilities: `$606,500.00` (12.5% of total expenses)
-  4. Utilities: `$304,319.60` (6.3% of total expenses)
-* **Trapped Receivables:** 44 unpaid invoices totaling `$89,382.50`.
-* **Inventory Capital:** 41 SKUs holding `$2,448,570.00` in merchandise assets.
+### Stage 2: Evidence-Backed Findings (Root Cause & Ledger Audit)
+Identifies where capital is trapped and where spending is concentrated based on audited ledger records:
+* **Audited Expense Breakdown (100% Denominator Basis):**
+  1. Rent: `$2,036,584.89` (41.8% of total expenses, 38 entries)
+  2. Salary: `$1,556,184.53` (32.0% of total expenses, 49 entries)
+  3. Rent & Utilities: `$606,500.00` (12.5% of total expenses, 83 entries)
+  4. Utilities: `$304,319.60` (6.3% of total expenses, 41 entries)
+  5. Other Operating Expenses: `$364,587.66` (7.5% of total expenses, 143 entries)
+* **Category Overlap & Duplicate Audit:**
+  - Consolidated facility & utility spending (`rent` + `utilities` + `Rent & Utilities`) represents **`$2,947,404.49` (60.5% of total expenses)**.
+  - Audit detected 82 duplicate voice entries totaling **`$603,000.00`** in `Rent & Utilities` (79 repeated entries of $7,500.00).
+  - Payroll is classified as recorded labor expenditure rather than pure fixed overhead, as retail staffing often includes variable hours.
+* **Working Capital Assessment (Not Immediately Available Cash):**
+  - **Uncollected Receivables:** 44 unpaid customer invoices totaling **`$89,382.50`** (actionable for dunning, not yet collected cash).
+  - **Inventory Capital:** 41 SKUs holding **`$2,448,570.00`** in merchandise valuation at cost (**not immediately recoverable cash**).
 
 ### Stage 3: Prioritized 3-Phase Action Plan
-* **Phase 1: Immediate Cash Protection (Days 1–15):** Mobilize `$89,382.50` in overdue receivables via automated WhatsApp/SMS reminders; freeze discretionary spend.
-* **Phase 2: Cost Restructuring (Days 16–45):** Renegotiate core commercial overheads (rent/utilities); align staff hours with peak retail foot-traffic.
+* **Phase 1: Immediate Cash Protection (Days 1–15):** Mobilize `$89,382.50` in overdue receivables via automated WhatsApp/SMS reminders; reconcile duplicate ledger entries; freeze discretionary spend.
+* **Phase 2: Cost Restructuring (Days 16–45):** Renegotiate core commercial overheads (addressing `$2,947,404.49` in facility costs); align staff hours with peak retail foot-traffic.
 * **Phase 3: Margin & Revenue Acceleration (Days 46–90):** Prioritize fast-moving high-margin SKUs; bundle slow movers with margin guardrails (>15%).
 
 ### Stage 4: Quantified Recovery Scenarios
-Presents mathematical models grounded in historical actuals:
-* **Scenario A (5% Expense Reduction):** Recovers **`$243,408.83`** directly to cash flow.
-* **Scenario B (10% Sales Volume Growth):** Injects **`$152,540.00`** in gross cash inflow.
-* **Scenario C (Combined Turnaround):** Yields **`$639,357.66`** in operating margin recovery.
+Presents mathematical models grounded in historical actuals with clear distinction between revenue, expense savings, and net profit:
+* **Scenario A (5% Expense Reduction):** Recovers **`$243,408.83`** directly in reduced operating cash outflow (5% of `$4,868,176.68`).
+* **Scenario B (10% Sales Volume Growth):** Generates **`$152,540.00`** in **additional top-line revenue** (estimated gross margin contribution: **`$22,651.78`** based on the shop's ~14.8% average gross margin).
+* **Scenario C (Combined Turnaround):**
+  - **Combined Gross Relief:** **`$395,948.83`** (simple sum of `$243,408.83` expense savings + `$152,540.00` additional top-line revenue).
+  - **Estimated Net Operating Deficit Reduction:** **`$266,060.61`** (`$243,408.83` cost savings + `$22,651.78` product margin contribution).
+  - *(Audit Investigation Note: The previous figure of `$639,357.66` was traced to an unaligned calculation adding a 10% expense cut of `$486,817.66` to 10% top-line revenue of `$152,540.00` without deducting product costs. It has been corrected to prevent double counting and distinguish top-line revenue from net operating profit.)*
 * *(Disclaimer: Scenarios are mathematical models based on historical ledger records and do not constitute guaranteed outcomes.)*
 
 ### Stage 5: Recommended Next Steps

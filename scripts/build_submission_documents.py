@@ -180,9 +180,9 @@ def build_technical_documentation():
         "deterministic 5-stage turnaround protocol grounded directly in the authenticated business ledger:", body_style
     ))
     story.append(Paragraph("<b>1. Current Financial Position:</b> Reconciles exact operating revenue ($1,525,400.00 across 816 sales), operating expenses ($4,868,176.68 across 354 expenses), and net operating loss (-$3,342,776.68) for the 182-day period in the configured enterprise currency (USD).", bullet_style))
-    story.append(Paragraph("<b>2. Root Cause Analysis:</b> Automatically identifies that <b>73.8% of spending is concentrated in fixed overheads</b> (Rent 41.8%, Salary 32.0%), while revealing $89,382.50 in uncollected receivables and $2,448,570.00 locked in inventory.", bullet_style))
-    story.append(Paragraph("<b>3. Prioritized 3-Phase Action Plan:</b> Days 1–15 immediate liquidity defense via automated WhatsApp dunning; Days 16–45 overhead restructuring; Days 46–90 margin acceleration.", bullet_style))
-    story.append(Paragraph("<b>4. Quantified Turnaround Scenarios:</b> Calculates mathematical models based on verified historical data: 5% overhead cut recovers <b>$243,408.83</b>; 10% sales lift injects <b>$152,540.00</b>; combined dual turnaround recovers <b>$639,357.66</b>.", bullet_style))
+    story.append(Paragraph("<b>2. Root Cause Analysis:</b> Audits expense categories on a 100% denominator basis, detects $2,947,404.49 (60.5%) in facility and utility costs, identifies 82 duplicate entries totaling $603,000.00, and distinguishes working capital ($89,382.50 in uncollected receivables, $2,448,570.00 in inventory at cost) from immediately available cash.", bullet_style))
+    story.append(Paragraph("<b>3. Prioritized 3-Phase Action Plan:</b> Days 1–15 immediate liquidity defense and duplicate ledger reconciliation; Days 16–45 overhead restructuring; Days 46–90 margin acceleration.", bullet_style))
+    story.append(Paragraph("<b>4. Quantified Turnaround Scenarios:</b> Grounded mathematical models: 5% expense reduction yields <b>$243,408.83</b> in reduced cash outflow; 10% sales volume growth adds <b>$152,540.00</b> in top-line revenue (~$22,651.78 margin contribution); combined gross turnaround yields <b>$395,948.83</b> (estimated net deficit reduction of <b>$266,060.61</b>).", bullet_style))
     story.append(Paragraph("<b>5. Intent-Gated Document Citations:</b> Vector retrieval enforces domain boundaries; bank loan sanction letters are strictly suppressed for operational questions, ensuring zero false-positive citations.", bullet_style))
 
     # Credit Underwriting & Loans
@@ -429,9 +429,9 @@ def build_presentation_pptx():
             "bullets": [
                 "The Live Test Query: 'I am in loss how can I recover?' (Shop #28 Bismillah Store).",
                 "Grounded Reconciled Actuals: $1.52M Revenue vs $4.86M Expenses = -$3.34M Net Operating Loss.",
-                "Root Cause Analysis: Detects that 73.8% of spending is concentrated in fixed overheads (Rent 41.8%, Salary 32.0%).",
-                "Prioritized 3-Phase Plan: 15-day liquidity defense ($89.3k receivables dunning), 45-day overhead cut, 90-day margin acceleration.",
-                "Quantified Turnaround Scenarios: 5% expense cut = +$243,408; 10% sales lift = +$152,540; combined = +$639,357."
+                "Root Cause Analysis: Audits categories on 100% denominator, detects $2.95M in facility costs & 82 duplicate entries ($603k).",
+                "Working Capital Distinction: Distinguishes uncollected receivables ($89.3k) and inventory at cost ($2.45M) from immediate cash.",
+                "Quantified Scenarios: 5% expense cut = +$243,408; 10% sales lift = +$152,540 top-line revenue; combined gross relief = +$395,949."
             ],
             "accent": RGBColor(245, 158, 11)
         },
@@ -573,9 +573,9 @@ def build_presentation_pdf():
         ("REAL-WORLD TURNAROUND: THE LOSS RECOVERY ENGINE", "Diagnosing & Modeling Turnaround from Real Ledger Records", [
             "<b>Test Failure Mode Repaired:</b> Merchant asks <i>\"I am in loss how can I recover?\"</i> (Shop #28 Bismillah Store).",
             "<b>Grounded Reconciled Actuals:</b> $1.52M Revenue vs $4.86M Expenses = -$3.34M Net Operating Loss.",
-            "<b>Root Cause Analysis:</b> Exposes that <b>73.8% of spending is locked in fixed overheads</b> (Rent 41.8%, Salary 32.0%).",
-            "<b>Prioritized 3-Phase Plan:</b> 15-day liquidity defense ($89.3k receivables dunning), 45-day overhead cut, 90-day margin acceleration.",
-            "<b>Quantified Scenarios:</b> 5% overhead cut recovers <b>$243,408</b>; 10% sales lift adds <b>$152,540</b>; combined turnaround = <b>$639,357</b>."
+            "<b>Root Cause Analysis:</b> Audits categories on 100% denominator, detects $2.95M facility costs & 82 duplicate entries ($603k).",
+            "<b>Working Capital Distinction:</b> Identifies uncollected receivables ($89.3k) and inventory at cost ($2.45M) without treating them as immediate cash.",
+            "<b>Quantified Scenarios:</b> 5% expense cut = <b>$243,408</b>; 10% sales lift = <b>$152,540</b> top-line revenue; combined gross turnaround = <b>$395,949</b> (net impact: <b>$266,061</b>)."
         ]),
         ("INSTITUTIONAL BRIDGE: INSTANT CREDIT UNDERWRITING", "Unlocking Commercial Bank Lending for Unstructured SMEs", [
             "<b>Real-Time Loan Calculation:</b> Monthly EMI, amortization schedules, and total interest.",

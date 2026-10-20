@@ -99,7 +99,8 @@ For Debian/Ubuntu, macOS, or cloud containers:
 
 ```bash
 # 1. Clone repository (or enter directory)
-cd "sme-finance-copilot"
+git clone https://github.com/ashik123-a1/Finova-Finpilot.git
+cd "Finova-Finpilot"
 
 # 2. Set up virtual environment
 python3.11 -m venv venv
@@ -153,7 +154,7 @@ To experience the full capabilities of SME Finance Copilot in 10 minutes:
    - Check the daily transaction trend and cash runway forecast.
 4. **Financial AI Copilot (`/app/copilot`):**
    - Ask the exact failure-mode question from the audit: *"I am in loss how can I recover?"*.
-   - Observe the 5-part turnaround plan with quantified scenarios (`+$243,408.83` via 5% cost reduction, `+$152,540.00` via 10% sales lift).
+   - Observe the 5-part turnaround plan with quantified scenarios (`+$243,408.83` via 5% cost reduction, `+$152,540.00` via 10% sales lift, combined gross relief of `+$395,948.83`).
    - Switch language to Bengali (`বাংলা`) or Simplified Chinese (`简体中文`) and observe native localized advice with enterprise currency preserved (`USD`).
 5. **Loan Calculator & Credit Underwriting (`/app/loans`):**
    - Test dynamic recalculation of monthly EMI and DSCR.

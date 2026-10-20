@@ -468,12 +468,29 @@ class VoiceService:
         amount_match = re.search(r"(\d+[\d,]*)", text)
         amount = float(amount_match.group(1).replace(",", "")) if amount_match else 5000.0
 
+        # Determine exact category based on utterance text
+        t_low = text.lower()
+        if any(k in t_low for k in ["rent", "lease", "ভাড়া", "ভাড়া", "租金"]):
+            cat = "rent"
+        elif any(k in t_low for k in ["utility", "electric", "power", "water", "gas", "বিদ্যুৎ", "ইউটিলিটি", "水电"]):
+            cat = "utilities"
+        elif any(k in t_low for k in ["salary", "wage", "payroll", "বেতন", "工资"]):
+            cat = "salary"
+        elif any(k in t_low for k in ["supplies", "stationer", "কাগজ", "স্টেশনারি", "办公"]):
+            cat = "supplies"
+        elif any(k in t_low for k in ["market", "ad", "প্রচার", "বিজ্ঞাপন", "营销"]):
+            cat = "marketing"
+        elif any(k in t_low for k in ["maint", "repair", "মেরামত", "维修"]):
+            cat = "maintenance"
+        else:
+            cat = "other"
+
         token = secrets.token_hex(8)
         action_payload = {
             "action": "post_expense",
             "business_id": business_id,
             "shop_id": shop_id or 28,
-            "category": "Rent & Utilities",
+            "category": cat,
             "amount_major": amount,
             "description": f"Voice-recorded expense entry ({text[:50]})",
             "created_at": datetime.now(timezone.utc).isoformat(),
@@ -496,7 +513,7 @@ class VoiceService:
             "text_response": (
                 f"⚠️ **Action Confirmation Required:**\n"
                 f"{prompt}\n\n"
-                f"- Category: **Rent & Utilities**\n"
+                f"- Category: **{cat.title()}**\n"
                 f"- Amount: **৳ {amount:,.2f}**\n\n"
                 f"*To prevent accidental writes, voice commands require explicit confirmation before posting.*"
             ),

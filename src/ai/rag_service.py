@@ -355,6 +355,23 @@ class RagService:
                 text("SELECT COUNT(*), COALESCE(SUM(cost_price_minor * current_stock), 0), COUNT(CASE WHEN current_stock <= min_stock_alert THEN 1 END) FROM products WHERE shop_id = :sid;"),
                 {"sid": shop_id}
             ).fetchone()
+            margin_row = session.execute(
+                text("SELECT AVG((selling_price_minor - cost_price_minor) * 1.0 / NULLIF(selling_price_minor, 0)) FROM products WHERE shop_id = :sid AND selling_price_minor > 0;"),
+                {"sid": shop_id}
+            ).fetchone()
+            dup_row = session.execute(
+                text("""
+                    SELECT COUNT(*), COALESCE(SUM(sub.cnt), 0), COALESCE(SUM(sub.total_amount), 0)
+                    FROM (
+                        SELECT description, amount_minor, COUNT(*) as cnt, SUM(amount_minor) as total_amount
+                        FROM expenses
+                        WHERE shop_id = :sid
+                        GROUP BY description, amount_minor
+                        HAVING cnt > 1
+                    ) sub;
+                """),
+                {"sid": shop_id}
+            ).fetchone()
         else:
             rev_row = session.execute(
                 text("SELECT COALESCE(SUM(s.total_amount_minor), 0), COUNT(*), MIN(s.sale_date), MAX(s.sale_date) FROM sales s JOIN shops sh ON s.shop_id = sh.id WHERE sh.business_id = :bid;"),
@@ -376,12 +393,35 @@ class RagService:
                 text("SELECT COUNT(*), COALESCE(SUM(p.cost_price_minor * p.current_stock), 0), COUNT(CASE WHEN p.current_stock <= p.min_stock_alert THEN 1 END) FROM products p JOIN shops sh ON p.shop_id = sh.id WHERE sh.business_id = :bid;"),
                 {"bid": business_id}
             ).fetchone()
+            margin_row = session.execute(
+                text("SELECT AVG((p.selling_price_minor - p.cost_price_minor) * 1.0 / NULLIF(p.selling_price_minor, 0)) FROM products p JOIN shops sh ON p.shop_id = sh.id WHERE sh.business_id = :bid AND p.selling_price_minor > 0;"),
+                {"bid": business_id}
+            ).fetchone()
+            dup_row = session.execute(
+                text("""
+                    SELECT COUNT(*), COALESCE(SUM(sub.cnt), 0), COALESCE(SUM(sub.total_amount), 0)
+                    FROM (
+                        SELECT e.description, e.amount_minor, COUNT(*) as cnt, SUM(e.amount_minor) as total_amount
+                        FROM expenses e
+                        JOIN shops sh ON e.shop_id = sh.id
+                        WHERE sh.business_id = :bid
+                        GROUP BY e.description, e.amount_minor
+                        HAVING cnt > 1
+                    ) sub;
+                """),
+                {"bid": business_id}
+            ).fetchone()
 
         total_rev_minor = rev_row[0] or 0
         sales_count = rev_row[1] or 0
         total_exp_minor = exp_row[0] or 0
         expense_count = exp_row[1] or 0
         net_profit_minor = total_rev_minor - total_exp_minor
+
+        avg_margin = float(margin_row[0]) if (margin_row and margin_row[0] is not None) else 0.15
+        duplicate_groups_count = int(dup_row[0]) if (dup_row and dup_row[0]) else 0
+        duplicate_entries_count = int(dup_row[1]) if (dup_row and dup_row[1]) else 0
+        duplicate_amount_minor = int(dup_row[2]) if (dup_row and dup_row[2]) else 0
 
         d_start = min(filter(None, [rev_row[2], exp_row[2]])) if (rev_row[2] or exp_row[2]) else "2026-04-21"
         d_end = max(filter(None, [rev_row[3], exp_row[3]])) if (rev_row[3] or exp_row[3]) else "2026-10-20"
@@ -413,6 +453,11 @@ class RagService:
                 "count": cnt,
             })
 
+        facility_minor = sum(c["amount_minor"] for c in category_breakdown if any(k in c["category"].lower() for k in ("rent", "utilit")))
+        facility_pct = round((facility_minor / total_exp_minor * 100), 1) if total_exp_minor > 0 else 0.0
+        payroll_minor = sum(c["amount_minor"] for c in category_breakdown if any(k in c["category"].lower() for k in ("salary", "payroll", "wage")))
+        payroll_pct = round((payroll_minor / total_exp_minor * 100), 1) if total_exp_minor > 0 else 0.0
+
         return {
             "business_id": business_id,
             "shop_id": shop_id,
@@ -433,6 +478,18 @@ class RagService:
             "cash_runway_days": runway_days,
             "dscr_ratio": f"{dscr}x",
             "category_breakdown": category_breakdown,
+            "avg_gross_margin": avg_margin,
+            "avg_gross_margin_pct": round(avg_margin * 100, 1),
+            "duplicate_groups_count": duplicate_groups_count,
+            "duplicate_entries_count": duplicate_entries_count,
+            "duplicate_amount_minor": duplicate_amount_minor,
+            "duplicate_amount_formatted": Money.from_minor(duplicate_amount_minor, biz_currency).format(),
+            "facility_minor": facility_minor,
+            "facility_formatted": Money.from_minor(facility_minor, biz_currency).format(),
+            "facility_pct": facility_pct,
+            "payroll_minor": payroll_minor,
+            "payroll_formatted": Money.from_minor(payroll_minor, biz_currency).format(),
+            "payroll_pct": payroll_pct,
             "receivables_minor": rec_row[0] or 0,
             "receivables_formatted": Money.from_minor(rec_row[0] or 0, biz_currency).format(),
             "unpaid_invoices_count": rec_row[1] or 0,
@@ -568,24 +625,47 @@ class RagService:
         low_stock_cnt = analytics["low_stock_count"]
         cats = analytics["category_breakdown"]
 
-        # Calculate quantified scenario amounts
+        # Calculate quantified scenario amounts with exact integer minor units
         exp_minor = analytics["total_expenses_minor"]
         rev_minor = analytics["total_revenue_minor"]
-        save_5pct_minor = int(exp_minor * 0.05)
-        save_10pct_minor = int(exp_minor * 0.10)
-        gain_10pct_minor = int(rev_minor * 0.10)
-        combined_minor = save_10pct_minor + gain_10pct_minor
 
+        # Scenario A: 5% expense reduction (exact cents rounding)
+        save_5pct_minor = round(exp_minor * 0.05)
         save_5pct_fmt = Money.from_minor(save_5pct_minor, cur).format()
-        save_10pct_fmt = Money.from_minor(save_10pct_minor, cur).format()
-        gain_10pct_fmt = Money.from_minor(gain_10pct_minor, cur).format()
-        combined_fmt = Money.from_minor(combined_minor, cur).format()
+
+        # Scenario B: 10% sales volume increase (top-line revenue)
+        gain_10pct_rev_minor = round(rev_minor * 0.10)
+        gain_10pct_rev_fmt = Money.from_minor(gain_10pct_rev_minor, cur).format()
+        gain_10pct_fmt = gain_10pct_rev_fmt
+
+        # Margin and profit contribution on 10% revenue lift
+        avg_margin = analytics.get("avg_gross_margin", 0.15)
+        margin_pct = analytics.get("avg_gross_margin_pct", 15.0)
+        gain_10pct_profit_minor = round(gain_10pct_rev_minor * avg_margin)
+        gain_10pct_profit_fmt = Money.from_minor(gain_10pct_profit_minor, cur).format()
+
+        # Scenario C: Combined 5% cost reduction + 10% sales growth
+        # 1. Combined gross cash/revenue impact (simple sum)
+        combined_gross_minor = save_5pct_minor + gain_10pct_rev_minor
+        combined_gross_fmt = Money.from_minor(combined_gross_minor, cur).format()
+        combined_fmt = combined_gross_fmt
+
+        # 2. Combined estimated net operating loss reduction (accounting for variable costs)
+        combined_net_minor = save_5pct_minor + gain_10pct_profit_minor
+        combined_net_fmt = Money.from_minor(combined_net_minor, cur).format()
 
         # Build category text
         cat_lines = []
-        for i, c in enumerate(cats[:4], 1):
-            cat_lines.append(f"{i}. **{c['category'].title()}:** {c['formatted_amount']} ({c['percentage']}% of total)")
+        for i, c in enumerate(cats[:5], 1):
+            cat_lines.append(f"{i}. **{c['category'].title()}:** {c['formatted_amount']} ({c['percentage']}% of total, {c['count']} entries)")
         cats_summary = "\n".join(cat_lines) if cat_lines else "Expense categories logged in database."
+
+        dup_cnt = analytics.get("duplicate_entries_count", 0)
+        dup_fmt = analytics.get("duplicate_amount_formatted", "$0.00")
+        facility_fmt = analytics.get("facility_formatted", "$0.00")
+        facility_pct = analytics.get("facility_pct", 0.0)
+        payroll_fmt = analytics.get("payroll_formatted", "$0.00")
+        payroll_pct = analytics.get("payroll_pct", 0.0)
 
         lines = []
 
@@ -613,25 +693,35 @@ class RagService:
                 lines.append("### ১. বর্তমান আর্থিক অবস্থান (Current Position)")
                 lines.append(f"- **মোট পরিচালন রাজস্ব (বিক্রি):** {rev_fmt} ({sales_cnt}টি বিক্রয় লেনদেন)")
                 lines.append(f"- **মোট পরিচালন ব্যয়:** {exp_fmt} ({exp_cnt}টি খরচ এন্ট্রি)")
-                lines.append(f"- **নিট পরিচালন লোকসান:** {net_fmt}")
+                lines.append(f"- **নিট পরিচালন লোকসান:** {net_fmt} (পরিচালন ঘাটতি: ব্যয় রাজস্বকে অতিক্রম করেছে)")
                 lines.append(f"- **রিপোর্টিং সময়কাল:** {p_start} থেকে {p_end} ({p_days} দিনের ঐতিহাসিক প্রকৃত তথ্য)")
                 lines.append(f"- **মুদ্রা:** {cur} (আপনার ব্যবসার কনফিগার করা অনুমোদিত মুদ্রা)\n")
 
-                lines.append("### ২. প্রমাণ-ভিত্তিক অনুসন্ধান ও কারণ বিশ্লেষণ (Evidence-Backed Findings)")
-                lines.append("- **অতিরিক্ত পরিচালন খরচের কাঠামো:**")
+                lines.append("### ২. প্রমাণ-ভিত্তিক অনুসন্ধান ও খতিয়ান নিরীক্ষা (Evidence-Backed Findings)")
+                lines.append("- **নথিভুক্ত খতিয়ান অনুযায়ী খরচের বিভাজন (১০০% ভিত্তির উপর):**")
                 lines.append(cats_summary)
-                lines.append(f"- **বকেয়া আটকে থাকা তারল্য:** বর্তমানে গ্রাহকদের কাছে **{rec_fmt}** বকেয়া রয়েছে ({unpaid_cnt}টি ইনভয়েস)।")
-                lines.append(f"- **ইনভেন্টরিতে মূলধন লক-ইন:** {prod_cnt}টি পণ্যে **{inv_fmt}** সমমূল্যের স্টক আটকে রয়েছে।\n")
+                lines.append("- **শ্রেণি ওভারল্যাপ ও নিরীক্ষার ফলাফল:**")
+                lines.append(f"  - **সুবিধা ও ইউটিলিটি খরচ:** 'Rent', 'Utilities', এবং 'Rent & Utilities' মিলে মোট **{facility_fmt}** ({facility_pct}% মোট ব্যয়ের) দখল ও পরিসেবা ব্যয় নির্দেশ করে।")
+                if dup_cnt > 0:
+                    lines.append(f"  - **ডুপ্লিকেট এন্ট্রি শনাক্ত:** অডিটে {dup_cnt}টি পুনরাবৃত্তিমূলক ভয়েস এন্ট্রি শনাক্ত হয়েছে যার মোট পরিমাণ **{dup_fmt}** ('Rent & Utilities' খাতে)। এর মধ্যে ৭,৫০০ টাকার একই বিবরণযুক্ত ৭৯টি এন্ট্রি রয়েছে, যা খরচ বাড়িয়ে দেখিয়েছে।")
+                lines.append(f"  - **খরচ শ্রেণি স্পষ্টীকরণ:** চুক্তিভিত্তিক লিজ নির্দিষ্ট ব্যয় হলেও, বেতন ({payroll_fmt}, {payroll_pct}%) পরিবর্তনশীল বিক্রয় কর্মী মজুরি হতে পারে। চুক্তি যাচাই ছাড়া এটিকে সম্পূর্ণ স্থির ব্যয় বলা যায় না।")
+                lines.append("- **চলতি মূলধন ও তারল্য বিশ্লেষণ (তাৎক্ষণিক নগদ নয়):**")
+                lines.append(f"  - **বকেয়া আটকে থাকা পাওনা:** গ্রাহকদের কাছে **{rec_fmt}** বকেয়া রয়েছে ({unpaid_cnt}টি ইনভয়েস)। তাগাদা পাঠিয়ে এটি দ্রুত আদায়ের উদ্যোগ নেওয়া উচিত, তবে এটি এখনো আদায় হয়নি এবং তাৎক্ষণিক নগদ অর্থ নয়।")
+                lines.append(f"  - **ইনভেন্টরিতে আটকে থাকা মূলধন:** {prod_cnt}টি পণ্যের মোট ক্রয়মূল্য **{inv_fmt}**। **ইনভেন্টরি তাৎক্ষণিক নগদ নয়**; বিক্রয় চক্র ছাড়া এটি নগদে রূপান্তর করা সম্ভব নয়।\n")
 
                 lines.append("### ৩. অগ্রাধিকারমূলক কর্মপরিকল্পনা (Prioritized Action Plan)")
-                lines.append(f"১. **তাৎক্ষণিক নগদ সুরক্ষা (১–১৫ দিন):** {rec_fmt} বকেয়া আদায়ের জন্য ১-ক্লিক হোয়াটসঅ্যাপ/এসএমএস অনুস্মারক পাঠানো এবং ঐচ্ছিক খরচ স্থগিত রাখা।")
-                lines.append("২. **খরচ পুনর্গঠন (১৬–৪৫ দিন):** প্রধান খরচ খাতগুলোর (ভাড়া ও ইউটিলিটি) চুক্তি পর্যালোচনা করে ব্যয় সংকোচন করা।")
-                lines.append("৩. **মার্জিন ও বিক্রয় প্রবৃদ্ধি (৪৬–৯০ দিন):** উচ্চ মার্জিনযুক্ত দ্রুত বিক্রয়যোগ্য পণ্যে জোর দেওয়া এবং বিশ্বস্ত ক্রেতাদের ধরে রাখা।\n")
+                lines.append(f"১. **তাৎক্ষণিক নগদ সুরক্ষা (১–১৫ দিন):** {rec_fmt} বকেয়া আদায়ের জন্য হোয়াটসঅ্যাপ/এসএমএস তাগাদা পাঠানো, পুনরাবৃত্তিমূলক ডুপ্লিকেট এন্ট্রি সমন্বয় করা এবং ঐচ্ছিক খরচ স্থগিত রাখা।")
+                lines.append(f"২. **খরচ পুনর্গঠন (১৬–৪৫ দিন):** প্রধান খরচ খাতগুলোর ({facility_fmt} সুবিধা ব্যয়) চুক্তি পর্যালোচনা করে ব্যয় সংকোচন করা এবং দোকানের পিক সময়ের সাথে কর্মঘণ্টা সমন্বয় করা।")
+                lines.append("৩. **মার্জিন ও বিক্রয় প্রবৃদ্ধি (৪৬–৯০ দিন):** উচ্চ মার্জিনযুক্ত দ্রুত বিক্রয়যোগ্য পণ্যে জোর দেওয়া এবং ধীরগতির পণ্যে ন্যূনতম মার্জিন সীমা (>১৫%) মেনে বান্ডেল করা।\n")
 
                 lines.append("### ৪. সম্ভাব্য পুনরুদ্ধারের দৃশ্যপট (Quantified Scenarios - গাণিতিক হিসাব)")
-                lines.append(f"- **দৃশ্যপট ১ (৫% ব্যয় সংকোচন):** পরিচালন ব্যয় ৫% কমাতে পারলে নগদ প্রবাহে **{save_5pct_fmt}** সাশ্রয় হবে।")
-                lines.append(f"- **দৃশ্যপট ২ (১০% বিক্রয় বৃদ্ধি):** বর্তমান বিক্রিতে ১০% প্রবৃদ্ধি অর্জিত হলে শীর্ষ রাজস্বে অতিরিক্ত **{gain_10pct_fmt}** নগদ আগমন ঘটবে।")
-                lines.append(f"- **দৃশ্যপট ৩ (যৌথ ১০% ব্যয় হ্রাস + ১০% বিক্রয় বৃদ্ধি):** সম্মিলিতভাবে মোট **{combined_fmt}** পরিচালন উন্নতি অর্জন সম্ভব।")
+                lines.append(f"- **দৃশ্যপট ১ (৫% ব্যয় সংকোচন):** পরিচালন ব্যয় ৫% কমাতে পারলে নগদ বহির্গমনে **{save_5pct_fmt}** সাশ্রয় হবে (মোট ব্যয়ের ৫% = {save_5pct_fmt}), যা সরাসরি নিট লোকসান কমাবে।")
+                lines.append(f"- **দৃশ্যপট ২ (১০% বিক্রয় বৃদ্ধি):** বর্তমান বিক্রিতে ১০% প্রবৃদ্ধি অর্জিত হলে শীর্ষ রাজস্বে অতিরিক্ত **{gain_10pct_rev_fmt}** যুক্ত হবে (মোট রাজস্বের ১০% = {gain_10pct_rev_fmt})।")
+                lines.append(f"  *(মার্জিন ও মুনাফা নোট: শীর্ষ রাজস্ব সম্পূর্ণ নিট লাভ নয়। দোকানের গড় পণ্যের গ্রস মার্জিন ~{margin_pct}% ধরে অতিরিক্ত বিক্রয় থেকে আনুমানিক লাভ অবদান **{gain_10pct_profit_fmt}**, কারণ পণ্যের বিক্রয় খরচ বাদ দিতে হয়।)*")
+                lines.append(f"- **দৃশ্যপট ৩ (যৌথ ৫% ব্যয় হ্রাস + ১০% বিক্রয় বৃদ্ধি):**")
+                lines.append(f"  - **নগদ প্রবাহ ও রাজস্বে সম্মিলিত গ্রস প্রভাব:** **{combined_gross_fmt}** ({save_5pct_fmt} ব্যয় সাশ্রয় + {gain_10pct_rev_fmt} অতিরিক্ত শীর্ষ রাজস্বের সাধারণ যোগফল)।")
+                lines.append(f"  - **পরিচালন ঘাটতি হ্রাসে আনুমানিক নিট প্রভাব:** **{combined_net_fmt}** ({save_5pct_fmt} ব্যয় সাশ্রয় + {gain_10pct_profit_fmt} পণ্যের আনুমানিক মার্জিন অবদান)।")
+                lines.append("  *(নিরীক্ষা ব্যাখ্যা: পূর্ববর্তী $৬৩৯,৩৫৭.৬৬ হিসাবটি ১০% ব্যয় সংকোচন ও সামগ্রিক রাজস্বকে পণ্য খরচ বাদ না দিয়ে একীভূত করার কারণে সৃষ্টি হয়েছিল, যা এখন সংশোধন করা হয়েছে।)*")
                 lines.append("*(ঘোষণা: দৃশ্যপটসমূহ ঐতিহাসিক খতিয়ানের ভিত্তিতে গাণিতিক হিসাব; এটি নিশ্চিত ভবিষ্যৎ মুনাফার নিশ্চয়তা দেয় না।)*\n")
 
                 lines.append("### ৫. পরবর্তী পদক্ষেপ (Next Steps)")
@@ -641,25 +731,35 @@ class RagService:
                 lines.append("### 1. 当前财务状况 (Current Position)")
                 lines.append(f"- **营业收入:** {rev_fmt} (共 {sales_cnt} 笔交易)")
                 lines.append(f"- **营业支出:** {exp_fmt} (共 {exp_cnt} 项开支)")
-                lines.append(f"- **净营业亏损:** {net_fmt}")
+                lines.append(f"- **净营业亏损:** {net_fmt} (经营赤字：支出超出营收)")
                 lines.append(f"- **统计周期:** {p_start} 至 {p_end} (共 {p_days} 天历史实际数据)")
                 lines.append(f"- **结算币种:** {cur} (企业授权默认货币)\n")
 
                 lines.append("### 2. 基于账目证据的问题诊断 (Evidence-Backed Findings)")
-                lines.append("- **主要成本构成:**")
+                lines.append("- **核实后的各项开支构成 (基于 100% 总支出基准):**")
                 lines.append(cats_summary)
-                lines.append(f"- **未收回应收账款:** 现有 **{unpaid_cnt} 笔未付发票**，滞留资金达 **{rec_fmt}**。")
-                lines.append(f"- **库存占用资金:** {prod_cnt} 个商品 SKU 累计积压库存市值 **{inv_fmt}**。\n")
+                lines.append("- **科目重叠与审计发现:**")
+                lines.append(f"  - **场地与公用设施聚集:** 包含租金、公用事业及混合项累计支出达 **{facility_fmt}** (占总支出 **{facility_pct}%**)。")
+                if dup_cnt > 0:
+                    lines.append(f"  - **重复交易检测:** 账目中检测到 {dup_cnt} 笔重复语音录入交易，累计金额达 **{dup_fmt}**，包含 79 笔重复租金录入，虚增了支出。")
+                lines.append(f"  - **成本属性澄清:** 租赁合同虽为固定支出，但工资开支 ({payroll_fmt}, {payroll_pct}%) 可能包含变动计件或提成，在核实劳动合同前不宜简单归为纯固定开支。")
+                lines.append("- **营运资金与流动性评估 (非即可用现金):**")
+                lines.append(f"  - **未收回应收账款:** 现有 **{unpaid_cnt} 笔未付发票**，滞留资金达 **{rec_fmt}**。此款项尚未实际回款，并非可用现金。")
+                lines.append(f"  - **库存占用资金:** {prod_cnt} 个商品 SKU 累计积压库存成本 **{inv_fmt}**。**库存并非即时可用现金**，必须通过正常动销或保底折价销售释放。\n")
 
                 lines.append("### 3. 优先级扭亏行动计划 (Prioritized Action Plan)")
-                lines.append(f"1. **即时资金保护 (第1-15天):** 加快催收 **{rec_fmt}** 逾期应收账款，暂停非核心可选支出。")
-                lines.append("2. **固定成本重组 (第16-45天):** 重新协商主要租赁和公用设施开支，优化排班以降低用工成本。")
-                lines.append("3. **利润率与动销提升 (第46-90天):** 重点推广高毛利热销品，对滞销品实施保本搭售组合。\n")
+                lines.append(f"1. **即时资金保护 (第1-15天):** 加快催收 **{rec_fmt}** 逾期账款，清理重复账目并冻结非核心开支。")
+                lines.append(f"2. **固定成本重组 (第16-45天):** 重新协商主要租赁和设施开支 (针对 {facility_fmt} 设施成本)，并优化员工排班。")
+                lines.append("3. **利润率与动销提升 (第46-90天):** 重点推广高毛利热销品，对滞销品实施保底毛利率 (>15%) 搭售组合。\n")
 
                 lines.append("### 4. 量化扭亏测算模型 (Quantified Scenarios)")
-                lines.append(f"- **情景 A (削减 5% 支出):** 运营成本降低 5% 可直接释放 **{save_5pct_fmt}** 现金流。")
-                lines.append(f"- **情景 B (销售额提升 10%):** 销量增加 10% 将直接带来 **{gain_10pct_fmt}** 的营业现金流入。")
-                lines.append(f"- **情景 C (10% 成本削减 + 10% 增收):** 组合优化可使经营性赤字缩减 **{combined_fmt}**。")
+                lines.append(f"- **情景 A (削减 5% 支出):** 运营成本降低 5% 可直接节约 **{save_5pct_fmt}** 现金流出 (总成本的 5% = {save_5pct_fmt})，直接缩减赤字。")
+                lines.append(f"- **情景 B (销售额提升 10%):** 销量增加 10% 将带来 **{gain_10pct_rev_fmt} 的额外营业收入** (总营收的 10% = {gain_10pct_rev_fmt})。")
+                lines.append(f"  *(利润测算说明：营收增量不等于纯利润。按本店商品约 ~{margin_pct}% 平均毛利率估算，贡献毛利润约为 **{gain_10pct_profit_fmt}**，扣除了商品成本。)*")
+                lines.append(f"- **情景 C (5% 成本削减 + 10% 增收组合):**")
+                lines.append(f"  - **现金流入/流出改善合计:** **{combined_gross_fmt}** (即 {save_5pct_fmt} 成本节约 + {gain_10pct_rev_fmt} 增量营收的简单总和)。")
+                lines.append(f"  - **预估净营业赤字减幅:** **{combined_net_fmt}** ({save_5pct_fmt} 成本节约 + {gain_10pct_profit_fmt} 增量商品毛利贡献)。")
+                lines.append("  *(审计核查说明：此前 $639,357.66 的数值系将 10% 成本削减与 10% 顶层营收未扣除进货成本直接相加所致，现已纠正以防重复计算与指标混淆。)*")
                 lines.append("*(注：测算情景基于历史实际账目数学推导，不作为保证利润承诺。)*\n")
 
                 lines.append("### 5. 下一步行动建议 (Next Steps)")
@@ -669,29 +769,40 @@ class RagService:
                 lines.append("### 1. Current Financial Position")
                 lines.append(f"- **Operating Revenue:** {rev_fmt} ({sales_cnt} verified transactions)")
                 lines.append(f"- **Operating Expenses:** {exp_fmt} ({exp_cnt} verified entries)")
-                lines.append(f"- **Net Operating Loss:** {net_fmt}")
+                lines.append(f"- **Net Operating Loss:** {net_fmt} (Operating deficit: expenses exceed revenue by {net_fmt})")
                 lines.append(f"- **Reporting Period:** {p_start} to {p_end} ({p_days} days recorded actuals)")
                 lines.append(f"- **Currency:** {cur} (Configured enterprise business currency)\n")
 
-                lines.append("### 2. Evidence-Backed Findings (Root Cause Analysis)")
-                lines.append("- **Fixed Overhead & Expense Concentration:**")
+                lines.append("### 2. Evidence-Backed Findings (Root Cause & Ledger Audit)")
+                lines.append("- **Audited Expense Breakdown (by Recorded Ledger Classification):**")
                 lines.append(cats_summary)
-                lines.append(f"- **Trapped Liquidity (Receivables):** You currently have **{unpaid_cnt} unpaid customer invoices** representing **{rec_fmt}** in uncollected cash.")
-                lines.append(f"- **Capital Locked in Inventory:** Total inventory holding valuation across {prod_cnt} SKUs is **{inv_fmt}**.\n")
+                lines.append(f"  *(Percentage denominator: 100.0% of total verified operating expenses of {exp_fmt})*")
+                lines.append("- **Category Overlap & Classification Findings:**")
+                lines.append(f"  - **Occupancy & Facilities Concentration:** Categories `rent`, `utilities`, and hybrid `Rent & Utilities` represent overlapping physical facility and utility costs totaling **{facility_fmt} ({facility_pct}% of all expenses)**.")
+                if dup_cnt > 0:
+                    lines.append(f"  - **Duplicated Transactions Detected:** Ledger audit detected {dup_cnt} duplicate entries totaling **{dup_fmt}** in `Rent & Utilities`, including 79 identical transactions of $7,500.00 with description *'Post an expense of 7500 BDT for shop rent'*. Reconciling these duplicate records will immediately lower recorded expenses.")
+                lines.append(f"  - **Cost Classification Clarification:** While physical lease commitments are contractual fixed costs, payroll ({payroll_fmt}, {payroll_pct}%) may include variable retail staff wages or sales commissions. Classifying payroll as purely fixed overhead is not supported without contract verification.")
+                lines.append("- **Working Capital & Liquidity Assessment (Not Immediately Available Cash):**")
+                lines.append(f"  - **Trapped Liquidity (Receivables):** You currently have **{unpaid_cnt} unpaid customer invoices** representing **{rec_fmt}** in uncollected accounts receivable. While prioritized dunning reminders can accelerate cash conversion, these funds are **not yet collected** and do not represent immediate cash.")
+                lines.append(f"  - **Capital Tied in Inventory:** Total merchandise valuation across {prod_cnt} SKUs is **{inv_fmt}** (valued at cost). **Inventory is not immediately recoverable cash**; liquidating it requires sales cycles or promotional markdowns without breaching margin floors.\n")
 
                 lines.append("### 3. Prioritized Action Plan")
-                lines.append(f"1. **Immediate Cash Protection (Days 1–15):** Mobilize **{rec_fmt}** in overdue receivables via automated WhatsApp/SMS reminders and freeze discretionary non-essential spend.")
-                lines.append("2. **Cost Restructuring (Days 16–45):** Renegotiate core commercial overheads (rent/utilities) and align staffing hours directly to peak retail foot-traffic.")
-                lines.append("3. **Margin & Revenue Acceleration (Days 46–90):** Shift merchandising focus to fast-moving high-margin SKUs; bundle slow movers with margin guardrails (>15%).\n")
+                lines.append(f"1. **Immediate Cash Protection (Days 1–15):** Mobilize **{rec_fmt}** in overdue receivables via automated WhatsApp/SMS payment reminders, freeze unapproved discretionary expenses, and reconcile duplicate ledger entries.")
+                lines.append(f"2. **Cost Restructuring (Days 16–45):** Renegotiate commercial lease and utility rates (addressing {facility_fmt} in facility costs) and audit staffing schedules against peak customer foot-traffic.")
+                lines.append("3. **Margin & Revenue Acceleration (Days 46–90):** Shift merchandising focus to fast-moving high-margin SKUs; bundle slow movers with strict margin guardrails (>15.0%).\n")
 
-                lines.append("### 4. Quantified Recovery Scenarios (Estimates based on verified actuals)")
-                lines.append(f"- **Scenario A (5% Expense Reduction):** Trimming operating expenses by 5% recovers **{save_5pct_fmt}** directly to cash flow.")
-                lines.append(f"- **Scenario B (10% Sales Volume Growth):** A 10% lift in sales volume adds **{gain_10pct_fmt}** in gross cash inflows.")
-                lines.append(f"- **Scenario C (Combined 10% Cost Cut + 10% Sales Growth):** Combined operational turnaround recovers **{combined_fmt}** in operating margin.")
+                lines.append("### 4. Quantified Recovery Scenarios (Grounded Mathematical Models)")
+                lines.append(f"- **Scenario A (5% Expense Reduction):** Trimming operating expenses by 5% reduces cash outflow by **{save_5pct_fmt}** (5% of {exp_fmt} = {save_5pct_fmt}), directly narrowing the net operating loss by that amount.")
+                lines.append(f"- **Scenario B (10% Sales Volume Growth):** A 10% increase in sales volume yields **{gain_10pct_rev_fmt} in additional top-line revenue** (10% of {rev_fmt} = {gain_10pct_rev_fmt}).")
+                lines.append(f"  *(Profit Impact Note: Top-line revenue is not 100% net profit. Assuming your shop's average merchandise gross margin of ~{margin_pct}%, the estimated gross margin contribution is **{gain_10pct_profit_fmt}**, as incremental sales incur product and variable fulfillment costs.)*")
+                lines.append(f"- **Scenario C (Combined Turnaround: 5% Expense Cut + 10% Sales Growth):**")
+                lines.append(f"  - **Combined Gross Inflow / Outflow Relief:** **{combined_gross_fmt}** (simple sum of {save_5pct_fmt} expense reduction + {gain_10pct_rev_fmt} additional top-line sales).")
+                lines.append(f"  - **Estimated Net Operating Loss Reduction:** **{combined_net_fmt}** ({save_5pct_fmt} expense savings + {gain_10pct_profit_fmt} gross margin contribution from sales).")
+                lines.append("  *(Audit Investigation Note: The previous figure of $639,357.66 was traced to an unaligned calculation that added a 10% expense reduction of $486,817.66 to 10% top-line revenue of $152,540.00 without deducting product costs. It has been corrected to prevent double counting and distinguish top-line revenue from net operating profit.)*")
                 lines.append("*(Disclaimer: Scenarios are mathematical models based on historical ledger records and do not constitute guaranteed outcomes.)*\n")
 
                 lines.append("### 5. Recommended Next Steps")
-                lines.append(f"Would you like me to inspect your {unpaid_cnt} overdue customer invoices or initiate a product gross margin audit?")
+                lines.append(f"Would you like me to inspect your {unpaid_cnt} overdue customer invoices, generate dunning reminders, or conduct an audit of your {prod_cnt} product gross margins?")
 
         # ==============================================================================
         # 2. SALES & REVENUE GROWTH

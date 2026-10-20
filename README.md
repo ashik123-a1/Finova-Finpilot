@@ -1,10 +1,10 @@
-# FinTechathon 2026: SME Finance Copilot 🚀
-### Autonomous AI as a Financial Participant | International Track — Topic E
+# Finova Finpilot: SME Finance Copilot 🚀
+### Autonomous AI as a Financial Participant | FinTechathon 2026 — Topic E
 
 [![Python 3.11](https://img.shields.io/badge/Python-3.11.9-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![SQLite WAL](https://img.shields.io/badge/SQLite-WAL_Mode-003B57?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-[![Tests](https://img.shields.io/badge/Tests-220%2F220_Passed-10B981?style=for-the-badge&logo=pytest&logoColor=white)](docs/TESTING.md)
+[![Tests](https://img.shields.io/badge/Tests-224%2F224_Passed-10B981?style=for-the-badge&logo=pytest&logoColor=white)](docs/TESTING.md)
 [![Security](https://img.shields.io/badge/Security-RBAC_%26_DDE_Safe-6366F1?style=for-the-badge&logo=shield&logoColor=white)](docs/SECURITY.md)
 [![Edge AI](https://img.shields.io/badge/Edge_AI-100%25_Offline_Ready-F59E0B?style=for-the-badge&logo=openai&logoColor=white)](docs/AI_COPILOT.md)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](LICENSE)
@@ -13,11 +13,11 @@
 
 ## 📌 Executive Overview
 
-**SME Finance Copilot** is a local-first, zero-float autonomous financial operating system built specifically for emerging-market micro, small, and medium enterprises (MSMEs). 
+**Finova Finpilot** (SME Finance Copilot) is a local-first, zero-float autonomous financial operating system built specifically for emerging-market micro, small, and medium enterprises (MSMEs). 
 
 Across developing regions, more than 400 million small merchants lack full-time accountants, CFOs, or institutional credit access. Traditional accounting software is **purely passive**—it logs history but offers zero forward guidance. Generic AI chatbots fail by hallucinating financial figures and citing irrelevant contracts.
 
-SME Finance Copilot acts as an **Autonomous Financial Participant**:
+Finova Finpilot acts as an **Autonomous Financial Participant**:
 1. **Zero-Float Precision Accounting:** Stores every transaction in 64-bit integer minor currency units, eliminating floating-point rounding errors.
 2. **Deterministic Loss Recovery Engine:** Diagnoses operating deficits from live ledgers, identifies fixed overhead bottlenecks, and calculates quantified turnaround scenarios.
 3. **Institutional Credit Underwriting (DSCR):** Computes real-time amortization schedules, evaluates Debt Service Coverage Ratios against commercial banking standards (1.25x benchmark), and generates official **Credit Underwriting Packet PDFs**.
@@ -84,7 +84,7 @@ flowchart TD
 ## 📂 Compact Visual Project Tree
 
 ```text
-sme-finance-copilot/                               # Competition submission root directory
+Finova-Finpilot/                                   # Competition submission root directory
 ├── README.md                                      # Executive overview, architecture, test badges & quickstart
 ├── .gitignore                                     # Excludes secrets (.env), SQLite binaries & private caches
 ├── .env.example                                   # Secure environment variable configuration template
@@ -214,25 +214,34 @@ When a merchant facing losses asks: *"I am in loss how can I recover?"*, SME Fin
 - Reporting Period: 2026-04-21 to 2026-10-20 (182 recorded days)
 - Currency: USD (Configured enterprise business currency)
 
-### 2. Evidence-Backed Findings (Root Cause Analysis)
-- Fixed Overhead Concentration:
-  1. Rent: 2,036,584.89 USD (41.8% of total)
-  2. Salary: 1,556,184.53 USD (32.0% of total)
-  3. Rent & Utilities: 606,500.00 USD (12.5% of total)
-  4. Utilities: 304,319.60 USD (6.3% of total)
-  => 73.8% of all operational spending is locked in fixed overheads!
-- Trapped Liquidity: 44 unpaid customer invoices representing 89,382.50 USD in uncollected cash.
-- Inventory Holding: 41 SKUs holding 2,448,570.00 USD in merchandise valuation.
+### 2. Evidence-Backed Findings (Root Cause & Ledger Audit)
+- Audited Expense Breakdown (by Recorded Ledger Classification):
+  1. Rent: 2,036,584.89 USD (41.8% of total, 38 entries)
+  2. Salary: 1,556,184.53 USD (32.0% of total, 49 entries)
+  3. Rent & Utilities: 606,500.00 USD (12.5% of total, 83 entries)
+  4. Utilities: 304,319.60 USD (6.3% of total, 41 entries)
+  5. Other Operating Expenses: 364,587.66 USD (7.5% of total, 143 entries)
+  *(Percentage denominator: 100.0% of total verified operating expenses of $4,868,176.68)*
+- Category Overlap & Duplicate Findings:
+  - Categories 'rent', 'utilities', and hybrid 'Rent & Utilities' represent overlapping occupancy costs totaling **$2,947,404.49 (60.5% of all expenses)**.
+  - Ledger audit detected 82 duplicate entries totaling **$603,000.00** in 'Rent & Utilities' (including 79 identical entries of $7,500.00).
+  - Payroll ($1,556,184.53, 32.0%) may include variable retail staffing; classification as pure fixed overhead is not supported without contract verification.
+- Working Capital Assessment (Not Immediately Available Cash):
+  - Trapped Liquidity: 44 unpaid customer invoices representing **$89,382.50 in uncollected accounts receivable** (not yet collected cash).
+  - Inventory Holding: 41 SKUs holding **$2,448,570.00 in merchandise valuation at cost** (inventory is not immediately recoverable cash).
 
 ### 3. Prioritized 3-Phase Action Plan
-1. Immediate Cash Defense (Days 1–15): Mobilize $89,382.50 in overdue receivables via automated WhatsApp dunning.
+1. Immediate Cash Defense (Days 1–15): Mobilize $89,382.50 in overdue receivables via automated WhatsApp dunning and reconcile duplicate ledger entries.
 2. Cost Restructuring (Days 16–45): Renegotiate commercial rent/utilities and align staff hours with peak retail foot-traffic.
 3. Margin Acceleration (Days 46–90): Shift merchandising to fast-moving high-margin SKUs; bundle slow movers with margin floors (>15%).
 
 ### 4. Quantified Turnaround Scenarios (Mathematical Models)
-- Scenario A (5% Expense Cut): Recovers $243,408.83 directly to cash flow.
-- Scenario B (10% Sales Volume Growth): Injects $152,540.00 in gross cash inflow.
-- Scenario C (Combined Dual Turnaround): Recovers $639,357.66 in operating margin.
+- Scenario A (5% Expense Cut): Recovers **$243,408.83** in reduced cash outflow (5% of $4,868,176.68).
+- Scenario B (10% Sales Volume Growth): Generates **$152,540.00 in additional top-line revenue** (estimated gross margin contribution: ~$22,651.78 at ~14.8% gross margin).
+- Scenario C (Combined Dual Turnaround): 
+  - Combined gross relief: **$395,948.83** (simple sum of $243,408.83 expense savings + $152,540.00 additional revenue).
+  - Estimated net loss reduction: **$266,060.61** ($243,408.83 savings + $22,651.78 margin contribution).
+  *(Audit Investigation Note: The previous figure of $639,357.66 was traced to an unaligned calculation adding 10% expense cuts to 10% gross revenue without deducting COGS, and has been corrected.)*
 *(Disclaimer: Scenarios are mathematical models based on historical ledger records and do not constitute guaranteed outcomes.)*
 
 ### 5. Recommended Next Steps

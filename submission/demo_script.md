@@ -46,9 +46,9 @@
   - Submit the question: **"I am in loss how can I recover?"**
   - Walk the judges through the 5 structured response sections:
     1. *Current Financial Position:* Reconciles exact revenue, expenses, and reporting period.
-    2. *Evidence-Backed Findings:* Highlights that fixed overheads represent 73.8% of spending (Rent 41.8%, Salary 32.0%).
+    2. *Evidence-Backed Findings:* Highlights audited expense breakdown (100% denominator basis), detects $2,947,404.49 in facility costs, identifies 82 duplicate entries totaling $603,000.00, and distinguishes working capital (uncollected receivables of $89,382.50, inventory at cost of $2,448,570.00) from immediate cash.
     3. *Prioritized 3-Phase Action Plan:* 15-day liquidity defense, 45-day overhead restructuring, 90-day margin acceleration.
-    4. *Quantified Recovery Scenarios:* Trimming 5% overhead recovers **`$243,408.83`**; 10% sales volume adds **`$152,540.00`**; combined turnaround yields **`$639,357.66`**.
+    4. *Quantified Recovery Scenarios:* Trimming 5% overhead recovers **`$243,408.83`** in reduced cash outflow; 10% sales volume adds **`$152,540.00`** in additional top-line revenue (~$22,651.78 margin contribution); combined turnaround gross yields **`$395,948.83`** (with estimated net loss reduction of **`$266,060.61`**).
     5. *Recommended Next Steps:* Actionable follow-up prompts.
   - Switch language to Bengali (`বাংলা`) or Chinese (`中文`) and ask the same query to demonstrate native multilingual reasoning while preserving enterprise currency (`USD`).
 * **Talking Point:** *"Notice that unlike generic chatbots, our AI does not cite unrelated bank loan letters or invent numbers. It diagnoses the root cause directly from the merchant's ledger."*

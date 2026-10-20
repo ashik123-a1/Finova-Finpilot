@@ -32,12 +32,12 @@
 
 *Generic AI chatbots hallucinate generic business advice or cite irrelevant bank loan contracts. But SME Finance Copilot executes an 11-domain intent classifier grounded in the merchant's live ledger:*
 
-*It detects that Bismillah Store has generated 1.52 million USD in revenue against 4.86 million USD in operating expenses. But more importantly, it uncovers the root cause: **73.8% of all spending is locked in fixed overheads—rent and salaries**.*
+*It detects that Bismillah Store has generated 1.52 million USD in revenue against 4.86 million USD in operating expenses. But more importantly, it audits the root cause: over 60% of all spending is concentrated in facility lease costs ($2.95M), while detecting 82 duplicate voice entries and $89,382 in uncollected customer receivables.*
 
 *It immediately formulates a 3-phase turnaround plan:*
-1. *Immediate cash defense by mobilizing 89,382 USD in overdue receivables via 1-click WhatsApp reminders.*
-2. *Restructuring fixed overheads, showing that a 5% cut directly injects 243,408 USD into cash flow.*
-3. *Margin-guarded merchandising, showing that a 10% sales lift adds 152,540 USD.*
+1. *Immediate cash defense by mobilizing 89,382 USD in overdue receivables via 1-click WhatsApp reminders and reconciling duplicate entries.*
+2. *Restructuring operating expenses, showing that a 5% cut directly preserves 243,408 USD in cash outflow.*
+3. *Margin-guarded merchandising, showing that a 10% sales lift adds 152,540 USD in top-line revenue, generating over 22,000 USD in gross profit contribution.*
 
 *It models the future mathematically, grounded in real ledger actuals."*
 

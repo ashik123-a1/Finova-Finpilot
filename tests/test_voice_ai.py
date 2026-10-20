@@ -194,8 +194,22 @@ def test_voice_consequential_confirmation_barrier(auth_headers):
     r_confirm = client.post("/api/models/voice/process", json=confirm_payload, headers=auth_headers)
     assert r_confirm.status_code == 200
     c_data = r_confirm.json()
-    assert c_data["status"] == "success"
-    assert "Successfully Posted" in c_data["text_response"]
+    try:
+        assert c_data["status"] == "success"
+        assert "Successfully Posted" in c_data["text_response"]
+    finally:
+        # Clean up the posted test expense to prevent test pollution of live database
+        from src.database.connection import get_db_session
+        from src.database.models import Expense
+        with get_db_session() as session:
+            test_exp = session.query(Expense).filter(
+                Expense.shop_id == 28,
+                Expense.description.like("%Voice-recorded expense entry%")
+            ).order_by(Expense.id.desc()).first()
+            if test_exp and test_exp.id > 7670:
+                session.delete(test_exp)
+                session.commit()
+
 
 
 def test_voice_cross_tenant_denial(auth_headers):

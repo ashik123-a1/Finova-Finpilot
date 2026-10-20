@@ -1,11 +1,11 @@
 # FinTechathon 2026: SME Finance Copilot — Test Execution & QA Report
 
-**Document Version:** 1.0.0 (Master Release)  
-**Execution Timestamp:** 2026-10-20 16:50:09 UTC+6  
+**Document Version:** 1.1.0 (Financial Accuracy Audit Release)  
+**Execution Timestamp:** 2026-10-20 17:39:29 UTC+6  
 **Command:** `python -m pytest`  
-**Execution Time:** 18.89 seconds  
-**Total Tests:** 220  
-**Passed:** 220  
+**Execution Time:** 19.63 seconds  
+**Total Tests:** 224  
+**Passed:** 224  
 **Failed:** 0  
 **Pass Rate:** **100%**
 
@@ -21,7 +21,7 @@ rootdir: F:\china project
 configfile: pyproject.toml
 testpaths: tests
 plugins: anyio-4.12.1
-collecting ... collected 220 items
+collecting ... collected 224 items
 
 tests/test_ai_copilot_intelligence.py::test_intent_classification_all_categories PASSED [  0%]
 tests/test_ai_copilot_intelligence.py::test_multilingual_intent_classification PASSED [  0%]
@@ -32,6 +32,10 @@ tests/test_ai_copilot_intelligence.py::test_overdue_receivables_workflow PASSED 
 tests/test_ai_copilot_intelligence.py::test_multilingual_loss_recovery_synthesis PASSED [  3%]
 tests/test_ai_copilot_intelligence.py::test_copilot_api_endpoint_loss_recovery_flow PASSED [  3%]
 tests/test_ai_copilot_intelligence.py::test_reconciled_financial_analytics_zero_drift PASSED [  4%]
+tests/test_ai_copilot_intelligence.py::test_financial_accuracy_audit_reconciliation_and_scenario_math PASSED [  4%]
+tests/test_ai_copilot_intelligence.py::test_expense_category_overlap_and_duplicate_detection PASSED [  4%]
+tests/test_ai_copilot_intelligence.py::test_working_capital_and_receivables_integrity PASSED [  5%]
+tests/test_ai_copilot_intelligence.py::test_multilingual_loss_recovery_financial_parity PASSED [  5%]
 tests/test_api_integration.py::test_health_and_root_endpoints PASSED     [  4%]
 tests/test_api_integration.py::test_business_and_shop_endpoints_isolation PASSED [  5%]
 tests/test_api_integration.py::test_financial_summary_endpoint PASSED    [  5%]
@@ -188,5 +192,5 @@ tests/test_web_ui.py::test_portal_views_render_successfully PASSED       [ 73%]
 tests/test_web_ui.py::test_multilingual_language_switch_in_web PASSED    [ 73%]
 tests/test_web_ui.py::test_static_assets_served PASSED                   [ 74%]
 
-============================ 220 passed in 18.89s =============================
+============================ 224 passed in 19.63s =============================
 ```
