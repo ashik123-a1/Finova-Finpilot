@@ -198,12 +198,12 @@ def build_technical_documentation():
     story.append(Paragraph("5. Quality Assurance & Test Verification Summary", h1_style))
     story.append(Paragraph(
         "The system has been verified through a formal catalogue of <b>50 Numbered Test Cases (TC-01 through TC-50)</b> with "
-        "<b>220 out of 220 automated unit, integration, and security tests passing (100% pass rate)</b>:", body_style
+        "<b>224 out of 224 automated unit, integration, and security tests passing (100% pass rate)</b>:", body_style
     ))
 
     test_data = [
         [Paragraph("Test Suite Focus Area", table_header), Paragraph("Files", table_header), Paragraph("Tests", table_header), Paragraph("Pass Rate", table_header), Paragraph("Verdict", table_header)],
-        [Paragraph("AI Intent Routing & Turnaround Scenarios", table_cell), Paragraph("test_ai_copilot_intelligence.py", table_cell), Paragraph("9", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
+        [Paragraph("AI Intent Routing & Turnaround Scenarios", table_cell), Paragraph("test_ai_copilot_intelligence.py", table_cell), Paragraph("13", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
         [Paragraph("RAG Embeddings & Tenant Isolation", table_cell), Paragraph("test_rag_pipeline.py", table_cell), Paragraph("14", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
         [Paragraph("API Routes, Cash Forecasting, OCR", table_cell), Paragraph("test_api_integration.py", table_cell), Paragraph("10", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
         [Paragraph("API Security, Path Traversal, Division Guards", table_cell), Paragraph("test_api_security_verification.py", table_cell), Paragraph("19", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
@@ -213,7 +213,7 @@ def build_technical_documentation():
         [Paragraph("Persistence, CSV Injection & WAL Backups", table_cell), Paragraph("test_report_generation_and_storage.py", table_cell), Paragraph("8", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
         [Paragraph("Multilingual Voice AI & Action Barriers", table_cell), Paragraph("test_voice_ai.py", table_cell), Paragraph("10", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
         [Paragraph("Web UI, Dashboard KPIs & Portals", table_cell), Paragraph("test_web_ui.py / test_dashboard.py", table_cell), Paragraph("18", table_cell), Paragraph("100%", table_cell), Paragraph("PASS", table_cell)],
-        [Paragraph("<b>TOTAL REGRESSION SUITE</b>", table_cell), Paragraph("<b>21 Test Suites</b>", table_cell), Paragraph("<b>220</b>", table_cell), Paragraph("<b>100%</b>", table_cell), Paragraph("<b>100% PASS</b>", table_cell)],
+        [Paragraph("<b>TOTAL REGRESSION SUITE</b>", table_cell), Paragraph("<b>21 Test Suites</b>", table_cell), Paragraph("<b>224</b>", table_cell), Paragraph("<b>100%</b>", table_cell), Paragraph("<b>100% PASS</b>", table_cell)],
     ]
 
     t = Table(test_data, colWidths=[150, 150, 45, 55, 60])
@@ -395,7 +395,7 @@ def build_presentation_pptx():
                 "Deterministic Zero-Float Accounting with Integer Minor Precision",
                 "Institutional DSCR Credit Underwriting & 1-Click Bank Packets",
                 "11-Domain Grounded Financial AI Copilot with Loss Turnaround Modeling",
-                "100% Offline Edge Capable | 220 / 220 Automated Tests Passed"
+                "100% Offline Edge Capable | 224 / 224 Automated Tests Passed"
             ],
             "accent": RGBColor(14, 165, 233)
         },
@@ -451,7 +451,7 @@ def build_presentation_pptx():
             "title": "VERIFICATION, COMPLIANCE & COMPETITION IMPACT",
             "subtitle": "Production-Ready Execution Built for Scale",
             "bullets": [
-                "220 / 220 Automated Tests Passed (100% Pass Rate across 21 test suites in 18.89s).",
+                "224 / 224 Automated Tests Passed (100% Pass Rate across 21 test suites in 20.77s).",
                 "Formal 50-Test Catalogue (TC-01..TC-50) covering security, edge cases, and arithmetic bounds.",
                 "Native Multilingual Intelligence: Fluent synthesis in English, Bengali (বাংলা), and Chinese (简体中文).",
                 "Enterprise Currency Preservation: Saved business currency (USD/BDT) preserved across language switches.",
@@ -554,7 +554,7 @@ def build_presentation_pdf():
             "<b>Zero-Float Deterministic Accounting:</b> All transactions tracked in 64-bit integer minor currency units.",
             "<b>Credit Underwriting & DSCR Risk Engine:</b> Instant loan packaging for Tier-1 commercial partner banks.",
             "<b>11-Domain Grounded Financial AI Copilot:</b> Real-time loss turnaround diagnosis and margin guardrails.",
-            "<b>100% Offline Edge Capable:</b> Tested and verified with 220/220 passing automated regression tests."
+            "<b>100% Offline Edge Capable:</b> Tested and verified with 224/224 passing automated regression tests."
         ]),
         ("THE CORE SME CRISIS & PASSIVE ACCOUNTING FAILURE", "Why Small Businesses Need an Active Financial Copilot", [
             "Over 400M global small enterprises operate without professional financial accountants or CFOs.",
@@ -585,7 +585,7 @@ def build_presentation_pdf():
             "<b>Smart Document OCR:</b> Staged human-in-the-loop invoice extraction before general ledger posting."
         ]),
         ("VERIFICATION, COMPLIANCE & PRODUCTION READINESS", "Master Competition Delivery Verification", [
-            "<b>220 / 220 Automated Tests Passed</b> across 21 test suites in 18.89 seconds (100% pass rate).",
+            "<b>224 / 224 Automated Tests Passed</b> across 21 test suites in 20.77 seconds (100% pass rate).",
             "<b>Formal 50-Test Catalogue (TC-01..TC-50)</b> covering security, arithmetic bounds, and RAG retrieval.",
             "<b>Native Multilingual Intelligence:</b> Fluent synthesis in English, Bengali (বাংলা), and Chinese (简体中文).",
             "<b>Enterprise Currency Preservation:</b> Configured business currency (USD) strictly preserved across language switches.",

@@ -25,4 +25,4 @@ During iterative development, one-off scripts were used to verify browser viewpo
 * `sme_finance.db`: Primary database file containing 163,054 verified records. **(Preserved, untouched)**.
 * `var/backups/`: Verified WAL-safe database backup snapshots. **(Preserved outside Git)**.
 * `src/`: Clean production source code.
-* `tests/`: 21 test files containing 220 automated unit/integration tests.
+* `tests/`: 21 test files containing 224 automated unit/integration tests.

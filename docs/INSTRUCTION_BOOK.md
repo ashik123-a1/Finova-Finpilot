@@ -76,10 +76,10 @@ python -c "from src.database.connection import init_db; init_db()"
 
 ### Step 6: Execute Automated Test Suite (Verification Gate)
 ```powershell
-# Run the complete test suite (220 tests across 21 test suites)
+# Run the complete test suite (224 tests across 21 test suites)
 python -m pytest
 ```
-*Expected output: `220 passed in ~18 seconds (100% pass rate)`.*
+*Expected output: `224 passed in ~20 seconds (100% pass rate)`.*
 
 ### Step 7: Launch the Application Server
 ```powershell

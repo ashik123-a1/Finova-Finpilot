@@ -13,7 +13,7 @@
 | **Database Schema & Migrations**| `docs/DATABASE.md` | ✅ **COMPLETE** | 50 tables, 8 migrations, WAL mode, zero-float integers. |
 | **API Reference Manual** | `docs/API_REFERENCE.md` | ✅ **COMPLETE** | Comprehensive endpoint documentation across 18 routers. |
 | **Security & Threat Model** | `docs/SECURITY.md` | ✅ **COMPLETE** | RBAC matrix, HMAC auth, DDE defense, prompt guardrails. |
-| **Canonical Test Catalogue** | `docs/TESTING.md` | ✅ **COMPLETE** | 50 numbered test cases (TC-01..TC-50) & 220 test results. |
+| **Canonical Test Catalogue** | `docs/TESTING.md` | ✅ **COMPLETE** | 50 numbered test cases (TC-01..TC-50) & 224 test results. |
 | **Local Instruction Book** | `docs/INSTRUCTION_BOOK.md` | ✅ **COMPLETE** | Step-by-step Windows, Linux, and Codespaces setup. |
 | **Visual Project Tree** | `docs/PROJECT_STRUCTURE.md` | ✅ **COMPLETE** | Screenshot-style terminal tree with `#` comments. |
 | **Deployment Manual** | `docs/DEPLOYMENT.md` | ✅ **COMPLETE** | Local ASGI, Docker readiness, Cloudflare tunnel. |
@@ -21,7 +21,7 @@
 | **Reports & Backup Manual** | `docs/REPORTS_AND_BACKUPS.md`| ✅ **COMPLETE** | CSV/PDF export instructions, WAL-safe restore steps. |
 | **Known Limitations** | `docs/KNOWN_LIMITATIONS.md` | ✅ **COMPLETE** | Honest disclosures of synthetic data & offline mode. |
 | **Final Release Audit** | `reports/release_audit.md` | ✅ **COMPLETE** | PASS classification across all 18 modules. |
-| **Executed Test Report** | `reports/test_report.md` | ✅ **COMPLETE** | Full 220-test terminal execution log. |
+| **Executed Test Report** | `reports/test_report.md` | ✅ **COMPLETE** | Full 224-test terminal execution log. |
 | **Dependency Inventory** | `reports/dependency_inventory.md`| ✅ **COMPLETE** | Pinned dependencies and software licenses. |
 | **Reproducibility Report** | `reports/reproducibility_report.md`| ✅ **COMPLETE** | Clean checkout audit and local environment matrix. |
 | **Cleanup Manifest** | `reports/cleanup_manifest.md` | ✅ **COMPLETE** | File hygiene and scratch script inventory. |

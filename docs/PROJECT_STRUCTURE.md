@@ -18,7 +18,7 @@ Finova-Finpilot/                                   # Competition submission root
 │   ├── DATABASE.md                                # Database schema, 8 migrations, WAL mode & recovery protocol
 │   ├── API_REFERENCE.md                           # Exhaustive API reference for all 18 backend service routers
 │   ├── SECURITY.md                                # Security posture, RBAC matrices, HMAC tokens & threat modeling
-│   ├── TESTING.md                                 # Canonical 50 numbered test cases (TC-01..TC-50) & 220 test audit
+│   ├── TESTING.md                                 # Canonical 50 numbered test cases (TC-01..TC-50) & 224 test audit
 │   ├── INSTRUCTION_BOOK.md                        # Complete local installation, execution & troubleshooting manual
 │   ├── PROJECT_STRUCTURE.md                       # Screenshot-style terminal visual tree with # comments
 │   ├── DEPLOYMENT.md                              # Local-first execution, production ASGI flags & container guide
