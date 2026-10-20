@@ -76,8 +76,15 @@ python -m pytest
 ```
 Open your browser and navigate to: **`http://127.0.0.1:8050`**
 
+<br/>
+
 <details>
-<summary><b>📖 Expand to view complete Cross-Platform Installation & Troubleshooting Guide (Linux / macOS / Docker / Codespaces)</b></summary>
+<summary>
+<h3>
+  <img src="https://img.shields.io/badge/%F0%9F%93%96_Cross--Platform_Setup-Linux_%7C_macOS_%7C_Docker-0ea5e9?style=for-the-badge&logoColor=white" alt="Setup Guide" />
+  &nbsp;👉 <b>CLICK TO EXPAND: Complete Cross-Platform Installation & Troubleshooting Guide</b>
+</h3>
+</summary>
 
 ### Linux / macOS / GitHub Codespaces Setup
 ```bash
@@ -155,8 +162,15 @@ The system is validated through a canonical catalogue of **50 Numbered Test Case
 | **Other Core Security & Integrity** | Remaining 8 test suites | 76 | 100% | **PASS** |
 | **TOTAL REGRESSION SUITE** | **21 Test Suites** | **224** | **100%** | **224/224 PASS** |
 
+<br/>
+
 <details>
-<summary><b>🧪 Expand to view all 50 Canonical Test Cases & QA Matrix (TC-01 to TC-50)</b></summary>
+<summary>
+<h3>
+  <img src="https://img.shields.io/badge/%F0%9F%A7%AA_Test_Catalogue-50_Canonical_Test_Cases-10b981?style=for-the-badge&logoColor=white" alt="Test Catalogue" />
+  &nbsp;👉 <b>CLICK TO EXPAND: All 50 Canonical Test Cases & QA Matrix (TC-01..TC-50)</b>
+</h3>
+</summary>
 
 | ID | Module / Feature | Objective | Required Role | Automated Test Reference | Status |
 | :--- | :--- | :--- | :--- | :--- | :---: |
@@ -266,8 +280,15 @@ When a merchant facing losses asks: *"I am in loss how can I recover?"*, Finova 
 "Would you like me to inspect your 44 overdue customer invoices or initiate a product gross margin audit?"
 ```
 
+<br/>
+
 <details>
-<summary><b>🤖 Expand to view 11-Domain Intent Taxonomy & Guardrail Specification</b></summary>
+<summary>
+<h3>
+  <img src="https://img.shields.io/badge/%F0%9F%A4%96_AI_Taxonomy-11_Domain_Intents_%26_Math-8b5cf6?style=for-the-badge&logoColor=white" alt="AI Taxonomy" />
+  &nbsp;👉 <b>CLICK TO EXPAND: 11-Domain Intent Taxonomy & Guardrail Specification</b>
+</h3>
+</summary>
 
 | Intent Key | Scope & Typical User Queries | Grounded Actions & Output |
 | :--- | :--- | :--- |
@@ -297,8 +318,15 @@ When a merchant facing losses asks: *"I am in loss how can I recover?"*, Finova 
 * **CSV Formula Injection (DDE) Defense:** Exported CSV cells starting with `=`, `+`, `-`, `@` are automatically escaped with leading single quotes.
 * **WAL-Safe Disaster Recovery:** Automated online backups (`var/backups/`) generate verified SQLite snapshots (`23.46 MB`, 163,054 records) with SHA-256 integrity manifests.
 
+<br/>
+
 <details>
-<summary><b>⚠️ Expand to view Transparent Engineering Disclosures & Known Limitations</b></summary>
+<summary>
+<h3>
+  <img src="https://img.shields.io/badge/%E2%9A%A0%EF%B8%8F_Disclosures-Engineering_Transparency-f59e0b?style=for-the-badge&logoColor=white" alt="Disclosures" />
+  &nbsp;👉 <b>CLICK TO EXPAND: Transparent Engineering Disclosures & Known Limitations</b>
+</h3>
+</summary>
 
 ### Honest Engineering Disclosures
 1. **Simulated Commercial Banking APIs:** While real Debt Service Coverage Ratios (DSCR), amortization schedules, and loan application packets are fully generated in PDF format, communication with commercial banks (e.g., BRAC Bank, City Bank) runs via a sandbox simulator. Live institutional banking integration requires production Open Banking credentials.
@@ -312,47 +340,50 @@ When a merchant facing losses asks: *"I am in loss how can I recover?"*, Finova 
 
 ---
 
-## 🏛️ Technical Architecture & Repository Topology
+## 🏛️ Technical Architecture & System Engineering
 
-*(Moved to this technical section for in-depth architectural inspection)*
+*(Consolidated system engineering, multi-layer workflows, and complete annotated repository architecture)*
 
-### System Architecture Topology
+### 1. High-Level System Architecture Topology
 
 ```mermaid
 flowchart TD
-    classDef client fill:#0f172a,stroke:#0ea5e9,stroke-width:2px,color:#fff;
-    classDef gateway fill:#1e293b,stroke:#6366f1,stroke-width:2px,color:#fff;
-    classDef core fill:#022c22,stroke:#10b981,stroke-width:2px,color:#fff;
-    classDef ai fill:#311042,stroke:#a855f7,stroke-width:2px,color:#fff;
-    classDef storage fill:#1c1917,stroke:#f59e0b,stroke-width:2px,color:#fff;
+    classDef client fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
+    classDef gateway fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff;
+    classDef core fill:#701a75,stroke:#f472b6,stroke-width:2px,color:#fff;
+    classDef ai fill:#312e81,stroke:#a78bfa,stroke-width:2px,color:#fff;
+    classDef storage fill:#78350f,stroke:#fbbf24,stroke-width:2px,color:#fff;
 
-    subgraph CLIENTS [" Client Tiers (Glassmorphism Web & Voice HUD) "]
+    subgraph CLIENTS [" 📱 Client Tiers & Interaction Channels "]
         UI["Executive Dashboard & Cockpit"]:::client
         COPILOT["Financial AI Copilot Chat"]:::client
         VOICE["Autonomous Voice AI HUD"]:::client
     end
 
-    subgraph GATEWAY [" FastAPI ASGI Application Gateway "]
+    subgraph GATEWAY [" 🛡️ FastAPI Application Gateway Layer "]
         AUTH["HMAC SHA-256 Auth & RBAC Guard"]:::gateway
         ROUTERS["18 Domain Service Routers"]:::gateway
+        MIDDLEWARE["CORS, GZip & CSP Headers"]:::gateway
     end
 
-    subgraph CORE [" Deterministic Finance & Underwriting Core "]
+    subgraph CORE [" ⚙️ Deterministic Finance & Underwriting Core "]
         LEDGER["Zero-Float Integer Ledger Engine"]:::core
         DSCR["Credit Underwriting & DSCR Engine (1.25x)"]:::core
         EXPORTERS["ReportLab PDF & Safe CSV Exporters"]:::core
+        CURRENCY["Multi-Jurisdiction Currency Normalizer"]:::core
     end
 
-    subgraph AI_SUBSYSTEM [" Hybrid AI & RAG Subsystem "]
+    subgraph AI_SUBSYSTEM [" 🧠 Hybrid AI & RAG Cognitive Subsystem "]
         INTENT["11-Domain Intent Classifier (EN / BN / ZH)"]:::ai
         RAG["Intent-Gated Document Vector Retriever"]:::ai
         TURNAROUND["5-Stage Turnaround Scenario Modeler"]:::ai
         BARRIER["Consequential Action Confirmation Barrier"]:::ai
     end
 
-    subgraph PERSISTENCE [" Local-First Persistence Layer "]
+    subgraph PERSISTENCE [" 🗄️ Local-First Persistence Layer "]
         DB[("SQLite 3 Database (WAL Mode)<br/>50 Relational Entities | 163,000+ Records")]:::storage
         BACKUP["WAL-Safe Online Backups & SHA-256 Manifests"]:::storage
+        AUDIT["Immutable Cryptographic Audit Trail"]:::storage
     end
 
     CLIENTS --> AUTH
@@ -363,166 +394,332 @@ flowchart TD
     INTENT --> RAG
     INTENT --> TURNAROUND
     VOICE --> BARRIER
-    BARRIER -.->|Authorized Confirmation| LEDGER
+    BARRIER -.->|Authorized Confirmation Token| LEDGER
     LEDGER --> DB
     DSCR --> EXPORTERS
     DB --> BACKUP
+    LEDGER --> AUDIT
 ```
 
-### Compact Visual Project Tree
+### 2. Autonomous Financial AI & 11-Domain Cognitive Decision Pipeline
+
+```mermaid
+flowchart LR
+    classDef input fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef guard fill:#450a0a,stroke:#f87171,stroke-width:2px,color:#fff;
+    classDef classify fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
+    classDef branch fill:#14532d,stroke:#4ade80,stroke-width:2px,color:#fff;
+    classDef math fill:#581c87,stroke:#c084fc,stroke-width:2px,color:#fff;
+    classDef output fill:#042f2e,stroke:#2dd4bf,stroke-width:2px,color:#fff;
+
+    Q["User Financial Query<br/>(EN / BN / ZH)"]:::input --> SANITIZE["Prompt Injection Sanitizer<br/>(Blocks DAN / System Overrides)"]:::guard
+    SANITIZE --> DETECT["Language & Locale Normalizer<br/>(en, bn, zh-CN)"]:::classify
+    DETECT --> CLASSIFY{"11-Domain Intent<br/>Classifier"}:::classify
+
+    CLASSIFY -->|Loss Recovery| LEDGER_QUERY["Query Authenticated Ledger Actuals<br/>(Revenue, Expenses, Overlaps)"]:::branch
+    CLASSIFY -->|Credit / Loan| RAG_QUERY["Intent-Gated Vector RAG<br/>(Loan Policies & Bank Cards)"]:::branch
+    CLASSIFY -->|Pricing / Discount| MARGIN_CHECK["15% Gross Margin Floor<br/>Erosion Guardrail"]:::guard
+
+    LEDGER_QUERY --> ROOT_CAUSE["Fixed Overhead Diagnosis<br/>& Duplicate Voice Audit"]:::math
+    ROOT_CAUSE --> SCENARIOS["Mathematical Turnaround Modeler<br/>• Scenario A (5% Cut)<br/>• Scenario B (10% Sales)<br/>• Scenario C (Dual Target)"]:::math
+
+    SCENARIOS --> SYNTHESIS["Evidence-Backed Financial Advice"]:::output
+    RAG_QUERY --> SYNTHESIS
+    MARGIN_CHECK --> SYNTHESIS
+```
+
+### 3. Consequential Action Authorization Barrier (Voice & Autonomous AI)
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Merchant as 👤 SME Merchant
+    participant HUD as 🎙️ Voice AI HUD
+    participant Parser as 🧩 Intent Parser
+    participant Barrier as 🛡️ Action Barrier
+    participant Ledger as ⚖️ Zero-Float Ledger
+    participant DB as 🗄️ SQLite Database
+
+    Merchant->>HUD: "Post expense 7,500 USD for warehouse rent"
+    HUD->>Parser: Extract action intent & minor units
+    Parser->>Barrier: Intercept write operation (Category: Expense)
+    
+    rect rgb(60, 20, 20)
+        Note over Barrier,HUD: Consequential Action Safeguard Triggered
+        Barrier->>Barrier: Generate one-time cryptographic challenge token
+        Barrier-->>HUD: Request explicit user confirmation
+        HUD-->>Merchant: "Action requires authorization. Confirm expense of $7,500.00?"
+    end
+
+    alt Explicit User Authorization Confirmed
+        Merchant->>HUD: "Yes, authorize and post"
+        HUD->>Barrier: Deliver confirmation with challenge token
+        Barrier->>Barrier: Cryptographically validate token integrity
+        Barrier->>Ledger: Execute double-entry integer posting
+        Ledger->>DB: Atomic commit with PRAGMA WAL
+        DB-->>Ledger: Transaction success (Entry ID #355)
+        Ledger-->>HUD: Return balance telemetry & updated cash runway
+        HUD-->>Merchant: "Expense confirmed and posted to ledger."
+    else User Rejection or Timeout (>60s)
+        Merchant->>HUD: "Cancel action"
+        HUD->>Barrier: Abort transaction
+        Barrier->>Barrier: Invalidate challenge token
+        HUD-->>Merchant: "Action safely cancelled. No ledger changes made."
+    end
+```
+
+### 4. Institutional Credit Underwriting & DSCR Evaluation Flow
+
+```mermaid
+flowchart TD
+    classDef input fill:#0c4a6e,stroke:#38bdf8,stroke-width:2px,color:#fff;
+    classDef compute fill:#1e1b4b,stroke:#a78bfa,stroke-width:2px,color:#fff;
+    classDef decision fill:#701a75,stroke:#f472b6,stroke-width:2px,color:#fff;
+    classDef pass fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff;
+    classDef fail fill:#7f1d1d,stroke:#f87171,stroke-width:2px,color:#fff;
+    classDef pdf fill:#78350f,stroke:#fbbf24,stroke-width:2px,color:#fff;
+
+    START["Merchant Historical Ledger Data<br/>(182 Days Verified Operating History)"]:::input --> NOI["Calculate Net Operating Income (NOI)<br/>NOI = Revenue - Operating Expenses"]:::compute
+    TERMS["Requested Loan Parameters<br/>(Principal, Annual Rate, Tenure Months)"]:::input --> AMORT["Compute Monthly Debt Service (Amortization)<br/>Zero-Float EMI Formula"]:::compute
+
+    NOI --> DSCR_CALC["Compute Debt Service Coverage Ratio (DSCR)<br/>DSCR = Annual NOI / Total Annual Debt Service"]:::compute
+    AMORT --> DSCR_CALC
+
+    DSCR_CALC --> EVAL{"Evaluate Against Commercial<br/>Bank Benchmark (1.25x)"}:::decision
+
+    EVAL -->|DSCR >= 1.25x| TIER1["Tier 1 Commercial Bank Match<br/>• Standard SME Term Loans<br/>• Prime Commercial Rates (9.0% - 11.5%)"]:::pass
+    EVAL -->|DSCR < 1.25x| SUB["Subsidized / Microfinance Match<br/>• Cash-Flow Backed Micro Loans<br/>• Collateral / Co-Guarantor Mitigation"]:::fail
+
+    TIER1 --> PACKET["Generate Official Credit Underwriting Packet<br/>(ReportLab PDF with Amortization Table & DSCR Metrics)"]:::pdf
+    SUB --> PACKET
+```
+
+### 5. Zero-Float Double-Entry Accounting & Integer Precision Engine
+
+```mermaid
+flowchart LR
+    classDef source fill:#1e293b,stroke:#64748b,stroke-width:2px,color:#fff;
+    classDef integer fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff;
+    classDef journal fill:#1e1b4b,stroke:#818cf8,stroke-width:2px,color:#fff;
+    classDef wal fill:#78350f,stroke:#fbbf24,stroke-width:2px,color:#fff;
+    classDef audit fill:#701a75,stroke:#f472b6,stroke-width:2px,color:#fff;
+
+    SOURCE["Raw Monetary Inputs<br/>• POS Sales Receipts<br/>• OCR Invoice Scans<br/>• Voice HUD Transactions"]:::source --> CONVERT["Zero-Float Minor Unit Converter<br/>Stores amounts in 64-bit integer cents<br/>$1,525.40 ➔ 152540 minor units"]:::integer
+
+    CONVERT --> POST["Double-Entry Balanced Journal Engine<br/>Every entry has equal Debit & Credit"]:::journal
+
+    POST --> INVARIANT{"Arithmetic Invariant Check<br/>Assets == Liabilities + Equity<br/>Debits == Credits"}:::journal
+
+    INVARIANT -->|Passed| WAL["SQLite 3 WAL Commit<br/>Atomic Disk Flush & Hot Backup Safe"]:::wal
+    INVARIANT -->|Failed| REVERT["Automatic Rollback<br/>Zero Corrupted Ledger State"]:::source
+
+    WAL --> KPI["Real-Time KPI Cache Recompute<br/>(Cash Runway, Net Loss, Working Capital)"]:::wal
+    WAL --> AUDIT["Cryptographic SHA-256 Audit Entry<br/>Immutable Security Audit Trail"]:::audit
+```
+
+---
+
+## 📂 Repository Directory Architecture
+
+The complete, annotated file catalog of the Finova Finpilot application:
 
 ```text
 Finova-Finpilot/                                   # Competition submission root directory
 ├── README.md                                      # Executive overview, architecture, test badges & quickstart
-├── .gitignore                                     # Excludes secrets (.env), SQLite binaries & private caches
+├── .gitignore                                     # Excludes secrets (.env), SQLite binaries, WAL files & private caches
 ├── .env.example                                   # Secure environment variable configuration template
 ├── pyproject.toml                                 # Python packaging, toolchain configurations & pytest settings
-├── requirements.txt                               # Pinned backend dependencies (FastAPI, SQLAlchemy, ReportLab)
+├── requirements.txt                               # Pinned backend dependencies (FastAPI, SQLAlchemy, ReportLab, etc.)
 ├── start.bat                                      # 1-Click Windows launch script (Uvicorn on port 8050)
 ├── share_online.bat                               # Optional encrypted public tunnel launcher for live evaluation
-├── sme_finance.db                                 # Primary SQLite database with WAL mode (163,000+ records)
+├── sme_finance.db                                 # Primary SQLite database with WAL mode enabled (163,000+ records)
 │
-├── docs/                                          # Technical, architecture & competition documentation
+├── docs/                                          # Formal technical & competition documentation (12 Detailed Books)
 │   ├── ARCHITECTURE.md                            # Comprehensive system architecture & data pipeline flow
 │   ├── DATABASE.md                                # Database schema, 8 migrations, WAL mode & recovery protocol
 │   ├── API_REFERENCE.md                           # Exhaustive API reference for all 18 backend service routers
-│   ├── SECURITY.md                                # Security posture, RBAC matrices, HMAC tokens & threat model
+│   ├── SECURITY.md                                # Security posture, RBAC matrices, HMAC tokens & threat modeling
 │   ├── TESTING.md                                 # Canonical 50 numbered test cases (TC-01..TC-50) & 224 test audit
 │   ├── INSTRUCTION_BOOK.md                        # Complete local installation, execution & troubleshooting manual
-│   ├── PROJECT_STRUCTURE.md                       # Full screenshot-style terminal tree with # comments
+│   ├── PROJECT_STRUCTURE.md                       # Screenshot-style terminal visual tree with # comments
 │   ├── DEPLOYMENT.md                              # Local-first execution, production ASGI flags & container guide
 │   ├── AI_COPILOT.md                              # 11-category financial intent routing & loss turnaround mechanics
 │   ├── REPORTS_AND_BACKUPS.md                     # Authorized CSV/PDF export & isolated disaster recovery guide
 │   └── KNOWN_LIMITATIONS.md                       # Transparent disclosure of simulated and non-implemented areas
 │
-├── src/                                           # Production application source code
-│   ├── ai/                                        # 11-intent classifier, grounded ledger extractor & Voice AI
-│   ├── api/                                       # FastAPI gateway, dependency injection & 18 REST routers
-│   ├── core/                                      # Zero-float banking math, amortization & 7 country profiles
-│   ├── crm/                                       # Customer RFM segmentation & WhatsApp receivables dunning
-│   ├── database/                                  # 50 ORM models, WAL backup service & 8 SQL migrations
-│   ├── documents/                                 # Smart OCR document upload, classification & review staging
-│   ├── finance/                                   # Institutional Loan Packet PDF generator & CSV/PDF exporters
-│   ├── i18n/                                      # Multilingual engine (English, Bengali বাংলা, Chinese 简体中文)
-│   └── web/                                       # Glassmorphism frontend templates & cyber-fintech static assets
+├── src/                                           # Production source code
+│   ├── __init__.py                                # Top-level package marker
+│   ├── config.py                                  # Application configuration, currency profiles & security defaults
+│   │
+│   ├── ai/                                        # Autonomous Financial AI & RAG Subsystem
+│   │   ├── __init__.py                            # AI package marker
+│   │   ├── rag_service.py                         # 11-intent classifier, grounded ledger extractor & RAG orchestrator
+│   │   └── voice_service.py                       # Real-time Voice AI processor with consequential action safeguards
+│   │
+│   ├── api/                                       # FastAPI REST API & WebSocket Application Layer
+│   │   ├── __init__.py                            # API package marker
+│   │   ├── app.py                                 # FastAPI application entrypoint, middleware & lifecycle events
+│   │   ├── dependencies.py                        # Dependency injection (signed HMAC session tokens, DB sessions)
+│   │   └── routes/                                # 18 Domain-specific API endpoint routers
+│   │       ├── __init__.py                        # Router aggregator
+│   │       ├── auth.py                            # Authentication, 1-click demo logins, registration & logout
+│   │       ├── business.py                        # Multi-tenant workspace creation, onboarding & shop switching
+│   │       ├── finance.py                         # General ledger, revenue/expense analytics, daily cash streams
+│   │       ├── documents.py                       # Secure document upload, OCR extraction & ledger posting
+│   │       ├── crm.py                             # Customer management, RFM segmentation & WhatsApp dunning
+│   │       ├── inventory.py                       # SKU catalog, stock movement audit, reorders & PO drafting
+│   │       ├── notifications.py                   # Persistent notification stream, unread counts & mark-as-read
+│   │       ├── reports.py                         # Authorized financial statements export (CSV & PDF formats)
+│   │       ├── models.py                          # Copilot query routing & AI model registry telemetry
+│   │       ├── voice.py                           # Multilingual voice intent processing & action confirmations
+│   │       ├── i18n.py                            # Translation catalog lookup & dynamic currency conversion
+│   │       └── admin.py                           # Platform Admin Portal HUD (Super Admin authorization boundary)
+│   │
+│   ├── core/                                      # Core Banking & International Profiles
+│   │   ├── __init__.py                            # Core package marker
+│   │   ├── calculator.py                          # Zero-float financial math, interest amortization & DSCR engine
+│   │   └── country_profiles.py                    # Multi-jurisdiction rules (Bangladesh, China, Kuwait, etc.)
+│   │
+│   ├── crm/                                       # Customer Relationship & Receivables Intelligence
+│   │   ├── __init__.py                            # CRM package marker
+│   │   └── rfm.py                                 # Recency, Frequency, Monetary (RFM) VIP customer segmentation
+│   │
+│   ├── database/                                  # Database Layer & Schema Migrations
+│   │   ├── __init__.py                            # Database package marker
+│   │   ├── connection.py                          # SQLAlchemy engine setup & SQLite WAL-mode session lifecycle
+│   │   ├── models.py                              # 50 normalized relational ORM models (Tenant-isolated)
+│   │   ├── backup_service.py                      # WAL-safe database backup creation & isolated restoration
+│   │   ├── integrity.py                           # PRAGMA integrity check & foreign key constraint auditing
+│   │   ├── seed.py                                # Idempotent demo persona & historical ledger seed data
+│   │   └── migrations/                            # Forward-only database migration runner
+│   │       ├── runner.py                          # Migration version tracker table & checksum validation
+│   │       └── versions/                          # Numbered SQL migration files
+│   │           ├── 001_initial_schema.sql         # Core users, businesses, shops, sales, expenses, inventory
+│   │           ├── 002_seed_roles_and_permissions.sql # 7 roles and 22 fine-grained permissions
+│   │           ├── 003_document_chunks_rag.sql    # Vector embedding chunk storage & RAG index
+│   │           ├── 004_workspace_invitations.sql  # Enterprise workspace invitations & password resets
+│   │           ├── 005_notification_enhancements.sql # Persistent user notifications stream
+│   │           ├── 006_crm_inventory_campaigns.sql   # RFM customer segmentation & discount campaigns
+│   │           ├── 007_user_language_preference.sql  # User profile preferred localization persistence
+│   │           └── 008_report_executions.sql      # Audit trail for generated CSV & PDF exports
+│   │
+│   ├── documents/                                 # Smart Document Pipeline (OCR & Classification)
+│   │   ├── __init__.py                            # Documents package marker
+│   │   ├── classifier.py                          # Multi-jurisdictional invoice/receipt document classifier
+│   │   ├── extractor.py                           # RegEx/OCR invoice field extraction (NBR Mushak 6.3, Fapiao)
+│   │   └── poster.py                              # Human-in-the-loop approved transaction ledger posting
+│   │
+│   ├── evaluation/                                # Model Registry & Accuracy Benchmarking
+│   │   ├── __init__.py                            # Evaluation package marker
+│   │   ├── benchmark.py                           # ARIMA forecasting & DSCR model accuracy benchmark suite
+│   │   └── registry.py                            # Model versioning, active champion routing & fallback flags
+│   │
+│   ├── finance/                                   # Financial Reporting & Loan Packet Services
+│   │   ├── __init__.py                            # Finance package marker
+│   │   ├── pdf_packet.py                          # Official Credit Underwriting Packet PDF generator
+│   │   ├── report_exporters.py                    # CSV (formula-injection safe) and PDF report builders
+│   │   └── reports_service.py                     # Report generation orchestrator & file persistence
+│   │
+│   ├── i18n/                                      # Multilingual Internationalization Engine
+│   │   ├── __init__.py                            # i18n package marker
+│   │   ├── translator.py                          # Multi-locale catalog loader (EN, Bengali, Chinese)
+│   │   └── locales/                               # Exhaustive translation dictionaries
+│   │       ├── en.json                            # English canonical string catalog
+│   │       ├── bn.json                            # Bengali (বাংলা) complete localized dictionary
+│   │       ├── zh.json                            # Simplified Chinese (简体中文) complete dictionary
+│   │       ├── ar.json                            # Arabic regional fallback dictionary
+│   │       ├── hi.json                            # Hindi regional fallback dictionary
+│   │       └── es.json                            # Spanish regional fallback dictionary
+│   │
+│   └── web/                                       # Server-Rendered Glassmorphism Fintech UI
+│       ├── router.py                              # Jinja2 template routes & multi-tier locale resolution
+│       ├── static/                                # Static web assets (CSS, JS, Images, Videos)
+│       │   ├── css/theme.css                      # Cyber-fintech glassmorphism styling & animations
+│       │   ├── js/app.js                          # Client-side reactivity, chart rendering & notifications
+│       │   ├── js/voice_controller.js             # Web Speech API audio controller & HUD visualizer
+│       │   └── images/                            # Theme backgrounds, architectural blueprints & icons
+│       └── templates/                             # Jinja2 HTML templates
+│           ├── base.html                          # Root shell (meta tags, preloader, fonts, toast alerts)
+│           ├── landing.html                       # Futuristic landing page with live execution sandbox
+│           ├── login.html                         # Login portal with 7 1-click selectable demo personas
+│           ├── register.html                      # Commercial SME merchant registration flow
+│           └── app/                               # Authenticated merchant portal views
+│               ├── layout.html                    # Unified portal shell (header, sidebar, shop switcher)
+│               ├── dashboard.html                 # Executive financial cockpit (live KPIs & daily stream)
+│               ├── finance.html                   # General ledger, revenue/expense CRUD & transaction log
+│               ├── forecast.html                  # Cash runway projection, daily burn rate & ARIMA trends
+│               ├── loans.html                     # Interactive loan calculator, DSCR underwriting & PDF packet
+│               ├── documents.html                 # Smart OCR document upload, preview & staging review
+│               ├── customers.html                 # CRM customer directory, RFM tiers & WhatsApp dunning
+│               ├── inventory.html                 # SKU warehouse management, stock valuation & PO drafting
+│               ├── copilot.html                   # Financial AI Copilot chat with loss turnaround scenarios
+│               ├── voice.html                     # Futuristic Cyber-Fintech real-time voice HUD console
+│               ├── reports.html                   # Authorized financial statement export & database backup
+│               ├── audit.html                     # Tamper-evident cryptographic audit log inspector
+│               ├── settings.html                  # Shop settings, currency selector & user permissions
+│               └── admin.html                     # Platform Admin Portal HUD (Super Admin view)
 │
-├── tests/                                         # 21 test suites containing 224 passing automated tests
-├── var/                                           # Backups (.db + SHA-256 manifests) & exports (Git-ignored)
-├── reports/                                       # Release audit, 224-test execution report & dependency inventory
-└── submission/                                    # Competition deliverables, PDFs, presentation deck & evidence
-```
-
-<details>
-<summary><b>📂 Expand to view Complete Annotated Directory Tree & File Catalog (docs/PROJECT_STRUCTURE.md)</b></summary>
-
-```text
-Finova-Finpilot/                                   # Root project folder
-├── .env.example                                   # Configuration template (JWT secrets, port, SQLite DB path)
-├── .gitignore                                     # Clean repository exclusions (venv/, *.db-wal, *.pyc, var/)
-├── README.md                                      # Primary competition overview & execution instructions
-├── pyproject.toml                                 # Python packaging, pytest settings & dependencies
-├── requirements.txt                               # Explicit package pins (FastAPI, SQLAlchemy, ReportLab, etc.)
-├── share_online.bat                               # Cloudflare quick-tunnel launcher for remote jury evaluation
-├── sme_finance.db                                 # Operational SQLite database (163,000+ pre-seeded records)
-├── start.bat                                      # 1-Click production ASGI launcher
+├── tests/                                         # Comprehensive Automated Regression Test Suite (224 Tests)
+│   ├── conftest.py                                # Test fixtures (isolated in-memory DB, auth client, seeded shops)
+│   ├── test_ai_copilot_intelligence.py            # AI intent classification, loss recovery, scenarios, guardrails
+│   ├── test_rag_pipeline.py                       # Vector embeddings, tenant isolation, prompt injection defense
+│   ├── test_api_integration.py                    # End-to-end API routes, financial calculations & OCR pipeline
+│   ├── test_api_security_verification.py          # Auth header forgery, path traversal, division by zero
+│   ├── test_auth_and_rbac.py                      # Registration, 7 demo personas, role permission boundaries
+│   ├── test_commercial_onboarding.py              # Commercial onboarding, workspace invites, password resets
+│   ├── test_country_profiles.py                   # 7 international jurisdictions & Kuwait 3-decimal precision
+│   ├── test_crm_and_inventory.py                  # RFM segmentation, aging receivables, low-stock reorder
+│   ├── test_dashboard_live_kpi.py                 # Live dashboard KPIs, daily sales/expense trend reconciliation
+│   ├── test_i18n_and_voice.py                     # Multilingual catalogs completeness & voice action barriers
+│   ├── test_isolation.py                          # Shop-level membership isolation & cross-shop posting denial
+│   ├── test_loan_and_dscr_module.py               # Loan EMI precision, DSCR underwriting & PDF packet download
+│   ├── test_master_completion_phase.py            # 6-step onboarding wizard & 7 demo personas end-to-end
+│   ├── test_multilingual_security.py              # XSS injection defense, locale normalization, currency API
+│   ├── test_notifications.py                      # Persistent notification stream, unread counts & mark-all-read
+│   ├── test_phase_gate_readiness.py               # Foreign key enforcement, atomic rollbacks & restart persistence
+│   ├── test_rbac_permissions.py                   # Least privilege boundaries & shop permission enforcement
+│   ├── test_report_generation_and_storage.py      # Persistence across restarts, CSV injection defense, backups
+│   ├── test_synthetic_generator.py                # Realistic multi-shop synthetic ledger generator & reset
+│   ├── test_voice_ai.py                           # Voice intent parsing, what-if simulation & confirmation barriers
+│   └── test_web_ui.py                             # Landing page, login, 13 portal views, language switcher
 │
-├── docs/                                          # Formal Competition Documentation (12 Dedicated Books)
-│   ├── AI_COPILOT.md                              # Cognitive architecture, intent mapping & loss recovery math
-│   ├── API_REFERENCE.md                           # Exhaustive 18-router REST API catalog with sample payloads
-│   ├── ARCHITECTURE.md                            # Comprehensive topology, sequence flows & design tenets
-│   ├── DATABASE.md                                # 50-table schema, 8 migrations & WAL recovery protocols
-│   ├── DEPLOYMENT.md                              # Local edge execution, systemd & containerized blueprints
-│   ├── INSTRUCTION_BOOK.md                        # Master setup, local runtime & troubleshooting playbook
-│   ├── KNOWN_LIMITATIONS.md                       # Transparent engineering disclosures & future roadmap
-│   ├── PROJECT_STRUCTURE.md                       # Complete visual source-tree map with inline annotations
-│   ├── REPORTS_AND_BACKUPS.md                     # WAL-safe disaster recovery, CSV sanitation & PDF reports
-│   ├── SECURITY.md                                # Threat models, RBAC privilege matrix & anti-tamper rules
-│   └── TESTING.md                                 # 50 canonical test cases catalogue & 224-test audit trail
+├── scripts/                                       # Operational, Verification & Seeding Scripts
+│   ├── seed_rag_documents.py                      # Seed statutory VAT, tax, and loan agreements for RAG retrieval
+│   ├── seed_demo_bank_products.py                 # Seed Tier-1 commercial bank loan products and interest rate cards
+│   └── db_backup.py                               # CLI utility for WAL-safe backup creation & integrity checks
 │
-├── src/                                           # Application Source Engine
-│   ├── ai/                                        # Artificial Intelligence & Cognitive Services
-│   │   ├── copilot_service.py                     # Financial conversation manager & dialogue memory
-│   │   ├── loss_recovery_engine.py                # Deterministic turnaround scenario modeler (Scenarios A/B/C)
-│   │   ├── rag_service.py                         # Intent-gated vector search & ledger context extractor
-│   │   └── voice_service.py                       # Voice AI parsing, action barriers & confirmation tokens
-│   ├── api/                                       # Application Gateway & REST Endpoints
-│   │   ├── app.py                                 # FastAPI initialization, middleware & static mounting
-│   │   ├── dependencies.py                        # HMAC auth token validation & tenant workspace context
-│   │   └── routes/                                # 18 Domain-Specific REST Routers
-│   │       ├── admin.py                           # Super Admin platform oversight & health audits
-│   │       ├── ai.py                              # Copilot chat and intent endpoints
-│   │       ├── auth.py                            # Login, registration & demo persona session dispatch
-│   │       ├── crm.py                             # Customer management & receivables collection
-│   │       ├── dashboard.py                       # High-performance KPI aggregation queries
-│   │       ├── documents.py                       # OCR upload and document review queue
-│   │       ├── finance.py                         # Double-entry ledger postings and reconciliations
-│   │       ├── inventory.py                       # Product inventory, movements & purchase orders
-│   │       ├── loans.py                           # DSCR credit underwriting & bank packet export
-│   │       ├── notifications.py                   # Real-time event notifications & read states
-│   │       ├── reports.py                         # Financial statement generation (P&L, Balance Sheet)
-│   │       ├── voice.py                           # Real-time speech input & action barrier execution
-│   │       └── web.py                             # HTML template rendering for browser users
-│   ├── core/                                      # Mathematical & Multi-Jurisdictional Foundation
-│   │   ├── currency.py                            # Multi-currency decimal rules (USD, BDT, CNY, KWD)
-│   │   ├── exceptions.py                          # Domain-specific error codes and HTTP mappings
-│   │   ├── financial_math.py                      # Zero-float integer arithmetic & EMI calculation
-│   │   └── security.py                            # HMAC SHA-256 signing & CSV formula neutralization
-│   ├── crm/                                       # Customer Relationship Management Subsystem
-│   │   ├── dunning_service.py                     # Automated polite/firm reminder generation
-│   │   └── rfm_service.py                         # Recency-Frequency-Monetary segmentation engine
-│   ├── database/                                  # Data Access & Persistence Layer
-│   │   ├── backup_service.py                      # Hot WAL backup snapshotting & SHA-256 integrity
-│   │   ├── connection.py                          # Engine, sessionmaker & WAL PRAGMA configuration
-│   │   ├── migrations/                            # 8 Schema migrations (V1 to V8)
-│   │   └── models/                                # 50 Declarative SQLAlchemy Relational Entities
-│   ├── documents/                                 # OCR & Computer Vision Subsystem
-│   │   ├── ocr_engine.py                          # Multi-pass Tesseract OCR & regex tokenizers
-│   │   └── staging_service.py                     # Document quarantine, review & ledger posting
-│   ├── finance/                                   # Credit Underwriting & Institutional Reporting
-│   │   ├── dscr_service.py                        # Debt Service Coverage Ratio evaluation (1.25x)
-│   │   ├── packet_generator.py                    # ReportLab Bank Underwriting Packet PDF builder
-│   │   └── statement_service.py                   # P&L, Cash Flow & Balance Sheet statement compiler
-│   ├── i18n/                                      # Multilingual Localization Engine
-│   │   ├── catalogs/                              # en.json (English), bn.json (বাংলা), zh.json (中文)
-│   │   └── translator.py                          # Dynamic key lookup & pluralization formatter
-│   └── web/                                       # Frontend Presentation Layer
-│       ├── static/                                # Cyber-fintech CSS, Vanilla JS modules & brand assets
-│       └── templates/                             # Jinja2 templates (Dashboard, Copilot, Admin, Loans)
+├── var/                                           # Runtime Data & Exports (Strictly Excluded from Git)
+│   ├── backups/                                   # Local WAL-safe database backups (.db) & SHA-256 manifests (.json)
+│   │   ├── .gitkeep                               # Retains directory structure in repository
+│   │   ├── sme_backup_20261020_105146.db          # Verified SQLite backup snapshot (23.46 MB, 163,054 records)
+│   │   └── manifest_20261020_105146.json          # SHA-256 integrity manifest & table record count breakdown
+│   └── exports/                                   # Generated CSV & PDF financial statement reports
+│       └── .gitkeep                               # Retains directory structure in repository
 │
-├── tests/                                         # Test Automation & Verification Engine (224 Tests)
-│   ├── conftest.py                                # Test database fixtures, mock clients & seeds
-│   ├── test_ai_copilot_intelligence.py            # AI intent classification & turnaround math
-│   ├── test_api_integration.py                   # End-to-end endpoint verification
-│   ├── test_api_security_verification.py          # Threat defense & header injection tests
-│   ├── test_auth_and_rbac.py                      # Authentication & role-based access checks
-│   ├── test_commercial_onboarding.py              # Self-serve merchant registration
-│   ├── test_country_profiles.py                   # Multi-currency precision tests
-│   ├── test_crm_and_inventory.py                  # RFM & stock restock automation
-│   ├── test_dashboard_live_kpi.py                 # KPI aggregation & ledger sync
-│   ├── test_document_pipeline.py                  # OCR extraction & verification
-│   ├── test_i18n_and_voice.py                     # Multilingual strings & voice action barrier
-│   ├── test_loan_and_dscr_module.py               # Loan underwriting & DSCR math
-│   ├── test_multilingual_security.py              # XSS & character encoding security
-│   ├── test_rag_pipeline.py                       # Vector retrieval & prompt injection
-│   └── test_voice_ai.py                           # Voice intent extraction & confirmation barrier
+├── reports/                                       # Independent Evaluation & Audit Reports
+│   ├── release_audit.md                           # Final release audit across all 18 modules (PASS classifications)
+│   ├── test_report.md                             # Exhaustive 224-test execution report with exact terminal logs
+│   ├── dependency_inventory.md                    # Verified dependency inventory & software versions
+│   ├── reproducibility_report.md                  # Clean-checkout reproducibility & local installation audit
+│   ├── cleanup_manifest.md                        # File hygiene, scratch scripts inventory & quarantine status
+│   └── deliverables_checklist.md                  # FinTechathon 2026 deliverables compliance checklist
 │
-└── submission/                                    # FinTechathon 2026 Deliverables Package
-    ├── README.md                                  # Submission manifest & judging orientation
-    ├── demo_script.md                             # 10-Minute live evaluation demonstration script
-    ├── presentation.pdf                           # Final pitch deck presentation (PDF format)
-    ├── presentation.pptx                          # Final pitch deck presentation (PowerPoint format)
-    ├── presentation_script.md                     # Timed 5-minute competitive pitch script
-    ├── security_self_assessment.pdf               # Comprehensive cybersecurity evaluation
-    ├── technical_documentation.pdf                # Consolidated system technical manual
-    └── execution_evidence/                        # Verified high-resolution screenshots
-        ├── copilot_loss_recovery_verified.png     # Real AI loss recovery calculation
-        ├── copilot_loss_recovery_bengali_verified.png # Native Bengali AI turnaround
+└── submission/                                    # Competition Submission Deliverables Package
+    ├── README.md                                  # Submission overview, competition track & executive brief
+    ├── deliverables_checklist.md                  # Formal compliance verification checklist
+    ├── demo_script.md                             # 10-step judge walkthrough demo script with talking points
+    ├── presentation_script.md                     # Timed 5-minute English speaker script
+    ├── technical_documentation.pdf                # Formal technical documentation PDF (ReportLab generated)
+    ├── security_self_assessment.pdf               # Formal security & threat assessment PDF (ReportLab generated)
+    ├── presentation.pdf                           # Pitch deck presentation slide deck PDF
+    ├── presentation.pptx                          # Editable pitch deck presentation slide deck PPTX
+    └── execution_evidence/                        # Genuine sanitized execution evidence
+        ├── copilot_loss_recovery_verified.png     # Browser evidence: English loss recovery turnaround response
+        ├── copilot_loss_recovery_bengali_verified.png # Browser evidence: Bengali localized loss recovery response
         ├── dashboard_executive_cockpit_verified.png # Live financial dashboard
         ├── dscr_underwriting_packet_verified.png  # Credit underwriting loan calculator
         └── sandbox_agent_execution_evidence_verified.png # Simulated API & agent execution trace
 ```
-
-</details>
 
 ---
 
